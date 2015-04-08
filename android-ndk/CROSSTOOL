@@ -1,0 +1,144 @@
+#
+# Copyright 2015 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+major_version: "local"
+minor_version: ""
+default_target_cpu: "armeabi-v7a"
+default_toolchain {
+  cpu: "armeabi-v7a"
+  toolchain_identifier: "arm-linux-androideabi-4.8"
+}
+
+# ARM 32 bits on linux-x86_64.
+toolchain {
+
+  # this should be more specific
+  abi_version: "local"
+  abi_libc_version: "local"
+
+  builtin_sysroot: "platforms/android-19/arch-arm/"
+
+  # This should contain a BUILD file, defining 'compile' and 'link' filegroups.
+  default_grte_top: "//android-ndk/platforms/android-19/arch-arm"
+
+  compiler: "gcc"
+  host_system_name: "local"
+  needsPic: true
+  supports_gold_linker: false
+  supports_incremental_linker: false
+  supports_fission: false
+  supports_interface_shared_objects: false
+  supports_normalizing_ar: false
+  supports_start_end_lib: false
+  supports_thin_archives: false
+  target_libc: "local"
+
+  target_cpu: "armeabi-v7a"
+  target_system_name: "arm-linux-androideabi-4.8"
+  toolchain_identifier: "arm-linux-androideabi-4.8"
+
+  tool_path { name: "ar"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar"
+  }
+  tool_path { name: "compat-ld"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld"
+  }
+  tool_path { name: "cpp"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-cpp"
+  }
+  tool_path { name: "dwp"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-dwp"
+  }
+  tool_path { name: "gcc"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc"
+  }
+  tool_path { name: "gcov"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcov"
+  }
+  tool_path { name: "ld"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld"
+  }
+  tool_path { name: "nm"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-nm"
+  }
+  tool_path { name: "objcopy"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-objcopy"
+  }
+  tool_path { name: "strip"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-strip"
+  }
+  tool_path { name: "objdump"
+    path: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-objdump"
+  }
+  objcopy_embed_flag: "-I"
+
+  cxx_flag: "-std=c++0x"
+  compilation_mode_flags {
+    mode: FASTBUILD
+  }
+  compilation_mode_flags {
+    mode: DBG
+  }
+  compilation_mode_flags {
+    mode: COVERAGE
+  }
+  compilation_mode_flags {
+    mode: OPT
+  }
+
+  cxx_flag: "-std=gnu++11"
+
+  cxx_builtin_include_directory: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.8/include"
+  cxx_builtin_include_directory: "toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.8/include-fixed"
+
+  unfiltered_cxx_flag: "-isystem%sysroot%/usr/include"
+  unfiltered_cxx_flag: "-isystemandroid-ndk/sources/cxx-stl/gnu-libstdc++/4.8/include"
+  unfiltered_cxx_flag: "-isystemandroid-ndk/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi/include"
+
+  unfiltered_cxx_flag: "-isystem"
+  unfiltered_cxx_flag: "android-ndk/sources/cxx-stl/stlport/stlport"
+  unfiltered_cxx_flag: "-isystem"
+  unfiltered_cxx_flag: "android-ndk/sources/cxx-stl/gabi++/include"
+
+  linking_mode_flags {
+    mode: FULLY_STATIC
+  }
+  objcopy_embed_flag: "-I"
+  objcopy_embed_flag: "binary"
+  linking_mode_flags {
+    mode: MOSTLY_STATIC
+  }
+  linking_mode_flags {
+    mode: DYNAMIC
+  }
+
+  unfiltered_cxx_flag: "-fno-canonical-system-headers"
+  unfiltered_cxx_flag: "-no-canonical-prefixes"
+
+  linker_flag: "-no-canonical-prefixes"
+
+  compiler_flag: "-fPIE"
+  compiler_flag: "-DANDROID"
+  compiler_flag: "-g"
+
+  linker_flag: "-fPIE"
+  linker_flag: "-pie"
+
+  linker_flag: "-Landroid-ndk/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/"
+  linker_flag: "-lgnustl_static"
+  linker_flag: "-lsupc++"
+  linker_flag: "-lc"
+  linker_flag: "-lm"
+}

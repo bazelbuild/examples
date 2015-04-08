@@ -9,3 +9,5 @@
     toolchain to produce the `protoc` binary in the Bazel repo.
 
   * A [BUILD file](re2/BUILD) for compiling RE2.
+
+  * An example of setting up a [cross-compiler](android-ndk/README.md)

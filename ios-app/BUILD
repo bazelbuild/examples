@@ -6,6 +6,7 @@ objc_binary(
     deps = [
         ":UrlGetClasses",
     ],
+    infoplist = "UrlGet/UrlGet-Info.plist",
 )
 
 objc_library(

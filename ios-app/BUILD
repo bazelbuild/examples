@@ -1,11 +1,5 @@
-ios_application(
-    name = "UrlGet",
-    binary = ":UrlGetBinary",
-    infoplist = "UrlGet/UrlGet-Info.plist",
-)
-
 objc_binary(
-    name = "UrlGetBinary",
+    name = "UrlGet",
     srcs = [
         "UrlGet/main.m",
     ],

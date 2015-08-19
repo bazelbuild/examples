@@ -53,7 +53,20 @@ $ bazel mobile-install //android/src/main/java/com/google/bazel/example/android:
 iOS application
 ---------------
 
-TODO
+The iOS application is a single view which retrives the contents of the HTTP
+response received for a given URL (such as localhost:8080). It displays the
+response in a text view.
+
+You can build the application by running:
+
+```
+$ bazel build //ios-app:GetUrl
+```
+
+Bazel will generate some output files, most notably `bazel-bin/ios-app/UrlGet.xcodeproj`
+
+Open this file in xcode and run the application on your target device
+(or device simulator).
 
 <a name="web-app" />
 Web application

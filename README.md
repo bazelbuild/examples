@@ -38,7 +38,16 @@ localhost:8080 and get a response from the server.
 Android application
 -------------------
 
-TODO
+The Android application has one activity, which retrieves the `'requested'` key
+of the JSON object retrieved from the URL http://10.0.0.2:8080/ and displays it
+on the screen.
+
+You can build and install this application by connecting an Android emulator or
+device via adb and running:
+
+```
+$ bazel mobile-install //android/src/main/java/com/google/bazel/example/android:android
+```
 
 <a name="ios-app" />
 iOS application

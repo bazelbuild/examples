@@ -30,7 +30,22 @@ maven_jar(
     artifact = "javax.servlet:servlet-api:2.5",
 )
 
+maven_jar(
+    name = "json",
+    artifact = "org.json:json:20141113",
+)
+
 bind(
     name = "javax/servlet/api",
     actual = "//tools/build_rules/appengine:javax.servlet.api",
+)
+
+android_sdk_repository(
+  name = "androidsdk",
+  # Set the path to the directory the Android SDK was unzipped into.
+  # path = "/path/to/android-sdk",
+  # Set the API level of the installed SDK Platform.
+  # api_level = 22,
+  # Set the version of the build tools (a directory inside build-tools)
+  # build_tools_version="22.0.1"
 )

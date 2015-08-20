@@ -67,10 +67,10 @@ response in a text view.
 You can build the application by running:
 
 ```
-$ bazel build //ios-app:GetUrl
+$ bazel build ios-app --ios_sdk_version=8.4
 ```
 
-Bazel will generate some output files, most notably `bazel-bin/ios-app/UrlGet.xcodeproj`
+Bazel will generate some output files, most notably `bazel-bin/ios-app/ios-app.xcodeproj`
 
 Open this file in xcode and run the application on your target device
 (or device simulator).

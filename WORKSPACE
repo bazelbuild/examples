@@ -39,14 +39,3 @@ maven_jar(
     name = "json",
     artifact = "org.json:json:20141113",
 )
-
-android_sdk_repository(
-  name = "androidsdk",
-  # Set the path to the directory the Android SDK was unzipped into.
-  # path = "/path/to/android-sdk",
-  # Set the API level of the installed SDK Platform.
-  # api_level = 22,
-  # Set the version of the build tools (a directory inside build-tools)
-  # build_tools_version="22.0.1"
-)
-

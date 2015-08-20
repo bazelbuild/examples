@@ -67,8 +67,12 @@ response in a text view.
 You can build the application by running:
 
 ```
-$ bazel build ios-app --ios_sdk_version=8.4
+$ bazel build //ios-app --ios_sdk_version=8.4
 ```
+
+(The ios_sdk_version flag value currently matches the supported SDK version of the
+current stable xcode build. The iOS app may not build without this set to the value that
+matches your currently installed xcode version.)
 
 Bazel will generate some output files, most notably `bazel-bin/ios-app/ios-app.xcodeproj`
 

@@ -7,7 +7,6 @@ including:
 
 * an [Android application](#android-app)
 * an [iOS application](#ios-app)
-* a [web application](#web-app)
 
 To build these examples, you will need to
 [install Bazel](http://bazel.io/docs/install.html).
@@ -78,9 +77,3 @@ Bazel will generate some output files, most notably `bazel-bin/ios-app/ios-app.x
 
 Open this file in xcode and run the application on your target device
 (or device simulator).
-
-<a name="web-app" />
-Web application
----------------
-
-TODO

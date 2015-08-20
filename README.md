@@ -53,7 +53,7 @@ You can build and install this application by connecting an Android emulator or
 device via adb and running:
 
 ```
-$ bazel mobile-install //android/src/main/java/com/google/bazel/example/android:android
+$ bazel mobile-install //android
 ```
 
 <a name="ios-app" />

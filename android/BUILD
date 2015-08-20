@@ -5,9 +5,9 @@
 # directory, so we specify it manually.
 android_binary(
     name = "android",
-    manifest = "AndroidManifest.xml",
     custom_package = "com.google.bazel.example.android",
-    resource_files = glob(["res/**"]),
+    manifest = "src/main/java/com/google/bazel/example/android/AndroidManifest.xml",
+    resource_files = glob(["src/main/java/com/google/bazel/example/android/res/**"]),
     deps = [":activities"],
 )
 

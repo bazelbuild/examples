@@ -8,7 +8,7 @@ android_binary(
     manifest = "AndroidManifest.xml",
     custom_package = "com.google.bazel.example.android",
     resource_files = glob(["res/**"]),
-    deps = ["//android/src/main/java/com/google/bazel/example/android/activities"],
+    deps = [":activities"],
 )
 
 # A library which compiles some Java sources and associated resources.

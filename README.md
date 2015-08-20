@@ -38,7 +38,23 @@ localhost:8080 and get a response from the server.
 Android application
 -------------------
 
-TODO
+The Android application has one activity, which retrieves the `'requested'` key
+of the JSON object retrieved from the URL http://10.0.2.2:8080/boop and displays
+it on the screen.
+
+In order to build the Android application, you will need to download the SDK at
+https://developer.android.com/sdk/installing/index.html?pkg=tools and install
+the Android SDK and build tools as described in 1. Get the latest SDK tools in
+https://developer.android.com/sdk/installing/adding-packages.html.
+Once these are done, set up the android_sdk_repository rule in the WORKSPACE file,
+following the instructions in the comments there.
+
+You can build and install this application by connecting an Android emulator or
+device via adb and running:
+
+```
+$ bazel mobile-install //android/src/main/java/com/google/bazel/example/android:android
+```
 
 <a name="ios-app" />
 iOS application

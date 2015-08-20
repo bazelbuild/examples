@@ -52,4 +52,3 @@ maven_jar(
 #     # Set the version of the build tools (a directory inside build-tools)
 #     build_tools_version="22.0.1"
 # )
-

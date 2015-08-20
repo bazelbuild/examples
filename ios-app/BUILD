@@ -1,5 +1,5 @@
 objc_binary(
-    name = "UrlGet",
+    name = "ios-app",
     srcs = [
         "UrlGet/main.m",
     ],

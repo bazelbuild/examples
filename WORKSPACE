@@ -30,14 +30,14 @@ maven_jar(
     artifact = "javax.servlet:servlet-api:2.5",
 )
 
-maven_jar(
-    name = "json",
-    artifact = "org.json:json:20141113",
-)
-
 bind(
     name = "javax/servlet/api",
     actual = "//tools/build_rules/appengine:javax.servlet.api",
+)
+
+maven_jar(
+    name = "json",
+    artifact = "org.json:json:20141113",
 )
 
 android_sdk_repository(
@@ -49,3 +49,4 @@ android_sdk_repository(
   # Set the version of the build tools (a directory inside build-tools)
   # build_tools_version="22.0.1"
 )
+

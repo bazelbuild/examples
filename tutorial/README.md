@@ -77,3 +77,8 @@ Bazel will generate some output files, most notably `bazel-bin/ios-app/ios-app.x
 
 Open this file in xcode and run the application on your target device
 (or device simulator).
+
+Continuous integration
+----------------------
+The script in ci/build.sh is used by [http://ci.bazel.io] to test that this workspace
+still build against Bazel at head.

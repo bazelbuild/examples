@@ -21,8 +21,8 @@
 #      the version of the build tools. If the path isn't defined
 #      the android build won't be tested. The 2 other one are defaulted
 #      to, respectively, "22" and "22.0.1".
-#   $IOS_SDK_VERSION set the SDK version of ios (defaulted to 8.4)
 
+IOS_SDK_VERSION=$(xcrun --sdk iphonesimulator --show-sdk-version)
 
 # Go to the workspace root
 cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
@@ -75,7 +75,7 @@ fi
 
 # Under darwin, test the ios application
 if [ "$(uname -s | tr 'A-Z' 'a-z')" = "darwin" ]; then
-  "${BAZEL}" build //ios-app --ios_sdk_version=${IOS_SDK_VERSION:-8.4}
+  "${BAZEL}" build //ios-app --ios_sdk_version=$IOS_SDK_VERSION
 fi
 
 echo "Yay!"

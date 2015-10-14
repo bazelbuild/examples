@@ -1,12 +1,17 @@
+ios_application(
+   name = "ios-app",
+   binary = "ios-app-binary",
+   infoplist = "UrlGet/UrlGet-Info.plist",
+)
+
 objc_binary(
-    name = "ios-app",
+    name = "ios-app-binary",
     srcs = [
         "UrlGet/main.m",
     ],
     deps = [
         ":UrlGetClasses",
     ],
-    infoplist = "UrlGet/UrlGet-Info.plist",
 )
 
 objc_library(

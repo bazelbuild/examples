@@ -1,4 +1,4 @@
-load("@bazel_tools//tools/build_rules/appengine:appengine.bzl", "appengine_war")
+load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_war")
 
 appengine_war(
     name = "backend",
@@ -21,6 +21,6 @@ java_binary(
     srcs = glob(["src/main/java/**/*.java"]),
     main_class = "does.not.exist",
     deps = [
-        "//external:javax/servlet/api",
+        "@io_bazel_rules_appengine//appengine:javax.servlet.api",
     ],
 )

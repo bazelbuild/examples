@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 java_library(
     name = "java-maven-lib",
-    srcs = glob(["src/main/**/myproject/*.java"]),
+    srcs = glob(["src/main/java/com/example/myproject/*.java"]),
     deps = ["@com_google_guava_guava//jar"],
 )
 
@@ -14,7 +14,7 @@ java_binary(
 
 java_test(
     name = "tests",
-    srcs = glob(["src/test/**/myproject/*.java"]),
+    srcs = glob(["src/test/java/com/example/myproject/*.java"]),
     test_class = "com.example.myproject.TestApp",
     deps = [
         ":java-maven-lib",

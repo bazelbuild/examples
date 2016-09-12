@@ -1,7 +1,8 @@
 ios_application(
-   name = "ios-app",
-   binary = "ios-app-binary",
-   infoplist = "UrlGet/UrlGet-Info.plist",
+    name = "ios-app",
+    binary = "ios-app-binary",
+    infoplist = "UrlGet/UrlGet-Info.plist",
+    visibility = ["//visibility:public"],
 )
 
 objc_binary(

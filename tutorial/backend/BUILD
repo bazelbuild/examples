@@ -5,6 +5,7 @@ appengine_war(
     data = [":webapp"],
     data_path = "/backend/webapp",
     jars = [":app_deploy.jar"],
+    visibility = ["//visibility:public"],
 )
 
 filegroup(

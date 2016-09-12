@@ -8,6 +8,7 @@ android_binary(
     custom_package = "com.google.bazel.example.android",
     manifest = "src/main/java/com/google/bazel/example/android/AndroidManifest.xml",
     resource_files = glob(["src/main/java/com/google/bazel/example/android/res/**"]),
+    visibility = ["//visibility:public"],
     deps = [":activities"],
 )
 

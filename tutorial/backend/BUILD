@@ -1,5 +1,7 @@
 load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_war")
 
+package(default_visibility = ["//visibility:public"])
+
 appengine_war(
     name = "backend",
     data = [":webapp"],

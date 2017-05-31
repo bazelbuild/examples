@@ -1,17 +1,21 @@
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+
 ios_application(
     name = "ios-app",
-    binary = "ios-app-binary",
-    infoplist = "UrlGet/UrlGet-Info.plist",
+    deps = [":UrlGetMain"],
+    infoplists = ["UrlGet/UrlGet-Info.plist"],
+    bundle_id = "examples.UrlGet",
+    families = ["iphone", "ipad"],
     visibility = ["//visibility:public"],
 )
 
-objc_binary(
-    name = "ios-app-binary",
+objc_library(
+    name = "UrlGetMain",
     srcs = [
-        "UrlGet/main.m",
+       "UrlGet/main.m",
     ],
     deps = [
-        ":UrlGetClasses",
+       ":UrlGetClasses",
     ],
 )
 

@@ -1,7 +1,7 @@
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
-    tag = "0.0.1",
+    commit = "4ac137080708924f6da02f8165b1c53b99d2d1c7", # 07-19-17
 )
 
 http_archive(

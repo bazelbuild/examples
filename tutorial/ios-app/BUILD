@@ -3,7 +3,6 @@ load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 objc_library(
     name = "UrlGetClasses",
     srcs = [
-	"UrlGet/main.m",
         "UrlGet/AppDelegate.m",
         "UrlGet/UrlGetViewController.m",
         "UrlGet/main.m",

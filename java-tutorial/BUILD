@@ -1,5 +1,4 @@
 java_binary(
-    name = "my-runner",
+    name = "ProjectRunner",
     srcs = glob(["src/main/java/com/example/*.java"]),
-    main_class = "com.example.ProjectRunner",
 )

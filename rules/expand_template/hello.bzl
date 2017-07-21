@@ -1,4 +1,4 @@
-# Path of the template file to use.
+# Label of the template file to use.
 _TEMPLATE = "//expand_template:hello.cc"
 
 def _hello_impl(ctx):

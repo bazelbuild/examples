@@ -1,6 +1,5 @@
 # Bazel Windows MSVC toolchain
 A standalone Windows CROSSTOOL for Bazel
-(disclaimer: This is not an official Google product.)
 
 # How to use it
 

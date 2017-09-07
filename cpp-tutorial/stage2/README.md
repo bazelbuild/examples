@@ -24,7 +24,7 @@ cc_binary(
 )
 ```
 
-To build this example you use (notice that 3 slashes are required in windows and only 2 in other operating systems.)
+To build this example you use (notice that 3 slashes are required in windows)
 ```
-bazel build ///main:hello-world
+bazel build //main:hello-world
 ```

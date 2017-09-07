@@ -12,7 +12,7 @@ cc_binary(
 )
 ```
 
-In order to build this package you run
+To build this example you use (notice that 3 slashes are required in windows and only 2 in other operating systems.)
 
 ```
 bazel build ///main:hello-world

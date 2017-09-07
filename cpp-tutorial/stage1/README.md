@@ -2,6 +2,16 @@
 
 This showcases how to build a single file to create a runnable application.
 
+In the build file for this stage you can read that this will use the c-compiler to build a binary file. (cc_binary)
+The name of the binary will be hello-world
+And we also name the required source files to build the current application.
+```
+cc_binary(
+    name = "hello-world",
+    srcs = ["hello-world.cc"],
+)
+```
+
 In order to build this package you run
 
 ```

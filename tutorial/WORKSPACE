@@ -1,7 +1,7 @@
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
-    commit = "2a7c5f5279a20e768d7e31acfc8c3b7fbeb29375", # 11-10-2017
+    commit = "09254d2d2640a65394cb2b829cdaff148dbd7926", # 13-10-2017
 )
 
 http_archive(
@@ -14,6 +14,3 @@ http_archive(
 load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_repositories")
 
 appengine_repositories()
-
-
-

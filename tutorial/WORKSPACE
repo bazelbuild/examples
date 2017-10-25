@@ -1,7 +1,7 @@
-git_repository(
+http_archive(
     name = "build_bazel_rules_apple",
-    remote = "https://github.com/bazelbuild/rules_apple.git",
-    commit = "09254d2d2640a65394cb2b829cdaff148dbd7926", # 13-10-2017
+    strip_prefix = "rules_apple-0.1.0",
+    urls = ["https://github.com/bazelbuild/rules_apple/archive/0.1.0.tar.gz"], # 2017-10-25
 )
 
 http_archive(

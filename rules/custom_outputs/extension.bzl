@@ -7,7 +7,7 @@ each of them.
 def _impl(ctx):
   # Access the custom outputs using ctx.outputs.<attribute name>.
   for output in ctx.outputs.outs:
-    ctx.file_action(
+    ctx.actions.write(
         output=output,
         content="I am " + output.short_path + "\n"
     )

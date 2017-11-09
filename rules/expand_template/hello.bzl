@@ -2,10 +2,7 @@
 _TEMPLATE = "//expand_template:hello.cc"
 
 def _hello_impl(ctx):
-  # 'ctx.template_action' is the old API.
-  # We use it for compatibility with Bazel 0.5.2.
-  # Later, we'll use 'ctx.actions.expand_template' instead.
-  ctx.template_action(
+  ctx.actions.expand_template(
       template=ctx.file._template,
       output=ctx.outputs.source_file,
       substitutions={

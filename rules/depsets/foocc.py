@@ -1,5 +1,3 @@
-# //mypackage:foocc.py
-
 # "Foo compiler" that just concatenates its inputs to form its output.
 import sys
 

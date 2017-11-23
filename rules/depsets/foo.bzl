@@ -31,11 +31,10 @@ def _foo_binary_impl(ctx):
   out = ctx.outputs.out
   trans_srcs = get_transitive_srcs(ctx.files.srcs, ctx.attr.deps)
   srcs_list = trans_srcs.to_list()
-  cmd_string = (foocc.path + " " + out.path + " " +
-                " ".join([src.path for src in srcs_list]))
-  ctx.actions.run_shell(command=cmd_string,
-                        inputs=srcs_list + [foocc],
-                        outputs=[out])
+  ctx.actions.run(executable = foocc,
+                  arguments = [out.path] + [src.path for src in srcs_list],
+                  inputs = srcs_list + [foocc],
+                  outputs = [out])
 
 foo_binary = rule(
     implementation = _foo_binary_impl,

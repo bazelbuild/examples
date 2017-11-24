@@ -2,7 +2,7 @@
 
 ### Library
 
-Here, we introduce the ```cc_library``` rule for building C++ libraries. Here, we have a ```cc_library``` named ```hello-greet``` and its header and source files are defined accordingly.
+Here, we introduce the ```cc_library``` rule for building C++ libraries. We have a ```cc_library``` named ```hello-greet``` and its header and source files are defined accordingly.
 ```
 cc_library(
     name = "hello-greet",

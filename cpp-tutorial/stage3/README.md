@@ -2,7 +2,7 @@
 
 In this stage we step it up and showcase how to integrate multiple libraries and even in different packages.
 
-Below we see a similar configurtion from stage 2. The differance is that this BUILD file is in the lib package / directory. And the new property below visibility will tell bazel which other packages that should be able to see / use this package. So in this case the main package can use this library. 
+Below we see a similar configurtion from stage 2. The differance is that this BUILD file is in the lib package / directory. And the new property below visibility will tell bazel which other packages that should be able to see / use this package. So in this case the main package can use this ```cc_library```. 
 ```
 cc_library(
     name = "hello-time",
@@ -12,7 +12,7 @@ cc_library(
 )
 ```
 
-Then to use the library above we add an extra dependency for //[package-path]:[dependency-name].
+Then to use the ```cc_library``` above we add an extra dependency for //[package-path]:[dependency-name].
 ```
 cc_binary(
     name = "hello-world",
@@ -24,7 +24,7 @@ cc_binary(
 )
 ```
 
-To build this example you use (notice that 3 slashes are required in windows)
+To build this example you use
 ```
 bazel build //main:hello-world
 ```

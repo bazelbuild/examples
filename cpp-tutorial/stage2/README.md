@@ -2,7 +2,7 @@
 
 ### Library
 
-Below we see a new configuration option. This is a c-compiler library with a seperate header file as an interface, the sources and a name for the library to be built.
+Here, we introduce the ```cc_library``` rule for building C++ libraries. Here, we have a ```cc_library``` named ```hello-greet``` and its header and source files are defined accordingly.
 ```
 cc_library(
     name = "hello-greet",
@@ -13,7 +13,7 @@ cc_library(
 
 ### Binary
 
-The binary configuration we saw in stage 1 has not changed except that we now depend on the library hello-great.
+The ```cc_binary``` configuration we saw in stage 1 has not changed, except that we now depend on the ```cc_library``` ```hello-greet```.
 ```
 cc_binary(
     name = "hello-world",
@@ -24,7 +24,7 @@ cc_binary(
 )
 ```
 
-To build this example you use (notice that 3 slashes are required in windows)
+To build this example you use
 ```
 bazel build //main:hello-world
 ```

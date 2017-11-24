@@ -17,7 +17,7 @@ def _impl(ctx):
       ["exit $err"])
 
   # Write the file, it is executed by 'bazel test'.
-  ctx.file_action(
+  ctx.actions.write(
       output=ctx.outputs.executable,
       content=script)
 

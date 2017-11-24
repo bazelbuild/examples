@@ -31,9 +31,9 @@ def _impl(ctx):
     processed = src
   else:
     # The temporary file is based on 'ctx.label.name' to avoid conflicts.
-    processed = ctx.new_file(ctx.label.name + "_processed")
+    processed = ctx.actions.declare_file(ctx.label.name + "_processed")
     # Run the selected binary
-    ctx.action(
+    ctx.actions.run(
         outputs = [processed],
         inputs = [ctx.file.src],
         progress_message="Apply filter '%s'" % ctx.attr.filter,
@@ -42,7 +42,7 @@ def _impl(ctx):
 
   # Compute the hash
   out = ctx.outputs.text
-  ctx.action(
+  ctx.actions.run_shell(
       outputs = [out],
       inputs = [processed],
       command = "md5sum < %s > %s" % (processed.path, out.path))

@@ -6,10 +6,10 @@ can also be executed as part of the build.
 
 def _impl(ctx):
   # The implementation function must generate the file 'ctx.outputs.executable'.
-  ctx.file_action(
+  ctx.actions.write(
       output=ctx.outputs.executable,
       content="#!/bin/bash\necho Hello!",
-      executable=True
+      is_executable=True
   )
   # The executable output is added automatically to this target.
 

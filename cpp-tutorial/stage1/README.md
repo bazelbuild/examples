@@ -2,9 +2,9 @@
 
 This showcases how to build a single file to create a runnable application.
 
-In the build file for this stage you can read that this will use the c-compiler to build a binary file. (cc_binary)
-The name of the binary will be hello-world
-And we also name the required source files to build the current application.
+This BUILD file shows that we want to build a C++ binary using the ```cc_binary``` rule provided by Bazel.
+The name of the binary will be ```hello-world```
+In the ```cc_binary``` rule, let's name the binary ```hello-world```, and provide the required source files in the srcs attribute.
 ```
 cc_binary(
     name = "hello-world",
@@ -15,10 +15,13 @@ cc_binary(
 To build this example you use (notice that 3 slashes are required in windows)
 ```
 bazel build //main:hello-world
+
+# In Windows, note the three slashes
+
+bazel build ///main:hello-world
 ```
 
-The build will output some information for example
-
+If the build is successful, Bazel prints the following output:
 ```
 ____Loading complete.  Analyzing...
 ____Found 1 target...

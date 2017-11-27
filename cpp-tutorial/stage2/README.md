@@ -13,7 +13,7 @@ cc_library(
 
 ### Binary
 
-The ```cc_binary``` configuration we saw in stage 1 has not changed, except that we now depend on the ```cc_library``` ```hello-greet```.
+The ```cc_binary``` rule we saw in stage 1 has not changed, except that we now depend on the ```cc_library``` ```hello-greet```.
 ```
 cc_binary(
     name = "hello-world",

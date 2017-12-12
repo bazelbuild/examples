@@ -8,7 +8,7 @@ def _impl(ctx):
   for i, d in enumerate(ctx.attr.deps):
     print(" {}. label = {}".format(i+1, d.label))
     # A label can represent any number of files (possibly 0).
-    print("    files = " + str([f.path for f in d.files]))
+    print("    files = " + str([f.path for f in d.files.to_list()]))
 
 printer = rule(
     implementation=_impl,

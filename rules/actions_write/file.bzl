@@ -1,6 +1,6 @@
 def _impl(ctx):
   output = ctx.outputs.out
-  ctx.file_action(output=output, content=ctx.attr.content)
+  ctx.actions.write(output=output, content=ctx.attr.content)
 
 file = rule(
     implementation=_impl,

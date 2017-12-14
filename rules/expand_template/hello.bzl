@@ -1,3 +1,9 @@
+"""Generate a file using a template.
+
+It is much more memory-efficient to use a template file than creating the whole
+content during the analysis phase.
+"""
+
 # Label of the template file to use.
 _TEMPLATE = "//expand_template:hello.cc"
 

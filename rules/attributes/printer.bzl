@@ -10,6 +10,10 @@ def _impl(ctx):
     # A label can represent any number of files (possibly 0).
     print("    files = " + str([f.path for f in d.files.to_list()]))
 
+  # For debugging, consider using `dir` to explore the existing fields.
+  print(dir(ctx))        # prints all the fields and methods of ctx
+  print(dir(ctx.attr))   # prints all the attributes of the rule
+
 printer = rule(
     implementation=_impl,
     attrs={

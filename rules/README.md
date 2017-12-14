@@ -24,6 +24,12 @@ passing information from a dependency to a target.
 
 * [default outputs](default_outputs/): Example of a rule with a declared output.
 
+* [mandatory provider](mandatory_provider/): Example with a mandatory provider,
+  to access information from a dependency.
+
+* [optional provider](optional_provider/): Example with an optional provider,
+  to access information from a dependency.
+
 * [depsets](depsets/): Example of a using a depset to gather transitive
   information. Each target collects data from its dependencies.
 
@@ -35,6 +41,9 @@ control on the behavior of the rules.
 * [executable](executable/): Example of an executable rule.
 
 * [test rule](test_rule/): Example of a test rule.
+
+* [runfiles](runfiles/): Example of an executable rule with runfiles (files
+  required at runtime).
 
 * [computed dependencies](computed_dependencies/): Example with computed
   dependencies. The set of implicit dependencies depends on the rule attributes.

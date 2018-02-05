@@ -1,4 +1,10 @@
 *~
 bazel-*
-.idea
 .bazelrc
+.idea
+# Eclipse
+.project
+.classpath
+.settings/
+# Maven
+target/

@@ -22,8 +22,6 @@ passing information from a dependency to a target.
 
 * [shell command](shell_command/): Example where a shell command is executed.
 
-* [default outputs](default_outputs/): Example of a rule with a declared output.
-
 * [mandatory provider](mandatory_provider/): Example with a mandatory provider,
   to access information from a dependency.
 
@@ -48,7 +46,8 @@ control on the behavior of the rules.
 * [computed dependencies](computed_dependencies/): Example with computed
   dependencies. The set of implicit dependencies depends on the rule attributes.
 
-* [custom outputs](custom_outputs/): Example with `attr.output_list`.
+* [predeclared outputs](predeclared_outputs/): Example with `attr.output_list`
+  and `outputs`.
 
 * [implicit output](implicit_output/): Example with implicit outputs. Some
   outputs are available only when explicitly requested.

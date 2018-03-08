@@ -36,7 +36,11 @@ def _haiku_fortune_impl(ctx):
 haiku_fortune = rule(
     implementation = _haiku_fortune_impl,
     attrs = {
-        "srcs": attr.label_list(allow_files=True),
+        "srcs": attr.label_list(
+            allow_files = True,
+            doc = "Input haiku files. Each file must have exactly three lines. "
+                + "The last line must be terminated by a newline character."
+        ),
     },
     outputs = {
         "exe": "%{name}-fortune",

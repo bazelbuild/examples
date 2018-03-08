@@ -1,4 +1,13 @@
-load("//executable:executable.bzl", "executable_rule")
+load("//executable:fortune.bzl", "haiku_fortune")
 
-# Run 'bazel run :my_rule' to execute it.
-executable_rule(name = "my_rule")
+haiku_fortune(
+    name = "bazel_haikus",
+    srcs = [
+        "correct.txt",
+        "extensible.txt",
+        "fast.txt",
+        "incremental.txt",
+        "polyglot.txt",
+        "reproducible.txt"
+    ],
+)

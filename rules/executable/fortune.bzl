@@ -24,14 +24,15 @@ def _haiku_fortune_impl(ctx):
             datafile.path))
 
     # Emit the executable shell script.
-    script = script_template.format(
+    script = ctx.actions.declare_file("%s-fortune" % ctx.label.name)
+    script_content = script_template.format(
         fortunes_file = datafile.short_path,
         num_fortunes = len(ctx.attr.srcs))
-    ctx.actions.write(ctx.outputs.exe, script, is_executable=True)
+    ctx.actions.write(script, script_content, is_executable=True)
 
     # The datafile must be in the runfiles for the executable to see it.
     runfiles = ctx.runfiles(files=[datafile])
-    return [DefaultInfo(executable=ctx.outputs.exe, runfiles=runfiles)]
+    return [DefaultInfo(executable=script, runfiles=runfiles)]
 
 haiku_fortune = rule(
     implementation = _haiku_fortune_impl,
@@ -41,9 +42,6 @@ haiku_fortune = rule(
             doc = "Input haiku files. Each file must have exactly three lines. "
                 + "The last line must be terminated by a newline character."
         ),
-    },
-    outputs = {
-        "exe": "%{name}-fortune",
     },
     executable = True,
 )

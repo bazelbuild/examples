@@ -11,5 +11,9 @@ load("//predeclared_outputs:hash.bzl", "word_hashes")
 word_hashes(
     name = "animal_hashes",
     dictionary = "animals.dict",
-    hashes = [":dog.md5", ":cat.md5", ":elephant.md5"],
+    hashes = [
+        ":dog.md5",
+        ":cat.md5",
+        ":elephant.md5",
+    ],
 )

@@ -8,6 +8,6 @@ haiku_fortune(
         "fast.txt",
         "incremental.txt",
         "polyglot.txt",
-        "reproducible.txt"
+        "reproducible.txt",
     ],
 )

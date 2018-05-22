@@ -9,20 +9,20 @@ dependents.
 NumberInfo = provider("number")
 
 def _impl(ctx):
-  result = ctx.attr.number
-  for dep in ctx.attr.deps:
-    result += dep[NumberInfo].number
-  ctx.file_action(output=ctx.outputs.out, content=str(result))
+    result = ctx.attr.number
+    for dep in ctx.attr.deps:
+        result += dep[NumberInfo].number
+    ctx.file_action(output = ctx.outputs.out, content = str(result))
 
-  # Return the provider with result, visible to other rules.
-  return [NumberInfo(number=result)]
+    # Return the provider with result, visible to other rules.
+    return [NumberInfo(number = result)]
 
 sum = rule(
-  implementation=_impl,
-  attrs={
-      "number": attr.int(default=1),
-      # All deps must provide all listed providers.
-      "deps": attr.label_list(providers=[NumberInfo]),
-  },
-  outputs = {"out": "%{name}.sum"}
+    implementation = _impl,
+    attrs = {
+        "number": attr.int(default = 1),
+        # All deps must provide all listed providers.
+        "deps": attr.label_list(providers = [NumberInfo]),
+    },
+    outputs = {"out": "%{name}.sum"},
 )

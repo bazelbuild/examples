@@ -21,26 +21,29 @@ def _haiku_fortune_impl(ctx):
         inputs = ctx.files.srcs,
         command = "cat {} > {}".format(
             " ".join([f.path for f in ctx.files.srcs]),
-            datafile.path))
+            datafile.path,
+        ),
+    )
 
     # Emit the executable shell script.
     script = ctx.actions.declare_file("%s-fortune" % ctx.label.name)
     script_content = script_template.format(
         fortunes_file = datafile.short_path,
-        num_fortunes = len(ctx.attr.srcs))
-    ctx.actions.write(script, script_content, is_executable=True)
+        num_fortunes = len(ctx.attr.srcs),
+    )
+    ctx.actions.write(script, script_content, is_executable = True)
 
     # The datafile must be in the runfiles for the executable to see it.
-    runfiles = ctx.runfiles(files=[datafile])
-    return [DefaultInfo(executable=script, runfiles=runfiles)]
+    runfiles = ctx.runfiles(files = [datafile])
+    return [DefaultInfo(executable = script, runfiles = runfiles)]
 
 haiku_fortune = rule(
     implementation = _haiku_fortune_impl,
     attrs = {
         "srcs": attr.label_list(
             allow_files = True,
-            doc = "Input haiku files. Each file must have exactly three lines. "
-                + "The last line must be terminated by a newline character."
+            doc = "Input haiku files. Each file must have exactly three lines. " +
+                  "The last line must be terminated by a newline character.",
         ),
     },
     executable = True,

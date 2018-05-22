@@ -31,15 +31,20 @@ def _word_hashes_impl(ctx):
             outputs = [hashfile],
             inputs = [dictionary],
             command = "grep {} {} | md5sum | cut -f1 -d ' ' > {}".format(
-                word, dictionary.path, hashfile.path))
+                word,
+                dictionary.path,
+                hashfile.path,
+            ),
+        )
 
     # Produce the manifest.
     manifest_content = "".join(
-        [hashfile.path + "\n" for hashfile in sorted(ctx.outputs.hashes)])
+        [hashfile.path + "\n" for hashfile in sorted(ctx.outputs.hashes)],
+    )
     ctx.actions.write(manifest, manifest_content)
 
-    # Since we are not returning a DefaultInfo provider with a files= field,
-    # all the predeclared outputs will be built when the target is requested.
+# Since we are not returning a DefaultInfo provider with a files= field,
+# all the predeclared outputs will be built when the target is requested.
 
 word_hashes = rule(
     implementation = _word_hashes_impl,
@@ -47,11 +52,11 @@ word_hashes = rule(
         "dictionary": attr.label(
             allow_single_file = True,
             mandatory = True,
-            doc = "A file containing words, one per line."
+            doc = "A file containing words, one per line.",
         ),
         "hashes": attr.output_list(
-            doc = "A list of files named \"<word>.md5\", where \"<word>\" "
-                + "is in the dictionary."
+            doc = "A list of files named \"<word>.md5\", where \"<word>\" " +
+                  "is in the dictionary.",
         ),
     },
     outputs = {"manifest": "%{name}.manifest"},

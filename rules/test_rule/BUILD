@@ -1,4 +1,4 @@
-load("//test_rule:line_length.bzl", "line_length_test")
+load(":line_length.bzl", "line_length_test")
 
 # Run 'bazel test :80columns' to check that all files in the directory
 # have at most 80 columns.

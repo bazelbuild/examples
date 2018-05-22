@@ -18,40 +18,44 @@ _filters = {
     "none": None,
 }
 
-def _get_filter(filter): # requires attribute "filter"
-  # Return the value for the attribute "_filter_bin"
-  # It can be a label or None.
-  return _filters[filter]
+def _get_filter(filter):  # requires attribute "filter"
+    # Return the value for the attribute "_filter_bin"
+    # It can be a label or None.
+    return _filters[filter]
 
 def _impl(ctx):
-  src = ctx.file.src
+    src = ctx.file.src
 
-  if not ctx.attr._filter_bin:
-    # Skip the processing
-    processed = src
-  else:
-    # The temporary file is based on 'ctx.label.name' to avoid conflicts.
-    processed = ctx.actions.declare_file(ctx.label.name + "_processed")
-    # Run the selected binary
-    ctx.actions.run(
-        outputs = [processed],
-        inputs = [ctx.file.src],
-        progress_message="Apply filter '%s'" % ctx.attr.filter,
-        arguments = [ctx.file.src.path, processed.path],
-        executable = ctx.executable._filter_bin)
+    if not ctx.attr._filter_bin:
+        # Skip the processing
+        processed = src
+    else:
+        # The temporary file is based on 'ctx.label.name' to avoid conflicts.
+        processed = ctx.actions.declare_file(ctx.label.name + "_processed")
 
-  # Compute the hash
-  out = ctx.outputs.text
-  ctx.actions.run_shell(
-      outputs = [out],
-      inputs = [processed],
-      command = "md5sum < %s > %s" % (processed.path, out.path))
+        # Run the selected binary
+        ctx.actions.run(
+            outputs = [processed],
+            inputs = [ctx.file.src],
+            progress_message = "Apply filter '%s'" % ctx.attr.filter,
+            arguments = [ctx.file.src.path, processed.path],
+            executable = ctx.executable._filter_bin,
+        )
+
+    # Compute the hash
+    out = ctx.outputs.text
+    ctx.actions.run_shell(
+        outputs = [out],
+        inputs = [processed],
+        command = "md5sum < %s > %s" % (processed.path, out.path),
+    )
 
 md5_sum = rule(
-    implementation=_impl,
-    attrs={
-        "filter": attr.string(values=_filters.keys(), default="none"),
-        "src": attr.label(mandatory=True, single_file=True, allow_files=True),
-        "_filter_bin": attr.label(default=_get_filter, executable=True, cfg="host"),
+    implementation = _impl,
+    attrs = {
+        "filter": attr.string(values = _filters.keys(), default = "none"),
+        "src": attr.label(mandatory = True, single_file = True, allow_files = True),
+        "_filter_bin": attr.label(default = _get_filter, executable = True, cfg = "host"),
     },
-    outputs = {"text": "%{name}.txt"})
+    outputs = {"text": "%{name}.txt"},
+)

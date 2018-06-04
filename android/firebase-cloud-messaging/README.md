@@ -1,7 +1,7 @@
 
 ### Bazel Firebase Cloud Messaging (FCM) example.
 
-FCM requires certain information about your app (api key, app id, project id,
+FCM requires certain information about your app (API key, app ID, project id,
 etc) to be present in the `res/values/values.xml` resource file. This example
 project provides a tool and a build macro that automatically generates this
 `values.xml` file from the `google-services.json` file that's available from
@@ -16,7 +16,7 @@ To build the example:
 2. Go to the Firebase console for your project, and in Settings, download
    `google-service.json`, and place it in the `app` directory.
 
-3. Run `bazel build app` in workspace root of the project.
+3. Run `bazel build //app` in the project.
 
 
 To apply this example to your code:
@@ -33,7 +33,7 @@ To apply this example to your code:
 ```
 
 3. Add `GOOGLE_SERVICES_XML` to the `resource_files` attribute of your
-   `android_binary` rule. E.g:
+   `android_binary` rule. For example:
 ```
   android_binary(
       ...
@@ -57,7 +57,7 @@ the results to your project:
      /tmp/values.xml
 ```
    The arguments are the package name for your app, the absolute file path to  
-   the `google-services.json` file, and finally the file path for values.xml.
+   the `google-services.json` file, and finally the file path for `values.xml`.
 
 3. Merge the resulting `values.xml` file into your `values.xml` file (or put the
    file into your `res/values` directory if you don't already have a

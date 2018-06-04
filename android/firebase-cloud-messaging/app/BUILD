@@ -2,7 +2,8 @@ load("//tools/googleservices:defs.bzl", "google_services_xml")
 
 GOOGLE_SERVICES_XML = google_services_xml(
     packageName = "com.example.myapplication",
-    google_services_json = "google-services.json")
+    google_services_json = "google-services.json"
+)
 
 android_binary(
     name = "app",

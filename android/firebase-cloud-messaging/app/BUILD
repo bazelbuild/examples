@@ -14,7 +14,8 @@ android_binary(
     custom_package = "com.example.myapplication",
     deps = [
         "@com_google_firebase_firebase_messaging_17_0_0//aar",
-        # firebase messaging 17.0.0 depends on firebase iid 16.0.0.
+        # firebase messaging 17.0.0 depends on firebase iid 16.0.0, so make sure
+        # to use the same version when depending on iid directly from the app.
         "@com_google_firebase_firebase_iid_16_0_0//aar",
         "@com_android_support_appcompat_v7_26_1_0//aar",
         # activity_main layout uses contraints

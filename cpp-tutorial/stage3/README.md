@@ -13,7 +13,7 @@ cc_library(
 )
 ```
 
-To use our ```hello-time``` libary, an extra dependency is added in the form of //[package-path]:[target-name], in this case, it's ```//lib:hello-time```
+To use our ```hello-time``` libary, an extra dependency is added in the form of //path/to/package:target_name, in this case, it's ```//lib:hello-time```
 
 ```
 cc_binary(

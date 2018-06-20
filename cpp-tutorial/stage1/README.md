@@ -3,8 +3,8 @@
 This showcases how to build a single file to create a runnable application.
 
 This BUILD file shows that we want to build a C++ binary using the ```cc_binary``` rule provided by Bazel.
-The name of the binary will be ```hello-world```
-In the ```cc_binary``` rule, let's name the binary ```hello-world```, and provide the required source files in the ```srcs``` attribute.
+In the ```cc_binary``` rule, name of the binary is specified in ```name``` attribute (in this example, it's ```hello-world```), required source files to be built are provided in ```srcs``` attribute.
+
 ```
 cc_binary(
     name = "hello-world",

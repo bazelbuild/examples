@@ -16,7 +16,10 @@ def get_transitive_srcs(srcs, deps):
 
 def _foo_library_impl(ctx):
     trans_srcs = get_transitive_srcs(ctx.files.srcs, ctx.attr.deps)
-    return [FooFiles(transitive_sources = trans_srcs)]
+    return [
+        FooFiles(transitive_sources = trans_srcs),
+        DefaultInfo(files = trans_srcs),
+    ]
 
 foo_library = rule(
     implementation = _foo_library_impl,

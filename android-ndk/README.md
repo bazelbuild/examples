@@ -1,10 +1,13 @@
 # Android NDK with Bazel example
 
+## Documentation
+
+For the full documentation, please visit the [Bazel documentation page](https://docs.bazel.build/versions/master/android-ndk.html).
+
 ## Instructions
 
 1) Launch emulator
 2) Run `bazel mobile-install //app/src/main:app --fat_apk_cpu=x86 --incremental --start_app`
-3) Profit
 
 <img src="/images/result.png" width="400px" />
 

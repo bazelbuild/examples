@@ -1,0 +1,25 @@
+load("@gmaven_rules//:defs.bzl", "gmaven_artifact")
+
+android_library(
+    name = "lib",
+    srcs = ["java/com/example/android/bazel/MainActivity.java"],
+    custom_package = "com.example.android.bazel",
+    manifest = "LibraryManifest.xml",
+    resource_files = glob(["res/**/*"]),
+    deps = [
+        ":jni_lib",
+        gmaven_artifact("com.android.support:appcompat-v7:aar:26.1.0"),
+        gmaven_artifact("com.android.support.constraint:constraint-layout:aar:1.1.2"),
+    ],
+)
+
+cc_library(
+    name = "jni_lib",
+    srcs = ["cpp/native-lib.cpp"],
+)
+
+android_binary(
+    name = "app",
+    manifest = "AndroidManifest.xml",
+    deps = [":lib"],
+)

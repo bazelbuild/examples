@@ -6,14 +6,16 @@ For the full documentation, please visit the [Bazel documentation page](https://
 
 ## Instructions
 
+This example requires Android SDK API 26 or later.
+
 1) Launch emulator
 2) Run `bazel mobile-install //app/src/main:app --fat_apk_cpu=x86 --start_app`
 
-<img src="/images/result.png" width="400px" />
+<img src="/android-ndk/images/result.png" width="400px" />
 
 ## Build graph
 
-![](/images/graph.png)
+![](/android-ndk/images/graph.png)
 
 - JNI/C++ sources goes into the `cc_library` target, `//app/src/main:jni_lib`.
 - Java sources, resource files, and assets go into the `android_library`

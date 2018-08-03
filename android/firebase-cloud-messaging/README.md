@@ -8,6 +8,7 @@ shows how to use the tools provided in the
 generate the `values.xml` file from the `google-services.json` file from your
 Firebase console.
 
+#### Building the Example
 
 To build the example:
 
@@ -19,6 +20,7 @@ To build the example:
 
 3. Run `bazel build //app` in the project.
 
+#### Apply the Example to Your Code
 
 To apply this example to your code:
 
@@ -53,6 +55,8 @@ To apply this example to your code:
       ...
   )
 ```
+
+#### Manual Integration
 
 It's also possible to run the Google Services values.xml generator manually and
 add the results to your project:

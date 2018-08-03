@@ -20,7 +20,7 @@ To build the example:
 
 3. Run `bazel build //app` in the project.
 
-#### Apply the Example to Your Code
+#### Applying the Example to Your Code
 
 To apply this example to your code:
 

@@ -59,7 +59,7 @@ android_binary(
 4. Bazel's `AndroidManifest.xml` merging logic does not merge permissions from
    dependent libraries (see issue [#5411](https://github.com/bazelbuild/bazel/issues/5411)).
    You may need to add the following permissions to the `AndroidManifest.xml` of
-   your top-level `android-binary` rule:
+   your top-level `android_binary` rule:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

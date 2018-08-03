@@ -12,7 +12,8 @@ android_binary(
     manifest = "src/main/AndroidManifest.xml",
     resource_files = glob(["src/main/res/**"]) + GOOGLE_SERVICES_XML,
     # this sets the java package for the R class, since this android_binary
-    # rule isn't under a java root.
+    # rule isn't under a java root (i.e., some directory named "java" for the
+    # root of the java code for the app).
     custom_package = "com.example.myapplication",
     deps = [
         gmaven_artifact("com.google.firebase:firebase_messaging:aar:17.0.0"),

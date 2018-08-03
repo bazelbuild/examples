@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
-    <!-- Bazel doesn't merge perimssions from libraries / aars, so these are
-         necessary at the top-level AndroidManifest.xml -->
+    <!-- Bazel doesn't merge perimissions from libraries / aars, so these are
+         necessary in the AndroidManifest.xml for the top-level android_binary -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />

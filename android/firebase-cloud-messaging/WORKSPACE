@@ -1,0 +1,25 @@
+
+# Requires ANDROID_HOME set to the path of your Android SDK.
+android_sdk_repository(
+  name = "androidsdk",
+)
+
+
+GMAVEN_TAG = "20180530-1"
+http_archive(
+    name = "gmaven_rules",
+    strip_prefix = "gmaven_rules-%s" % GMAVEN_TAG,
+    url = "https://github.com/bazelbuild/gmaven_rules/archive/%s.tar.gz" % GMAVEN_TAG,
+)
+load("@gmaven_rules//:gmaven.bzl", "gmaven_rules")
+gmaven_rules()
+
+
+TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
+http_archive(
+  name = "tools_android",
+  strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
+  url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
+)
+load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
+google_services_workspace_dependencies()

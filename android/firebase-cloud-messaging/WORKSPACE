@@ -15,8 +15,11 @@ load("@gmaven_rules//:gmaven.bzl", "gmaven_rules")
 gmaven_rules()
 
 
-# Required for GenerateFirebaseXml tool.
-maven_jar(
-  name = "com_google_code_gson",
-  artifact = "com.google.code.gson:gson:2.8.2",
+TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
+http_archive(
+  name = "tools_android",
+  strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
+  url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
 )
+load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
+google_services_workspace_dependencies()

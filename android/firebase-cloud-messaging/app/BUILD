@@ -1,8 +1,8 @@
-load("//tools/googleservices:defs.bzl", "google_services_xml")
+load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
 load("@gmaven_rules//:defs.bzl", "gmaven_artifact")
 
 GOOGLE_SERVICES_XML = google_services_xml(
-    packageName = "com.example.myapplication",
+    package_name = "com.example.myapplication",
     google_services_json = "google-services.json"
 )
 

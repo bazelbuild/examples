@@ -5,8 +5,8 @@ This is a "hello world" example that uses a variety of Bazel features. There is
 a backend server and a couple of front-end applications that use this backend,
 including:
 
-* an [Android application](#android-app)
-* an [iOS application](#ios-app)
+* an [Android application](#android-application)
+* an [iOS application](#ios-application)
 
 To build these examples, you will need to
 [install Bazel](http://bazel.io/docs/install.html).
@@ -33,7 +33,6 @@ Once the `bazel-bin/backend/backend` prints
 `INFO: Dev App Server is now running`, you can visit any URI relative to
 localhost:8080 and get a response from the server.
 
-<a name="android-app" />
 Android application
 -------------------
 
@@ -55,7 +54,6 @@ device via adb and running:
 $ bazel mobile-install //android
 ```
 
-<a name="ios-app" />
 iOS application
 ---------------
 

@@ -1,8 +1,12 @@
 http_archive(
     name = "build_bazel_rules_apple",
-    strip_prefix = "rules_apple-0.2.0",
-    urls = ["https://github.com/bazelbuild/rules_apple/archive/0.2.0.tar.gz"], # 2017-11-22
+    strip_prefix = "rules_apple-0.7.0",
+    urls = ["https://github.com/bazelbuild/rules_apple/archive/0.7.0.tar.gz"], # 2018-08-15
 )
+
+load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependencies")
+
+apple_rules_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",

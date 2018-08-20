@@ -22,8 +22,7 @@ hello = rule(
         "firstname": attr.string(mandatory = True),
         "_template": attr.label(
             default = Label(_TEMPLATE),
-            allow_files = True,
-            single_file = True,
+            allow_single_file = True,
         ),
     },
     outputs = {"source_file": "%{name}.cc"},

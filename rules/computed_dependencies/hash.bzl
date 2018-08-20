@@ -54,7 +54,7 @@ md5_sum = rule(
     implementation = _impl,
     attrs = {
         "filter": attr.string(values = _filters.keys(), default = "none"),
-        "src": attr.label(mandatory = True, single_file = True, allow_files = True),
+        "src": attr.label(mandatory = True, allow_single_file = True),
         "_filter_bin": attr.label(default = _get_filter, executable = True, cfg = "host"),
     },
     outputs = {"text": "%{name}.txt"},

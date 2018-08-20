@@ -13,7 +13,7 @@ def _impl(ctx):
     for dep in ctx.attr.deps:
         if NumberInfo in dep:
             result += dep[NumberInfo].number
-    ctx.file_action(output = ctx.outputs.out, content = str(result))
+    ctx.actions.write(output = ctx.outputs.out, content = str(result))
 
     # Return the provider with result, visible to other rules.
     return [NumberInfo(number = result)]

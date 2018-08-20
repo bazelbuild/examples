@@ -37,7 +37,8 @@ def _foo_binary_impl(ctx):
     ctx.actions.run(
         executable = foocc,
         arguments = [out.path] + [src.path for src in srcs_list],
-        inputs = srcs_list + [foocc],
+        inputs = srcs_list,
+        tools = [foocc],
         outputs = [out],
     )
 

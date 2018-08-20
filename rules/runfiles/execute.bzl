@@ -10,10 +10,10 @@ def _impl(ctx):
     command = ctx.expand_location(ctx.attr.command, ctx.attr.data)
 
     # Create the output executable file with command as its content.
-    ctx.file_action(
+    ctx.actions.write(
         output = ctx.outputs.executable,
         content = command,
-        executable = True,
+        is_executable = True,
     )
 
     # Create runfiles from the files specified in the data attribute.

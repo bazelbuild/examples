@@ -20,6 +20,6 @@ def _impl(ctx):
 
 size = rule(
     implementation = _impl,
-    attrs = {"file": attr.label(mandatory = True, allow_files = True, single_file = True)},
+    attrs = {"file": attr.label(mandatory = True, allow_single_file = True)},
     outputs = {"out": "%{name}.size"},
 )

@@ -8,10 +8,10 @@
     android:targetSdkVersion="26" />
 
   <application
-    android:label="Bazel App">
+    android:label="Bazel Tutorial App">
     <activity
       android:name=".MainActivity"
-      android:label="Bazel" >
+      android:label="Bazel Tutorial App" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

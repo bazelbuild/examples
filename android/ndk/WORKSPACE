@@ -5,6 +5,7 @@ android_ndk_repository(name = "androidndk")
 # Google Maven Repository
 GMAVEN_TAG = "20180625-1"
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "gmaven_rules",
     strip_prefix = "gmaven_rules-%s" % GMAVEN_TAG,

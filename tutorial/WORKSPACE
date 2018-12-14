@@ -1,12 +1,24 @@
-http_archive(
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
     name = "build_bazel_rules_apple",
-    strip_prefix = "rules_apple-0.7.0",
-    urls = ["https://github.com/bazelbuild/rules_apple/archive/0.7.0.tar.gz"], # 2018-08-15
+    remote = "https://github.com/bazelbuild/rules_apple.git",
+    tag = "0.10.0",
 )
 
-load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependencies")
+load(
+    "@build_bazel_rules_apple//apple:repositories.bzl",
+    "apple_rules_dependencies",
+)
 
 apple_rules_dependencies()
+
+load(
+    "@build_bazel_rules_swift//swift:repositories.bzl",
+    "swift_rules_dependencies",
+)
+
+swift_rules_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",

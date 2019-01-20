@@ -1,5 +1,3 @@
-package(default_visibility = ["//visibility:public"])
-
 java_binary(
     name = "ProjectRunner",
     srcs = glob(["src/main/java/com/example/ProjectRunner.java"]),
@@ -8,5 +6,6 @@ java_binary(
 
 java_library(
     name = "greeter",
-    srcs = glob(["src/main/java/com/example/Greeting.java"]),
+    srcs = ["src/main/java/com/example/Greeting.java"],
+    visibility = ["//src/main/java/com/example/cmdline:__pkg__"],
 )

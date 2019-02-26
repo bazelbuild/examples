@@ -16,7 +16,7 @@ To build the example:
    of your Android SDK.
 
 2. Go to the Firebase console for your project, and in Settings, download
-   `google-service.json`, and place it in the `app` directory.
+   `google-service.json`, and replace the sample file in the `app` directory.
 
 3. Run `bazel build //app` in the project.
 

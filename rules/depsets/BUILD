@@ -1,4 +1,4 @@
-load(":foo.bzl", "foo_library", "foo_binary")
+load(":foo.bzl", "foo_binary", "foo_library")
 
 # Our hypothetical Foo compiler.
 py_binary(

@@ -54,15 +54,11 @@ tasks:
     working_directory: cpp-tutorial/stage1
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   cpp-stage1-macos:
     name: "C++ Stage 1"
     platform: macos
     working_directory: cpp-tutorial/stage1
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   cpp-stage1-windows:
     name: "C++ Stage 1"
@@ -70,15 +66,11 @@ tasks:
     working_directory: cpp-tutorial/stage1
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   cpp-stage2-linux:
     name: "C++ Stage 2"
     platform: ubuntu1804
     working_directory: cpp-tutorial/stage2
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   cpp-stage2-macos:
     name: "C++ Stage 2"
@@ -86,15 +78,11 @@ tasks:
     working_directory: cpp-tutorial/stage2
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   cpp-stage2-windows:
     name: "C++ Stage 2"
     platform: windows
     working_directory: cpp-tutorial/stage2
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   cpp-stage3-linux:
     name: "C++ Stage 3"
@@ -102,23 +90,17 @@ tasks:
     working_directory: cpp-tutorial/stage3
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   cpp-stage3-macos:
     name: "C++ Stage 3"
     platform: macos
     working_directory: cpp-tutorial/stage3
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   cpp-stage3-windows:
     name: "C++ Stage 3"
     platform: windows
     working_directory: cpp-tutorial/stage3
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   java-maven-linux:
     name: "Maven Java App"

@@ -6,23 +6,17 @@ tasks:
     working_directory: android/firebase-cloud-messaging
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   android-firebase-macos:
     name: "Android Firebase Cloud Messaging"
     platform: macos
     working_directory: android/firebase-cloud-messaging
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   android-firebase-windows:
     name: "Android Firebase Cloud Messaging"
     platform: windows
     working_directory: android/firebase-cloud-messaging
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   android-ndk-linux:
     name: "Android NDK"

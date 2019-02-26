@@ -29,25 +29,21 @@ tasks:
     platform: ubuntu1804
     working_directory: android/ndk
     build_targets:
-    - "..."
-    test_targets:
-    - "..."
+    - "//app/src/main:app"
   android-ndk-macos:
     name: "Android NDK"
     platform: macos
     working_directory: android/ndk
     build_targets:
-    - "..."
-    test_targets:
-    - "..."
-  android-ndk-windows:
-    name: "Android NDK"
-    platform: windows
-    working_directory: android/ndk
-    build_targets:
-    - "..."
-    test_targets:
-    - "..."
+    - "//app/src/main:app"
+  # NDK project is not building on Windows yet.
+  # https://github.com/bazelbuild/examples/issues/94
+  # android-ndk-windows:
+  #   name: "Android NDK"
+  #   platform: windows
+  #   working_directory: android/ndk
+  #   build_targets:
+  #   - "//app/src/main:app"
   cpp-stage1-linux:
     name: "C++ Stage 1"
     platform: ubuntu1804

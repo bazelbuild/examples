@@ -1,0 +1,200 @@
+---
+tasks:
+  android-firebase-linux:
+    name: "Android Firebase Cloud Messaging"
+    platform: ubuntu1804
+    working_directory: android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  android-firebase-macos:
+    name: "Android Firebase Cloud Messaging"
+    platform: macos
+    working_directory: android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  android-firebase-windows:
+    name: "Android Firebase Cloud Messaging"
+    platform: windows
+    working_directory: android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  android-ndk-linux:
+    name: "Android NDK"
+    platform: ubuntu1804
+    working_directory: android/ndk
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  android-ndk-macos:
+    name: "Android NDK"
+    platform: macos
+    working_directory: android/ndk
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  android-ndk-windows:
+    name: "Android NDK"
+    platform: windows
+    working_directory: android/ndk
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  cpp-stage1-linux:
+    name: "C++ Stage 1"
+    platform: ubuntu1804
+    working_directory: cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage1-macos:
+    name: "C++ Stage 1"
+    platform: macos
+    working_directory: cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage1-windows:
+    name: "C++ Stage 1"
+    platform: windows
+    working_directory: cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage2-linux:
+    name: "C++ Stage 2"
+    platform: ubuntu1804
+    working_directory: cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage2-macos:
+    name: "C++ Stage 2"
+    platform: macos
+    working_directory: cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage2-windows:
+    name: "C++ Stage 2"
+    platform: windows
+    working_directory: cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage3-linux:
+    name: "C++ Stage 3"
+    platform: ubuntu1804
+    working_directory: cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  cpp-stage3-macos:
+    name: "C++ Stage 3"
+    platform: macos
+    working_directory: cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  cpp-stage3-windows:
+    name: "C++ Stage 3"
+    platform: windows
+    working_directory: cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  java-maven-linux:
+    name: "Maven Java App"
+    platform: ubuntu1804
+    working_directory: java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-maven-macos:
+    name: "Maven Java App"
+    platform: macos
+    working_directory: java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-maven-windows:
+    name: "Maven Java App"
+    platform: windows
+    working_directory: java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-tutorial-linux:
+    name: "Java Tutorial"
+    platform: ubuntu1804
+    working_directory: java-tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-tutorial-macos:
+    name: "Java Tutorial"
+    platform: macos
+    working_directory: java-tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-tutorial-windows:
+    name: "Java Tutorial"
+    platform: windows
+    working_directory: java-tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  rules-linux:
+    name: "Bazel Rules"
+    platform: ubuntu1804
+    working_directory: rules
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  rules-macos:
+    name: "Bazel Rules"
+    platform: macos
+    working_directory: rules
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  rules-windows:
+    name: "Bazel Rules"
+    platform: windows
+    working_directory: rules
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  tutorial-linux:
+    name: "Bazel end-to-end example"
+    platform: ubuntu1804
+    working_directory: tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  tutorial-macos:
+    name: "Bazel end-to-end example"
+    platform: macos
+    working_directory: tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  tutorial-windows:
+    name: "Bazel end-to-end example"
+    platform: windows
+    working_directory: tutorial
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."

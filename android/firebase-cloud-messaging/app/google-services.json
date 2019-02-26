@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "12345678901",
+    "firebase_url": "https://replace.with.your.project.example.com",
+    "project_id": "example-123",
+    "storage_bucket": "replace.with.your.project.example.org"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12345678901:android:abcdef1111111111",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12345678901-abcdabcdabcdabcdabcdabcdabcdabcd.apps.googleusercontent.com",
+          "client_type": 1
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "abcdef12345678901_abcdef123456_abcdef12"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

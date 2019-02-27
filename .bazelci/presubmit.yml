@@ -122,23 +122,17 @@ tasks:
     working_directory: java-tutorial
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   java-tutorial-macos:
     name: "Java Tutorial"
     platform: macos
     working_directory: java-tutorial
     build_targets:
     - "..."
-    test_targets:
-    - "..."
   java-tutorial-windows:
     name: "Java Tutorial"
     platform: windows
     working_directory: java-tutorial
     build_targets:
-    - "..."
-    test_targets:
     - "..."
   rules-linux:
     name: "Bazel Rules"

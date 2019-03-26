@@ -1,0 +1,41 @@
+android_sdk_repository(name = "androidsdk")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+RULES_JVM_EXTERNAL_TAG = "1.1"
+RULES_JVM_EXTERNAL_SHA = "ade316ec98ba0769bb1189b345d9877de99dd1b1e82f5a649d6ccbcb8da51c1f"
+
+http_archive(
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+)
+
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+# http_archive(
+#     name = "robolectric",
+#     urls = ["https://github.com/robolectric/robolectric-bazel/archive/4.0.1.tar.gz"],
+#     strip_prefix = "robolectric-bazel-4.0.1",
+#     sha256 = "dff7a1f8e7bd8dc737f20b6bbfaf78d8b5851debe6a074757f75041029f0c43b",
+# )
+local_repository(
+    name = "robolectric",
+    path = "/Users/jin/code/robolectric-bazel",
+)
+load("@robolectric//bazel:robolectric.bzl", "robolectric_repositories")
+robolectric_repositories()
+
+maven_install(
+    artifacts = [
+        "androidx.test.ext:junit:1.1.0",
+        "org.assertj:assertj-core:3.12.1",
+        "org.robolectric:robolectric:4.2",
+    ],
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+)

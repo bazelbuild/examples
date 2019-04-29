@@ -5,22 +5,37 @@ android_sdk_repository(
   name = "androidsdk",
 )
 
+RULES_JVM_EXTERNAL_TAG = "2.0.1"
+RULES_JVM_EXTERNAL_SHA = "55e8d3951647ae3dffde22b4f7f8dee11b3f70f3f89424713debd7076197eaca"
 
-GMAVEN_TAG = "20180530-1"
 http_archive(
-    name = "gmaven_rules",
-    strip_prefix = "gmaven_rules-%s" % GMAVEN_TAG,
-    url = "https://github.com/bazelbuild/gmaven_rules/archive/%s.tar.gz" % GMAVEN_TAG,
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
-load("@gmaven_rules//:gmaven.bzl", "gmaven_rules")
-gmaven_rules()
 
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "com.google.firebase:firebase-messaging:17.0.0",
+        "com.android.support:appcompat-v7:26.1.0",
+        "com.android.support.constraint:constraint-layout:1.0.2",
+    ],
+    repositories = [
+        "https://jcenter.bintray.com/",
+        "https://maven.google.com",
+    ],
+    fetch_sources = True,
+)
 
 TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
 http_archive(
   name = "tools_android",
   strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
   url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
+  sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
 )
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
 google_services_workspace_dependencies()

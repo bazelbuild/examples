@@ -1,5 +1,4 @@
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
-load("@gmaven_rules//:defs.bzl", "gmaven_artifact")
 
 GOOGLE_SERVICES_XML = google_services_xml(
     package_name = "com.example.myapplication",
@@ -20,12 +19,10 @@ android_binary(
     },
     resource_files = glob(["src/main/res/**"]) + GOOGLE_SERVICES_XML,
     deps = [
-        gmaven_artifact("com.google.firebase:firebase_messaging:aar:17.0.0"),
-        # firebase messaging 17.0.0 depends on firebase iid 16.0.0, so make sure
-        # to use the same version when depending on iid directly from the app.
-        gmaven_artifact("com.google.firebase:firebase_iid:aar:16.0.0"),
-        gmaven_artifact("com.android.support:appcompat_v7:aar:26.1.0"),
+        "@maven//:com_google_firebase_firebase_messaging",
+        "@maven//:com_google_firebase_firebase_iid",
+        "@maven//:com_android_support_appcompat_v7",
         # activity_main layout uses contraints
-        gmaven_artifact("com.android.support.constraint:constraint_layout:aar:1.0.2"),
+        "@maven//:com_android_support_constraint_constraint_layout",
     ],
 )

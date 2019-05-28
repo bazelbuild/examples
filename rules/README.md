@@ -17,6 +17,8 @@ passing information from a dependency to a target.
 
 * [actions.write](actions_write/): Example where a file is generated.
 
+* [capitalize](capitalize/): Example of a rule that does simple processing on a text file.
+
 * [expand_template](expand_template/): Example where a file is generated based
   on a template.
 

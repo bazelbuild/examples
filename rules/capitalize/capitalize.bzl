@@ -11,7 +11,11 @@ def _generate_uppercase_impl(ctx):
 generate_uppercase = rule(
     implementation = _generate_uppercase_impl,
     attrs = {
-        "input": attr.label(allow_single_file=True, doc = "The file to transform"),
+        "input": attr.label(
+            allow_single_file = True,
+            mandatory = True,
+            doc = "The file to transform",
+        ),
         "output": attr.output(doc = "The generated file"),
     },
     doc = "Transforms a text file by changing its characters to uppercase.",
@@ -30,7 +34,7 @@ def _generate_lowercase_impl(ctx):
 generate_lowercase = rule(
     implementation = _generate_lowercase_impl,
     attrs = {
-        "input": attr.label(allow_single_file=True, doc = "The file to transform"),
+        "input": attr.label(allow_single_file = True, doc = "The file to transform"),
         "output": attr.output(doc = "The generated file"),
     },
     doc = "Transforms a text file by changing its characters to lowercase.",

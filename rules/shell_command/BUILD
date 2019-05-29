@@ -1,6 +1,25 @@
-load(":size.bzl", "size")
+# A small example that takes a text file and generates modified versions of it,
+# and metadata about it. These rules depend on unix shell commands like `tr`
+# and `stat`.
+#
+# Build with:
+#     bazel build //shell_command:*
 
-size(
-    name = "foo_size",
+load(":rules.bzl", "emit_size", "convert_to_uppercase", "convert_to_lowercase")
+
+emit_size(
+    name = "foo",
     file = "foo.txt",
+)
+
+convert_to_uppercase(
+    name = "make_uppercase",
+    input = "foo.txt",
+    output = "upper_foo.txt",
+)
+
+convert_to_lowercase(
+    name = "make_lowercase",
+    input = "foo.txt",
+    output = "lower_foo.txt",
 )

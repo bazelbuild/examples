@@ -17,12 +17,11 @@ passing information from a dependency to a target.
 
 * [actions.write](actions_write/): Example where a file is generated.
 
-* [capitalize](capitalize/): Example of a rule that does simple processing on a text file.
-
 * [expand_template](expand_template/): Example where a file is generated based
   on a template.
 
-* [shell command](shell_command/): Example where a shell command is executed.
+* [shell command](shell_command/): Example where a shell command is executed to
+  do simple text file processing.
 
 * [mandatory provider](mandatory_provider/): Example with a mandatory provider,
   to access information from a dependency.

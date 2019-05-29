@@ -13,6 +13,7 @@ invokes shell commands.
 def _emit_size_impl(ctx):
     # The input file is given to us from the BUILD file via an attribute.
     in_file = ctx.file.file
+
     # The output file is declared with a name based on the target's name.
     out_file = ctx.actions.declare_file("%s.size" % ctx.attr.name)
 
@@ -32,13 +33,13 @@ def _emit_size_impl(ctx):
         # param (see other rules below). This would be more robust against
         # escaping issues. Note that actions require the full `path`, not the
         # ambiguous truncated `short_path`.
-        command = "stat -L -c%%s '%s' > '%s'" \
-            % (in_file.path, out_file.path),
+        command = "stat -L -c%%s '%s' > '%s'" %
+                  (in_file.path, out_file.path),
     )
 
     # Tell Bazel that the files to build for this target includes
     # `out_file`.
-    return [DefaultInfo(files=depset([out_file]))]
+    return [DefaultInfo(files = depset([out_file]))]
 
 emit_size = rule(
     implementation = _emit_size_impl,
@@ -52,7 +53,7 @@ emit_size = rule(
     doc = """
 Given an input file, creates an output file with the extension `.size`
 containing the file's size in bytes.
-"""
+""",
 )
 
 def _convert_to_uppercase_impl(ctx):

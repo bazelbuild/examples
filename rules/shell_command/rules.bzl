@@ -30,9 +30,9 @@ def _emit_size_impl(ctx):
         progress_message = "Getting size of %s" % in_file.short_path,
         # The command to run. Alternatively we could use '$1', '$2', etc., and
         # pass the values for their expansion to `run_shell`'s `arguments`
-        # param (see other rules below). This would be more robust against
-        # escaping issues. Note that actions require the full `path`, not the
-        # ambiguous truncated `short_path`.
+        # param (see convert_to_uppercase below). This would be more robust
+        # against escaping issues. Note that actions require the full `path`,
+        # not the ambiguous truncated `short_path`.
         command = "stat -L -c%%s '%s' > '%s'" %
                   (in_file.path, out_file.path),
     )
@@ -81,27 +81,4 @@ convert_to_uppercase = rule(
         "output": attr.output(doc = "The generated file"),
     },
     doc = "Transforms a text file by changing its characters to uppercase.",
-)
-
-def _convert_to_lowercase_impl(ctx):
-    # Same implementation as above, just with upper and lower reversed in the
-    # command. (We could have factored the two rule implementation functions
-    # together by parameterizing them on a hidden boolean attribute controlling
-    # which way to convert, but this is easier.)
-    in_file = ctx.file.input
-    out_file = ctx.outputs.output
-    ctx.actions.run_shell(
-        outputs = [out_file],
-        inputs = [in_file],
-        arguments = [in_file.path, out_file.path],
-        command = "tr '[:upper:]' '[:lower:]' < \"$1\" > \"$2\"",
-    )
-
-convert_to_lowercase = rule(
-    implementation = _convert_to_lowercase_impl,
-    attrs = {
-        "input": attr.label(allow_single_file = True, doc = "The file to transform"),
-        "output": attr.output(doc = "The generated file"),
-    },
-    doc = "Transforms a text file by changing its characters to lowercase.",
 )

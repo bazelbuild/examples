@@ -10,6 +10,11 @@ load(":rules.bzl", "emit_size", "convert_to_uppercase")
 emit_size(
     name = "foo",
     file = "foo.txt",
+    macos_syntax = select({
+        "@bazel_tools//src/conditions:darwin": True,
+        "@bazel_tools//src/conditions:darwin_x86_64": True,
+        "//conditions:default": False,
+    }),
 )
 
 convert_to_uppercase(

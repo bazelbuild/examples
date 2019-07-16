@@ -17,13 +17,6 @@ def _emit_size_impl(ctx):
     # The output file is declared with a name based on the target's name.
     out_file = ctx.actions.declare_file("%s.size" % ctx.attr.name)
 
-    # stat(1) on macOS and Linux expect different flags.
-    # See https://github.com/bazelbuild/examples/issues/103
-    if ctx.attr.macos_syntax:
-        cmd = "stat -L -f%%z '%s' > '%s'"
-    else:
-        cmd = "stat -L -c%%s '%s' > '%s'"
-
     ctx.actions.run_shell(
         # Input files visible to the action.
         inputs = [in_file],
@@ -40,7 +33,8 @@ def _emit_size_impl(ctx):
         # param (see convert_to_uppercase below). This would be more robust
         # against escaping issues. Note that actions require the full `path`,
         # not the ambiguous truncated `short_path`.
-        command = cmd % (in_file.path, out_file.path),
+        command = "wc -c '%s' | awk '{print $1}' > '%s'" %
+                  (in_file.path, out_file.path),
     )
 
     # Tell Bazel that the files to build for this target includes
@@ -54,10 +48,6 @@ emit_size = rule(
             mandatory = True,
             allow_single_file = True,
             doc = "The file whose size is computed",
-        ),
-        "macos_syntax": attr.bool(
-            mandatory = True,
-            doc = "Use macOS stat(1) syntax or Linux stat(1) syntax",
         ),
     },
     doc = """

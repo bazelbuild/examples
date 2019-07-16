@@ -33,7 +33,7 @@ def _emit_size_impl(ctx):
         # param (see convert_to_uppercase below). This would be more robust
         # against escaping issues. Note that actions require the full `path`,
         # not the ambiguous truncated `short_path`.
-        command = "stat -L -c%%s '%s' > '%s'" %
+        command = "wc -c '%s' | awk '{print $1}' > '%s'" %
                   (in_file.path, out_file.path),
     )
 

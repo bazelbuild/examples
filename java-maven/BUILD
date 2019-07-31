@@ -18,6 +18,7 @@ java_test(
     test_class = "com.example.myproject.TestApp",
     deps = [
         ":java-maven-lib",
+        "@maven//:junit_junit",
         "@maven//:com_google_guava_guava",
     ],
 )

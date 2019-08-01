@@ -1,10 +1,10 @@
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
-    tag = "0.13.0",
+    tag = "0.17.2",
 )
 
 load(
@@ -21,13 +21,25 @@ load(
 
 swift_rules_dependencies()
 
-http_archive(
-    name = "io_bazel_rules_appengine",
-    sha256 = "d1fbc9a48332cc00b56d66751b5eb911ac9a88e820af7a2316a9b5ed4ee46d0b",
-    strip_prefix = "rules_appengine-0.0.7",
-    url = "https://github.com/bazelbuild/rules_appengine/archive/0.0.7.tar.gz",
+load(
+    "@build_bazel_apple_support//lib:repositories.bzl",
+    "apple_support_dependencies",
 )
 
-load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_repositories")
+apple_support_dependencies()
 
-appengine_repositories()
+http_archive(
+    name = "io_bazel_rules_appengine",
+    sha256 = "",
+    strip_prefix = "rules_appengine-69621ad36dcb8b8e07379eda5e7d22a83364b205",
+    url = "https://github.com/bazelbuild/rules_appengine/archive/69621ad36dcb8b8e07379eda5e7d22a83364b205.tar.gz",
+)
+
+load(
+    "@io_bazel_rules_appengine//appengine:java_appengine.bzl",
+    "java_appengine_repositories",
+)
+
+java_appengine_repositories()
+
+android_sdk_repository(name = "androidsdk")

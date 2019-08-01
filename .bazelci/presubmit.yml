@@ -162,23 +162,27 @@ tasks:
     name: "Bazel end-to-end example"
     platform: ubuntu1804
     working_directory: tutorial
+    build_flags:
+      - "--host_force_python=PY2"
     build_targets:
-    - "..."
-    test_targets:
-    - "..."
+      - "//backend"
+      - "//android"
   tutorial-macos:
     name: "Bazel end-to-end example"
     platform: macos
     working_directory: tutorial
+    build_flags:
+      - "--host_force_python=PY2"
     build_targets:
-    - "..."
-    test_targets:
-    - "..."
+      - "//backend"
+      - "//android"
+      - "//ios-app"
   tutorial-windows:
     name: "Bazel end-to-end example"
     platform: windows
     working_directory: tutorial
+    build_flags:
+      - "--host_force_python=PY2"
     build_targets:
-    - "..."
-    test_targets:
-    - "..."
+      - "//backend"
+      - "//android"

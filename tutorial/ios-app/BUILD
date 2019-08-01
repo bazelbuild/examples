@@ -8,7 +8,6 @@ objc_library(
         "UrlGet/main.m",
     ],
     hdrs = glob(["UrlGet/*.h"]),
-    xibs = ["UrlGet/UrlGetViewController.xib"],
 )
 
 ios_application(
@@ -21,4 +20,6 @@ ios_application(
     infoplists = [":UrlGet/UrlGet-Info.plist"],
     visibility = ["//visibility:public"],
     deps = [":UrlGetClasses"],
+    minimum_os_version = "8.0",
+    launch_storyboard = "UrlGet/UrlGetViewController.xib",
 )

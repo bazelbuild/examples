@@ -4,7 +4,8 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
-    tag = "0.17.2",
+    commit = "ff6a37b24fcbbd525a5bf61692a12c810d0ee3c1", # tag = "0.17.2",
+    shallow_since = "1559833568 -0700",
 )
 
 load(
@@ -30,7 +31,7 @@ apple_support_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",
-    sha256 = "",
+    sha256 = "a7683a79e2001fef2aef7f2ade5bdc1c99af30cea9445cbbf67ddf8959b8a879",
     strip_prefix = "rules_appengine-69621ad36dcb8b8e07379eda5e7d22a83364b205",
     url = "https://github.com/bazelbuild/rules_appengine/archive/69621ad36dcb8b8e07379eda5e7d22a83364b205.tar.gz",
 )

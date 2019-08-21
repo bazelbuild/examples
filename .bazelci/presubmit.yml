@@ -157,7 +157,10 @@ tasks:
     build_targets:
     - "..."
     test_targets:
+    - "--"
     - "..."
+    # TODO(bazel-team): Make //test_rule:80columns work on Windows
+    - "//test_rule:80columns"
   tutorial-linux:
     name: "Bazel end-to-end example"
     platform: ubuntu1804

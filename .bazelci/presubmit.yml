@@ -121,19 +121,19 @@ tasks:
     platform: ubuntu1804
     working_directory: java-tutorial
     build_targets:
-    - "..."
+    - "//:ProjectRunner"
   java-tutorial-macos:
     name: "Java Tutorial"
     platform: macos
     working_directory: java-tutorial
     build_targets:
-    - "..."
+    - "//:ProjectRunner"
   java-tutorial-windows:
     name: "Java Tutorial"
     platform: windows
     working_directory: java-tutorial
     build_targets:
-    - "..."
+    - "//:ProjectRunner"
   rules-linux:
     name: "Bazel Rules"
     platform: ubuntu1804

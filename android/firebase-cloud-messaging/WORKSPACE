@@ -2,16 +2,17 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Requires ANDROID_HOME set to the path of your Android SDK.
 android_sdk_repository(
-  name = "androidsdk",
+    name = "androidsdk",
 )
 
 RULES_JVM_EXTERNAL_TAG = "2.8"
+
 RULES_JVM_EXTERNAL_SHA = "79c9850690d7614ecdb72d68394f994fef7534b292c4867ce5e7dec0aa7bdfad"
 
 http_archive(
     name = "rules_jvm_external",
-    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     sha256 = RULES_JVM_EXTERNAL_SHA,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
@@ -23,19 +24,37 @@ maven_install(
         "com.android.support:appcompat-v7:26.1.0",
         "com.android.support.constraint:constraint-layout:1.0.2",
     ],
+    fetch_sources = True,
     repositories = [
         "https://jcenter.bintray.com/",
         "https://maven.google.com",
     ],
-    fetch_sources = True,
 )
 
 TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
+
 http_archive(
-  name = "tools_android",
-  strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
-  url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
-  sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
+    name = "tools_android",
+    sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
+    strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
+    url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
 )
+
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
+
 google_services_workspace_dependencies()
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "rules_android",
+    urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
+    sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
+    strip_prefix = "rules_android-0.1.1",
+)
+
+http_archive(
+        name = "rules_cc",
+        url = "https://github.com/bazelbuild/rules_cc/archive/624b5d59dfb45672d4239422fa1e3de1822ee110.zip",
+        sha256 = "8c7e8bf24a2bf515713445199a677ee2336e1c487fa1da41037c6026de04bbc3",
+        strip_prefix = "rules_cc-624b5d59dfb45672d4239422fa1e3de1822ee110",
+)

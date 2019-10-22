@@ -1,3 +1,4 @@
+load("@rules_cc//cc:defs.bzl", "objc_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 
 objc_library(
@@ -18,8 +19,8 @@ ios_application(
         "ipad",
     ],
     infoplists = [":UrlGet/UrlGet-Info.plist"],
+    launch_storyboard = "UrlGet/UrlGetViewController.xib",
+    minimum_os_version = "8.0",
     visibility = ["//visibility:public"],
     deps = [":UrlGetClasses"],
-    minimum_os_version = "8.0",
-    launch_storyboard = "UrlGet/UrlGetViewController.xib",
 )

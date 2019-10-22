@@ -1,3 +1,5 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_test")
+
 package(default_visibility = ["//visibility:public"])
 
 java_library(
@@ -18,7 +20,7 @@ java_test(
     test_class = "com.example.myproject.TestApp",
     deps = [
         ":java-maven-lib",
-        "@maven//:junit_junit",
         "@maven//:com_google_guava_guava",
+        "@maven//:junit_junit",
     ],
 )

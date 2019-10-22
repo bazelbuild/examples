@@ -1,3 +1,4 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//expand_template:hello.bzl", "hello")
 
 # Generates a C++ source file that says "Hello John!".

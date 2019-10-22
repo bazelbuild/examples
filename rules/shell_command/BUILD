@@ -5,7 +5,7 @@
 # Build with:
 #     bazel build //shell_command:*
 
-load(":rules.bzl", "emit_size", "convert_to_uppercase")
+load(":rules.bzl", "convert_to_uppercase", "emit_size")
 
 emit_size(
     name = "foo",

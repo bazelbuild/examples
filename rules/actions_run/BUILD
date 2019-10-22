@@ -29,13 +29,13 @@ sh_binary(
 config_setting(
     name = "on_linux",
     constraint_values = [
-        "@platforms//os:linux"
+        "@platforms//os:linux",
     ],
 )
 
 config_setting(
     name = "on_windows",
     constraint_values = [
-        "@platforms//os:windows"
+        "@platforms//os:windows",
     ],
 )

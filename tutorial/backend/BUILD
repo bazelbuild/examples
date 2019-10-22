@@ -1,3 +1,4 @@
+load("@rules_java//java:defs.bzl", "java_binary")
 load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_war")
 
 package(default_visibility = ["//visibility:public"])

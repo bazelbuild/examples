@@ -1,3 +1,4 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load(":file_collector.bzl", "file_collector")
 
 cc_library(

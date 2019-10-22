@@ -1,3 +1,4 @@
+load("@rules_python//python:defs.bzl", "py_binary")
 load(":foo.bzl", "foo_binary", "foo_library")
 
 # Our hypothetical Foo compiler.

@@ -1,3 +1,5 @@
+load("@rules_android//android:rules.bzl", "android_binary", "android_library")
+
 # The final binary rule, which builds the APK and sets the application manifest,
 # as well as any other resources needed by the application.
 # The package for the R class for resources is normally inferred from the

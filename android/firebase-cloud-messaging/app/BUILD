@@ -1,3 +1,4 @@
+load("@rules_android//android:rules.bzl", "android_binary")
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
 
 GOOGLE_SERVICES_XML = google_services_xml(

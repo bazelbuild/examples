@@ -24,7 +24,6 @@ maven_install(
         "com.android.support.constraint:constraint-layout:1.0.2",
         "com.google.code.gson:gson:2.8.2",
     ],
-    fetch_sources = True,
     repositories = [
         "https://jcenter.bintray.com",
         "https://maven.google.com",

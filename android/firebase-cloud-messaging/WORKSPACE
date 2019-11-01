@@ -15,9 +15,6 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
-load("@rules_jvm_external//migration:maven_jar_migrator_deps.bzl", "maven_jar_migrator_repositories")
-maven_jar_migrator_repositories()
-
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
@@ -45,13 +42,13 @@ compat_repositories()
 TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
 
 http_archive(
-  name = "tools_android",
-  strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
-  url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
-  sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
-  repo_mapping = {
-      "@com_google_code_gson_2_8_2": "@com_google_code_gson_gson",
-  },
+    name = "tools_android",
+    strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
+    url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
+    sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
+    repo_mapping = {
+        "@com_google_code_gson_2_8_2": "@com_google_code_gson_gson",
+    },
 )
 
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
@@ -67,8 +64,8 @@ http_archive(
 )
 
 http_archive(
-        name = "rules_cc",
-        url = "https://github.com/bazelbuild/rules_cc/archive/624b5d59dfb45672d4239422fa1e3de1822ee110.zip",
-        sha256 = "8c7e8bf24a2bf515713445199a677ee2336e1c487fa1da41037c6026de04bbc3",
-        strip_prefix = "rules_cc-624b5d59dfb45672d4239422fa1e3de1822ee110",
+    name = "rules_cc",
+    url = "https://github.com/bazelbuild/rules_cc/archive/624b5d59dfb45672d4239422fa1e3de1822ee110.zip",
+    sha256 = "8c7e8bf24a2bf515713445199a677ee2336e1c487fa1da41037c6026de04bbc3",
+    strip_prefix = "rules_cc-624b5d59dfb45672d4239422fa1e3de1822ee110",
 )

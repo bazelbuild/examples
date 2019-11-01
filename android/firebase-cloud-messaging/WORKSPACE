@@ -9,12 +9,22 @@ RULES_JVM_EXTERNAL_TAG = "2.8"
 
 RULES_JVM_EXTERNAL_SHA = "79c9850690d7614ecdb72d68394f994fef7534b292c4867ce5e7dec0aa7bdfad"
 
-http_archive(
+# http_archive(
+#     name = "rules_jvm_external",
+#     strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+#     sha256 = RULES_JVM_EXTERNAL_SHA,
+#     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+# )
+
+local_repository(
     name = "rules_jvm_external",
     sha256 = RULES_JVM_EXTERNAL_SHA,
     strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
+
+load("@rules_jvm_external//migration:maven_jar_migrator_deps.bzl", "maven_jar_migrator_repositories")
+maven_jar_migrator_repositories()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
@@ -23,21 +33,33 @@ maven_install(
         "com.google.firebase:firebase-messaging:17.0.0",
         "com.android.support:appcompat-v7:26.1.0",
         "com.android.support.constraint:constraint-layout:1.0.2",
+        "com.google.code.gson:gson:2.8.2",
     ],
     fetch_sources = True,
     repositories = [
-        "https://jcenter.bintray.com/",
+        "https://jcenter.bintray.com",
         "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
     ],
+    fetch_sources = True,
+    version_conflict_policy = "pinned",
+    # See https://github.com/bazelbuild/rules_jvm_external/#repository-aliases
+    # This can be removed if none of your external dependencies uses `maven_jar`.
+    generate_compat_repositories = True,
 )
+load("@maven//:compat.bzl", "compat_repositories")
+compat_repositories()
 
 TOOLS_ANDROID_COMMIT = "0e864ba5a86958513658250de587416d8e17c481"
 
 http_archive(
-    name = "tools_android",
-    sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
-    strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
-    url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
+  name = "tools_android",
+  strip_prefix = "tools_android-" + TOOLS_ANDROID_COMMIT,
+  url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
+  sha256 = "57c50d6331ba578fc8adfcede20ef12b437cb4cc2edf60c852e4b834eefee5fc",
+  repo_mapping = {
+      "@com_google_code_gson_2_8_2": "@com_google_code_gson_gson",
+  },
 )
 
 load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")

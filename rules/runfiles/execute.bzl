@@ -18,9 +18,7 @@ def _impl(ctx):
 
     # Create runfiles from the files specified in the data attribute.
     # The shell executable - the output of this rule - can use them at
-    # runtime. It is also possible to define data_runfiles and
-    # default_runfiles. However if runfiles is specified it's not possible to
-    # define the above ones since runfiles sets them both.
+    # runtime.
     return [DefaultInfo(
         runfiles = ctx.runfiles(files = ctx.files.data),
     )]

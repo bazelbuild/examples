@@ -29,13 +29,12 @@ def _tool_impl(ctx):
     data_dep_path = runfiles_path + "data_dep"
 
     # Thus the example directory structure is:
-    # rules/runfiles/tool     (executable)
-    # rules/runfiles/tool.runfiles/
+    # runfiles/tool     (executable)
+    # runfiles/tool.runfiles/
     #     data_dep   (symlink to data.txt)
     #     <workspace_name>/
-    #         rules/
-    #             runfiles/
-    #                 data.txt
+    #         runfiles/
+    #        udata.txt
 
     # Create the output executable file with command as its content.
     ctx.actions.write(
@@ -60,7 +59,7 @@ tool = rule(
         "command": attr.string(),
         "_data": attr.label(
             allow_files = True,
-            default = "//rules/runfiles:data.txt"),
+            default = "//runfiles:data.txt"),
     },
 )
 

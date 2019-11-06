@@ -13,7 +13,7 @@ if [[ -z "${RUNFILES_DIR}" ]]; then
   RUNFILES_DIR=${0}.runfiles
 fi
 
-cat ${RUNFILES_DIR}/examples/rules/runfiles/data.txt > $1"""
+cat ${RUNFILES_DIR}/examples/runfiles/data.txt > $1"""
 
     # Using root_symlinks or symlinks for a tool is very brittle if the
     # tool may be used by another tool; there will be a collision when merging
@@ -25,7 +25,7 @@ cat ${RUNFILES_DIR}/examples/rules/runfiles/data.txt > $1"""
         is_executable = True,
     )
 
-    # Subtool depends on RUNFILES_DIR/<workspace_name>/rules/runfiles/data.txt.
+    # Subtool depends on RUNFILES_DIR/<workspace_name>/runfiles/data.txt.
     return [DefaultInfo(
         runfiles = ctx.runfiles(files = [ctx.files._data[0]]),
     )]
@@ -37,7 +37,7 @@ sub_tool = rule(
         "command": attr.string(),
         "_data": attr.label(
             allow_files = True,
-            default = "//rules/runfiles:data.txt"),
+            default = "//runfiles:data.txt"),
     },
 )
 
@@ -48,14 +48,13 @@ def _complex_tool_impl(ctx):
     my_runfiles = my_runfiles.merge(ctx.attr._subtool[DefaultInfo].default_runfiles)
 
     # Thus the example directory structure is:
-    # rules/runfiles/complex_tool     (executable)
-    # rules/runfiles/complex_tool.runfiles/
+    # runfiles/complex_tool     (executable)
+    # runfiles/complex_tool.runfiles/
     #     <workspace_name>/
-    #         rules/
-    #             runfiles/
-    #                 complex_tool_data.txt
-    #                 data.txt
-    #                 subtool
+    #         runfiles/
+    #             complex_tool_data.txt
+    #             data.txt
+    #             subtool
 
     runfiles_relative_tool_path = ctx.workspace_name + "/" + ctx.attr._subtool[DefaultInfo].files_to_run.executable.short_path
 
@@ -65,7 +64,7 @@ def _complex_tool_impl(ctx):
     command = ("export RUNFILES_DIR=\"$0.runfiles\" && "
              + "${RUNFILES_DIR}/%s $1 && cat ${RUNFILES_DIR}/examples/%s >> $1") % (
                    runfiles_relative_tool_path, ctx.files._data[0].short_path)
-                   
+
     ctx.actions.write(
         output = ctx.outputs.executable,
         content = command,
@@ -83,9 +82,9 @@ complex_tool = rule(
         "command": attr.string(),
         "_subtool": attr.label(
             allow_files = True,
-            default = "//rules/runfiles:subtool"),
+            default = "//runfiles:subtool"),
         "_data": attr.label(
             allow_files = True,
-            default = "//rules/runfiles:complex_tool_data.txt"),
+            default = "//runfiles:complex_tool_data.txt"),
     },
 )

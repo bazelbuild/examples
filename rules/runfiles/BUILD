@@ -44,7 +44,7 @@ tool_user(
 # 4. Tool with runfiles depending on another tool
 # Same as (3), except adds the complexity of a tool which depends on another tool
 # with its own runfiles. This adds complexity, as the runfiles of the "inner tool"
-# is in a differnt location than if the inner tool were run itself.
+# is in a different location than if the inner tool were run itself.
 # `bazel build //runfiles:complex_tool_user` to build this example.
 sub_tool(
     name = "subtool",

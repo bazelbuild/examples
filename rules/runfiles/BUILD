@@ -3,6 +3,9 @@ load(":execute.bzl", "execute")
 load(":library.bzl", "runfiles_library", "runfiles_binary")
 load(":tool.bzl", "tool", "tool_user")
 
+# Tests in this package do not currently work on Windows (as they create
+# shell-script binaries not compatible with Windows).
+
 # 1. Basic example
 # `bazel build //runfiles:e` will create an executable.
 # `bazel run //runfiles:e` will run it.
@@ -39,6 +42,7 @@ tool(
 tool_user(
     name = "tool_user",
     tool = ":tool",
+    tags = DISABLE_WINDOWS_TAGS,
 )
 
 # 4. Tool with runfiles depending on another tool

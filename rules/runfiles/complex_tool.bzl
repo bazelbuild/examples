@@ -61,7 +61,7 @@ def _complex_tool_impl(ctx):
     # This tool forwards its runfiles directory via the RUNFILES_DIR to the
     # subtool, otherwise the subtool would be looking to $0.runfiles, which does
     # not exist.
-    command = ("export RUNFILES_DIR=\"$0.runfiles\" && "
+    command = ("#!/bin/bash\nexport RUNFILES_DIR=\"$0.runfiles\" && "
              + "${RUNFILES_DIR}/%s $1 && cat ${RUNFILES_DIR}/examples/%s >> $1") % (
                    runfiles_relative_tool_path, ctx.files._data[0].short_path)
 

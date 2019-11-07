@@ -41,7 +41,7 @@ def _tool_impl(ctx):
         output = ctx.outputs.executable,
         # Simple example, effectively puts the contents of data.txt into
         # the output twice (read once via symlink, once via normal file).
-        content = "cat %s %s > $1" % (data_file_path, data_dep_path),
+        content = "#!/bin/bash\ncat %s %s > $1" % (data_file_path, data_dep_path),
         is_executable = True,
     )
 
@@ -56,7 +56,6 @@ tool = rule(
     implementation = _tool_impl,
     executable = True,
     attrs = {
-        "command": attr.string(),
         "_data": attr.label(
             allow_files = True,
             default = "//runfiles:data.txt"),
@@ -66,13 +65,20 @@ tool = rule(
 def _tool_user_impl(ctx):
     my_out = ctx.actions.declare_file(ctx.attr.name + "_out")
 
-    # Use the tool's `files_to_run` to describe the tool's
-    # required environment.
-    tool_files_to_run = ctx.attr.tool[DefaultInfo].files_to_run
+    # If the tool dependency attribute was declared with `executable = True`,
+    # then the tool's file can be found under `ctx.executable.<attr_name>`.
+    # If this file is passed to `ctx.actions.run()`, the runfiles for this file
+    # are automatically added to the action.
+    tool = ctx.executable.tool
+
+    # Below is an alternate manner to acquire the executable together with
+    # its runfiles (useful if for some reason the attribute itself could not
+    # be made `executable = True`)
+    tool_alt = ctx.attr.tool[DefaultInfo].files_to_run
 
     ctx.actions.run(
         outputs = [my_out],
-        executable = tool_files_to_run,
+        executable = tool,
         arguments = [str(my_out.path)]
     )
 
@@ -81,6 +87,8 @@ def _tool_user_impl(ctx):
 tool_user = rule(
     implementation = _tool_user_impl,
     attrs = {
-        "tool": attr.label(mandatory = True),
+        # 
+        "tool": attr.label(mandatory = True, executable = True, cfg = "host"),
     },
+
 )

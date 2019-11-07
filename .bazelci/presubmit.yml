@@ -156,6 +156,8 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    # TODO(bazel-team): Make runfiles examples work on Windows.
+    - "-//runfiles/..."
     # TODO(bazel-team): Make //test_rule:80columns work on Windows
     # test_targets:
     # - "--"

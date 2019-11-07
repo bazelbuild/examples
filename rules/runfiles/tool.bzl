@@ -71,15 +71,10 @@ def _tool_user_impl(ctx):
     # are automatically added to the action.
     tool = ctx.executable.tool
 
-    # Below is an alternate manner to acquire the executable together with
-    # its runfiles (useful if for some reason the attribute itself could not
-    # be made `executable = True`)
-    tool_alt = ctx.attr.tool[DefaultInfo].files_to_run
-
     ctx.actions.run(
         outputs = [my_out],
         executable = tool,
-        arguments = [str(my_out.path)]
+        arguments = [my_out.path]
     )
 
     return [DefaultInfo(files = depset([my_out]))]
@@ -87,7 +82,6 @@ def _tool_user_impl(ctx):
 tool_user = rule(
     implementation = _tool_user_impl,
     attrs = {
-        # 
         "tool": attr.label(mandatory = True, executable = True, cfg = "host"),
     },
 

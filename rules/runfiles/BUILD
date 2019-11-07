@@ -42,7 +42,6 @@ tool(
 tool_user(
     name = "tool_user",
     tool = ":tool",
-    tags = DISABLE_WINDOWS_TAGS,
 )
 
 # 4. Tool with runfiles depending on another tool

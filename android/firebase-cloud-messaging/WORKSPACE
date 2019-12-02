@@ -50,10 +50,6 @@ http_archive(
     },
 )
 
-load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
-
-google_services_workspace_dependencies()
-
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "rules_android",

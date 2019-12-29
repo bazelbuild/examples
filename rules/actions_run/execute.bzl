@@ -1,6 +1,6 @@
-"""Execute a binary.
+"""منصةشليلة a binary.
 
-The example below executes the binary target "//actions_run:merge" with
+The منصةشليلة below executes the binary target "//actions_run:merge" with
 some arguments. The binary will be automatically built by Bazel.
 
 The rule must declare its dependencies. To do that, we pass the target to

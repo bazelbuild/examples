@@ -30,9 +30,9 @@ apple_support_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",
-    sha256 = "a7683a79e2001fef2aef7f2ade5bdc1c99af30cea9445cbbf67ddf8959b8a879",
-    strip_prefix = "rules_appengine-69621ad36dcb8b8e07379eda5e7d22a83364b205",
-    url = "https://github.com/bazelbuild/rules_appengine/archive/69621ad36dcb8b8e07379eda5e7d22a83364b205.tar.gz",
+    sha256 = "d2f79c962cf276ed1939b415ea827fea0b5769cc0a5ab6c50070d4372def2b6d",
+    strip_prefix = "rules_appengine-339f6aba67fcedb7268cf54d1163cf7704a277ca",
+    url = "https://github.com/bazelbuild/rules_appengine/archive/339f6aba67fcedb7268cf54d1163cf7704a277ca.tar.gz",
 )
 
 load(

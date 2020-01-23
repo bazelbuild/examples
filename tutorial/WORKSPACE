@@ -1,4 +1,3 @@
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -29,12 +28,14 @@ load(
 
 apple_support_dependencies()
 
-git_repository(
+http_archive(
     name = "io_bazel_rules_appengine",
     # TODO: update to a release version that contains 339f6aba67fcedb7268cf54d1163cf7704a277ca.
     # This commit fixes the Maven artifact URLs to use "https" instead of "http".
-    commit = "339f6aba67fcedb7268cf54d1163cf7704a277ca",
-    remote = "https://github.com/bazelbuild/rules_appengine.git",
+    # We don't specify sha256, because the sha256 of GitHub-served non-release archives isn't
+    # stable.
+    urls = ["https://github.com/bazelbuild/rules_appengine/archive/339f6aba67fcedb7268cf54d1163cf7704a277ca.tar.gz"],
+    strip_prefix = "rules_appengine-339f6aba67fcedb7268cf54d1163cf7704a277ca",
 )
 
 load(

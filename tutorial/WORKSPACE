@@ -30,9 +30,12 @@ apple_support_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",
-    sha256 = "a7683a79e2001fef2aef7f2ade5bdc1c99af30cea9445cbbf67ddf8959b8a879",
-    strip_prefix = "rules_appengine-69621ad36dcb8b8e07379eda5e7d22a83364b205",
-    url = "https://github.com/bazelbuild/rules_appengine/archive/69621ad36dcb8b8e07379eda5e7d22a83364b205.tar.gz",
+    # TODO: update to a release version that contains 339f6aba67fcedb7268cf54d1163cf7704a277ca.
+    # This commit fixes the Maven artifact URLs to use "https" instead of "http".
+    # We don't specify sha256, because the sha256 of GitHub-served non-release archives isn't
+    # stable.
+    urls = ["https://github.com/bazelbuild/rules_appengine/archive/339f6aba67fcedb7268cf54d1163cf7704a277ca.tar.gz"],
+    strip_prefix = "rules_appengine-339f6aba67fcedb7268cf54d1163cf7704a277ca",
 )
 
 load(

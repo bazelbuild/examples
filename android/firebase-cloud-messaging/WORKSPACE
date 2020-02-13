@@ -3,6 +3,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Requires ANDROID_HOME set to the path of your Android SDK.
 android_sdk_repository(
     name = "androidsdk",
+    api_level = 28,
+    build_tools_version = "28.0.2",
 )
 
 RULES_JVM_EXTERNAL_TAG = "2.9"

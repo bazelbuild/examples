@@ -37,12 +37,14 @@ sub_tool = rule(
         "command": attr.string(),
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:data.txt"),
+            default = "//runfiles:data.txt",
+        ),
     },
 )
 
 def _complex_tool_impl(ctx):
     my_runfiles = ctx.runfiles(files = [ctx.files._data[0]])
+
     # Use runfiles.merge to merge the runfiles of both tools. All runfiles will
     # be rooted under the runfiles directory owned by this rule, however.
     my_runfiles = my_runfiles.merge(ctx.attr._subtool[DefaultInfo].default_runfiles)
@@ -61,9 +63,11 @@ def _complex_tool_impl(ctx):
     # This tool forwards its runfiles directory via the RUNFILES_DIR to the
     # subtool, otherwise the subtool would be looking to $0.runfiles, which does
     # not exist.
-    command = ("#!/bin/bash\nexport RUNFILES_DIR=\"$0.runfiles\" && "
-             + "${RUNFILES_DIR}/%s $1 && cat ${RUNFILES_DIR}/examples/%s >> $1") % (
-                   runfiles_relative_tool_path, ctx.files._data[0].short_path)
+    command = ("#!/bin/bash\nexport RUNFILES_DIR=\"$0.runfiles\" && " +
+               "${RUNFILES_DIR}/%s $1 && cat ${RUNFILES_DIR}/examples/%s >> $1") % (
+        runfiles_relative_tool_path,
+        ctx.files._data[0].short_path,
+    )
 
     ctx.actions.write(
         output = ctx.outputs.executable,
@@ -82,9 +86,11 @@ complex_tool = rule(
         "command": attr.string(),
         "_subtool": attr.label(
             allow_files = True,
-            default = "//runfiles:subtool"),
+            default = "//runfiles:subtool",
+        ),
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:complex_tool_data.txt"),
+            default = "//runfiles:complex_tool_data.txt",
+        ),
     },
 )

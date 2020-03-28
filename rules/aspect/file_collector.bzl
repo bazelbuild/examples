@@ -42,7 +42,7 @@ def _file_collector_rule_impl(ctx):
     for dep in ctx.attr.deps:
         files = [f.short_path for f in dep[FileCollector].files.to_list()]
         content.append("files from {}: {}".format(dep.label, files))
-    content += [""]  # trailing newline
+    content.append("")  # trailing newline
 
     ctx.actions.write(
         output = ctx.outputs.out,

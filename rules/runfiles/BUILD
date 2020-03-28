@@ -1,6 +1,6 @@
 load(":complex_tool.bzl", "complex_tool", "sub_tool")
 load(":execute.bzl", "execute")
-load(":library.bzl", "runfiles_library", "runfiles_binary")
+load(":library.bzl", "runfiles_binary", "runfiles_library")
 load(":tool.bzl", "tool", "tool_user")
 
 # Tests in this package do not currently work on Windows (as they create
@@ -27,6 +27,7 @@ runfiles_library(
     command = "cat $(location :data.txt)",
     data = [":data.txt"],
 )
+
 runfiles_binary(
     name = "bin",
     lib = ":lib",
@@ -39,6 +40,7 @@ runfiles_binary(
 tool(
     name = "tool",
 )
+
 tool_user(
     name = "tool_user",
     tool = ":tool",
@@ -52,12 +54,12 @@ tool_user(
 sub_tool(
     name = "subtool",
 )
+
 complex_tool(
     name = "complex_tool",
 )
+
 tool_user(
     name = "complex_tool_user",
     tool = ":complex_tool",
 )
-
-

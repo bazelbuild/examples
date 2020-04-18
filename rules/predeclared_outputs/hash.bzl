@@ -24,7 +24,7 @@ def _word_hashes_impl(ctx):
     for hashfile in ctx.outputs.hashes:
         basename = hashfile.basename
         if not basename.endswith(".md5"):
-            fail("Hash file '%s' must end in '.md5'".format(basename))
+            fail("Hash file '{}' must end in '.md5'".format(basename))
         word = basename[:-len(".md5")]
 
         ctx.actions.run_shell(

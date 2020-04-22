@@ -13,7 +13,7 @@ def _tool_impl(ctx):
     # to be relative to the directory in which the executable file is run.
     runfiles_path = "$0.runfiles/"
 
-    # Each runfile under the runfiles path resides under a directory with 
+    # Each runfile under the runfiles path resides under a directory with
     # with the same name as its workspace.
     data_file_root = runfiles_path + ctx.workspace_name + "/"
 
@@ -22,8 +22,10 @@ def _tool_impl(ctx):
     # Alternatively, one can use the root_symlinks parameter of `runfiles`
     # to create a symlink rooted directly under the {rulename}.runfiles
     # directory.
-    my_runfiles = ctx.runfiles(files = [ctx.files._data[0]],
-        root_symlinks = {"data_dep" : ctx.files._data[0]})
+    my_runfiles = ctx.runfiles(
+        files = [ctx.files._data[0]],
+        root_symlinks = {"data_dep": ctx.files._data[0]},
+    )
 
     # Even root symlinks are under the runfiles path.
     data_dep_path = runfiles_path + "data_dep"
@@ -58,7 +60,8 @@ tool = rule(
     attrs = {
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:data.txt"),
+            default = "//runfiles:data.txt",
+        ),
     },
 )
 
@@ -74,7 +77,7 @@ def _tool_user_impl(ctx):
     ctx.actions.run(
         outputs = [my_out],
         executable = tool,
-        arguments = [my_out.path]
+        arguments = [my_out.path],
     )
 
     return [DefaultInfo(files = depset([my_out]))]
@@ -84,5 +87,4 @@ tool_user = rule(
     attrs = {
         "tool": attr.label(mandatory = True, executable = True, cfg = "host"),
     },
-
 )

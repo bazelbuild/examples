@@ -45,10 +45,11 @@ def _binary_impl(ctx):
 
     my_runfiles = ctx.runfiles(
         files = [ctx.attr.lib[RuntimeRequiredFiles].file],
-        transitive_files = ctx.attr.lib[RuntimeRequiredFiles].data_files)
+        transitive_files = ctx.attr.lib[RuntimeRequiredFiles].data_files,
+    )
 
     return [DefaultInfo(
-        runfiles = my_runfiles
+        runfiles = my_runfiles,
     )]
 
 runfiles_binary = rule(

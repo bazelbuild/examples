@@ -1,4 +1,4 @@
-load("//:defs.bzl", "test_arg_cc_test")
+load(":defs.bzl", "test_arg_cc_test")
 
 test_arg_cc_test(
   name = "my-test",

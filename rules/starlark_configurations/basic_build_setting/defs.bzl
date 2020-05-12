@@ -3,10 +3,10 @@ TemperatureProvider = provider(fields = ['type'])
 temperatures = ["HOT", "LUKEWARM", "ICED"]
 
 def _impl(ctx):
-	# use `ctx.build_setting_value` to access the raw value 
-	# of this build setting. This value is either derived from
-	# the default value set on the target or from the setting
-	# being set somewhere on the command line/in a transition, etc.
+    # use `ctx.build_setting_value` to access the raw value 
+    # of this build setting. This value is either derived from
+    # the default value set on the target or from the setting
+    # being set somewhere on the command line/in a transition, etc.
     raw_temperature = ctx.build_setting_value
 
     # Things you can do in a build setting implementation function
@@ -29,23 +29,22 @@ temperature = rule(
 )
 
 def _day_impl(ctx):
-	# This accesses the value of the buidl setting at the time this
-	# rule implementation is evaluated. This means if there was
-	# a command-line change or a transition change in the ancestors
-	# of the target this is running for, those will be reflected here.
-	print(ctx.attr._temperature[TemperatureProvider].type)
-	return []
+    # This accesses the value of the buidl setting at the time this
+    # rule implementation is evaluated. This means if there was
+    # a command-line change or a transition change in the ancestors
+    # of the target this is running for, those will be reflected here.
+    print(ctx.attr._temperature[TemperatureProvider].type)
+    return []
 
 
 breakfast = rule(
-	implementation = _day_impl,
-	# depending on a build setting will give you access to its
-	# configuration value inside your rule implementation. You
-	# might want to make these private attributes so rule
-	# users can't change what piece of configuration you are
-	# reading (https://docs.bazel.build/versions/master/skylark/rules.html#private-attributes-and-implicit-dependencies)
-	attrs = {
-		"_temperature": attr.label(default = ":coffee_temp")
-
-	},
+    implementation = _day_impl,
+    # depending on a build setting will give you access to its
+    # configuration value inside your rule implementation. You
+    # might want to make these private attributes so rule
+    # users can't change what piece of configuration you are
+    # reading (https://docs.bazel.build/versions/master/skylark/rules.html#private-attributes-and-implicit-dependencies)
+    attrs = {
+        "_temperature": attr.label(default = ":coffee_temp")
+    },
 )

@@ -1,3 +1,5 @@
+# We can transition on native options using this 
+# //command_line_option:<option-name> syntax
 _BUILD_SETTING = "//command_line_option:test_arg"
 
 def _test_arg_transition_impl(settings, attr):

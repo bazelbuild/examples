@@ -26,7 +26,7 @@ def _rule_impl(ctx):
     # The values of `x86_dep` and `armeabi-v7a_dep` here are regular
     # dependencies with providers.
     x86_dep = tools['x86-platform']
-    armeabi-v7a_dep = tools['armeabi-v7a-platform']
+    armeabi_v7a_dep = tools['armeabi-v7a-platform']
     return []
 
 foo_binary = rule(

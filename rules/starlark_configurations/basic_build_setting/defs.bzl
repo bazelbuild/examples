@@ -45,6 +45,6 @@ breakfast = rule(
     # users can't change what piece of configuration you are
     # reading (https://docs.bazel.build/versions/master/skylark/rules.html#private-attributes-and-implicit-dependencies)
     attrs = {
-        "_temperature": attr.label(default = ":coffee_temp")
+        "_temperature": attr.label(default = ":coffee-temp")
     },
 )

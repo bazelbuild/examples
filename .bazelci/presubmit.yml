@@ -142,6 +142,7 @@ tasks:
     - "..."
     # These targest are not supposed to build at the top level without flags being set
     - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
     - "-//starlark_configurations/cc_binary_selectable_copts:lib"
     test_targets:
     - "..."

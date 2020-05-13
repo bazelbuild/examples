@@ -29,7 +29,7 @@ temperature = rule(
 )
 
 def _day_impl(ctx):
-    # This accesses the value of the buidl setting at the time this
+    # This accesses the value of the build setting at the time this
     # rule implementation is evaluated. This means if there was
     # a command-line change or a transition change in the ancestors
     # of the target this is running for, those will be reflected here.
@@ -39,7 +39,7 @@ def _day_impl(ctx):
 
 breakfast = rule(
     implementation = _day_impl,
-    # depending on a build setting will give you access to its
+    # Depending on a build setting will give you access to its
     # configuration value inside your rule implementation. You
     # might want to make these private attributes so rule
     # users can't change what piece of configuration you are

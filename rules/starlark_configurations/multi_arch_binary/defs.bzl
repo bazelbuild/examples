@@ -28,6 +28,8 @@ def _rule_impl(ctx):
     # dependencies with providers.
     x86_dep = tools['x86-platform']
     armeabi_v7a_dep = tools['armeabi-v7a-platform']
+    print("transitioned deps: ")
+    print(ctx.split_attr.tool)
     return []
 
 foo_binary = rule(

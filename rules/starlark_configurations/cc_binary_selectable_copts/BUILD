@@ -33,8 +33,8 @@ cc_library(
     srcs = ["lib.cc"],
     copts = select(
         {
-            "//custom_settings:feature1": ["-Dfeature1"],
-            "//custom_settings:feature2": ["-Dfeature2"],
+            "custom_settings:feature1": ["-Dfeature1"],
+            "custom_settings:feature2": ["-Dfeature2"],
         },
         no_match_error = "You must explicitly set which features you want!",
     ),

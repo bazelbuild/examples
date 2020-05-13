@@ -1,4 +1,6 @@
 def _copt_transition_impl(settings, attr):
+    _ignore = settings
+    
     # settings provides read access to existing flags. But
     # this transition doesn't need to read any flags.
     return {"//starlark_configurations/cc_binary_selectable_copts/custom_settings:mycopts": attr.set_features}

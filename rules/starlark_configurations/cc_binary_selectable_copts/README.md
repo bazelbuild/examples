@@ -25,7 +25,7 @@ This example has five files:
   called `_copt_transition` that reads the value of `set_features` and sets
   `//custom-settings:mycopts` accordingly.
   
-  Finally, this file declares a macro called `cc_binary` that automates away all
+  Finally, this file declares a macro (also) called `cc_binary` that automates away all
   this extra abstraction: the new macro `cc_binary` simply instantiates a
   `transition_rule` with the desired `set_features` then passes all other
   attributes directly to the native `cc_binary`. To the end user this makes it

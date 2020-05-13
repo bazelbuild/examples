@@ -21,21 +21,21 @@ cc_binary(
 
 # This binary "forgets" to set any features, so we have it fail with
 # a descriptive message.
-#cc_binary(
-#    name = "app_forgets_to_set_features",
-#    srcs = ["main.cc"],
-#    deps = [":lib"],
-#)
+cc_binary(
+   name = "app_forgets_to_set_features",
+   srcs = ["main.cc"],
+   deps = [":lib"],
+)
 
 # The library only builds if some feature is requested.
-#cc_library(
-#    name = "lib",
-#    srcs = ["lib.cc"],
-#    copts = select(
-#        {
-#            "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature1": ["-Dfeature1"],
-#            "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature2": ["-Dfeature2"],
-#        },
-#        no_match_error = "You must explicitly set which features you want!",
-#    ),
-#)
+cc_library(
+   name = "lib",
+   srcs = ["lib.cc"],
+   copts = select(
+       {
+           "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature1": ["-Dfeature1"],
+           "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature2": ["-Dfeature2"],
+       },
+       no_match_error = "You must explicitly set which features you want!",
+   ),
+)

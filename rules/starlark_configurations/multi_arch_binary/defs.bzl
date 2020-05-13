@@ -6,8 +6,9 @@ def _transition_impl(settings, attr):
     # targets in the rule context
     #
     # Returning a dict of dicts creates a "split transition", which transitions
-    # the dep its attached to to more than one configuration creating multiple
-    # configured targets.
+    # the dep it's attached to to more than one configuration creating multiple
+    # configured targets. For more info on "split" transitions:
+    # https://docs.bazel.build/versions/master/skylark/config.html#defining-12-transitions
     return {
         "x86-platform": {"//command_line_option:cpu": "x86"},
         "armeabi-v7a-platform": {"//command_line_option:cpu": "armeabi-v7a"}
@@ -33,6 +34,9 @@ foo_binary = rule(
   implementation = _rule_impl,
   attrs = {
     "tool": attr.label(cfg = fat_transition),
+    # This attribute is required to use starlark transitions. It allows 
+    # whitelisting usage of this rule. For more information, see
+    # https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions
     '_whitelist_function_transition': attr.label(
         default = '@bazel_tools//tools/whitelists/function_transition_whitelist',
     )

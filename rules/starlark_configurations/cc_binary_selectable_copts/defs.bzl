@@ -1,7 +1,7 @@
 def _copt_transition_impl(settings, attr):
     # settings provides read access to existing flags. But
     # this transition doesn't need to read any flags.
-    return {"//custom_settings:mycopts": attr.set_features}
+    return {"//starlark_configurations/cc_binary_selectable_copts/custom_settings:mycopts": attr.set_features}
 
 # This defines a Starlark transition and which flags it reads and
 # writes. In this case we don't need to read any flags - we
@@ -10,7 +10,7 @@ def _copt_transition_impl(settings, attr):
 _copt_transition = transition(
     implementation = _copt_transition_impl,
     inputs = [],
-    outputs = ["//custom_settings:mycopts"],
+    outputs = ["//starlark_configurations/cc_binary_selectable_copts/custom_settings:mycopts"],
 )
 
 # The implementation of transition_rule: all this does is copy the

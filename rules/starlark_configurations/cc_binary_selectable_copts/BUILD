@@ -21,11 +21,11 @@ cc_binary(
 
 # This binary "forgets" to set any features, so we have it fail with
 # a descriptive message.
-cc_binary(
-    name = "app_forgets_to_set_features",
-    srcs = ["main.cc"],
-    deps = [":lib"],
-)
+#cc_binary(
+#    name = "app_forgets_to_set_features",
+#    srcs = ["main.cc"],
+#    deps = [":lib"],
+#)
 
 # The library only builds if some feature is requested.
 cc_library(

@@ -33,8 +33,8 @@ cc_library(
     srcs = ["lib.cc"],
     copts = select(
         {
-            "//rules/starlark_configurations/cc_binary_selectable_copts/custom_settings:feature1": ["-Dfeature1"],
-            "//rules/starlark_configurations/cc_binary_selectable_copts/custom_settings:feature2": ["-Dfeature2"],
+            "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature1": ["-Dfeature1"],
+            "//starlark_configurations/cc_binary_selectable_copts/custom_settings:feature2": ["-Dfeature2"],
         },
         no_match_error = "You must explicitly set which features you want!",
     ),

@@ -1,7 +1,8 @@
-# Load the provider of the pre-made settings defined in bazel_skylib
+# Load the provider of the pre-made settings defined in bazel_skylib.
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
-# Define two different transitions.
+# Define two different transitions that both transition the `color` build setting
+# we defined in the BUILD.
 def _blue_impl(settings, attr):
     _ignore = settings, attr
 

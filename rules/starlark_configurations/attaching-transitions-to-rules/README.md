@@ -1,4 +1,4 @@
-This is an example of how to attach transitions to rules. Rules can attach transitions
+This is an example of how to define and use a transition on a build setting. Rules can attach transitions
 in two places: (1) directly on the rule and (2) onto an attribute. It covers the following topics
 - attaching a transition to a rule
 - attaching a transition to an attribute

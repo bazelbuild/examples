@@ -6,7 +6,7 @@ the BUILD Encyclopedia.
 
 The `//testapp:show_app_output` target demonstrates predefined source/output
 path variables:
-```sh
+```
 $ bazel build //testapp:show_app_output && cat bazel-bin/testapp/app_output
 Target //testapp:show_app_output up-to-date:
   bazel-bin/testapp/app_output
@@ -23,7 +23,7 @@ source file paths
 ```
 
 The `//testapp:show_custom_var` target demonstrates custom variables:
-```sh
+```
 $ bazel build //testapp:show_custom_var && cat bazel-bin/testapp/custom_var
 Target //testapp:show_custom_var up-to-date:
   bazel-bin/testapp/custom_var

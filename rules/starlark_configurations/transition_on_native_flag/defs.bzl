@@ -5,7 +5,7 @@ def _transition_impl(settings, attr):
     # flag makes the flag available to transition on.
     return {"//command_line_option:cpu": "x86"}
 
-# define a transition
+# Define a transition.
 cpu_transition = transition(
     implementation = _transition_impl,
     inputs = [],
@@ -17,11 +17,11 @@ cpu_transition = transition(
 def _impl(ctx):
     return []
 
-# define a rule that uses the transition
+# Define a rule that uses the transition.
 cpu_rule = rule(
     implementation = _impl,
     # Attach the transition to the rule using the `cfg` attribute. This will transition
-    # the configuration of this target, which the targets descendents will inherit.
+    # the configuration of this target, which the target's descendents will inherit.
     cfg = cpu_transition,
     attrs = {
         # This attribute is required to use starlark transitions. It allows

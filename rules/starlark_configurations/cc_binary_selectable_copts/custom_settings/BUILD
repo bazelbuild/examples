@@ -16,11 +16,13 @@ load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 # overloaded concept of "mode").
 
 string_flag(
-    # You can set this at the command line with "$ bazel build //:all
-    # --//custom_settings:mycopts". It's also possible to disallow
-    # command line access (in this example we don't need that because
-    # cc_binary sets this implicitly without the end user even having to 
-    # know this flag exists). See https://docs.bazel.build/versions/master/skylark/config.html#the-build_setting-rule-parameter
+    # You can set this at the command line with "$ bazel build 
+    # //starlark_configurations/cc_binary_selectable_copts:all
+    # --//starlark_configurations/cc_binary_selectable_copts/custom_settings:mycopts". 
+    # It's also possible to disallow command line access (in this example
+    # we don't need that because cc_binary sets this implicitly without the
+    # end user even having to know this flag exists). See 
+    # https://docs.bazel.build/versions/master/skylark/config.html#the-build_setting-rule-parameter
     # for details.
     name = "mycopts",
     build_setting_default = "unset",

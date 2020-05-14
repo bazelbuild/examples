@@ -37,24 +37,24 @@ This example has five files:
   
 * [main.cc](main.cc) and [lib.cc](lib.cc) for the actual C++ code.
 
-To see it in action, try the following commands:
+To see it in action, cd to this directory and try the following commands:
 
 ```sh
-$ bazel run //:app_with_feature1
+$ bazel run :app_with_feature1
 ...
 Running my app!
 Building lib with feature 1!
 ```
 
 ```sh
-$ bazel run //:app_with_feature2
+$ bazel run :app_with_feature2
 ...
 Running my app!
 Building lib with feature 2!
 ```
 
 ```sh
-$ bazel run //:app_forgets_to_set_features 
+$ bazel run :app_forgets_to_set_features 
 ERROR: $(MYWORKSPACE)/cc_binary_selectable_copts/BUILD:32:13: Configurable attribute "copts"
 doesn't match this configuration: You must explicitly set which features you want!
 ```

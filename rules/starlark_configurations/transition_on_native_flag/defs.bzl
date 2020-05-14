@@ -2,7 +2,8 @@ def _transition_impl(settings, attr):
     _ignore = settings, attr
 
     # Attaching the special prefix "//comand_line_option" to the name of a native
-    # flag makes the flag available to transition on.
+    # flag makes the flag available to transition on. The result of this transition
+    # is that --cpu=x86
     return {"//command_line_option:cpu": "x86"}
 
 # Define a transition.

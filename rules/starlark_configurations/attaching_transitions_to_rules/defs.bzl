@@ -6,23 +6,23 @@ load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 def _blue_impl(settings, attr):
     _ignore = settings, attr
 
-    return {"//starlark_configurations/attaching-transitions-to-rules:color": "blue"}
+    return {"//starlark_configurations/attaching_transitions_to_rules:color": "blue"}
 
 blue_transition = transition(
     implementation = _blue_impl,
     inputs = [],
-    outputs = ["//starlark_configurations/attaching-transitions-to-rules:color"],
+    outputs = ["//starlark_configurations/attaching_transitions_to_rules:color"],
 )
 
 def _red_impl(settings, attr):
     _ignore = settings, attr
 
-    return {"//starlark_configurations/attaching-transitions-to-rules:color": "red"}
+    return {"//starlark_configurations/attaching_transitions_to_rules:color": "red"}
 
 red_transition = transition(
     implementation = _red_impl,
     inputs = [],
-    outputs = ["//starlark_configurations/attaching-transitions-to-rules:color"],
+    outputs = ["//starlark_configurations/attaching_transitions_to_rules:color"],
 )
 
 def _impl(ctx):

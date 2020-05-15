@@ -26,14 +26,14 @@ red_transition = transition(
 )
 
 def _impl(ctx):
-    # Access the value of "//experimental/users/juliexxia:color" for the target (blue).
+    # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the target (blue).
     print("shirt color: " + ctx.attr._color[BuildSettingInfo].value)
-    # Access the value of "//experimental/users/juliexxia:color" for the transitioned dep (red).
+    # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the transitioned dep (red).
     # Note that you have to index by [0] here for the transitioned dep and you don't need to
     # do so below - this is because attribute-attached transitions can transition to multiple
     # new configurations so you must specify which one you want.
     print("sleeve color: " + ctx.attr.sleeve[0][BuildSettingInfo].value)
-    # Access the value of "//experimental/users/juliexxia:color" for the non-transitioned dep (blue).
+    # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the non-transitioned dep (blue).
     print("back color: " + ctx.attr.back[BuildSettingInfo].value)
     return []
 

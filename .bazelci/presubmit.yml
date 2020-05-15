@@ -140,6 +140,8 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    # TODO(#160) renable this target when split_attr logic is released
+    - "-//starlark_configurations/multi_arch_binary:foo"
     test_targets:
     - "..."
   rules-macos:
@@ -148,6 +150,8 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    # TODO(#160) renable this target when split_attr logic is released
+    - "-//starlark_configurations/multi_arch_binary:foo"
     test_targets:
     - "..."
   rules-windows:
@@ -156,6 +160,8 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    # TODO(#160) renable this target when split_attr logic is released
+    - "-//starlark_configurations/multi_arch_binary:foo"
     # TODO(bazel-team): Make runfiles examples work on Windows.
     - "-//runfiles/..."
     # TODO(bazel-team): Make //test_rule:80columns work on Windows

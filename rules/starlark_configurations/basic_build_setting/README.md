@@ -5,8 +5,8 @@ This is an example of defining and instantiating your own build setting from scr
 - Defining the build setting rule (`temperature`) and creating an instance of it (`:coffee-temp`)
 - Accessing a build setting's value from inside another rule that cares about it
 
-To test it out, run the following:
+To test it out, cd to this directory and run the following:
 ```
-$ bazel build //:today => will print "HOT"
-$ bazel build //:today --//:coffee-temp=ICED => will print "ICED"
+$ bazel build :today # => "HOT"
+$ bazel build :today --//starlark_configurations/basic_build_setting:coffee-temp=ICED # => "ICED"
 ```

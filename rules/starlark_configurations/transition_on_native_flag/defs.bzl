@@ -1,10 +1,13 @@
 def _transition_impl(settings, attr):
-    _ignore = settings, attr
+    _ignore = settings
 
     # Attaching the special prefix "//comand_line_option" to the name of a native
     # flag makes the flag available to transition on. The result of this transition
-    # is that --cpu=x86
-    return {"//command_line_option:cpu": "x86"}
+    # is to set --cpu
+    # We read the value from the attr also named `cpu` which allows target writers
+    # to modify how the transition works. This could also just be a hardcoded 
+    # string like "x86" if you didn't want to give target writers that power.
+    return {"//command_line_option:cpu": attr.cpu }
 
 # Define a transition.
 cpu_transition = transition(
@@ -16,6 +19,10 @@ cpu_transition = transition(
 )
 
 def _impl(ctx):
+    # Print the current cpu using `ctx.var` which contains a 
+    # dict of configuration variable
+    # https://docs.bazel.build/versions/master/skylark/lib/ctx.html#var
+    print("--cpu=" + ctx.var["TARGET_CPU"])
     return []
 
 # Define a rule that uses the transition.
@@ -31,5 +38,6 @@ cpu_rule = rule(
         "_whitelist_function_transition": attr.label(
             default = "@bazel_tools//tools/whitelists/function_transition_whitelist",
         ),
+        "cpu": attr.string(default = "x86"),
     },
 )

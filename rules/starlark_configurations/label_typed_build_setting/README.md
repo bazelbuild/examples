@@ -5,8 +5,8 @@ Label-typed build settings are, like all build settings, targets, but their valu
 They automatically forward the providers of the targets to which they point. Let's say you have:
 
 Target A ------------------->Target B
-				<-
-			Provider B
+                 <-
+             Provider B
 
 
 where Target A consumes provider FooInfo from Target B. 
@@ -16,8 +16,8 @@ setting the value of Target B on the command line, you can use a `label_flag` to
 
 
 Target A --------------> Label Flag X --------------> Target B
-				<-							<-
-			Provider B 					Provider B
+                <-                          <-
+            Provider B                  Provider B
 
 
 To test it out, cd to this directory and run the following:

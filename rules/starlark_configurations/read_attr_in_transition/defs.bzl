@@ -25,7 +25,7 @@ my_rule = rule(
     cfg = my_transition,
     attrs = {
         "do_transition": attr.bool(),
-        "_some_string": attr.label(default = Label("//starlark_configurations/read_attr_in_transition:some-string"),
+        "_some_string": attr.label(default = Label("//starlark_configurations/read_attr_in_transition:some-string")),
         "_whitelist_function_transition": attr.label(
             default = "@bazel_tools//tools/whitelists/function_transition_whitelist",
         ),

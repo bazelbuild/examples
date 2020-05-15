@@ -10,7 +10,7 @@ load(":defs.bzl", "dessert")
 
 # This can be set on the command line by setting 
 # //starlark_configurations/use_skylib_build_setting:flavor=<flavor>.
-# We declare here that it's default value is "strawberry".
+# We declare here that its default value is "strawberry".
 string_flag(name = "flavor", build_setting_default = "strawberry")
 
 # A rule that depends on `:flavor`which means it can read its value.

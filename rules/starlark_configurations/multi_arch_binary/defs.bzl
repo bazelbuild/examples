@@ -25,11 +25,12 @@ def _rule_impl(ctx):
     # Access the split dependencies via `ctx.split_attr.<split-attr-name>`
     tools = ctx.split_attr.tool
     # The values of `x86_dep` and `armeabi-v7a_dep` here are regular
-    # dependencies with providers.
+    # dependencies with providers. These keys are pulled from the dict
+    # returned by the transition above. 
     x86_dep = tools['x86-platform']
     armeabi_v7a_dep = tools['armeabi-v7a-platform']
-    print("transitioned deps: ")
-    print(ctx.split_attr.tool)
+    print("tool 'x86-platform' dep: " + x86_dep[CpuInfo].value)
+    print("tool 'armeabi-v7a-platform' dep: " + armeabi_v7a_dep[CpuInfo].value)
     return []
 
 foo_binary = rule(
@@ -45,7 +46,12 @@ foo_binary = rule(
   }
 )
 
+CpuInfo = provider(fields = ["value"])
+
 def _impl(ctx):
-    return []
+    # Get the current cpu using `ctx.var` which contains a 
+    # dict of configuration variable
+    # https://docs.bazel.build/versions/master/skylark/lib/ctx.html#var
+    return CpuInfo(value = "--cpu=" + ctx.var["TARGET_CPU"])
 
 simple = rule(_impl)

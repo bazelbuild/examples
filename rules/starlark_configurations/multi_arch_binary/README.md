@@ -4,7 +4,7 @@ architecture. It covers the following topics:
 - attaching a transition to a rule
 - reading the transitioned
 
-To test it out, run the following:
+To test it out, cd to this directory and run the following:
 ```
-$ bazel build //:foo
+$ bazel build :foo
 ```

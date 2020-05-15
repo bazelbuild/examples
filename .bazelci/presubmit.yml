@@ -140,6 +140,7 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    - "-//starlark_configurations/read_attr_in_transition:will-break"
     # TODO(#160) renable this target when split_attr logic is released
     - "-//starlark_configurations/multi_arch_binary:foo"
     test_targets:
@@ -150,6 +151,7 @@ tasks:
     working_directory: rules
     build_targets:
     - "..."
+    - "-//starlark_configurations/read_attr_in_transition:will-break"
     # TODO(#160) renable this target when split_attr logic is released
     - "-//starlark_configurations/multi_arch_binary:foo"
     test_targets:

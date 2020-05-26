@@ -1,7 +1,6 @@
 #include "hello-greet.h"
 #include <ctime>
 #include <iostream>
-#include <string>
 
 void print_localtime() {
   std::time_t result = std::time(nullptr);

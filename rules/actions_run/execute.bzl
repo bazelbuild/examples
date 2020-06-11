@@ -18,7 +18,7 @@ def _impl(ctx):
         outputs = [ctx.outputs.out],
         arguments = args,
         progress_message = "Merging into %s" % ctx.outputs.out.short_path,
-        executable = ctx.executable.merge_tool,
+        executable = ctx.executable._merge_tool,
     )
 
 concat = rule(
@@ -26,7 +26,7 @@ concat = rule(
     attrs = {
         "chunks": attr.label_list(allow_files = True),
         "out": attr.output(mandatory = True),
-        "merge_tool": attr.label(
+        "_merge_tool": attr.label(
             executable = True,
             cfg = "host",
             allow_files = True,

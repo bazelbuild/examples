@@ -51,7 +51,7 @@ foo_binary = rule(
             default = Label("//depsets:foocc"),
             allow_files = True,
             executable = True,
-            cfg = "host",
+            cfg = "exec",
         ),
     },
     outputs = {"out": "%{name}.out"},

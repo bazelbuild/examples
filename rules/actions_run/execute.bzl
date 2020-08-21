@@ -28,7 +28,7 @@ concat = rule(
         "out": attr.output(mandatory = True),
         "merge_tool": attr.label(
             executable = True,
-            cfg = "host",
+            cfg = "exec",
             allow_files = True,
             default = Label("//actions_run:merge"),
         ),

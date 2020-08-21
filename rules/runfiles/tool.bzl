@@ -85,6 +85,6 @@ def _tool_user_impl(ctx):
 tool_user = rule(
     implementation = _tool_user_impl,
     attrs = {
-        "tool": attr.label(mandatory = True, executable = True, cfg = "host"),
+        "tool": attr.label(mandatory = True, executable = True, cfg = "exec"),
     },
 )

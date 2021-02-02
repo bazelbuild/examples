@@ -1,6 +1,6 @@
 def _copt_transition_impl(settings, attr):
     _ignore = settings
-    
+
     # settings provides read access to existing flags. But
     # this transition doesn't need to read any flags.
     return {"//starlark_configurations/cc_binary_selectable_copts/custom_settings:mycopts": attr.set_features}
@@ -49,22 +49,22 @@ def _transition_rule_impl(ctx):
 transition_rule = rule(
     implementation = _transition_rule_impl,
     attrs = {
-    	# This is where the user can set the feature they want.
+        # This is where the user can set the feature they want.
         "set_features": attr.string(default = "unset"),
-	# This is the cc_binary whose deps will select() on that feature.
-	# Note specificaly how it's configured with _copt_transition, which
-	# ensures that setting propagates down the graph.
+        # This is the cc_binary whose deps will select() on that feature.
+        # Note specificaly how it's configured with _copt_transition, which
+        # ensures that setting propagates down the graph.
         "actual_binary": attr.label(cfg = _copt_transition),
-	# This is a stock Bazel requirement for any rule that uses Starlark
-	# transitions. It's okay to copy the below verbatim for all such rules.
-	#
-	# The purpose of this requirement is to give the ability to restrict
-	# which packages can invoke these rules, since Starlark transitions
-	# make much larger graphs possible that can have memory and performance
-	# consequences for your build. The whitelist defaults to "everything".
-	# But you can redefine it more strictly if you feel that's prudent.
-        "_whitelist_function_transition": attr.label(
-            default = "@bazel_tools//tools/whitelists/function_transition_whitelist",
+        # This is a stock Bazel requirement for any rule that uses Starlark
+        # transitions. It's okay to copy the below verbatim for all such rules.
+        #
+        # The purpose of this requirement is to give the ability to restrict
+        # which packages can invoke these rules, since Starlark transitions
+        # make much larger graphs possible that can have memory and performance
+        # consequences for your build. The allowlist defaults to "everything".
+        # But you can redefine it more strictly if you feel that's prudent.
+        "_allowlist_function_transition": attr.label(
+            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),
     },
     # Making this executable means it works with "$ bazel run".

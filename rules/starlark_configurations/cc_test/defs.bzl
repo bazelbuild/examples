@@ -1,4 +1,4 @@
-# We can transition on native options using this 
+# We can transition on native options using this
 # //command_line_option:<option-name> syntax
 _BUILD_SETTING = "//command_line_option:test_arg"
 
@@ -30,8 +30,8 @@ transition_rule_test = rule(
     implementation = _test_transition_rule_impl,
     attrs = {
         "actual_test": attr.label(cfg = _test_arg_transition, executable = True),
-        "_whitelist_function_transition": attr.label(
-            default = "@bazel_tools//tools/whitelists/function_transition_whitelist",
+        "_allowlist_function_transition": attr.label(
+            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),
     },
     test = True,

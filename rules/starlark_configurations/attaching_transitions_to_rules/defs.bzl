@@ -28,11 +28,13 @@ red_transition = transition(
 def _impl(ctx):
     # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the target (blue).
     print("shirt color: " + ctx.attr._color[BuildSettingInfo].value)
+
     # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the transitioned dep (red).
     # Note that you have to index by [0] here for the transitioned dep and you don't need to
     # do so below - this is because attribute-attached transitions can transition to multiple
     # new configurations so you must specify which one you want.
     print("sleeve color: " + ctx.attr.sleeve[0][BuildSettingInfo].value)
+
     # Access the value of //starlark_configurations/attaching_transitions_to_rules:color for the non-transitioned dep (blue).
     print("back color: " + ctx.attr.back[BuildSettingInfo].value)
     return []
@@ -53,10 +55,10 @@ shirt = rule(
         # can't override the value.
         "_color": attr.label(default = ":color"),
         # This attribute is required to use starlark transitions. It allows
-        # whitelisting usage of this rule. For more information, see
+        # allowlisting usage of this rule. For more information, see
         # https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions
-        "_whitelist_function_transition": attr.label(
-            default = "@bazel_tools//tools/whitelists/function_transition_whitelist",
+        "_allowlist_function_transition": attr.label(
+            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),
     },
 )
@@ -70,6 +72,6 @@ piece = rule(
         # Depend on the build setting so that we can access it in the rule implementation.
         # Use a private attribute (one that is prefixed with "_") so that target writers
         # can't override the value.
-        "_color": attr.label(default = ":color")
-    }
+        "_color": attr.label(default = ":color"),
+    },
 )

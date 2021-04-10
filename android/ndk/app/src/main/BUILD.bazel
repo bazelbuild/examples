@@ -17,6 +17,7 @@ android_library(
 
 cc_library(
     name = "jni_lib",
+    alwayslink=1,
     srcs = ["cpp/native-lib.cpp"],
 )
 

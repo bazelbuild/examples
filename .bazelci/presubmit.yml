@@ -189,6 +189,24 @@ tasks:
     # test_targets:
     # - "--"
     # - "..."
+  third-party-dependencies-linux:
+    name: "Example with third party dependencies"
+    platform: ubuntu1804
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-macos:
+    name: "Example with third party dependencies"
+    platform: macos
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-windows:
+    name: "Example with third party dependencies"
+    platform: windows
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
   tutorial-linux:
     name: "Bazel end-to-end example"
     platform: ubuntu1804

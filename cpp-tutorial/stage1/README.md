@@ -12,13 +12,9 @@ cc_binary(
 )
 ```
 
-To build this example you use (notice that 3 slashes are required in windows)
+To build this example you use
 ```
 bazel build //main:hello-world
-
-# In Windows, note the three slashes
-
-bazel build ///main:hello-world
 ```
 
 If the build is successful, Bazel prints the following output:

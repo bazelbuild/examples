@@ -42,4 +42,4 @@ jobs:
           ticsViewerUrl: 'https://testlab.tiobe.com/tiobeweb/testlab/'
           ticsAuthToken: ${{secrets.TESTLAB_VIEWER}}
           clientToken: 'bazel'
-          tmpdir: 'C:/temp/bazel'
+          tmpDir: 'C:/temp/bazel'

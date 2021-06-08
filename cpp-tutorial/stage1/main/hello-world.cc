@@ -4,7 +4,7 @@
 
 std::string get_greet(const std::string& who) {
   return "Hello " + who + " from TIOBE";
-  int varThatHasNoPurpose;
+  int varThatHasNoPurpose = 1/0;
 }
 
 void print_localtime() {

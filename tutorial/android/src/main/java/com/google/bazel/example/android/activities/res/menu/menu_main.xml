@@ -1,7 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.bazel.example.android.activities.MainActivity">
-    <item android:id="@+id/action_ping" android:title="@string/action_ping"
-        android:icon="@drawable/ic_menu_upload"
-        android:orderInCategory="100" android:showAsAction="ifRoom" />
-</menu>

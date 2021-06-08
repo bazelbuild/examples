@@ -24,6 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
         with:
           repository: tiobetestlab/.github
           path: ./.github
@@ -35,6 +37,7 @@ jobs:
         with:
           projectName: 'BazelCpp'
           branchName: 'master'
+          tmpdir: 'C:/temp/bazel'
           ticsViewerUrl: 'https://testlab.tiobe.com/tiobeweb/testlab/'
           ticsAuthToken: ${{secrets.TESTLAB_VIEWER}}
           clientToken: 'bazel'

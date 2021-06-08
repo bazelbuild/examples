@@ -37,7 +37,7 @@ jobs:
         with:
           projectName: 'BazelCpp'
           branchName: 'master'
-          tmpdir: 'C:/temp/bazel'
           ticsViewerUrl: 'https://testlab.tiobe.com/tiobeweb/testlab/'
           ticsAuthToken: ${{secrets.TESTLAB_VIEWER}}
           clientToken: 'bazel'
+          tmpdir: 'C:/temp/bazel'

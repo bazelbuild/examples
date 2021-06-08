@@ -1,3 +1,0 @@
-Hermeticity;
-I must never have my build
-contaminated.

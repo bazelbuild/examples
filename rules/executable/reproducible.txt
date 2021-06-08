@@ -1,3 +1,0 @@
-Always require it:
-reproducibility
-Settle for no less.

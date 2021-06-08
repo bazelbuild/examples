@@ -1,5 +1,0 @@
-bazel-bin
-bazel-genfiles
-bazel-java-maven
-bazel-out
-bazel-testlogs

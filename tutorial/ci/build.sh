@@ -15,12 +15,8 @@
 # Scripts to compile the tutorial on the CI system
 # This script expect the following environment variable:
 #   $BAZEL_INSTALLER set to the path to the bazel installer
-#   $ANDROID_SDK_PATH, $ANDROID_SDK_API_LEVEL,
-#      $ANDROID_SDK_BUILD_TOOLS_VERSION are respectively the
-#      path to the Android SDK, the API Level of the SDK and
-#      the version of the build tools. If the path isn't defined
-#      the android build won't be tested. The 2 other one are defaulted
-#      to, respectively, "22" and "22.0.1".
+#   $ANDROID_SDK_PATH is the path to the Android SDK. If the path isn't
+#     defined, then the android build won't be tested.
 
 IOS_SDK_VERSION=$(xcrun --sdk iphonesimulator --show-sdk-version)
 
@@ -42,8 +38,6 @@ if [ -n "${ANDROID_SDK_PATH-}" ]; then
 android_sdk_repository(
     name = "androidsdk",
     path = "${ANDROID_SDK_PATH}",
-    api_level = ${ANDROID_SDK_API_LEVEL:-22},
-    build_tools_version = "${ANDROID_SDK_BUILD_TOOLS_VERSION:-22.0.1}",
 )
 EOF
   # Revert change to workspace

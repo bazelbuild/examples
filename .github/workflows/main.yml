@@ -42,5 +42,5 @@ jobs:
           ticsViewerUrl: 'https://testlab.tiobe.com/tiobeweb/testlab/'
           ticsAuthToken: 'NGUyOTFkMzMtM2ExYS00MDhjLTgzMDktMTVlNjBlYjZmMzM5OnBTWiVNUl5FZmdSLTpwQg'
           clientToken: 'bazel'
-          tmpDir: 'C:/temp/bazel',
+          tmpDir: 'C:/temp/bazel'
           calc: 'cs,cw'

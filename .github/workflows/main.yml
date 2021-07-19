@@ -43,4 +43,4 @@ jobs:
           ticsAuthToken: 'NGUyOTFkMzMtM2ExYS00MDhjLTgzMDktMTVlNjBlYjZmMzM5OnBTWiVNUl5FZmdSLTpwQg'
           clientToken: 'bazel'
           tmpDir: 'C:/temp/bazel',
-          calc: 'CS, CW'
+          calc: 'cs cw duplicatedcode'

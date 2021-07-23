@@ -3,12 +3,12 @@ def _transition_impl(settings, attr):
 
     # Return a dict of dicts. The values are the updates to the configuration.
     # The keys are arbitrary helpful strings that can be used to access the split
-    # targets in the rule context
+    # targets in the rule context.
     #
     # Returning a dict of dicts creates a "split transition", which transitions
     # the dep it's attached to to more than one configuration creating multiple
     # configured targets. For more info on "split" transitions:
-    # https://docs.bazel.build/versions/master/skylark/config.html#defining-12-transitions
+    # https://docs.bazel.build/skylark/config.html#defining-12-transitions.
     return {
         "x86-platform": {"//command_line_option:cpu": "x86"},
         "armeabi-v7a-platform": {"//command_line_option:cpu": "armeabi-v7a"},
@@ -21,7 +21,7 @@ fat_transition = transition(
 )
 
 def _rule_impl(ctx):
-    # Access the split dependencies via `ctx.split_attr.<split-attr-name>`
+    # Access the split dependencies via `ctx.split_attr.<split-attr-name>`.
     tools = ctx.split_attr.tool
 
     # The values of `x86_dep` and `armeabi-v7a_dep` here are regular
@@ -37,9 +37,9 @@ foo_binary = rule(
     implementation = _rule_impl,
     attrs = {
         "tool": attr.label(cfg = fat_transition),
-        # This attribute is required to use starlark transitions. It allows
+        # This attribute is required to use Starlark transitions. It allows
         # allowlisting usage of this rule. For more information, see
-        # https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions
+        # https://docs.bazel.build/skylark/config.html#user-defined-transitions.
         "_allowlist_function_transition": attr.label(
             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),
@@ -50,8 +50,8 @@ CpuInfo = provider(fields = ["value"])
 
 def _impl(ctx):
     # Get the current cpu using `ctx.var` which contains a
-    # dict of configuration variable
-    # https://docs.bazel.build/versions/master/skylark/lib/ctx.html#var
+    # dict of configuration variables.
+    # https://docs.bazel.build/skylark/lib/ctx.html#var
     return CpuInfo(value = "--cpu=" + ctx.var["TARGET_CPU"])
 
 simple = rule(_impl)

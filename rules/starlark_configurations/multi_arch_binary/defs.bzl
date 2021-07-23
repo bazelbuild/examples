@@ -22,6 +22,7 @@ fat_transition = transition(
 
 def _rule_impl(ctx):
     # Access the split dependencies via `ctx.split_attr.<split-attr-name>`.
+    # See: https://docs.bazel.build/skylark/lib/ctx.html#split_attr.
     tools = ctx.split_attr.tool
 
     # The values of `x86_dep` and `armeabi-v7a_dep` here are regular
@@ -50,8 +51,8 @@ CpuInfo = provider(fields = ["value"])
 
 def _impl(ctx):
     # Get the current cpu using `ctx.var` which contains a
-    # dict of configuration variables.
-    # https://docs.bazel.build/skylark/lib/ctx.html#var
+    # dict of configuration variables. See:
+    # https://docs.bazel.build/skylark/lib/ctx.html#var.
     return CpuInfo(value = "--cpu=" + ctx.var["TARGET_CPU"])
 
 simple = rule(_impl)

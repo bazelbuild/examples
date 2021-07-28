@@ -46,7 +46,7 @@ def _word_hashes_impl(ctx):
 # Since we are not returning a DefaultInfo provider with a files= field,
 # all the predeclared outputs will be built when the target is requested.
 
-word_hashes = rule(
+_word_hashes = rule(
     implementation = _word_hashes_impl,
     attrs = {
         "dictionary": attr.label(
@@ -58,6 +58,9 @@ word_hashes = rule(
             doc = "A list of files named \"<word>.md5\", where \"<word>\" " +
                   "is in the dictionary.",
         ),
+        "manifest": attr.output(),
     },
-    outputs = {"manifest": "%{name}.manifest"},
 )
+
+def word_hashes(**kwargs):
+    _word_hashes(manifest = "{name}.manifest".format(**kwargs), **kwargs)

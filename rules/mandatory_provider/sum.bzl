@@ -17,12 +17,15 @@ def _impl(ctx):
     # Return the provider with result, visible to other rules.
     return [NumberInfo(number = result)]
 
-sum = rule(
+_sum = rule(
     implementation = _impl,
     attrs = {
         "number": attr.int(default = 1),
         # All deps must provide all listed providers.
         "deps": attr.label_list(providers = [NumberInfo]),
+        "out": attr.output(),
     },
-    outputs = {"out": "%{name}.sum"},
 )
+
+def sum(**kwargs):
+    _sum(out = "{name}.sum".format(**kwargs), **kwargs)

@@ -49,11 +49,14 @@ def _file_collector_rule_impl(ctx):
         content = "\n".join(content),
     )
 
-file_collector = rule(
+_file_collector = rule(
     implementation = _file_collector_rule_impl,
     attrs = {
         "deps": attr.label_list(aspects = [file_collector_aspect]),
         "extension": attr.string(default = "*"),
+        "out": attr.output(),
     },
-    outputs = {"out": "%{name}.files"},
 )
+
+def file_collector(**kwargs):
+    _file_collector(out = "{name}.files".format(**kwargs), **kwargs)

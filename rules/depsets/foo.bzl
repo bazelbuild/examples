@@ -42,7 +42,7 @@ def _foo_binary_impl(ctx):
         outputs = [out],
     )
 
-foo_binary = rule(
+_foo_binary = rule(
     implementation = _foo_binary_impl,
     attrs = {
         "srcs": attr.label_list(allow_files = True),
@@ -53,6 +53,9 @@ foo_binary = rule(
             executable = True,
             cfg = "exec",
         ),
+        "out": attr.output(),
     },
-    outputs = {"out": "%{name}.out"},
 )
+
+def foo_binary(**kwargs):
+    _foo_binary(out = "{name}.out".format(**kwargs), **kwargs)

@@ -24,14 +24,21 @@ def _impl(ctx):
     # source of another target), only the sha256 is computed.
     return DefaultInfo(files = depset([ctx.outputs.sha256]))
 
-hashes = rule(
+_hashes = rule(
     implementation = _impl,
     attrs = {
         "src": attr.label(mandatory = True, allow_single_file = True),
-    },
-    outputs = {
-        "md5": "%{name}.md5",
-        "sha1": "%{name}.sha1",
-        "sha256": "%{name}.sha256",
+        "md5": attr.output(),
+        "sha1": attr.output(),
+        "sha256": attr.output(),
     },
 )
+
+def hashes(**kwargs):
+    name = kwargs["name"]
+    _hashes(
+        md5 = "%s.md5" % name,
+        sha1 = "%s.sha1" % name,
+        sha256 = "%s.sha256" % name,
+        **kwargs
+    )

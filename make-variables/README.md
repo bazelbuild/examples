@@ -24,9 +24,9 @@ available to `genrule`.
 ```
 $ bazel build //testapp:show_genrule_variables && cat bazel-bin/testapp/subdir/show_genrule_variables1.out
 SRCS: testapp/show_genrule_variables1.src testapp/show_genrule_variables2.src
-OUTS: bazel-out/k8-fastbuild/bin/testapp/subdir/show_genrule_variables1.out bazel-out/k8-fastbuild/bin/testapp/subdir/show_genrule_variables2.out
-RULEDIR: bazel-out/k8-fastbuild/bin/testapp
-@D (prefer RULEDIR to this): bazel-out/k8-fastbuild/bin/testapp
+OUTS: bazel-out/x86-fastbuild/bin/testapp/subdir/show_genrule_variables1.out bazel-out/x86-fastbuild/bin/testapp/subdir/show_genrule_variables2.out
+RULEDIR: bazel-out/x86-fastbuild/bin/testapp
+@D (prefer RULEDIR to this): bazel-out/x86-fastbuild/bin/testapp
  * Because this genrule has multiple outputs, @D is the same as RULEDIR.
 ```
 
@@ -37,9 +37,9 @@ output file.
 ```
 $ bazel build //testapp:single_file_genrule && cat bazel-bin/testapp/subdir/single_file_genrule.out
 <: testapp/show_genrule_variables1.src
-@: bazel-out/k8-fastbuild/bin/testapp/subdir/single_file_genrule.out
-RULEDIR: bazel-out/k8-fastbuild/bin/testapp
-@D: bazel-out/k8-fastbuild/bin/testapp/subdir
+@: bazel-out/x86-fastbuild/bin/testapp/subdir/single_file_genrule.out
+RULEDIR: bazel-out/x86-fastbuild/bin/testapp
+@D: bazel-out/x86-fastbuild/bin/testapp/subdir
  * Because this genrule has one input, < is a valid variable.
  * Because this genrule has one output, @ is a valid variable.
  * Because this genrule has one output, @D is different than RULEDIR.

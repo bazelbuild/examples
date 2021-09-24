@@ -17,6 +17,8 @@ TARGET_CPU: x86
 ```
 
 ## Predefined genrule variables
+
+### All genrules
 `//testapp:show_genrule_variables` demonstrates predefined variables exclusively
 available to `genrule`.
 ```
@@ -28,6 +30,7 @@ RULEDIR: bazel-out/k8-fastbuild/bin/testapp
  * Because this genrule has multiple outputs, @D is the same as RULEDIR.
 ```
 
+### Genrules with one input or output
 `//testapp:single_file_genrule` demonstrates predefined variables exclusively
 available to `genrule`s that consume a single source file or produce a single
 output file.

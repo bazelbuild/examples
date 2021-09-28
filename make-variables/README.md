@@ -62,7 +62,7 @@ source file paths
 ```
 
 ## Custom Starlark-defined variables
-`//testapp:show_custom_var` monstrates custom variable defined in Starlrak.
+`//testapp:show_custom_var` demonstrates custom variable defined in Starlrak.
 ```
 $ bazel build //testapp:show_custom_var && cat bazel-bin/testapp/custom_var
 Target //testapp:show_custom_var up-to-date:

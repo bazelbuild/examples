@@ -12,12 +12,12 @@ cc_binary(
 )
 ```
 
-To build this example you use
+To build this example, use
 ```
 bazel build //main:hello-world
 ```
 
-If the build is successful, Bazel prints the following output:
+If the build is successful, Bazel prints the output similar to
 ```
 ____Loading complete.  Analyzing...
 ____Found 1 target...
@@ -28,3 +28,14 @@ ____Elapsed time: 0,400s, Critical Path: 0,01s
 ```
 
 In the run log above you can see where the executable was built so you can locate it and use it.
+
+You can also get the output path with the bazel cquery command. For
+example, the command below would print the path to the output file. This
+is a useful technique for use in scripts, where you do not want to parse the
+`blaze build` output.
+
+```
+bazel cquery --output=starlark \
+  --starlark:expr="' '.join([f.path for f in target.files.to_list()])" \
+  //main:hello-world
+```

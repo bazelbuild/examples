@@ -25,7 +25,7 @@ independent dependency trees with different versions of the same dependency.
 
 ## How it is done
 
-**Disclaimer:** How it is done right now does not satisfy the restrictions mentioned above. This could be achieved with a proper package manager but right now there is none for Bazel (at least public). There are [some discussions](https://groups.google.com/a/bazel.build/g/external-deps) to create one but for the moment there is no initial implementation. Until then this is the best that I could come up with, if you think that something can be improved please file a bug or even better create a pull request.
+**Disclaimer:** How it is done right now does not satisfy the restrictions mentioned above. This could be achieved with a proper package manager but right now there is none for Bazel (at least public). There are [some efforts going on](https://docs.google.com/document/d/1moQfNcEIttsk6vYanNKIy3ZuK53hQUFq1b1r0rmsYVg/edit) to create one but it is still in an alpha state (some examples on how it looks [can be found here](https://github.com/meteorcloudy/bzlmod-examples/tree/main/examples)). Until then this is the best that I could come up with, if you think that something can be improved please file a bug or even better create a pull request.
 
 All dependencies need to be loaded in the workspace file but this does not prevent us on splitting this in several files. The first split comes on the [`WORKSPACE`](WORKSPACE), first we load the source code of all declared dependencies and then we finish what is left to have a fully loaded dependency.
 

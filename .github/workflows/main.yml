@@ -36,7 +36,7 @@ jobs:
         uses: carlosperate/download-file-action@v1.0.3
         id: download-poetry
         with:
-          file-url: 'https://tics.tiobe.com/downloads/buildserver.zip'
+          file-url: 'https://tics.tiobe.com/download/buildserver.zip'
           file-name: 'buildserver.zip'
           location: './tics/buildserver.zip'
           

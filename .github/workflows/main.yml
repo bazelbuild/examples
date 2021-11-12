@@ -39,14 +39,20 @@ jobs:
           file-url: 'https://tics.tiobe.com/download/buildserver.zip'
           file-name: 'buildserver.zip'
           location: './tics/buildserver.zip'
-          
+              
+      - name: Decompress
+        uses: TonyBogdanov/zip@1.0
+        with:
+          args: unzip -qq ./tics/buildserver.zip -d ./tics
+      
       - name: Print the file path
-        run: echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}" 
+        run: dir ./tics
       
       - name: TICS Action Run
         uses: ./.github/actions/tics
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          TICS: http://testlab.tiobe.com/tiobeweb/testlab/api/cfg?name=testlab
         with:
           projectName: 'BazelCpp'
           branchName: 'master'

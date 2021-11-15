@@ -32,7 +32,7 @@ jobs:
           repository: tiobetestlab/.github
           path: ./.github
       
-      - name: Download a file
+      - name: Download TICS wrappers
         uses: carlosperate/download-file-action@v1.0.3
         id: download-poetry
         with:
@@ -40,17 +40,17 @@ jobs:
           file-name: 'buildserver.zip'
           location: './tics'
               
-      - name: Extract some files
+      - name: Extract TICS wrappers
         run: 7z x ./tics/buildserver.zip -o"$PWD/tics"
       
       - name: Print the file path
-        run: dir ./tics
+        run: dir ./tics/BuildServer
       
       - name: Add TICS to path
         run: echo "$PWD/tics/BuildServer" >> $GITHUB_PATH
       
-      - name: Print the file path
-        run: dir "$PWD/tics/BuildServer"
+      - name: Print path
+        run: echo $GITHUB_PATH
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

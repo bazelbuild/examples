@@ -41,13 +41,13 @@ jobs:
           location: './tics'
               
       - name: Extract TICS wrappers
-        run: 7z x ./tics/buildserver.zip -o"$GITHUB_WORKSPACE/tics"
+        run: 7z x ./tics/buildserver.zip -o"$PWD/tics"
       
       - name: Print the file path
         run: dir ./tics/BuildServer
       
       - name: Add TICS to path
-        run: echo "$GITHUB_WORKSPACE/tics/BuildServer" >> $GITHUB_PATH
+        run: echo "$PWD/tics/BuildServer" >> $PATH
       
       - name: Print path
         run: echo $GITHUB_PATH

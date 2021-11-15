@@ -41,16 +41,16 @@ jobs:
           location: './tics'
               
       - name: Extract some files
-        run: 7z x ./tics/buildserver.zip
+        run: 7z x ./tics/buildserver.zip -o ./tics
       
       - name: Print the file path
         run: dir ./tics
       
       - name: Add TICS to path
-        run: echo "$PWD/tics" >> $GITHUB_PATH
+        run: echo "$PWD/tics/BuildServer" >> $GITHUB_PATH
       
       - name: Print the file path
-        run: dir "$PWD/tics"
+        run: dir "$PWD/tics/BuildServer"
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

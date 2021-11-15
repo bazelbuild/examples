@@ -40,10 +40,9 @@ jobs:
           file-name: 'buildserver.zip'
           location: './tics/buildserver.zip'
               
-      - name: Decompress
-        uses: TonyBogdanov/zip@1.0
-        with:
-          args: unzip -qq ./tics/buildserver.zip -d ./tics
+      - name: Extract some files
+        run: 7z x ./tics/buildserver.zip -o ./tics
+
       
       - name: Print the file path
         run: dir ./tics

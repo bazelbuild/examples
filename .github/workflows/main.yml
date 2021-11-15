@@ -50,7 +50,7 @@ jobs:
         run: echo "#{{env.working-directory}}/tics" >> $GITHUB_PATH
       
       - name: Print the file path
-        run: echo "#{{env.working-directory}}/tics"
+        run: echo #{{env.working-directory}}/tics
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

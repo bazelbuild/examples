@@ -41,7 +41,7 @@ jobs:
           location: './tics'
               
       - name: Extract some files
-        run: 7z x ./tics/buildserver.zip -o./tics
+        run: 7z x ./tics/buildserver.zip -o"$PWD/tics"
       
       - name: Print the file path
         run: dir ./tics

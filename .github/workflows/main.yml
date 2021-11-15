@@ -47,10 +47,10 @@ jobs:
         run: dir ./tics
       
       - name: Add TICS to path
-        run: echo "#{{env.working-directory}}/tics" >> $GITHUB_PATH
+        run: echo "./tics" >> $GITHUB_PATH
       
       - name: Print the file path
-        run: echo #{{env.working-directory}}/tics
+        run: echo "./tics"
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

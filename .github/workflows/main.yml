@@ -66,3 +66,11 @@ jobs:
           clientToken: 'bazel'
           tmpDir: 'C:/temp/bazel'
           calc: 'CS,CW'
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: TICSLog
+          # A file, directory or wildcard pattern that describes what to upload
+          path: C:/temp/bazel/ticstmpdir/tics.log
+          # The desired behavior if no files are found using the provided path.

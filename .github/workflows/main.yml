@@ -50,7 +50,7 @@ jobs:
         run: echo "$PWD/tics/BuildServer" >> $GITHUB_PATH
       
       - name: Print path
-        run: echo $GITHUB_PATH
+        run: echo $PATH
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

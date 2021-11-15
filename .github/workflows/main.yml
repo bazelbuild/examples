@@ -47,10 +47,10 @@ jobs:
         run: dir ./tics/BuildServer
       
       - name: Add TICS to path
-        run: echo "$PWD/tics/BuildServer" >> $PATH
+        run: echo "$PWD/tics/BuildServer" >> $GITHUB_PATH
       
       - name: Print path
-        run: echo $GITHUB_PATH
+        run: echo $GITHUB_PATH $PATH
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

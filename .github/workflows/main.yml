@@ -38,7 +38,7 @@ jobs:
         with:
           file-url: 'https://tics.tiobe.com/download/buildserver.zip'
           file-name: 'buildserver.zip'
-          location: './tics/buildserver.zip'
+          location: './tics'
               
       - name: Extract some files
         run: 7z x ./tics/buildserver.zip

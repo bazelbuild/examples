@@ -42,10 +42,12 @@ jobs:
               
       - name: Extract some files
         run: 7z x ./tics/buildserver.zip
-
       
       - name: Print the file path
         run: dir ./tics
+      
+      - name: Add TICS to path
+        run: echo "#{{env.working-directory}}/tics" >> $GITHUB_PATH
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

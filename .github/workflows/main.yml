@@ -47,7 +47,8 @@ jobs:
         run: dir ./tics/BuildServer
       
       - name: Add TICS to path
-        run: echo "$PWD/tics/BuildServer" >> $GITHUB_PATH
+        run: echo "${{github.workspace}}/tics/BuildServer/" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
       
       - name: Print path
         run: echo $GITHUB_PATH $PATH "Some string"

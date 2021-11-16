@@ -43,15 +43,11 @@ jobs:
       - name: Extract TICS wrappers
         run: 7z x ./tics/buildserver.zip -o"$PWD/tics"
       
-      - name: Print the file path
-        run: dir ./tics/BuildServer
-      
       - name: Add TICS to path
         run: echo "${{github.workspace}}/tics/BuildServer/" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
       
-      - name: Print path
-        run: echo $GITHUB_PATH $PATH "Some string"
+      - name: Install MS Build tools
+        run: npm install --global windows-build-tools
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

@@ -32,6 +32,9 @@ jobs:
           repository: tiobetestlab/.github
           path: ./.github
       
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      
       - name: Download TICS wrappers
         uses: carlosperate/download-file-action@v1.0.3
         id: download-poetry

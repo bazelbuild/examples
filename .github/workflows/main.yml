@@ -58,7 +58,7 @@ jobs:
           ticsAuthToken: 'NGUyOTFkMzMtM2ExYS00MDhjLTgzMDktMTVlNjBlYjZmMzM5OnBTWiVNUl5FZmdSLTpwQg'
           clientToken: 'bazel'
           tmpDir: 'C:/temp/bazel'
-          calc: 'CS'
+          calc: 'CY'
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:

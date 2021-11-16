@@ -47,7 +47,7 @@ jobs:
         run: echo "${{github.workspace}}/tics/BuildServer/" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       
       - name: Install MS Build tools
-        run: npm install --global windows-build-tools
+        run: npm install --global windows-build-tools@4.0.0
       
       - name: TICS Action Run
         uses: ./.github/actions/tics

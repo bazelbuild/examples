@@ -57,7 +57,7 @@ jobs:
         uses: ./.github/actions/tics
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          TICS: http://testlab.tiobe.com/tiobeweb/testlab/api/cfg?name=testlab
+          TICS: https://testlab.tiobe.com/tiobeweb/testlab/api/cfg?name=testlab
         with:
           projectName: 'BazelCpp'
           branchName: 'master'

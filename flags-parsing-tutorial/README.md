@@ -18,14 +18,14 @@ For each requirement below, run the following example command and examine output
 
 ❗❗❗<i>Please note that there is an outstanding bug concerning `--config` and Starlark flags which will be pointed out later in this README. Once a fix is released, this doc will be updated.</i>
 
-##A. Options on the command line takes precedence over those in bazelrc. 
+### A. Options on the command line takes precedence over those in bazelrc. ### 
   
 Without `--config`, this is true for both Starlark and non-Starlark options
 ```
 # DEBUG should show cmd for option flag
 bazel --bazelrc=./bazelrc build --//:flag=cmd :flag
 ```
-##B. The last flag on the command line takes precedence.
+### B. The last flag on the command line takes precedence. ###
 ⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/versions/main/command-line-reference.html#options-common-to-all-commands) to debug options parsing
 ```
 # Since -c is an output affecting option, the "winning" option 
@@ -50,7 +50,7 @@ bazel --bazelrc=./bazelrc build --config=foo --config=bar :wibble :wobble :wubbl
 # DEBUG should show flob for --//:wibble per A, but instead wibble is shown
 bazel --bazelrc=./bazelrc build --config=foo --//:wibble=flob :wibble
 ```
-##C. Within bazelrc file, precedence depends on specificity which is defined by inheritance
+### C. Within bazelrc file, precedence depends on specificity which is defined by inheritance ###
 Commands such as test and release inherit options from build. The inheriting command is said to be more specific and thus takes precedence.
 ```
 # -c is resolved to opt, and --//:wibble resolves to flob.

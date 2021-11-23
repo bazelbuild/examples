@@ -1,7 +1,7 @@
 Bazel flags parsing examples
 ========================
 
-This provides examples for the current behavior of flag/options parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/versions/main/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also know what [options/flags](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) including built-in (non-Starlark) and user-defined(Starlark) options are.
+This provides examples for the current behavior of flag/options parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also know what [options/flags](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) including built-in (non-Starlark) and [user-defined](https://docs.bazel.build/skylark/config.html#user-defined-build-settings) (Starlark) options are.
 
 Instructions
 ========================
@@ -10,15 +10,15 @@ Instructions
 cd examples/flags-parsing-tutorial
 ```
 In this WORKSPACE, we have:
-* <b>bazelrc file</b>: This is the user-defined bazelrc where options/flags can be defined.
+* <b>[bazelrc](https://docs.bazel.build/guide.html#bazelrc-the-bazel-configuration-file) file</b>: This is the user-defined bazelrc where options/flags can be defined.
 * <b>build_defs.bzl</b>: This contains the Starlark rules' implementations.
 * <b>BUILD</b>: This contains rules Bazel uses to build a package.
 
 For each requirement below, run the following example command and examine output. 
 
-❗❗❗<i>Please note that there is an outstanding bug concerning `--config` and Starlark flags which will be pointed out later in this README. Once a fix is released, this doc will be updated.</i>
+❗❗❗<i>Please note that there is an outstanding [bug](https://github.com/bazelbuild/bazel/issues/13603) concerning `--config` and Starlark flags which will be pointed out later in this README. Once a fix is released, this doc will be updated.</i>
 
-### A. Options on the command line takes precedence over those in bazelrc. ### 
+### A. Options on the command line take precedence over those in bazelrc. ### 
   
 Without `--config`, this is true for both Starlark and non-Starlark options
 ```
@@ -44,6 +44,7 @@ bazel --bazelrc=./bazelrc build --//:flag=cmd --//:flag=cmd_last :flag
 bazel --bazelrc=./bazelrc build --config=foo --config=bar :wibble :wobble :wubble
 ```
 ⭐ <b>Tips</b>: Since `--config` is a group of options and it can override explicit options (Example 2), try to have your explicit options at the end to avoid unintentional overriding. In this case, Bazel will show a <b>WARNING</b>.
+
 
 ❗❗❗ As mentioned above, there is an outstanding bug. Currently, users cannot override options associated with a `--config` via an explicit flag the command line
 ```

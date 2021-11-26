@@ -26,7 +26,7 @@ Without `--config`, this is true for both Starlark and non-Starlark options
 bazel --bazelrc=./bazelrc build --//:flag=cmd :flag
 ```
 ### B. The last flag on the command line takes precedence. ###
-⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/versions/main/command-line-reference.html#options-common-to-all-commands) to debug options parsing
+⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/user-manual.html#flag--announce_rc) to debug options parsing
 ```
 # Since -c is an output affecting option, the "winning" option 
 # will be reflected in the output paths (i.e opt). To see this run `ls -l`

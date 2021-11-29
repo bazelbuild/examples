@@ -32,11 +32,13 @@ For each requirement below, run the following example command and examine output
 ❗❗❗<i>Please note that there is an outstanding [bug](https://github.com/bazelbuild/bazel/issues/13603) concerning `--config` and Starlark flags which will be pointed out later in this README. Once a fix is released, this doc will be updated.</i>
 
 ### A. Options on the command line take precedence over those in bazelrc. ### 
-  
 Without `--config`, this is true for both Starlark and non-Starlark options
 ```
-# DEBUG should show cmd for option flag
 bazel --bazelrc=./bazelrc build --//:flag=cmd :flag
+```
+For user-defined (Starlark) flags, the evaluated value can be observed by adding a `DEBUG` statement as in line 6 of `build_defs.bzl`. Users should see the following `DEBUG` statement indicating that the final value for `--//:flag` is `cmd`
+```
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label flag: cmd
 ```
 ### B. The last option on the command line takes precedence. ###
 ⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/user-manual.html#flag--announce_rc) to debug flag parsing.
@@ -59,7 +61,7 @@ Since `--config=foo` is last on the command line and flag `-c dbg` is expanded b
 ```
 bazel --bazelrc=./bazelrc build --//:flag=cmd --//:flag=cmd_last :flag
 ```
-For user-defined (Starlark) flags, the evaluated value can be observed by adding a `DEBUG` statement as in line 6 of `build_defs.bzl`. Users should see the following `DEBUG` statement indicating that the final value for `--//:flag` is `cmd_last`.
+Users should see the following `DEBUG` statement indicating that the final value for `--//:flag` is `cmd_last`.
 ```
 DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label flag: cmd_last
 ```

@@ -1,20 +1,23 @@
 Bazel flags parsing examples
 ========================
 
-This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also know what [options/flags](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) including built-in (non-Starlark) and [user-defined](https://docs.bazel.build/skylark/config.html#user-defined-build-settings) (Starlark) options are.
+This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also know what flags including [built-in](https://docs.bazel.build/versions/main/configurable-attributes.html#built-in-flags) (non-Starlark) and [user-defined](https://docs.bazel.build/versions/main/configurable-attributes.html#custom-flags) (Starlark) flags are. 
+
+Note that a broader term, [options](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) is often used interchangeably with flags. An important distinction is that only flags can be set on the command line. 
 
 Terminologies
 ========================
 `--config`: Throughout this tutorial, users will see regular usage of `--config`. Although, it's already defined [here](https://docs.bazel.build/guide.html#bazelrc), important points will be repeated for first-time Bazel users.
-* `--config` can be used to represent a group of options with a short name following the convention `<command>:<config_name>`. For example:
+* `--config` can be used to represent a group of flags with a short name following the convention `<command>:<config_name>`. For example:
 ```
 # bazelrc
 build:foo --//:wibble=wibble
 build:foo --//:wobble=wobble
 build:foo --//:wubble=wubble
 ```
-Here, we have defined a `--config` named `foo` expanding options `--//:wibble, --//:wobble, --//:wubble`.
-* By default, options defined in a `--config` will be ignored, unless `--config=<config_name>` is specified either on the command line or in the `bazelrc` file. Where `--config=<config_name>` is specified determines the priorities/precedence of the flag expanded by that `--config` (i.e RC priority vs command line priority).
+Here, we have defined a `--config` named `foo` expanding flags `--//:wibble, --//:wobble, --//:wubble`.
+
+By default, flags defined in a `--config` will be ignored, unless `--config=<config_name>` is specified either on the command line or in the `bazelrc` file. Where `--config=<config_name>` is specified determines the priorities/precedence of the flag expanded by that `--config` (i.e RC priority vs command line priority).
 
 Instructions
 ========================
@@ -23,22 +26,22 @@ Instructions
 cd examples/flags-parsing-tutorial
 ```
 In this WORKSPACE, we have:
-* <b>[bazelrc](https://docs.bazel.build/guide.html#bazelrc-the-bazel-configuration-file) file</b>: This is the user-defined bazelrc where options/flags can be defined.
+* <b>[bazelrc](https://docs.bazel.build/guide.html#bazelrc-the-bazel-configuration-file) file</b>: This is the user-defined bazelrc where flags can be defined.
 * <b>build_defs.bzl</b>: This contains the Starlark rules' implementations.
 * <b>BUILD</b>: This contains rules Bazel uses to build a package.
 
-For each requirement below, run the following example command and examine output. 
+For each requirement below, run the following example commands and examine the outputs. 
 
 ❗❗❗<i>Please note that there is an outstanding [bug](https://github.com/bazelbuild/bazel/issues/13603) concerning `--config` and Starlark flags which will be pointed out later in this README. Once a fix is released, this doc will be updated.</i>
 
-### A. Options on the command line take precedence over those in bazelrc. ### 
+### A. Flags on the command line take precedence over those in bazelrc. ### 
 Without `--config`, this is true for both Starlark and non-Starlark options
 ```
 bazel --bazelrc=./bazelrc build --//:flag=cmd :flag
 ```
 For user-defined (Starlark) flags, the evaluated value can be observed by adding a `DEBUG` statement as in line 6 of `build_defs.bzl`. Users should see the following `DEBUG` statement indicating that the final value for `--//:flag` is `cmd`
 ```
-DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label flag: cmd
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for flag: cmd
 ```
 ### B. The last option on the command line takes precedence. ###
 ⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/user-manual.html#flag--announce_rc) to debug flag parsing.
@@ -63,7 +66,7 @@ bazel --bazelrc=./bazelrc build --//:flag=cmd --//:flag=cmd_last :flag
 ```
 Users should see the following `DEBUG` statement indicating that the final value for `--//:flag` is `cmd_last`.
 ```
-DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label flag: cmd_last
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for flag: cmd_last
 ```
 <u><b>Example B.4</b></u>
 ```
@@ -71,24 +74,24 @@ bazel --bazelrc=./bazelrc build --config=foo --config=bar :wibble :wobble :wubbl
 ```
 Requirement <b>B</b> is also applicable for cascading `--config(s)`. `DEBUG` should show `flob` as the evaluated value for `--//:wibble`. Since `config=bar` does not expand `--//:wobble` and `--//:wubble`, their values should stay the same as defined in `--config=foo`.
 ```
-DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label wibble: flob
-DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label wubble: wubble
-DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label wobble: wobble
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for wibble: flob
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for wubble: wubble
+DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for wobble: wobble
 ```
-⭐ <b>Tips</b>: Since `--config` is a group of options and it can override explicit options (<b>Example B.2</b>), try to have your explicit options at the end to avoid unintentional overriding. In this case, Bazel will show a <b>WARNING</b>.
+⭐ <b>Tips</b>: Since `--config` is a group of options and it can override explicit flags specified on the command line (<b>Example B.2</b>), try to have your explicit options at the end to avoid unintentional overriding. In this case, Bazel will show a <b>WARNING</b>.
 
 <u><b>Example B.5</b></u>
 
-❗❗❗ As mentioned above, there is an outstanding [bug](https://github.com/bazelbuild/bazel/issues/13603). Currently, users cannot override options associated with a `--config` via an explicit flag the command line
+❗❗❗ As mentioned above, there is an outstanding [bug](https://github.com/bazelbuild/bazel/issues/13603). Currently, users cannot override Starlark flags expanded by a `--config` via an explicit flag on the command line
 ```
 bazel --bazelrc=./bazelrc build --config=foo --//:wibble=flob :wibble
 ```
 DEBUG should show `flob` for `--//:wibble` per requirement <b>A</b>, but instead `wibble` is shown.
 ```
-DEBUG: /Users/aranguyen/examples/flags-parsing-tutorial/build_defs.bzl:6:10: build setting value for label wibble: wibble
+DEBUG: /Users/aranguyen/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for wibble: wibble
 ```
 ### C. Within bazelrc file, precedence depends on specificity which is defined by inheritance ###
-Commands such as test and release inherit options from build. The inheriting command is said to be more specific and thus takes precedence.
+Commands such as test and release inherit flags from build. The inheriting command is said to be more specific and thus takes precedence.
 ```
 # -c is resolved to opt, and --//:wibble resolves to flob.
 bazel --bazelrc=./bazelrc test --config=baz :wibble --announce_rc

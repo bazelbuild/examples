@@ -1,7 +1,7 @@
 Bazel flags parsing examples
 ========================
 
-This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also know what flags including [built-in](https://docs.bazel.build/versions/main/configurable-attributes.html#built-in-flags) (non-Starlark) and [user-defined](https://docs.bazel.build/versions/main/configurable-attributes.html#custom-flags) (Starlark) flags are. 
+This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also be familiar with [built-in](https://docs.bazel.build/versions/main/configurable-attributes.html#built-in-flags) (non-Starlark) and [user-defined](https://docs.bazel.build/versions/main/configurable-attributes.html#custom-flags) (Starlark) flags. 
 
 Note that a broader term, [options](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) is often used interchangeably with flags. An important distinction is that only flags can be set on the command line. 
 

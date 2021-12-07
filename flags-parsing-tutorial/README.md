@@ -7,7 +7,7 @@ Note that a broader term, [options](https://docs.bazel.build/versions/main/comma
 
 Terminologies
 ========================
-`--config`: Throughout this tutorial, users will see regular usage of `--config`. Although, it's already defined [here](https://docs.bazel.build/guide.html#bazelrc), important points will be repeated for first-time Bazel users.
+`--config`: Throughout this tutorial, users will see regular usage of `--config`. Although, it's already defined [here](https://docs.bazel.build/guide.html#bazelrc), we will repeat important points for first-time Bazel users.
 * `--config` can be used to represent a group of flags with a short name following the convention `<command>:<config_name>`. For example:
 ```
 # bazelrc

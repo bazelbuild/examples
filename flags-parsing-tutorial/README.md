@@ -17,7 +17,7 @@ build:foo --//:wubble=wubble
 ```
 Here, we have defined a `--config` named `foo` expanding flags `--//:wibble, --//:wobble, --//:wubble`.
 
-By default, flags defined in a `--config` will be ignored, unless `--config=<config_name>` is specified either on the command line or in the `bazelrc` file. Where `--config=<config_name>` is specified determines the priorities/precedence of the flag expanded by that `--config` (i.e RC priority vs command line priority).
+By default, flags defined in a `--config` will be ignored, unless `--config=<config_name>` is specified either on the command line or in the `bazelrc` file. Flags grouped by `--config` are expanded in place having the same priority with the `--config` expanding them. Please see example B.4.
 
 Instructions
 ========================

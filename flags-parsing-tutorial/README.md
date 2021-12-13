@@ -97,5 +97,20 @@ Commands such as test and release inherit flags from build. The inheriting comma
 bazel --bazelrc=./bazelrc test --config=baz :wibble --announce_rc
 ```
 ⭐ <b>Tips</b>: For readability, have your most common options at the top of bazelrc.
+### D. Using `--enable_platform_specific_config` flag
+If the value of `--enable_platform_specific_config` is `True`, Bazel enables host-OS-specific flags in the `bazelrc`. For example, considering the `bazelrc` in this WORKSPACE:
+```
+build --enable_platform_specific_config
 
+build:linux --cpu=arm
+build:macos --cpu=k8
+build:windows --cpu=x64_windows
+build:freebsd --cpu=ppc
+build:openbsd --cpu=haswell
+```
+If the host platform (where Bazel is running) is `macos` and the `build` command is run, Bazel picks up `build:macos` lines in the `bazelrc`. In this example, `build:macos --cpu=k8` will be enabled. Try the following command and observe the output, `k8` should appear in the output path.
+```
+bazel --bazelrc=./bazelrc build :wibble
+```
+Note that Bazel will only enable flags based on the host platform, instead of execution platform or target platform.
 

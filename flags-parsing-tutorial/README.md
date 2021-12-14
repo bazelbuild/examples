@@ -108,9 +108,9 @@ build:windows --cpu=x64_windows
 build:freebsd --cpu=ppc
 build:openbsd --cpu=haswell
 ```
-If the host platform (where Bazel is running) is `macos` and the `build` command is run, Bazel picks up `build:macos` lines in the `bazelrc`. In this example, `build:macos --cpu=k8` will be enabled. Try the following command and observe the output, `k8` should appear in the output path.
+If the host platform (where Bazel is running) is `macos` and the `build` command is run, Bazel picks up `build:macos` lines in the `bazelrc`. In this example, `build:macos --cpu=k8` will be enabled. Try the following command and observe the output, `k8` should appear in the output path (.../bazel-out/k8-fastbuild/...).
 ```
 bazel --bazelrc=./bazelrc build :wibble
 ```
-Note that Bazel will only enable flags based on the host platform, instead of execution platform or target platform.
+Note that Bazel will only enable flags based on the host platform, instead of execution platform or target platform. The definitions for these platforms can be found [here](https://docs.bazel.build/platforms.html). 
 

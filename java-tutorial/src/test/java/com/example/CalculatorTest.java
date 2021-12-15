@@ -1,11 +1,10 @@
 package com.example;
 
-import com.example.Calculator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class RunnerTest {
+public class CalculatorTest {
     @Test
     public void evaluatesExpression() {
         Calculator calculator = new Calculator();

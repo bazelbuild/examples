@@ -15,7 +15,7 @@ java_library(
 java_test(
     name = "runner_tests",
     srcs = glob(["src/test/java/com/example/*.java"]),
-    test_class = "com.example.RunnerTest",
+    test_class = "com.example.CalculatorTest",
     deps = [
         ":java-maven-lib",
         "@maven//:junit_junit",

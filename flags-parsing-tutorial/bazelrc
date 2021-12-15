@@ -1,3 +1,11 @@
+build --enable_platform_specific_config
+
+build:linux --cpu=arm
+build:macos --cpu=k8
+build:windows --cpu=x64_windows
+build:freebsd --cpu=ppc
+build:openbsd --cpu=haswell
+
 ### Starlark flag that is not associated with a config
 build --//:flag=flag
 

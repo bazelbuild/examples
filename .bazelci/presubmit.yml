@@ -137,7 +137,7 @@ tasks:
   rules-linux:
     name: "Bazel Rules"
     platform: ubuntu1804
-    bazel: "4.2.2"
+    bazel: "latest"
     working_directory: rules
     build_targets:
     - "..."
@@ -155,7 +155,7 @@ tasks:
   rules-macos:
     name: "Bazel Rules"
     platform: macos
-    bazel: "4.2.2"    
+    bazel: "latest"    
     working_directory: rules
     build_targets:
     - "..."
@@ -173,7 +173,7 @@ tasks:
   rules-windows:
     name: "Bazel Rules"
     platform: windows
-    bazel: "4.2.2"    
+    bazel: "latest"    
     working_directory: rules
     build_targets:
     - "..."

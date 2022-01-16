@@ -4,7 +4,7 @@
 # case that it is defined with the same name but different version.
 # Because of that, we load the 3rd party dependencies in two steps. First we load only the source code of all
 # dependencies explicitly declared in our project. Then on a second step we do everything that is missing to
-# fully load the dependency (load transitive dependencies, registar rules or toolchains, etc.)
+# fully load the dependency (load transitive dependencies, register rules or toolchains, etc.)
 
 load("//third_party:third_party.bzl", "load_third_party_libraries")
 

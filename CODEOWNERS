@@ -1,6 +1,6 @@
-* @gregce @brandjon @c-parsons
+* @gregestren @brandjon @c-parsons
 android/ @ahumesky @jin
 java-maven/ @jin
-rules/starlark-configurations @gregce @configurability
-make-variables @gregce @configurability
+rules/starlark-configurations @gregestren @configurability
+make-variables @gregestren @configurability
 AUTHORS  @sventiffe @philwo

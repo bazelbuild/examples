@@ -1,6 +1,11 @@
-* @gregestren @brandjon @c-parsons
-android/ @ahumesky @jin
-java-maven/ @jin
-rules/starlark-configurations @gregestren @configurability
-make-variables @gregestren @configurability
+* @gregestren @brandjon
+
 AUTHORS  @sventiffe @philwo
+android/ @ahumesky @jin
+cpp-tutorial @oquenchil
+java-maven/ @jin
+java-tutorial/ @jin
+make-variables @configurability
+flags-parsing-tutorial @configurability
+rules/starlark-configurations @gregestren @configurability
+third-party-dependencies @metorcloudy

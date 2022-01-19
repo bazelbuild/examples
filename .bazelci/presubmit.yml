@@ -137,6 +137,7 @@ tasks:
   rules-linux:
     name: "Bazel Rules"
     platform: ubuntu1804
+    bazel: "latest"
     working_directory: rules
     build_targets:
     - "..."
@@ -154,6 +155,7 @@ tasks:
   rules-macos:
     name: "Bazel Rules"
     platform: macos
+    bazel: "latest"    
     working_directory: rules
     build_targets:
     - "..."
@@ -171,6 +173,7 @@ tasks:
   rules-windows:
     name: "Bazel Rules"
     platform: windows
+    bazel: "latest"    
     working_directory: rules
     build_targets:
     - "..."
@@ -189,6 +192,24 @@ tasks:
     # test_targets:
     # - "--"
     # - "..."
+  third-party-dependencies-linux:
+    name: "Example with third party dependencies"
+    platform: ubuntu1804
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-macos:
+    name: "Example with third party dependencies"
+    platform: macos
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-windows:
+    name: "Example with third party dependencies"
+    platform: windows
+    working_directory: third-party-dependencies
+    build_targets:
+    - "..."
   tutorial-linux:
     name: "Bazel end-to-end example"
     platform: ubuntu1804

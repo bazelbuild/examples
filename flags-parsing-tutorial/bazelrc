@@ -1,0 +1,27 @@
+build --enable_platform_specific_config
+
+build:linux --cpu=arm
+build:macos --cpu=k8
+build:windows --cpu=x64_windows
+build:freebsd --cpu=ppc
+build:openbsd --cpu=haswell
+
+### Starlark flag that is not associated with a config
+build --//:flag=flag
+
+### --config=foo
+build:foo -c dbg
+build:foo --//:wibble=wibble
+build:foo --//:wobble=wobble
+build:foo --//:wubble=wubble
+
+### --config=bar has the option --//:wibble which is also defined in --config=foo
+build:bar -c opt
+build:bar --//:wibble=flob
+
+### --config=baz includes --config=foo
+# since --config=foo is specified here, options in foo will be expanded with RC Priority
+build:baz --config=foo
+test:baz --config=bar
+
+

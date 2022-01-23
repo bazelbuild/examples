@@ -5,7 +5,7 @@ android/ @ahumesky @jin
 cpp-tutorial @oquenchil
 java-maven/ @jin
 java-tutorial/ @jin
-make-variables @configurability
-flags-parsing-tutorial @configurability
-rules/starlark-configurations @gregestren @configurability
-third-party-dependencies @metorcloudy
+make-variables @bazelbuild/configurability
+flags-parsing-tutorial @bazelbuild/configurability
+rules/starlark-configurations @bazelbuild/configurability
+third-party-dependencies @meteorcloudy

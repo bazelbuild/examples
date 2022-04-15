@@ -32,7 +32,7 @@ In the run log above you can see where the executable was built so you can locat
 You can also get the output path with the bazel cquery command. For
 example, the command below would print the path to the output file. This
 is a useful technique for use in scripts, where you do not want to parse the
-`blaze build` output.
+`bazel build` output.
 
 ```
 bazel cquery --output=starlark \

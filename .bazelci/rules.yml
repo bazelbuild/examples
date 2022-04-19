@@ -29,6 +29,7 @@ basics: &basics
   test_targets:
   - "..."
 
+# TODO(bazel-configurability-team): Make these work again.
 configurations: &configurations
   working_directory: ../configurations
   build_targets:

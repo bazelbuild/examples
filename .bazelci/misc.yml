@@ -1,0 +1,44 @@
+---
+tasks:
+  java-maven-linux:
+    name: "Maven Java App"
+    platform: ubuntu1804
+    working_directory: ../java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-maven-macos:
+    name: "Maven Java App"
+    platform: macos
+    working_directory: ../java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  java-maven-windows:
+    name: "Maven Java App"
+    platform: windows
+    working_directory: ../java-maven
+    build_targets:
+    - "..."
+    test_targets:
+    - "..."
+  third-party-dependencies-linux:
+    name: "Example with third party dependencies"
+    platform: ubuntu1804
+    working_directory: ../third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-macos:
+    name: "Example with third party dependencies"
+    platform: macos
+    working_directory: ../third-party-dependencies
+    build_targets:
+    - "..."
+  third-party-dependencies-windows:
+    name: "Example with third party dependencies"
+    platform: windows
+    working_directory: ../third-party-dependencies
+    build_targets:
+    - "..."

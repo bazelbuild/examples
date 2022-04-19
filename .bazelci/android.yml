@@ -1,0 +1,40 @@
+---
+tasks:
+  android-firebase-linux:
+    name: "Android Firebase Cloud Messaging"
+    platform: ubuntu1804
+    working_directory: ../android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+  android-firebase-macos:
+    name: "Android Firebase Cloud Messaging"
+    platform: macos
+    working_directory: ../android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+  android-firebase-windows:
+    name: "Android Firebase Cloud Messaging"
+    platform: windows
+    working_directory: ../android/firebase-cloud-messaging
+    build_targets:
+    - "..."
+  android-ndk-linux:
+    name: "Android NDK"
+    platform: ubuntu1804
+    working_directory: ../android/ndk
+    build_targets:
+    - "//app/src/main:app"
+  android-ndk-macos:
+    name: "Android NDK"
+    platform: macos
+    working_directory: ../android/ndk
+    build_targets:
+    - "//app/src/main:app"
+  # NDK project is not building on Windows yet.
+  # https://github.com/bazelbuild/examples/issues/94
+  # android-ndk-windows:
+  #   name: "Android NDK"
+  #   platform: windows
+  #   working_directory: ../android/ndk
+  #   build_targets:
+  #   - "//app/src/main:app"

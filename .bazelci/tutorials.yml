@@ -1,0 +1,96 @@
+# Getting started tutorials
+tasks:
+  tutorial-linux:
+    name: "Bazel end-to-end example"
+    platform: ubuntu1804
+    working_directory: ../tutorial
+    build_targets:
+      - "//backend"
+      - "//android"
+  tutorial-macos:
+    name: "Bazel end-to-end example"
+    platform: macos
+    working_directory: ../tutorial
+    build_targets:
+      - "//backend"
+      - "//android"
+      - "//ios-app"
+  tutorial-windows:
+    name: "Bazel end-to-end example"
+    platform: windows
+    working_directory: ../tutorial
+    build_targets:
+      - "//backend"
+      - "//android"
+  cpp-stage1-linux:
+    name: "C++ Stage 1"
+    platform: ubuntu1804
+    working_directory: ../cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage1-macos:
+    name: "C++ Stage 1"
+    platform: macos
+    working_directory: ../cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage1-windows:
+    name: "C++ Stage 1"
+    platform: windows
+    working_directory: ../cpp-tutorial/stage1
+    build_targets:
+    - "..."
+  cpp-stage2-linux:
+    name: "C++ Stage 2"
+    platform: ubuntu1804
+    working_directory: ../cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage2-macos:
+    name: "C++ Stage 2"
+    platform: macos
+    working_directory: ../cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage2-windows:
+    name: "C++ Stage 2"
+    platform: windows
+    working_directory: ../cpp-tutorial/stage2
+    build_targets:
+    - "..."
+  cpp-stage3-linux:
+    name: "C++ Stage 3"
+    platform: ubuntu1804
+    working_directory: ../cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  cpp-stage3-macos:
+    name: "C++ Stage 3"
+    platform: macos
+    working_directory: ../cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  cpp-stage3-windows:
+    name: "C++ Stage 3"
+    platform: windows
+    working_directory: ../cpp-tutorial/stage3
+    build_targets:
+    - "..."
+  java-tutorial-linux:
+    name: "Java Tutorial"
+    platform: ubuntu1804
+    working_directory: ../java-tutorial
+    build_targets:
+    - "//:ProjectRunner"
+  java-tutorial-macos:
+    name: "Java Tutorial"
+    platform: macos
+    working_directory: ../java-tutorial
+    build_targets:
+    - "//:ProjectRunner"
+  java-tutorial-windows:
+    name: "Java Tutorial"
+    platform: windows
+    working_directory: ../java-tutorial
+    build_targets:
+    - "//:ProjectRunner"

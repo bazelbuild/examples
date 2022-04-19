@@ -1,0 +1,60 @@
+---
+tasks:
+  rules-linux:
+    name: "Bazel Rules"
+    platform: ubuntu1804
+    bazel: "latest"
+    working_directory: rules
+    build_targets:
+    - "..."
+    - "-//starlark_configurations/read_attr_in_transition:will-break"
+   # These targest are not supposed to build at the top level without flags being set
+   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
+   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
+   - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
+   - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
+   - "-//starlark_configurations/cc_binary_selectable_copts:lib"
+   # TODO(#160) renable this target when split_attr logic is released
+   - "-//starlark_configurations/multi_arch_binary:foo"
+   test_targets:
+   - "..."
+  rules-macos:
+   name: "Bazel Rules"
+   platform: macos
+   bazel: "latest"    
+   working_directory: rules
+   build_targets:
+   - "..."
+   - "-//starlark_configurations/read_attr_in_transition:will-break"
+       # These targest are not supposed to build at the top level without flags being set
+   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:lib"
+    # TODO(#160) renable this target when split_attr logic is released
+    - "-//starlark_configurations/multi_arch_binary:foo"
+    test_targets:
+    - "..."
+  rules-windows:
+    name: "Bazel Rules"
+    platform: windows
+    bazel: "latest"    
+    working_directory: rules
+    build_targets:
+    - "..."
+    - "-//starlark_configurations/read_attr_in_transition:will-break"
+        # These targest are not supposed to build at the top level without flags being set
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
+    - "-//starlark_configurations/cc_binary_selectable_copts:lib"
+    # TODO(#160) renable this target when split_attr logic is released
+    - "-//starlark_configurations/multi_arch_binary:foo"
+    # TODO(bazel-team): Make runfiles examples work on Windows.
+    - "-//runfiles/..."
+    # TODO(bazel-team): Make //test_rule:80columns work on Windows
+    # test_targets:
+    # - "--"
+    # - "..."

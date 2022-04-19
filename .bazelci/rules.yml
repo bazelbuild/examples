@@ -74,4 +74,8 @@ tasks:
     name: basics_windows_latest
     <<: *windows
     <<: *rolling
-    <<: *basics
+    working_directory: ../rules
+    build_targets:
+    - "..."
+    # TODO(bazel-team): Make runfiles examples work on Windows.
+    - "-//rules/runfiles/..."

@@ -79,6 +79,10 @@ tasks:
     - "..."
     # TODO(bazel-team): Make runfiles examples work on Windows.
     - "-//runfiles/..."
+    test_targets:
+    - "..."
+    # This test does not work on 5x and earlier.
+    - "-//test_rule/..."
   basics_windows_latest:
     name: basics_windows_latest
     <<: *windows

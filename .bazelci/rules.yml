@@ -50,14 +50,23 @@ configurations: &configurations
 #
 tasks:
   rule_basics_linux_lts5:
-    name: rule_basics_linux_lts5
+    name: basics_linux_lts5
     <<: *linux
     <<: *lts
     <<: *basics
-
-tasks:
   rule_basics_linux_latest:
-    name: rule_basics_linux_latest
+    name: basics_linux_latest
     <<: *linux
     <<: *rolling
+    <<: *basics
+  rule_basics_macos_lts5:
+    name: basics_macos_lts5
+    <<: *macos
+    <<: *lts
+    <<: *basics
+  rule_basics_macos_latest:
+    name: basics_macos_latest
+    <<: *macos
+    # It seems there is no rolling Bazel for macos.
+    bazel: last_green
     <<: *basics

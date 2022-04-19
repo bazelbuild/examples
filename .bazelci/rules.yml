@@ -49,8 +49,15 @@ configurations: &configurations
 # Finally, the cross product of tests X platforms X bazel release
 #
 tasks:
+  rule_basics_linux_lts5:
+    name: rule_basics_linux_lts5
+    <<: *linux
+    <<: *lts
+    <<: *basics
+
+tasks:
   rule_basics_linux_latest:
     name: rule_basics_linux_latest
     <<: *linux
-    <<: *latest
+    <<: *rolling
     <<: *basics

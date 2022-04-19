@@ -49,8 +49,8 @@ configurations: &configurations
 # Finally, the cross product of tests X platforms X bazel release
 #
 tasks:
-  basics_linux_lts5:
-    name: basics_linux_lts5
+  basics_linux_lts:
+    name: basics_linux_lts
     <<: *linux
     <<: *lts
     <<: *basics
@@ -59,8 +59,8 @@ tasks:
     <<: *linux
     <<: *rolling
     <<: *basics
-  basics_macos_lts5:
-    name: basics_macos_lts5
+  basics_macos_lts:
+    name: basics_macos_lts
     <<: *macos
     <<: *lts
     <<: *basics
@@ -69,7 +69,15 @@ tasks:
     <<: *macos
     # It seems there is no rolling Bazel for macos.
     bazel: last_green
-    <<: *basics
+  basics_windows_lts:
+    name: basics_windows_lts
+    <<: *windows
+    <<: *lts
+    working_directory: ../rules
+    build_targets:
+    - "..."
+    # TODO(bazel-team): Make runfiles examples work on Windows.
+    - "-//runfiles/..."
   basics_windows_latest:
     name: basics_windows_latest
     <<: *windows
@@ -79,3 +87,4 @@ tasks:
     - "..."
     # TODO(bazel-team): Make runfiles examples work on Windows.
     - "-//runfiles/..."
+    <<: *basics

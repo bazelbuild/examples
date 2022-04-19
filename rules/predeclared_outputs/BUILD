@@ -1,4 +1,4 @@
-load("//predeclared_outputs:hash.bzl", "word_hashes")
+load(":hash.bzl", "word_hashes")
 
 # Run any of the following:
 #   bazel build //predeclared_outputs:animal_hashes

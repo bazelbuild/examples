@@ -48,7 +48,7 @@ _foo_binary = rule(
         "srcs": attr.label_list(allow_files = True),
         "deps": attr.label_list(),
         "_foocc": attr.label(
-            default = Label("//depsets:foocc"),
+            default = ":foocc",
             allow_files = True,
             executable = True,
             cfg = "exec",

@@ -37,7 +37,7 @@ sub_tool = rule(
         "command": attr.string(),
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:data.txt",
+            default = ":data.txt",
         ),
     },
 )
@@ -86,11 +86,11 @@ complex_tool = rule(
         "command": attr.string(),
         "_subtool": attr.label(
             allow_files = True,
-            default = "//runfiles:subtool",
+            default = ":subtool",
         ),
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:complex_tool_data.txt",
+            default = ":complex_tool_data.txt",
         ),
     },
 )

@@ -1,4 +1,4 @@
-load("//executable:fortune.bzl", "haiku_fortune")
+load(":fortune.bzl", "haiku_fortune")
 
 haiku_fortune(
     name = "bazel_haikus",

@@ -4,9 +4,6 @@ It is much more memory-efficient to use a template file than creating the whole
 content during the analysis phase.
 """
 
-# Label of the template file to use.
-_TEMPLATE = "//expand_template:hello.cc"
-
 def hello(**kwargs):
     _hello(
         source_file = "{name}.cc".format(**kwargs),
@@ -27,7 +24,7 @@ _hello = rule(
     attrs = {
         "firstname": attr.string(mandatory = True),
         "_template": attr.label(
-            default = Label(_TEMPLATE),
+            default = ":hello.cc",
             allow_single_file = True,
         ),
         "source_file": attr.output(mandatory = True),

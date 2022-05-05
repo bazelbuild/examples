@@ -1,5 +1,5 @@
 imports:
 - android.yml
 - misc.yml
+- rules.yml
 - tutorials.yml
-# - rules.yml

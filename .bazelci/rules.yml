@@ -1,60 +1,91 @@
----
+#
+# Bazel releases
+#
+lts: &lts
+  bazel: latest
+
+rolling: &rolling
+  bazel: rolling
+
+#
+# Commmon features by platform
+#
+linux: &linux
+  platform: ubuntu1804
+
+macos: &macos
+  platform: macos
+
+windows: &windows
+  platform: windows
+
+#
+# Test sets
+#
+basics: &basics
+  working_directory: ../rules
+  build_targets:
+  - "..."
+  test_targets:
+  - "..."
+
+# TODO(bazel-configurability-team): Make these work again.
+configurations: &configurations
+  working_directory: ../configurations
+  build_targets:
+  - "..."
+  - "-//configurations/read_attr_in_transition:will-break"
+  # These targest are not supposed to build at the top level without flags being set
+  - "-//configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
+  - "-//configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
+  - "-//configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
+  - "-//configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
+  - "-//configurations/cc_binary_selectable_copts:lib"
+  # TODO(#160) renable this target when split_attr logic is released
+  - "-//configurations/multi_arch_binary:foo"
+  test_targets:
+  - "..."
+
+#
+# Finally, the cross product of tests X platforms X bazel release
+#
 tasks:
-  rules-linux:
-    name: "Bazel Rules"
-    platform: ubuntu1804
-    bazel: "latest"
-    working_directory: rules
+  basics_linux_lts:
+    name: basics_linux_lts
+    <<: *linux
+    <<: *lts
+    <<: *basics
+  basics_linux_latest:
+    name: basics_linux_latest
+    <<: *linux
+    <<: *rolling
+    <<: *basics
+  basics_macos_lts:
+    name: basics_macos_lts
+    <<: *macos
+    <<: *lts
+    <<: *basics
+  basics_macos_latest:
+    name: basics_macos_latest
+    <<: *macos
+    # It seems there is no rolling Bazel for macos.
+    bazel: last_green
+    <<: *basics
+  basics_windows_lts:
+    name: basics_windows_lts
+    <<: *windows
+    <<: *lts
+    working_directory: ../rules
     build_targets:
     - "..."
-    - "-//starlark_configurations/read_attr_in_transition:will-break"
-   # These targest are not supposed to build at the top level without flags being set
-   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
-   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
-   - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
-   - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
-   - "-//starlark_configurations/cc_binary_selectable_copts:lib"
-   # TODO(#160) renable this target when split_attr logic is released
-   - "-//starlark_configurations/multi_arch_binary:foo"
-   test_targets:
-   - "..."
-  rules-macos:
-   name: "Bazel Rules"
-   platform: macos
-   bazel: "latest"    
-   working_directory: rules
-   build_targets:
-   - "..."
-   - "-//starlark_configurations/read_attr_in_transition:will-break"
-       # These targest are not supposed to build at the top level without flags being set
-   - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:lib"
-    # TODO(#160) renable this target when split_attr logic is released
-    - "-//starlark_configurations/multi_arch_binary:foo"
-    test_targets:
-    - "..."
-  rules-windows:
-    name: "Bazel Rules"
-    platform: windows
-    bazel: "latest"    
-    working_directory: rules
-    build_targets:
-    - "..."
-    - "-//starlark_configurations/read_attr_in_transition:will-break"
-        # These targest are not supposed to build at the top level without flags being set
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
-    - "-//starlark_configurations/cc_binary_selectable_copts:lib"
-    # TODO(#160) renable this target when split_attr logic is released
-    - "-//starlark_configurations/multi_arch_binary:foo"
     # TODO(bazel-team): Make runfiles examples work on Windows.
     - "-//runfiles/..."
-    # TODO(bazel-team): Make //test_rule:80columns work on Windows
-    # test_targets:
-    # - "--"
-    # - "..."
+  basics_windows_latest:
+    name: basics_windows_latest
+    <<: *windows
+    <<: *rolling
+    working_directory: ../rules
+    build_targets:
+    - "..."
+    # TODO(bazel-team): Make runfiles examples work on Windows.
+    - "-//runfiles/..."

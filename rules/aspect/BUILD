@@ -5,6 +5,8 @@ cc_library(
     name = "lib",
     srcs = [
         "lib.cc",
+    ],
+    hdrs = [
         "lib.h",
     ],
 )
@@ -14,7 +16,7 @@ cc_binary(
     srcs = [
         "app.cc",
     ],
-    deps = ["lib"],
+    deps = [":lib"],
 )
 
 file_collector(

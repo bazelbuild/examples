@@ -60,7 +60,7 @@ tool = rule(
     attrs = {
         "_data": attr.label(
             allow_files = True,
-            default = "//runfiles:data.txt",
+            default = ":data.txt",
         ),
     },
 )

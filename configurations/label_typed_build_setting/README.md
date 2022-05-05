@@ -23,6 +23,6 @@ Target A --------------> Label Flag X --------------> Target B
 To test it out, cd to this directory and run the following:
 ```
 $ bazel build :my-toolbox # "Using a hammer."
-$ bazel build :my-toolbox --//starlark_configurations/label_typed_build_setting:tool= \
-	//starlark_configurations/label_typed_build_setting:screwdriver # "Using a screwdriver."
+$ bazel build :my-toolbox --//configurations/label_typed_build_setting:tool= \
+	//configurations/label_typed_build_setting:screwdriver # "Using a screwdriver."
 ```

@@ -9,9 +9,9 @@ concat(
         "footer.html",
     ],
     merge_tool = select({
-        "//conditions:default": "//actions_run:merge_on_linux",
-        "on_linux": "//actions_run:merge_on_linux",
-        "on_windows": "//actions_run:merge_on_windows.bat",
+        "//conditions:default": ":merge_on_linux",
+        "on_linux": ":merge_on_linux",
+        "on_windows": ":merge_on_windows.bat",
     }),
 )
 

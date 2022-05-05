@@ -1,4 +1,4 @@
-load("//attributes:printer.bzl", "printer")
+load(":printer.bzl", "printer")
 
 # Run 'bazel build :some_target' to print its information.
 printer(

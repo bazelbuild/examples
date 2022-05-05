@@ -1,4 +1,4 @@
-load("//computed_dependencies:hash.bzl", "md5_sum")
+load(":hash.bzl", "md5_sum")
 
 # Run 'bazel build :hash_no_space' to compute the md5 sum of 'hello.txt'
 # ignoring all spaces.

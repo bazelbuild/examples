@@ -8,5 +8,5 @@ This is an example of defining and instantiating your own build setting from scr
 To test it out, cd to this directory and run the following:
 ```
 $ bazel build :today # => "HOT"
-$ bazel build :today --//configurations/basic_build_setting:coffee-temp=ICED # => "ICED"
+$ bazel build :today --//basic_build_setting:coffee-temp=ICED # => "ICED"
 ```

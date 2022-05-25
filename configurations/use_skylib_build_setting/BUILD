@@ -8,8 +8,8 @@
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load(":defs.bzl", "dessert")
 
-# This can be set on the command line by setting 
-# //configurations/use_skylib_build_setting:flavor=<flavor>.
+# This can be set on the command line by setting
+# //use_skylib_build_setting:flavor=<flavor>.
 # We declare here that its default value is "strawberry".
 string_flag(name = "flavor", build_setting_default = "strawberry")
 

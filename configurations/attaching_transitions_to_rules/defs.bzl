@@ -6,36 +6,36 @@ load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 def _blue_impl(settings, attr):
     _ignore = settings, attr
 
-    return {"//configurations/attaching_transitions_to_rules:color": "blue"}
+    return {"//attaching_transitions_to_rules:color": "blue"}
 
 blue_transition = transition(
     implementation = _blue_impl,
     inputs = [],
-    outputs = ["//configurations/attaching_transitions_to_rules:color"],
+    outputs = ["//attaching_transitions_to_rules:color"],
 )
 
 def _red_impl(settings, attr):
     _ignore = settings, attr
 
-    return {"//configurations/attaching_transitions_to_rules:color": "red"}
+    return {"//attaching_transitions_to_rules:color": "red"}
 
 red_transition = transition(
     implementation = _red_impl,
     inputs = [],
-    outputs = ["//configurations/attaching_transitions_to_rules:color"],
+    outputs = ["//attaching_transitions_to_rules:color"],
 )
 
 def _impl(ctx):
-    # Access the value of //configurations/attaching_transitions_to_rules:color for the target (blue).
+    # Access the value of //attaching_transitions_to_rules:color for the target (blue).
     print("shirt color: " + ctx.attr._color[BuildSettingInfo].value)
 
-    # Access the value of //configurations/attaching_transitions_to_rules:color for the transitioned dep (red).
+    # Access the value of //attaching_transitions_to_rules:color for the transitioned dep (red).
     # Note that you have to index by [0] here for the transitioned dep and you don't need to
     # do so below - this is because attribute-attached transitions can transition to multiple
     # new configurations so you must specify which one you want.
     print("sleeve color: " + ctx.attr.sleeve[0][BuildSettingInfo].value)
 
-    # Access the value of //configurations/attaching_transitions_to_rules:color for the non-transitioned dep (blue).
+    # Access the value of //attaching_transitions_to_rules:color for the non-transitioned dep (blue).
     print("back color: " + ctx.attr.back[BuildSettingInfo].value)
     return []
 

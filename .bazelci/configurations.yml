@@ -39,6 +39,8 @@ configurations: &configurations
   - "-//cc_test/..."
   test_targets:
   - "..."
+  # TODO: why is this crashing bazel?
+  - "-//cc_test/..."
 
 #
 # Finally, the cross product of tests X platforms X bazel release

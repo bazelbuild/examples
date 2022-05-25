@@ -28,10 +28,10 @@ configurations: &configurations
   - "..."
   # These targets demonstrate failures: they're never meant to build.
   - "-//read_attr_in_transition:will-break"
-  -"-//cc_binary_selectable_copts:app_forgets_to_set_features"
+  - "-//cc_binary_selectable_copts:app_forgets_to_set_features"
    # These targest are not supposed to build at the top level: only as
   # dependencies of other targets.
-  -"-//cc_binary_selectable_copts:lib"
+  - "-//cc_binary_selectable_copts:lib"
   - "-//cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
   - "-//cc_binary_selectable_copts:app_with_feature1_native_binary"
   - "-//cc_binary_selectable_copts:app_with_feature2_native_binary"

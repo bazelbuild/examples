@@ -71,13 +71,10 @@ tasks:
     name: configs_windows_lts
     <<: *windows
     <<: *lts
-    working_directory: ../configurations
-    build_targets:
-    - "..."
+    <<: *configurations
   configs_windows_latest:
     name: configs_windows_latest
     <<: *windows
     <<: *rolling
-    working_directory: ../configurations
-    build_targets:
-    - "..."
+    <<: *configurations
+

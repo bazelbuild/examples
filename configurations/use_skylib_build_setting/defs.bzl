@@ -2,7 +2,7 @@
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 def _impl(ctx):
-    # Access the value of --//configurations/use_skylib_build_setting:flavor for the target.
+    # Access the value of --//use_skylib_build_setting:flavor for the target.
     print("flavor: " + ctx.attr._flavor[BuildSettingInfo].value)
     return []
 

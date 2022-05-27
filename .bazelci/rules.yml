@@ -29,23 +29,6 @@ basics: &basics
   test_targets:
   - "..."
 
-# TODO(bazel-configurability-team): Make these work again.
-configurations: &configurations
-  working_directory: ../configurations
-  build_targets:
-  - "..."
-  - "-//configurations/read_attr_in_transition:will-break"
-  # These targest are not supposed to build at the top level without flags being set
-  - "-//configurations/cc_binary_selectable_copts:app_forgets_to_set_features"
-  - "-//configurations/cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
-  - "-//configurations/cc_binary_selectable_copts:app_with_feature1_native_binary"
-  - "-//configurations/cc_binary_selectable_copts:app_with_feature2_native_binary"
-  - "-//configurations/cc_binary_selectable_copts:lib"
-  # TODO(#160) renable this target when split_attr logic is released
-  - "-//configurations/multi_arch_binary:foo"
-  test_targets:
-  - "..."
-
 #
 # Finally, the cross product of tests X platforms X bazel release
 #

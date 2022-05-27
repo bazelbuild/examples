@@ -1,0 +1,80 @@
+#
+# Bazel releases
+#
+lts: &lts
+  bazel: latest
+
+rolling: &rolling
+  bazel: rolling
+
+#
+# Commmon features by platform
+#
+linux: &linux
+  platform: ubuntu1804
+
+macos: &macos
+  platform: macos
+
+windows: &windows
+  platform: windows
+
+#
+# Test sets
+#
+configurations: &configurations
+  working_directory: ../configurations
+  build_targets:
+  - "..."
+  # These targets demonstrate failures: they're never meant to build.
+  - "-//read_attr_in_transition:will-break"
+  - "-//cc_binary_selectable_copts:app_forgets_to_set_features"
+   # These targest are not supposed to build at the top level: only as
+  # dependencies of other targets.
+  - "-//cc_binary_selectable_copts:lib"
+  - "-//cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
+  - "-//cc_binary_selectable_copts:app_with_feature1_native_binary"
+  - "-//cc_binary_selectable_copts:app_with_feature2_native_binary"
+  # TODO: why is this crashing bazel?
+  - "-//cc_test/..."
+  # test_targets:
+  # - "..."
+  # TODO: why is this crashing bazel?
+  - "-//cc_test/..."
+
+#
+# Finally, the cross product of tests X platforms X bazel release
+#
+tasks:
+  configs_linux_lts:
+    name: configs_linux_lts
+    <<: *linux
+    <<: *lts
+    <<: *configurations
+  configs_linux_latest:
+    name: configs_linux_latest
+    <<: *linux
+    <<: *rolling
+    <<: *configurations
+  configs_macos_lts:
+    name: configs_macos_lts
+    <<: *macos
+    <<: *lts
+    <<: *configurations
+  configs_macos_latest:
+    name: configs_macos_latest
+    <<: *macos
+    # It seems there is no rolling Bazel for macos.
+    bazel: last_green
+    <<: *configurations
+  configs_windows_lts:
+    name: configs_windows_lts
+    <<: *windows
+    <<: *lts
+    <<: *configurations
+  configs_windows_latest:
+    name: configs_windows_latest
+    <<: *windows
+    <<: *rolling
+    <<: *configurations
+

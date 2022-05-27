@@ -12,7 +12,7 @@ toolbox = rule(
         # Depend on the label flag.
         # Optionally use a private variable (one prefixed with "_" to prevent
         # target writers from changing what flag is read.
-        "_tool": attr.label(default = "//configurations/label_typed_build_setting:tool"),
+        "_tool": attr.label(default = ":tool"),
     },
 )
 

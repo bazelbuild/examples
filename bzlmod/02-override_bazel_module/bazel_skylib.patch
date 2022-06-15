@@ -1,0 +1,9 @@
+diff --git a/version.bzl b/version.bzl
+index dc7f0ef..47768d8 100644
+--- a/version.bzl
++++ b/version.bzl
+@@ -14,3 +14,4 @@
+ """The version of bazel-skylib."""
+ 
+ version = "1.2.0"
++hello_msg = "Hello skylib"

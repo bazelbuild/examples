@@ -4,3 +4,4 @@ imports:
 - misc.yml
 - rules.yml
 - tutorials.yml
+- bzlmod.yml

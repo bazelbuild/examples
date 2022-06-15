@@ -1,0 +1,4 @@
+load("//:deps.bzl", "deps", "A_dev_deps")
+
+deps()
+dev_deps()

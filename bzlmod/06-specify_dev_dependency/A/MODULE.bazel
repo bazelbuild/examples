@@ -16,7 +16,7 @@ librarian_extension = use_extension("@librarian//:librarian.bzl", "librarian_ext
 librarian_extension.book(name="the_great_gatsby", edition="2003.7")
 use_repo(librarian_extension, "the_great_gatsby")
 
-# All tags belonging to librarian_extension_dev won't propagate downstream.
+# All tags belonging to librarian_extension_dev won't take effect if this module is used as a dependency.
 librarian_extension_dev = use_extension("@librarian//:librarian.bzl", "librarian_extension", dev_dependency=True)
 librarian_extension_dev.book(name="hamlet", edition="2005.1")
 use_repo(librarian_extension_dev, "hamlet")

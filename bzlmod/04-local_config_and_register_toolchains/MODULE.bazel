@@ -1,5 +1,5 @@
 module(
-    name = "exmaple",
+    name = "example",
     version = "0.0.1",
     toolchains_to_register = ["@my_local_config_sh//:local_sh_toolchain"],
 )

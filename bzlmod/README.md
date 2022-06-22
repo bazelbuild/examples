@@ -1,4 +1,4 @@
-This folder contains examples usages of the new external dependency system for Bazel - Bzlmod. In generall, each example repository contains
+This folder contains example usages of the new external dependency system for Bazel - Bzlmod. In general, each example repository contains
 
 - The MODULE.bazel file for defining dependencies with Bzlmod.
 - The WORKSPACE file for defining equivalent dependencies with the old system.

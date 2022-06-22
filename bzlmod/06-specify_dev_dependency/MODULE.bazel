@@ -1,9 +1,12 @@
 module(
-    name = "exmaple",
+    name = "example",
     version = "0.0.1",
 )
 
-# Check A's MODULE.bazel to see how dev dependencies are defined.
+# A requires
+#   - bazel_skylib@1.2.0 as dev dependency.
+#   - the_great_gatsby@2003.7 as dependency.
+#   - hamlet@2005.1 as dev dependency.
 bazel_dep(name = "A", version = "")
 local_path_override(
     module_name = "A",

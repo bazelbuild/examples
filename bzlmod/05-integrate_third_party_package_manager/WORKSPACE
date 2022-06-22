@@ -1,7 +1,7 @@
 # A requires the_great_gatsby@2003.7, hamlet@1800.1
 # B requires the_great_gatsby@2020.5, hamlet@1603.1
 # The main repo requires the_great_gatsby@1995.12, hamlet@2005.1
-# Questsion: Guess which book edition you'll get with the following definitions? :)
+# Question: Guess which book edition you'll get with the following definitions? :)
 
 local_repository(
     name = "librarian",

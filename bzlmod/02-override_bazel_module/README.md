@@ -1,4 +1,4 @@
-This is an example on how to override Bazel module dependencies in the MODULE.bazel file. The WORKSPACE file contains the equivalent definitons in the old system. It covers the following topics:
+This is an example on how to override Bazel module dependencies in the MODULE.bazel file. The WORKSPACE file contains the equivalent definitions in the old system. It covers the following topics:
 
 - overriding a Bazel module with an archive URL.
 - overriding a Bazel module with a git repository.

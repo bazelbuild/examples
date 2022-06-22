@@ -1,4 +1,4 @@
-This is an example on how to introduce dependencies by invoking external repositories with module extensions. The WORKSPACE file contains the equivalent definitons in the old system. It covers the following topics:
+This is an example on how to introduce dependencies by invoking external repositories with module extensions. The WORKSPACE file contains the equivalent definitions in the old system. It covers the following topics:
 
 - defining simple module extensions to introduce external repositories.
 - using a module extension provided by the root module.

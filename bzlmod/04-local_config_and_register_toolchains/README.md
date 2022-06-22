@@ -1,4 +1,4 @@
-This is an example on how to generate local config repos and register toolchains with Bzlmod. The WORKSPACE file contains their equivalent definitons in the old system. It covers the following topics:
+This is an example on how to generate local config repos and register toolchains with Bzlmod. The WORKSPACE file contains their equivalent definitions in the old system. It covers the following topics:
 
 - using a module extension to generate a local config repository which contains a toolchain definition.
 - registering the generated toolchain in the MODULE.bazel file.

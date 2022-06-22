@@ -20,7 +20,6 @@ local_repository(
     path = "./A",
 )
 load("@A//:deps.bzl", "deps")
-# In WORKSPACE, the way to avoid introducing dev dependencies is to not loading the `dev_deps()` macro.
 deps()
 
 http_archive(

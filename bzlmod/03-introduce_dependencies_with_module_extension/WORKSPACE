@@ -1,0 +1,12 @@
+load("//:deps.bzl", "world_cities")
+world_cities()
+
+# Depend on A at a local path.
+local_repository(
+    name = "A",
+    path = "./A",
+)
+
+# This has to be defined after defining A.
+load("@A//:deps.bzl", "emojis")
+emojis()

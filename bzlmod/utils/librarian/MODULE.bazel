@@ -1,0 +1,4 @@
+module(
+    name = "librarian",
+    version = "0.0.1",
+)

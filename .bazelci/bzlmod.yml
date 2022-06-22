@@ -1,0 +1,89 @@
+---
+matrix:
+  all_platform: ["ubuntu1804", "macos", "windows"]
+  unix_platform: ["ubuntu1804", "macos"]
+
+tasks:
+  01-depend_on_bazel_module:
+    name: "Depend on Bazel module"
+    bazel: last_green
+    platform: ${{ all_platform }}
+    working_directory: ../bzlmod/01-depend_on_bazel_module
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:main"
+  02-override_bazel_module:
+    name: "Override Bazel module"
+    bazel: last_green
+    platform: ${{ all_platform }}
+    working_directory: ../bzlmod/02-override_bazel_module
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:main"
+  03-introduce_dependencies_with_module_extension:
+    name: "Introduce dependencies with module extension"
+    bazel: last_green
+    platform: ${{ all_platform }}
+    working_directory: ../bzlmod/03-introduce_dependencies_with_module_extension
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:city_count"
+    - "//:emoji_count"
+  04-local_config_and_register_toolchains:
+    name: "Local config and register toolchains"
+    bazel: last_green
+    platform: ${{ all_platform }}
+    environment:
+      MY_SHELL_BIN_PATH: /foo/bar/sh
+    working_directory: ../bzlmod/04-local_config_and_register_toolchains
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:get_sh_path"
+  05-integrate_third_party_package_manager:
+    name: "Integrate third party package manager"
+    bazel: last_green
+    platform: ${{ unix_platform }}
+    environment:
+      LIBRARIAN_BIN_PATH: $PWD/bzlmod/utils/librarian/librarian.py
+    working_directory: ../bzlmod/05-integrate_third_party_package_manager
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:check_books"
+  05-integrate_third_party_package_manager_windows:
+    name: "Integrate third party package manager"
+    bazel: last_green
+    platform: windows
+    environment:
+      LIBRARIAN_BIN_PATH: $PWD/bzlmod/utils/librarian/librarian.cmd
+    working_directory: ../bzlmod/05-integrate_third_party_package_manager
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:check_books"
+  06-specify_dev_dependency:
+    name: "Specify dev dependency"
+    bazel: last_green
+    platform: ${{ unix_platform }}
+    environment:
+      LIBRARIAN_BIN_PATH: $PWD/bzlmod/utils/librarian/librarian.py
+    working_directory: ../bzlmod/06-specify_dev_dependency
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:check_books"
+  06-specify_dev_dependency_windows:
+    name: "Specify dev dependency"
+    bazel: last_green
+    platform: windows
+    environment:
+      LIBRARIAN_BIN_PATH: $PWD/bzlmod/utils/librarian/librarian.cmd
+    working_directory: ../bzlmod/06-specify_dev_dependency
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    build_targets:
+    - "//:check_books"

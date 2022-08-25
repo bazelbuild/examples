@@ -7,13 +7,13 @@ data_deps_ext = use_extension("//:deps.bzl", "data_deps_ext")
 # The module extension can generate multiple repositories, due to strict deps, you need to declare which ones you need.
 use_repo(data_deps_ext, "world_cities")
 
-# It's fine to declare extension usages before defining module A.
-data_deps_ext_from_a = use_extension("@A//:deps.bzl", "data_deps_ext")
+# It's fine to declare extension usages before defining module lib_a.
+data_deps_ext_from_a = use_extension("@lib_a//:deps.bzl", "data_deps_ext")
 # The emojis repo will be accessible with the "com_foo_bar_emojis" repo name instead.
 use_repo(data_deps_ext_from_a, com_foo_bar_emojis="emojis")
 
-bazel_dep(name = "A", version = "")
+bazel_dep(name = "lib_a", version = "")
 local_path_override(
-    module_name = "A",
-    path = "./A",
+    module_name = "lib_a",
+    path = "./lib_a",
 )

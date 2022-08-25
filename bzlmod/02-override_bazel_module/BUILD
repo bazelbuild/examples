@@ -5,7 +5,7 @@ cc_binary(
   name = "main",
   srcs = ["main.cc"],
   deps = [
-    "@A//:lib_a",
+    "@lib_a//:lib_a",
     "@com_github_google_glog//:glog",
   ],
 )

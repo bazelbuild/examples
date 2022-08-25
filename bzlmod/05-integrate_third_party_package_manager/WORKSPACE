@@ -1,5 +1,5 @@
-# A requires the_great_gatsby@2003.7, hamlet@1800.1
-# B requires the_great_gatsby@2020.5, hamlet@1603.1
+# lib_a requires the_great_gatsby@2003.7, hamlet@1800.1
+# lib_b requires the_great_gatsby@2020.5, hamlet@1603.1
 # The main repo requires the_great_gatsby@1995.12, hamlet@2005.1
 # Question: Guess which book edition you'll get with the following definitions? :)
 
@@ -8,11 +8,11 @@ local_repository(
     path = "../utils/librarian",
 )
 local_repository(
-    name = "A",
-    path = "./A",
+    name = "lib_a",
+    path = "./lib_a",
 )
 
-load("@A//:deps.bzl","fetch_book_for_A")
+load("@lib_a//:deps.bzl","fetch_book_for_lib_a")
 
 load("@librarian//:librarian.bzl", "fetch_book")
 fetch_book(
@@ -20,7 +20,7 @@ fetch_book(
     edition = "1995.12",
 )
 
-fetch_book_for_A()
+fetch_book_for_lib_a()
 
 fetch_book(
     name = "hamlet",
@@ -28,11 +28,11 @@ fetch_book(
 )
 
 local_repository(
-    name = "B",
-    path = "./B",
+    name = "lib_b",
+    path = "./lib_b",
 )
-load("@B//:deps.bzl","fetch_book_for_B")
-fetch_book_for_B()
+load("@lib_b//:deps.bzl","fetch_book_for_lib_b")
+fetch_book_for_lib_b()
 
 # Answer: You'll get the_great_gatsby@2003.7 and hamlet@2005.1.
 # To verify run: bazel build //:check_books && cat bazel-bin/books

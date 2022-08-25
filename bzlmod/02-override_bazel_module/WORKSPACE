@@ -25,8 +25,8 @@ http_archive(
     patch_args = ["-p1"],
 )
 
-# Depend on A at a local path.
+# Depend on lib_a at a local path.
 local_repository(
-    name = "A",
-    path = "./A",
+    name = "lib_a",
+    path = "./lib_a",
 )

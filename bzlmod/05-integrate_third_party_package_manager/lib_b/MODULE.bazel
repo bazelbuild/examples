@@ -1,5 +1,5 @@
 module(
-    name = "B",
+    name = "lib_b",
     version = "0.0.1",
 )
 

@@ -3,21 +3,21 @@ module(
     version = "0.0.1",
 )
 
-# A requires the_great_gatsby@2003.7, hamlet@1800.1
-# B requires the_great_gatsby@2020.5, hamlet@1603.1
+# lib_a requires the_great_gatsby@2003.7, hamlet@1800.1
+# lib_b requires the_great_gatsby@2020.5, hamlet@1603.1
 # The main repo requires the_great_gatsby@1995.12, hamlet@2005.1
 # With the librarian module extension, you'll get the latest editions of them: the_great_gatsby@2020.1, hamlet@2005.1
 
-bazel_dep(name = "A", version = "")
+bazel_dep(name = "lib_a", version = "")
 local_path_override(
-    module_name = "A",
-    path = "./A",
+    module_name = "lib_a",
+    path = "./lib_a",
 )
 
-bazel_dep(name = "B", version = "")
+bazel_dep(name = "lib_b", version = "")
 local_path_override(
-    module_name = "B",
-    path = "./B",
+    module_name = "lib_b",
+    path = "./lib_b",
 )
 
 bazel_dep(name = "librarian", version = "")

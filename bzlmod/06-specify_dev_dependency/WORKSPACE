@@ -16,10 +16,10 @@ fetch_book(
 )
 
 local_repository(
-    name = "A",
-    path = "./A",
+    name = "lib_a",
+    path = "./lib_a",
 )
-load("@A//:deps.bzl", "deps")
+load("@lib_a//:deps.bzl", "deps")
 deps()
 
 http_archive(

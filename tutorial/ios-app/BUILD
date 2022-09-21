@@ -26,7 +26,7 @@ ios_application(
     infoplists = [":UrlGet/UrlGet-Info.plist"],
     launch_storyboard = "UrlGet/UrlGetViewController.xib",
     minimum_os_version = "15.0",
-    provisioning_profile = "<your_profile_name>.mobileprovision",
+    # provisioning_profile = "<your_profile_name>.mobileprovision", # Uncomment and set your own profile.
     visibility = ["//visibility:public"],
     deps = [":UrlGetClasses"],
 )

@@ -1,9 +1,11 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# rules required for ios-app
+
 http_archive(
     name = "build_bazel_rules_apple",
-    sha256 = "0052d452af7742c8f3a4e0929763388a66403de363775db7e90adecb2ba4944b",
-    url = "https://github.com/bazelbuild/rules_apple/releases/download/0.31.3/rules_apple.0.31.3.tar.gz",
+    sha256 = "90e3b5e8ff942be134e64a83499974203ea64797fd620eddeb71b3a8e1bff681",
+    url = "https://github.com/bazelbuild/rules_apple/releases/download/1.1.2/rules_apple.1.1.2.tar.gz",
 )
 
 load(
@@ -21,11 +23,36 @@ load(
 swift_rules_dependencies()
 
 load(
+    "@build_bazel_rules_swift//swift:extras.bzl",
+    "swift_rules_extra_dependencies",
+)
+
+swift_rules_extra_dependencies()
+
+load(
     "@build_bazel_apple_support//lib:repositories.bzl",
     "apple_support_dependencies",
 )
 
 apple_support_dependencies()
+
+# rules required by ios-app Xcode integration
+
+http_archive(
+    name = "com_github_buildbuddy_io_rules_xcodeproj",
+    sha256 = "cb4ae95d86a1961734f17a1d4743010480a576214519ceb2ce9cec34b88da7b2",
+    strip_prefix = "rules_xcodeproj-0bad4f33c462f5a26e4c13861afd181e56729938",
+    url = "https://github.com/buildbuddy-io/rules_xcodeproj/archive/0bad4f33c462f5a26e4c13861afd181e56729938.tar.gz",
+)
+
+load(
+    "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:repositories.bzl",
+    "xcodeproj_rules_dependencies",
+)
+
+xcodeproj_rules_dependencies()
+
+# rules required by backend
 
 http_archive(
     name = "io_bazel_rules_appengine",
@@ -43,6 +70,8 @@ load(
 )
 
 java_appengine_repositories()
+
+# rules required by android
 
 android_sdk_repository(name = "androidsdk")
 

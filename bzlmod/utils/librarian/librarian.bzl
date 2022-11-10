@@ -6,7 +6,7 @@ def _get_librarian_path(ctx):
 
 def _fetch_book_impl(repository_ctx):
     librarian = _get_librarian_path(repository_ctx)
-    book_name = repository_ctx.attr.name.split(".")[-1]
+    book_name = repository_ctx.attr.name.split("~")[-1]
     edition = repository_ctx.attr.edition
     result = repository_ctx.execute([librarian, "fetch", "%s@%s" % (book_name, edition)])
     if result.return_code != 0:

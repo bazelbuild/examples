@@ -8,8 +8,9 @@ This is an example on how to override Bazel module dependencies in the MODULE.ba
 Note that the final source tree after overriding must contain a MODULE.bazel file at the root.
 
 To test it out, `cd` into this directory and run the following:
-```
-$ export USE_BAZEL_VERSION=last_green
-$ bazelisk build --experimental_enable_bzlmod //:main
-$ GLOG_logtostderr=1 ./bazel-bin/main
+
+```bash
+export USE_BAZEL_VERSION=last_green
+bazelisk build --enable_bzlmod //:main
+GLOG_logtostderr=1 ./bazel-bin/main
 ```

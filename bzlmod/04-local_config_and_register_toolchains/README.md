@@ -4,9 +4,10 @@ This is an example on how to generate local config repos and register toolchains
 - registering the generated toolchain in the MODULE.bazel file.
 
 To test it out, `cd` into this directory and run the following:
-```
-$ export USE_BAZEL_VERSION=last_green
-$ export MY_SHELL_BIN_PATH=/foo/bar/sh
-$ bazelisk build --experimental_enable_bzlmod //:get_sh_path
-$ cat ./bazel-bin/result
+
+```bash
+export USE_BAZEL_VERSION=last_green
+export MY_SHELL_BIN_PATH=/foo/bar/sh
+bazelisk build --enable_bzlmod //:get_sh_path
+cat ./bazel-bin/result
 ```

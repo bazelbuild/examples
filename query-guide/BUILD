@@ -5,6 +5,6 @@ java_binary(
     srcs = glob(["src/main/java/com/example/*.java"]),
     main_class = "com.example.Runner",
     deps = [
-        "//src/main/java/com/example/restaurant:cafe"
+        "//src/main/java/com/example/restaurant:cafe",
     ],
 )

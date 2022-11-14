@@ -63,6 +63,7 @@ load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
 
 android_sdk_repository(
     name = "androidsdk",
+    api_level = 31,
 )
 
 ## Kotlin

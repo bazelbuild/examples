@@ -67,8 +67,6 @@ android_sdk_repository(
 )
 
 ## Kotlin
-## Note: For Hilt to work correctly, we are using a pre-release branch being worked on by mauriciogg
-## that brings in native support for Android compilation
 
 http_archive(
     name = "io_bazel_rules_kotlin",

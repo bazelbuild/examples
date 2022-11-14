@@ -1,25 +1,63 @@
-android_sdk_repository(name = "androidsdk")
-
-android_ndk_repository(name = "androidndk")
-
-# Google Maven Repository
-GMAVEN_TAG = "20180625-1"
+workspace(name = "bazel_android_sample_project")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+## rules_jvm_external
+
 http_archive(
-    name = "gmaven_rules",
-    strip_prefix = "gmaven_rules-%s" % GMAVEN_TAG,
-    url = "https://github.com/bazelbuild/gmaven_rules/archive/%s.tar.gz" % GMAVEN_TAG,
+    name = "rules_jvm_external",
+    sha256 = "cd1a77b7b02e8e008439ca76fd34f5b07aecb8c752961f9640dea15e9e5ba1ca",
+    strip_prefix = "rules_jvm_external-4.2",
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/4.2.zip",
 )
 
-load("@gmaven_rules//:gmaven.bzl", "gmaven_rules")
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-gmaven_rules()
+maven_install(
+    name = "maven",
+    artifacts = [
+        "androidx.appcompat:appcompat:1.5.1",
+        "androidx.constraintlayout:constraintlayout:2.1.4",
+        # Needed to enforce version conflict resolution
+        "androidx.savedstate:savedstate:1.2.0",
+        "androidx.lifecycle:lifecycle-livedata-core:2.5.1",
+        "androidx.lifecycle:lifecycle-livedata:2.5.1",
+        "androidx.lifecycle:lifecycle-process:2.5.1",
+        "androidx.lifecycle:lifecycle-runtime:2.5.1",
+        "androidx.lifecycle:lifecycle-service:2.5.1",
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1",
+        "androidx.lifecycle:lifecycle-viewmodel:2.5.1",
+    ],
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+
+## Android
 
 http_archive(
-    name = "rules_android",
+    name = "build_bazel_rules_android",
     sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
     strip_prefix = "rules_android-0.1.1",
     urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
+)
+
+load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
+
+android_sdk_repository(
+    name = "androidsdk",
+)
+
+http_archive(
+    name = "rules_android_ndk",
+    sha256 = "3fa4a58f4df356bca277219763f91c64f33dcc59e10843e9762fc5e7947644f9",
+    strip_prefix = "rules_android_ndk-63fa7637902fb1d7db1bf86182e939ed3fe98477",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/63fa7637902fb1d7db1bf86182e939ed3fe98477.zip",
+)
+
+load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
+
+android_ndk_repository(
+    name = "androidndk",
 )

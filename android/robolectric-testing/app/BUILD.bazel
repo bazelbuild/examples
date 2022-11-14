@@ -9,6 +9,7 @@ kt_android_library(
 kt_android_local_test(
     name = "test",
     srcs = ["src/test/java/com/example/android/bazel/AndroidHelperTest.kt"],
+    test_class = "com.example.android.bazel.AndroidHelperTest",
     custom_package = "com.example.android.bazel.test",
     deps = [
         ":lib",

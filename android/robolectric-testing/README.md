@@ -3,9 +3,9 @@
 ## Documentation
 
 For the full documentation, please visit
-the [rules_kotlin documentation page](https://github.com/bazelbuild/rules_kotlin/blob/master/docs/kotlin.md).
+the [robolectric-bazel documentation page](https://github.com/robolectric/robolectric-bazel#usage).
 
 ## Instructions
 
 1) Launch emulator
-2) Run `bazel mobile-install //app/src/main:app --start_app`
+2) Run `bazel test //app:test`

@@ -1,0 +1,20 @@
+load("@io_bazel_rules_kotlin//kotlin:android.bzl", "kt_android_library", "kt_android_local_test")
+
+kt_android_library(
+    name = "lib",
+    srcs = ["src/main/java/com/example/android/bazel/AndroidHelper.kt"],
+    custom_package = "com.example.android.bazel",
+)
+
+kt_android_local_test(
+    name = "test",
+    srcs = ["src/test/java/com/example/android/bazel/AndroidHelperTest.kt"],
+    custom_package = "com.example.android.bazel.test",
+    deps = [
+        ":lib",
+        "@maven//:com_google_truth_truth",
+        "@maven//:junit_junit",
+        "@maven//:org_robolectric_robolectric",
+        "@robolectric//bazel:android-all",
+    ],
+)

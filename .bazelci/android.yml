@@ -50,3 +50,21 @@ tasks:
   #   working_directory: ../android/ndk
   #   build_targets:
   #   - "//app/src/main:app"
+  android-jetpack-compose-linux:
+    name: "Android Jetpack Compose"
+    platform: ubuntu1804
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"
+  android-jetpack-compose-macos:
+    name: "Android Jetpack Compose"
+    platform: macos
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"
+  android-jetpack-compose-windows:
+    name: "Android Jetpack Compose"
+    platform: windows
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"

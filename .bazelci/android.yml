@@ -22,7 +22,6 @@ tasks:
     name: "Android NDK"
     platform: ubuntu1804
     working_directory: ../android/ndk
-    bazel: 6.0.0-pre.20221020.1
     environment:
       ANDROID_NDK_HOME: /opt/android-ndk-r25b
     build_flags:
@@ -35,7 +34,6 @@ tasks:
     name: "Android NDK"
     platform: macos
     working_directory: ../android/ndk
-    bazel: 6.0.0-pre.20221020.1
     environment:
       ANDROID_NDK_HOME: /Users/buildkite/android-ndk-r25b
     build_flags:

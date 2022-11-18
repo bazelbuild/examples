@@ -1,6 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@rules_android//android:rules.bzl", "android_binary", "android_library")
-load("@gmaven_rules//:defs.bzl", "gmaven_artifact")
+load("@build_bazel_rules_android//android:rules.bzl", "android_binary", "android_library")
 
 android_library(
     name = "lib",
@@ -10,8 +9,8 @@ android_library(
     resource_files = glob(["res/**/*"]),
     deps = [
         ":jni_lib",
-        gmaven_artifact("com.android.support:appcompat-v7:aar:26.1.0"),
-        gmaven_artifact("com.android.support.constraint:constraint-layout:aar:1.1.2"),
+        "@maven//:androidx_appcompat_appcompat",
+        "@maven//:androidx_constraintlayout_constraintlayout",
     ],
 )
 
@@ -23,5 +22,6 @@ cc_library(
 android_binary(
     name = "app",
     manifest = "AndroidManifest.xml",
+    manifest_values = {"applicationId": "com.example.android.bazel"},
     deps = [":lib"],
 )

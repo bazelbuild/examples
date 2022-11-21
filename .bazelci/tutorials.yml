@@ -94,3 +94,9 @@ tasks:
     working_directory: ../java-tutorial
     build_targets:
     - "//:ProjectRunner"
+  query-quickstart-tutorial:
+    name: "Query Quickstart"
+    platform: macos
+    working_directory: ../query-quickstart
+    build_targets:
+    - "//:runner"

@@ -84,11 +84,11 @@ tasks:
       - "..."
     test_targets:
       - "..."
-  android-robolectric-testing-windows:
-    name: "Android Robolectric Testing"
-    platform: windows
-    working_directory: ../android/robolectric-testing
-    build_targets:
-      - "..."
-    test_targets:
-      - "..."
+  #  android-robolectric-testing-windows:
+  #    name: "Android Robolectric Testing"
+  #    platform: windows
+  #    working_directory: ../android/robolectric-testing
+  #    build_targets:
+  #      - "..."
+  #    test_targets:
+  #      - "..."

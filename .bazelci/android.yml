@@ -68,3 +68,27 @@ tasks:
     working_directory: ../android/jetpack-compose
     build_targets:
       - "//app/src/main:app"
+  android-robolectric-testing-linux:
+    name: "Android Robolectric Testing"
+    platform: ubuntu1804
+    working_directory: ../android/robolectric-testing
+    build_targets:
+      - "..."
+    test_targets:
+      - "..."
+  android-robolectric-testing-macos:
+    name: "Android Robolectric Testing"
+    platform: macos
+    working_directory: ../android/robolectric-testing
+    build_targets:
+      - "..."
+    test_targets:
+      - "..."
+  #  android-robolectric-testing-windows:
+  #    name: "Android Robolectric Testing"
+  #    platform: windows
+  #    working_directory: ../android/robolectric-testing
+  #    build_targets:
+  #      - "..."
+  #    test_targets:
+  #      - "..."

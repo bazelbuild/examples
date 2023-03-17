@@ -1,7 +1,7 @@
 load("@rules_cc//cc:defs.bzl", "objc_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 load(
-    "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:defs.bzl",
+    "@rules_xcodeproj//xcodeproj:defs.bzl",
     "top_level_target",
     "xcodeproj",
 )
@@ -37,6 +37,9 @@ xcodeproj(
     project_name = "ios-app",
     tags = ["manual"],
     top_level_targets = [
-        top_level_target(":ios-app", target_environments = ["device", "simulator"]),
+        top_level_target(
+            ":ios-app",
+            target_environments = ["device", "simulator"],
+        ),
     ],
 )

@@ -39,14 +39,13 @@ apple_support_dependencies()
 # rules required by ios-app Xcode integration
 
 http_archive(
-    name = "com_github_buildbuddy_io_rules_xcodeproj",
-    sha256 = "cb4ae95d86a1961734f17a1d4743010480a576214519ceb2ce9cec34b88da7b2",
-    strip_prefix = "rules_xcodeproj-0bad4f33c462f5a26e4c13861afd181e56729938",
-    url = "https://github.com/buildbuddy-io/rules_xcodeproj/archive/0bad4f33c462f5a26e4c13861afd181e56729938.tar.gz",
+    name = "rules_xcodeproj",
+    sha256 = "3ec2a81def51aac59de49273cf6f8e3f151a95bc4f4b4891750afa750a55973b",
+    url = "https://github.com/buildbuddy-io/rules_xcodeproj/releases/download/1.3.2/release.tar.gz",
 )
 
 load(
-    "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:repositories.bzl",
+    "@rules_xcodeproj//xcodeproj:repositories.bzl",
     "xcodeproj_rules_dependencies",
 )
 

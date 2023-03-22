@@ -1,0 +1,14 @@
+module(
+    name = "lib_b",
+    version = "0.0.1",
+)
+
+bazel_dep(name = "librarian", version = "")
+
+librarian_extension = use_extension("@librarian//:librarian.bzl", "librarian_extension")
+
+librarian_extension.book(name="the_great_gatsby", edition="2020.5")
+use_repo(librarian_extension, "the_great_gatsby")
+
+librarian_extension.book(name="hamlet", edition="1603.1")
+use_repo(librarian_extension, "hamlet")

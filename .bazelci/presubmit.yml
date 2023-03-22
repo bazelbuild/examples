@@ -1,5 +1,7 @@
 imports:
 - android.yml
+- configurations.yml
 - misc.yml
 - rules.yml
 - tutorials.yml
+- bzlmod.yml

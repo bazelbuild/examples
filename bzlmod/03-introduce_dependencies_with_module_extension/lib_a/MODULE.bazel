@@ -1,0 +1,7 @@
+module(
+    name = "lib_a",
+    version = "0.0.1",
+)
+
+data_deps_ext = use_extension("//:deps.bzl", "data_deps_ext")
+use_repo(data_deps_ext, "emojis")

@@ -1,0 +1,8 @@
+module(
+    name = "example",
+    version = "0.0.1",
+)
+
+sh_config_ext = use_extension("//:local_config_sh.bzl", "my_sh_config_extension")
+use_repo(sh_config_ext, "my_local_config_sh")
+register_toolchains("@my_local_config_sh//:local_sh_toolchain")

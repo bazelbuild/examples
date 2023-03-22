@@ -75,7 +75,7 @@ EOF""",
     tools = [":app"],
 )
 
-# Targets demonstrating Starlrk-defined custom variables:
+# Targets demonstrating Starlark-defined custom variables:
 var_providing_rule(
     name = "set_foo_to_bar",
     var_value = "bar",

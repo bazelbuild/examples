@@ -2,17 +2,17 @@
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 def _transition_impl(settings, attr):
-    new_val = settings["//configurations/read_attr_in_transition:some-string"]
+    new_val = settings["//read_attr_in_transition:some-string"]
 
     if attr.do_transition:
         new_val = new_val + "-transitioned"
 
-    return {"//configurations/read_attr_in_transition:some-string": new_val}
+    return {"//read_attr_in_transition:some-string": new_val}
 
 my_transition = transition(
     implementation = _transition_impl,
-    inputs = ["//configurations/read_attr_in_transition:some-string"],
-    outputs = ["//configurations/read_attr_in_transition:some-string"],
+    inputs = ["//read_attr_in_transition:some-string"],
+    outputs = ["//read_attr_in_transition:some-string"],
 )
 
 def _impl(ctx):
@@ -25,7 +25,7 @@ my_rule = rule(
     cfg = my_transition,
     attrs = {
         "do_transition": attr.bool(),
-        "_some_string": attr.label(default = Label("//configurations/read_attr_in_transition:some-string")),
+        "_some_string": attr.label(default = Label("//read_attr_in_transition:some-string")),
         "_allowlist_function_transition": attr.label(
             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),

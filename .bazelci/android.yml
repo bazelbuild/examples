@@ -5,31 +5,43 @@ tasks:
     platform: ubuntu1804
     working_directory: ../android/firebase-cloud-messaging
     build_targets:
-    - "..."
+      - "..."
   android-firebase-macos:
     name: "Android Firebase Cloud Messaging"
     platform: macos
     working_directory: ../android/firebase-cloud-messaging
     build_targets:
-    - "..."
+      - "..."
   android-firebase-windows:
     name: "Android Firebase Cloud Messaging"
     platform: windows
     working_directory: ../android/firebase-cloud-messaging
     build_targets:
-    - "..."
+      - "..."
   android-ndk-linux:
     name: "Android NDK"
     platform: ubuntu1804
     working_directory: ../android/ndk
+    environment:
+      ANDROID_NDK_HOME: /opt/android-ndk-r25b
+    build_flags:
+      - "--noincompatible_enable_cc_toolchain_resolution"
+      - "--fat_apk_cpu=arm64-v8a,x86"
+      - "--android_crosstool_top=@androidndk//:toolchain"
     build_targets:
-    - "//app/src/main:app"
+      - "//app/src/main:app"
   android-ndk-macos:
     name: "Android NDK"
     platform: macos
     working_directory: ../android/ndk
+    environment:
+      ANDROID_NDK_HOME: /Users/buildkite/android-ndk-r25b
+    build_flags:
+      - "--noincompatible_enable_cc_toolchain_resolution"
+      - "--fat_apk_cpu=arm64-v8a,x86"
+      - "--android_crosstool_top=@androidndk//:toolchain"
     build_targets:
-    - "//app/src/main:app"
+      - "//app/src/main:app"
   # NDK project is not building on Windows yet.
   # https://github.com/bazelbuild/examples/issues/94
   # android-ndk-windows:
@@ -38,3 +50,45 @@ tasks:
   #   working_directory: ../android/ndk
   #   build_targets:
   #   - "//app/src/main:app"
+  android-jetpack-compose-linux:
+    name: "Android Jetpack Compose"
+    platform: ubuntu1804
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"
+  android-jetpack-compose-macos:
+    name: "Android Jetpack Compose"
+    platform: macos
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"
+  android-jetpack-compose-windows:
+    name: "Android Jetpack Compose"
+    platform: windows
+    working_directory: ../android/jetpack-compose
+    build_targets:
+      - "//app/src/main:app"
+  android-robolectric-testing-linux:
+    name: "Android Robolectric Testing"
+    platform: ubuntu1804
+    working_directory: ../android/robolectric-testing
+    build_targets:
+      - "..."
+    test_targets:
+      - "..."
+  android-robolectric-testing-macos:
+    name: "Android Robolectric Testing"
+    platform: macos
+    working_directory: ../android/robolectric-testing
+    build_targets:
+      - "..."
+    test_targets:
+      - "..."
+  #  android-robolectric-testing-windows:
+  #    name: "Android Robolectric Testing"
+  #    platform: windows
+  #    working_directory: ../android/robolectric-testing
+  #    build_targets:
+  #      - "..."
+  #    test_targets:
+  #      - "..."

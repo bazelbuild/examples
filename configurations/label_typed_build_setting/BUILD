@@ -1,7 +1,7 @@
 load(":defs.bzl", "tool", "toolbox")
 
-# Define a label_flag (or setting) using the built in bazel rules.
-# It's default value it the default target this flag should point to. 
+# Define a label_flag (or setting) using the built-in bazel rules.
+# Its default value is the default target this flag should point to. 
 label_flag(name = 'tool', build_setting_default = ":hammer")
 
 # A target that depends on the label flag.

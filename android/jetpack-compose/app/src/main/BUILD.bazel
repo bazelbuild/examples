@@ -1,0 +1,27 @@
+load("@build_bazel_rules_android//android:rules.bzl", "android_binary", "android_library")
+load("@io_bazel_rules_kotlin//kotlin:android.bzl", "kt_android_library")
+
+kt_android_library(
+    name = "lib",
+    srcs = ["java/com/example/android/bazel/MainActivity.kt"],
+    custom_package = "com.example.android.bazel",
+    manifest = "LibraryManifest.xml",
+    plugins = ["//:jetpack_compose_compiler_plugin"],
+    resource_files = glob(["res/**/*"]),
+    deps = [
+        "@maven//:androidx_activity_activity_compose",
+        "@maven//:androidx_appcompat_appcompat",
+        "@maven//:androidx_compose_foundation_foundation",
+        "@maven//:androidx_compose_foundation_foundation_layout",
+        "@maven//:androidx_compose_runtime_runtime",
+        "@maven//:androidx_compose_ui_ui",
+        "@maven//:androidx_compose_ui_ui_tooling",
+    ],
+)
+
+android_binary(
+    name = "app",
+    manifest = "AndroidManifest.xml",
+    manifest_values = {"applicationId": "com.example.android.bazel"},
+    deps = [":lib"],
+)

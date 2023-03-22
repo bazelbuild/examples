@@ -1,0 +1,29 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+local_repository(
+    name = "librarian",
+    path = "../utils/librarian",
+)
+
+load("@librarian//:librarian.bzl", "fetch_book")
+fetch_book(
+    name = "the_great_gatsby",
+    edition = "1995.12",
+)
+fetch_book(
+    name = "hamlet",
+    edition = "1800.1",
+)
+
+local_repository(
+    name = "lib_a",
+    path = "./lib_a",
+)
+load("@lib_a//:deps.bzl", "deps")
+deps()
+
+http_archive(
+    name = "bazel_skylib",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/1.1.1/bazel-skylib-1.1.1.tar.gz"],
+    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
+)

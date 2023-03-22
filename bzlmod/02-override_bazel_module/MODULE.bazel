@@ -1,0 +1,37 @@
+module(
+    name = "example",
+    version = "0.0.1",
+)
+
+bazel_dep(name = "glog", version = "0.5.0", repo_name = "com_github_google_glog")
+# Override glog to a fork version with archive_override.
+archive_override(
+    module_name = "glog",
+    urls = ["https://github.com/meteorcloudy/glog/archive/9401faa19e0424791243827b8e95efd3d0d8db23.tar.gz"],
+    integrity = "sha256-EH4o3n+qkfcsEFODkkRzs1/XAH9ej2V77gv05eplB5k=",
+    strip_prefix = "glog-9401faa19e0424791243827b8e95efd3d0d8db23",
+)
+
+# Override gflag to a fork version with git_override.
+# gflag is still an indirect dependency, the override itself doesn't give the root module visibility on gflags.
+git_override(
+    module_name = "gflags",
+    remote = "https://github.com/meteorcloudy/gflags.git",
+    commit = "95995169e86f3fedd19696df5b1811d441c462a2",
+)
+
+# Patch bazel skylib 1.2.0 with a local patch file.
+bazel_dep(name = "bazel_skylib", version = "1.2.0")
+single_version_override(
+    module_name = "bazel_skylib",
+    patches = ["//:bazel_skylib.patch"],
+    patch_strip = 1,
+)
+
+# Depend on module lib_a at a local path.
+# The bazel_dep statement is necessary because the root module must have visibility on lib_a.
+bazel_dep(name = "lib_a", version="")
+local_path_override(
+    module_name = "lib_a",
+    path = "./lib_a",
+)

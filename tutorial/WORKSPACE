@@ -55,12 +55,12 @@ xcodeproj_rules_dependencies()
 
 http_archive(
     name = "io_bazel_rules_appengine",
-    strip_prefix = "rules_appengine-8099725bab2fa01ccd385fac2f78278ea8145a7a",
+    strip_prefix = "rules_appengine-03121ae8efa634f7219f53970650a4445a72b759",
     # TODO: update to a release version that contains 339f6aba67fcedb7268cf54d1163cf7704a277ca.
     # This commit fixes the Maven artifact URLs to use "https" instead of "http".
     # We don't specify sha256, because the sha256 of GitHub-served non-release archives isn't
     # stable.
-    urls = ["https://github.com/bazelbuild/rules_appengine/archive/8099725bab2fa01ccd385fac2f78278ea8145a7a.tar.gz"],
+    urls = ["https://github.com/bazelbuild/rules_appengine/archive/03121ae8efa634f7219f53970650a4445a72b759.tar.gz"],
 )
 
 load(

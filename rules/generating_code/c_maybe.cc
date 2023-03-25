@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include "generating_code/values.h"

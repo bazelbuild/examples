@@ -1,4 +1,4 @@
-"""Print the value of MAYBE?"""
+"""Print the value of MAYBE"""
 
 from collections.abc import Sequence
 import sys

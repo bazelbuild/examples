@@ -1,6 +1,4 @@
-
 load("//generating_code/gen:enum_maker.bzl", "enum_maker")
-
 
 enum_maker(
     name = "gen_enums",

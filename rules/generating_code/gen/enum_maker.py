@@ -5,12 +5,11 @@ some C++ and Python code based on them.
 """
 
 import argparse
-from collections.abc import Sequence
 import os
 import sys
 
 
-def main(argv: Sequence[str]) -> None:
+def main(argv):
   parser = argparse.ArgumentParser(
       description='Tiny code generator',
       # It is good practice to allow you command line args to come from a file.
@@ -30,12 +29,12 @@ def main(argv: Sequence[str]) -> None:
   return 0
 
 
-def load_values(path: str) -> Sequence[str]:
+def load_values(path):
   with open(path, 'r') as inp:
     return inp.read().split('\n')
 
 
-def gen_python(values: Sequence[str], output_path: str, source: str = None):
+def gen_python(values, output_path, source = None):
   with open(output_path, 'w') as out:
     out.write('# THIS IS GENERATED CODE. Do not edit\n')
     if source:
@@ -48,7 +47,7 @@ def gen_python(values: Sequence[str], output_path: str, source: str = None):
       out.write('%s = %d\n' % (v, at))
 
 
-def gen_h(values: Sequence[str], output_path: str, source: str = None):
+def gen_h(values, output_path, source = None):
   fname = os.path.basename(output_path)
   namespace = fname.split('.')[0]
   with open(output_path, 'w') as out:

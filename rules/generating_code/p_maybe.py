@@ -1,6 +1,6 @@
 """Print the value of MAYBE"""
 
-from collections.abc import Sequence
+from typing import Sequence
 import sys
 
 from generating_code import values

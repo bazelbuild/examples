@@ -1,6 +1,6 @@
 """A toy code generator.
 
-This takes as input a file of name/value pairs, and will generate
+This takes as input a file with a list of values, and will generate
 some C++ and Python code based on them.
 """
 
@@ -12,7 +12,7 @@ import sys
 def main(argv):
   parser = argparse.ArgumentParser(
       description='Tiny code generator',
-      # It is good practice to allow you command line args to come from a file.
+      # It is good practice to allow your command line args to come from a file.
       fromfile_prefix_chars='@')
 
   parser.add_argument('--values', required=True, help='The input file')

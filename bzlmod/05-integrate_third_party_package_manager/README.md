@@ -6,21 +6,23 @@ Our goal is to integrate it with module extension to select and fetch books, the
 
 It covers the following topics:
 
- - Defining module extension tags.
- - Using module extension tags in MODULE.bazel files.
- - Collecting transitive dependency info from module extension tags.
- - Invoking the package manager to resolve dependencies.
- - Generating repositories for resolved dependencies.
+- Defining module extension tags.
+- Using module extension tags in MODULE.bazel files.
+- Collecting transitive dependency info from module extension tags.
+- Invoking the package manager to resolve dependencies.
+- Generating repositories for resolved dependencies.
 
 To test it out, `cd` into this directory and run the following:
+
+```bash
+export USE_BAZEL_VERSION=last_green
+bazelisk build --enable_bzlmod //:check_books
+cat ./bazel-bin/books
 ```
-$ export USE_BAZEL_VERSION=last_green
-$ export LIBRARIAN_BIN_PATH=$PWD/../utils/librarian/librarian.py
-$ bazelisk build --experimental_enable_bzlmod //:check_books
-$ cat ./bazel-bin/books
-```
+
 The newest editions of all required books should be fetched, expected output:
-```
+
+```bash
 $ cat bazel-bin/books
 Book Name: hamlet
 Edition: 2005.1

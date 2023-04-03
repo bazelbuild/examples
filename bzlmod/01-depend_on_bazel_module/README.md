@@ -4,8 +4,9 @@ This is an example on how to introduce dependencies on Bazel modules in the MODU
 - referencing the dependency with a given repository name instead of the module name
 
 To test it out, `cd` into this directory and run the following:
-```
-$ export USE_BAZEL_VERSION=last_green
-$ bazelisk build --experimental_enable_bzlmod //:main
-$ GLOG_logtostderr=1 ./bazel-bin/main
+
+```bash
+export USE_BAZEL_VERSION=last_green
+bazelisk build --enable_bzlmod //:main
+GLOG_logtostderr=1 ./bazel-bin/main
 ```

@@ -6,8 +6,9 @@ This is an example on how to introduce dependencies by invoking external reposit
 - allowing accessing a repository from the root module under a different name.
 
 To test it out, `cd` into this directory and run the following:
-```
-$ export USE_BAZEL_VERSION=last_green
-$ bazelisk build --experimental_enable_bzlmod //:city_count //:emoji_count
-$ cat bazel-bin/city_number bazel-bin/emoji_number
+
+```bash
+export USE_BAZEL_VERSION=last_green
+bazelisk build --enable_bzlmod //:city_count //:emoji_count
+cat bazel-bin/city_number bazel-bin/emoji_number
 ```

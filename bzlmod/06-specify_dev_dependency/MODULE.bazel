@@ -3,17 +3,17 @@ module(
     version = "0.0.1",
 )
 
-# A requires
+# lib_a requires
 #   - bazel_skylib@1.2.0 as dev dependency.
 #   - the_great_gatsby@2003.7 as dependency.
 #   - hamlet@2005.1 as dev dependency.
-bazel_dep(name = "A", version = "")
+bazel_dep(name = "lib_a", version = "")
 local_path_override(
-    module_name = "A",
-    path = "./A",
+    module_name = "lib_a",
+    path = "./lib_a",
 )
 
-# The root module will get bazel_skylib 1.1.1 because bazel_skylib 1.2.0 is only a dev dependency of A.
+# The root module will get bazel_skylib 1.1.1 because bazel_skylib 1.2.0 is only a dev dependency of lib_a.
 bazel_dep(
     name = "bazel_skylib",
     version = "1.1.1",
@@ -32,5 +32,5 @@ def book(name, edition):
     use_repo(librarian_extension, name)
 
 book(name="the_great_gatsby", edition="1995.12")
-# The root module will get hamlet@1800.1 because hamlet@2005.1 is only a dev dependency of A.
+# The root module will get hamlet@1800.1 because hamlet@2005.1 is only a dev dependency of lib_a.
 book(name="hamlet", edition="1800.1")

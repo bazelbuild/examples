@@ -1,10 +1,12 @@
+def _get_librarian_path(ctx):
+    if ctx.os.name.find("windows") != -1:
+        return ctx.path(Label("//:librarian.cmd"))
+    else:
+        return ctx.path(Label("//:librarian.py"))
+
 def _fetch_book_impl(repository_ctx):
-    librarian = repository_ctx.os.environ.get("LIBRARIAN_BIN_PATH")
-    if not librarian:
-        fail("LIBRARIAN_BIN_PATH is not set!")
-    if not repository_ctx.path(librarian).exists:
-        fail("Path %s doesn't exist!" % librarian)
-    book_name = repository_ctx.attr.name.split(".")[-1]
+    librarian = _get_librarian_path(repository_ctx)
+    book_name = repository_ctx.attr.name.split("~")[-1]
     edition = repository_ctx.attr.edition
     result = repository_ctx.execute([librarian, "fetch", "%s@%s" % (book_name, edition)])
     if result.return_code != 0:
@@ -19,16 +21,13 @@ filegroup(
 
 fetch_book = repository_rule(
     implementation = _fetch_book_impl,
-    environ = ["LIBRARIAN_BIN_PATH"],
     attrs = {
         "edition": attr.string(),
     },
 )
 
 def _librarian_extension_impl(module_ctx):
-    librarian = module_ctx.os.environ.get("LIBRARIAN_BIN_PATH")
-    if not librarian:
-        fail("LIBRARIAN_BIN_PATH is not set!")
+    librarian = _get_librarian_path(module_ctx)
     books = []
     for mod in module_ctx.modules:
         for book in mod.tags.book:
@@ -49,7 +48,5 @@ book = tag_class(attrs={
 
 librarian_extension = module_extension(
     implementation = _librarian_extension_impl,
-    # TODO: module_extension should also support the "environ" attribute.
-    # environ = ["LIBRARIAN_BIN_PATH"],
     tag_classes = {"book": book},
 )

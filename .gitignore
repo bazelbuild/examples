@@ -1,6 +1,5 @@
 *~
 bazel-*
-.bazelrc
 .idea
 .vscode
 # Eclipse

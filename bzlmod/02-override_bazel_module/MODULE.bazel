@@ -28,10 +28,10 @@ single_version_override(
     patch_strip = 1,
 )
 
-# Depend on module A at a local path.
-# The bazel_dep statement is necessary because the root module must have visibility on A.
-bazel_dep(name = "A", version="")
+# Depend on module lib_a at a local path.
+# The bazel_dep statement is necessary because the root module must have visibility on lib_a.
+bazel_dep(name = "lib_a", version="")
 local_path_override(
-    module_name = "A",
-    path = "./A",
+    module_name = "lib_a",
+    path = "./lib_a",
 )

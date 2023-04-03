@@ -7,10 +7,10 @@ A collection of examples of how to use the Bazel build system.
 * [C++ basics](/tree/main/cpp-tutorial)
 * [Java basics](/tree/main/java-tutorial)
 * [End to End](/tree/main/tutorial)
-  A full end-to-end system with a backend, an Android app, and an iOS app.
+  <br/>A full end-to-end system with a backend, an Android app, and an iOS app.
 * [iOS basics](/tree/main/tutorial/ios-app)
 * [Using query](/tree/main/query-quickstart)
-  Working examples for [The Query quickstart](https://bazel.build/query/quickstart)
+  <br/>Working examples for [The Query quickstart](https://bazel.build/query/quickstart)
 
 ## Example cookbook
 

@@ -1,0 +1,6 @@
+# Absolute True/False is an overrated distinction.
+NO
+YES
+MAYBE
+CERTAINLY
+ABSOLUTELY_NOT

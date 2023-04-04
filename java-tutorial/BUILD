@@ -1,9 +1,7 @@
 load("@rules_java//java:defs.bzl", "java_binary")
+package(default_visibility = ["//visibility:public"])
 
 java_binary(
-    name = "ProjectRunner",
-    visibility = [
-        "//src/main/java/com/example/cmdline:__pkg__"
-    ],
+    name = "ProjectRunner",    
     srcs = glob(["src/main/java/com/example/*.java"]),
 )

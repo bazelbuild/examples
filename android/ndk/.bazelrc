@@ -1,0 +1,5 @@
+common --experimental_enable_android_migration_apis
+common --experimental_google_legacy_api
+common --incompatible_java_common_parameters
+common --android_databinding_use_v3_4_args
+common --experimental_android_databinding_v2

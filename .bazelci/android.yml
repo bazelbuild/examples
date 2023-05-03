@@ -54,18 +54,24 @@ tasks:
     name: "Android Jetpack Compose"
     platform: ubuntu1804
     working_directory: ../android/jetpack-compose
+    build_flags:
+      - "--remote_download_outputs=all"
     build_targets:
       - "//app/src/main:app"
   android-jetpack-compose-macos:
     name: "Android Jetpack Compose"
     platform: macos
     working_directory: ../android/jetpack-compose
+    build_flags:
+      - "--remote_download_outputs=all"
     build_targets:
       - "//app/src/main:app"
   android-jetpack-compose-windows:
     name: "Android Jetpack Compose"
     platform: windows
     working_directory: ../android/jetpack-compose
+    build_flags:
+      - "--remote_download_outputs=all"
     build_targets:
       - "//app/src/main:app"
   android-robolectric-testing-linux:

@@ -28,11 +28,7 @@ local_path_override(
 
 librarian_extension = use_extension("@librarian//:librarian.bzl", "librarian_extension")
 
-# Whether we should allow macros in MODULE.bazel is still in debate,
-# but currently it works and helps simplifying `use_repo` usages.
-def book(name, edition):
-    librarian_extension.book(name=name, edition=edition)
-    use_repo(librarian_extension, name)
-
-book(name="the_great_gatsby", edition="1995.12")
-book(name="hamlet", edition="2005.1")
+librarian_extension.book(name="the_great_gatsby", edition="1995.12")
+librarian_extension.book(name="hamlet", edition="2005.1")
+use_repo(librarian_extension, "the_great_gatsby")
+use_repo(librarian_extension, "hamlet")

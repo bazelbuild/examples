@@ -17,6 +17,7 @@ android_library(
 cc_library(
     name = "jni_lib",
     srcs = ["cpp/native-lib.cpp"],
+    deps = ["@bazel_tools//tools/jdk:jni"],
 )
 
 android_binary(

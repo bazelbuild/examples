@@ -1,0 +1,2 @@
+build --android_crosstool_top=@androidndk//:toolchain
+common --experimental_google_legacy_api

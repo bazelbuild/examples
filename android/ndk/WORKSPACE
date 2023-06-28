@@ -36,28 +36,49 @@ maven_install(
 
 ## Android
 
+RULES_ANDROID_COMMIT = "03aee31a691be8c4b61d3c32581435a77c81f9f8"
+
+RULES_ANDROID_SHA = "5cc8d2b7c1d4e91192a280db60f87498bb68ce9972825791d13af233a6041907"
+
 http_archive(
     name = "build_bazel_rules_android",
-    sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
-    strip_prefix = "rules_android-0.1.1",
-    urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
+    sha256 = RULES_ANDROID_SHA,
+    strip_prefix = "rules_android-%s" % RULES_ANDROID_COMMIT,
+    url = "https://github.com/bazelbuild/rules_android/archive/%s.zip" % RULES_ANDROID_COMMIT,
 )
 
-load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
+load("@build_bazel_rules_android//:prereqs.bzl", "rules_android_prereqs")
 
-android_sdk_repository(
-    name = "androidsdk",
+rules_android_prereqs()
+
+load("@build_bazel_rules_android//:defs.bzl", "rules_android_workspace")
+
+rules_android_workspace()
+
+register_toolchains(
+    "@build_bazel_rules_android//toolchains/android:android_default_toolchain",
+    "@build_bazel_rules_android//toolchains/android_sdk:android_sdk_tools",
 )
+
+load("@build_bazel_rules_android//rules:rules.bzl", "android_sdk_repository")
+
+android_sdk_repository(name = "androidsdk")
+
+# Rules Android NDK
+
+RULES_ANDROID_NDK_COMMIT = "44dcd014f4b126f8941c29ff1b25e1584bd3eb26"
+
+RULES_ANDROID_NDK_SHA = "79b1857e8e05e3007ad090a3269d2932e988b3ed176d7abd042719d45eb51500"
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "rules_android_ndk",
-    sha256 = "3fa4a58f4df356bca277219763f91c64f33dcc59e10843e9762fc5e7947644f9",
-    strip_prefix = "rules_android_ndk-63fa7637902fb1d7db1bf86182e939ed3fe98477",
-    url = "https://github.com/bazelbuild/rules_android_ndk/archive/63fa7637902fb1d7db1bf86182e939ed3fe98477.zip",
+    sha256 = RULES_ANDROID_NDK_SHA,
+    strip_prefix = "rules_android_ndk-%s" % RULES_ANDROID_NDK_COMMIT,
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/%s.zip" % RULES_ANDROID_NDK_COMMIT,
 )
 
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
 
-android_ndk_repository(
-    name = "androidndk",
-)
+android_ndk_repository(name = "androidndk")

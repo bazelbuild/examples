@@ -28,7 +28,7 @@ cc_test(
     deps = [
         ":my_lib",
         "@catch2",
-        "@catch2//:catch2_main",
+        "@catch2//:catch2_with_main",
     ],
 )
 

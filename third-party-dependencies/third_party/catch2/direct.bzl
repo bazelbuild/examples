@@ -21,8 +21,7 @@ def load_catch2():
     maybe(
         http_archive,
         name = "catch2",
-        url = "https://github.com/catchorg/Catch2/archive/v2.6.1.zip",
-        sha256 = "cc21033c8085c83a867153982e90514c6b6072bed8cec0e688663cfcdaa8bb32",
-        strip_prefix = "Catch2-2.6.1",
-        build_file = "//third_party/catch2:catch2.BUILD",
+        url = "https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.zip",
+        sha256 = "cd175f5b7e62c29558d4c17d2b94325ee0ab6d0bf1a4b3d61bc8dbcc688ea3c2",
+        strip_prefix = "Catch2-3.4.0",
     )

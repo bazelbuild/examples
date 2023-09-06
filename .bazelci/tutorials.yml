@@ -15,8 +15,6 @@ tasks:
       - "//backend"
       - "//android"
       - "//ios-app"
-    build_flags:
-      - --incompatible_enable_cc_toolchain_resolution # TODO: remove, testing on CI
   tutorial-windows:
     name: "Bazel end-to-end example"
     platform: windows

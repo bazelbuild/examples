@@ -16,7 +16,6 @@ tasks:
       - "//android"
       - "//ios-app"
     build_flags:
-      - --platform_mappings=@build_bazel_rules_apple//:platform_mappings
       - --incompatible_enable_cc_toolchain_resolution # TODO: remove, testing on CI
   tutorial-windows:
     name: "Bazel end-to-end example"

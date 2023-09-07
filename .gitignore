@@ -8,3 +8,5 @@ bazel-*
 .settings/
 # Maven
 target/
+# Xcode
+*.xcodeproj

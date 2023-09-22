@@ -8,7 +8,7 @@ FileCollector = provider(
     fields = {"files": "collected files"},
 )
 
-def _file_collector_aspect_impl(target, ctx):
+def _file_collector_aspect_impl(_, ctx):
     # This function is executed for each dependency the aspect visits.
 
     # Collect files from the srcs

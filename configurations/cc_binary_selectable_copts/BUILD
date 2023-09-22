@@ -1,7 +1,7 @@
 # This load statement replaces the native cc_binary (which has no "set_features"
 # attribute) with a macro that strings together the logic to make that work,
 # then passes everything else back to the native cc_binary.
-load(":defs.bzl", "cc_binary", "transition_rule")
+load(":defs.bzl", "cc_binary")
 
 # To see what this does, try "$ bazel run //:app_with_feature1".
 cc_binary(

@@ -1,6 +1,4 @@
-def _transition_impl(settings, attr):
-    _ignore = settings
-
+def _transition_impl(_, attr):
     # Attaching the special prefix "//comand_line_option" to the name of a native
     # flag makes the flag available to transition on. The result of this transition
     # is to set --cpu
@@ -18,6 +16,7 @@ cpu_transition = transition(
     outputs = ["//command_line_option:cpu"],
 )
 
+# buildifier: disable=print
 def _impl(ctx):
     # Print the current cpu using `ctx.var` which contains a
     # dict of configuration variable

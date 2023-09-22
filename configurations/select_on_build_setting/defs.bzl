@@ -1,5 +1,6 @@
 FruitInfo = provider(fields = ["type"])
 
+# buildifier: disable=print
 def _impl(ctx):
     print("We're harvesting " + ctx.attr.fruit[FruitInfo].type + "!")
 

@@ -3,9 +3,7 @@ load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 # Define two different transitions that both transition the `color` build setting
 # we defined in the BUILD.
-def _blue_impl(settings, attr):
-    _ignore = settings, attr
-
+def _blue_impl(_, __):
     return {"//attaching_transitions_to_rules:color": "blue"}
 
 blue_transition = transition(
@@ -14,9 +12,7 @@ blue_transition = transition(
     outputs = ["//attaching_transitions_to_rules:color"],
 )
 
-def _red_impl(settings, attr):
-    _ignore = settings, attr
-
+def _red_impl(_, __):
     return {"//attaching_transitions_to_rules:color": "red"}
 
 red_transition = transition(
@@ -25,6 +21,7 @@ red_transition = transition(
     outputs = ["//attaching_transitions_to_rules:color"],
 )
 
+# buildifier: disable=print
 def _impl(ctx):
     # Access the value of //attaching_transitions_to_rules:color for the target (blue).
     print("shirt color: " + ctx.attr._color[BuildSettingInfo].value)

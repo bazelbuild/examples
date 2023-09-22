@@ -38,10 +38,9 @@ def _librarian_extension_impl(module_ctx):
     resolved_book_list = json.decode(module_ctx.read("./booklist.json"))
     for name in resolved_book_list:
         edition = resolved_book_list[name]
-        fetch_book(name=name, edition=edition)
+        fetch_book(name = name, edition = edition)
 
-
-book = tag_class(attrs={
+book = tag_class(attrs = {
     "name": attr.string(),
     "edition": attr.string(),
 })

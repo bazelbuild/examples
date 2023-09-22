@@ -4,8 +4,9 @@ def _is_windows(repository_ctx):
 
 def _my_sh_config_impl(repository_ctx):
     """
-    Detects the path of the shell interpreter via a env var
-    and stores it in a sh_toolchain rule.
+    Detects the path of the shell interpreter via a env var.
+
+    Stores it in a sh_toolchain rule.
     """
     sh_path = repository_ctx.os.environ.get("MY_SHELL_BIN_PATH")
     if not sh_path:

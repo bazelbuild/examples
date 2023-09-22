@@ -3,6 +3,8 @@ BuildSettingInfo = provider()
 def _string_imp(ctx):
     value = ctx.build_setting_value
     label = ctx.label.name
+
+    # buildifier: disable=print
     print("evaluated value for " + label + ": " + value)
     return BuildSettingInfo(value = value)
 

@@ -1,13 +1,13 @@
 java_library(
     name = "amir",
-    visibility = ["//visibility:public"],
     srcs = ["Amir.java"],
     tags = ["pizza"],
+    visibility = ["//visibility:public"],
 )
 
 java_library(
     name = "jenny",
-    visibility = ["//visibility:public"],
     srcs = ["Jenny.java"],
     tags = ["macAndCheese"],
+    visibility = ["//visibility:public"],
 )

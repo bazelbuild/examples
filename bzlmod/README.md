@@ -4,10 +4,9 @@ This folder contains example usages of the new external dependency system for Ba
 - The WORKSPACE file for defining equivalent dependencies with the old system.
 - An empty WORKSPACE.bzlmod file to prevent fetching any dependencies from the old WORKSPACE system when Bzlmod is enabled. (Bzlmod and WORKSPACE can work at the same time, with dependencies from Bzlmod takes priority.)
 
-To turn on Bzlmod, you'll need to pass `--experimental_enable_bzlmod` as a build flag.
+With Bazel 6, you'll need to pass `--enable_bzlmod` as a build flag to turn
+this feature on. Consider adding this to `.bazelrc`:
 
-As of Jun 2022, Bzlmod is still in development, it's recommended to test with Bazel built at HEAD, you can use Bazel built at HEAD via [Bazelisk](https://github.com/bazelbuild/bazelisk/releases),
 ```
-export USE_BAZEL_VERSION=last_green
-bazelisk build <targets>
+common --enable_bzlmod
 ```

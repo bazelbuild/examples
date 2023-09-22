@@ -35,7 +35,5 @@ is a useful technique for use in scripts, where you do not want to parse the
 `bazel build` output.
 
 ```
-bazel cquery --output=starlark \
-  --starlark:expr="' '.join([f.path for f in target.files.to_list()])" \
-  //main:hello-world
+bazel cquery --output=files //main:hello-world
 ```

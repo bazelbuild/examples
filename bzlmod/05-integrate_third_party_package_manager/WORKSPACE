@@ -7,14 +7,15 @@ local_repository(
     name = "librarian",
     path = "../utils/librarian",
 )
+
 local_repository(
     name = "lib_a",
     path = "./lib_a",
 )
 
-load("@lib_a//:deps.bzl","fetch_book_for_lib_a")
-
+load("@lib_a//:deps.bzl", "fetch_book_for_lib_a")
 load("@librarian//:librarian.bzl", "fetch_book")
+
 fetch_book(
     name = "the_great_gatsby",
     edition = "1995.12",
@@ -31,7 +32,9 @@ local_repository(
     name = "lib_b",
     path = "./lib_b",
 )
-load("@lib_b//:deps.bzl","fetch_book_for_lib_b")
+
+load("@lib_b//:deps.bzl", "fetch_book_for_lib_b")
+
 fetch_book_for_lib_b()
 
 # Answer: You'll get the_great_gatsby@2003.7 and hamlet@2005.1.

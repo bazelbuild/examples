@@ -1,5 +1,6 @@
 """Example of a rule that accesses its attributes."""
 
+# buildifier: disable=print
 def _impl(ctx):
     # Print debug information about the target.
     print("Target {} has {} deps".format(ctx.label, len(ctx.attr.deps)))

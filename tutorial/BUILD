@@ -13,8 +13,8 @@ config_setting(
 filegroup(
     name = "all",
     srcs = [
-        "//backend",
         "//android",
+        "//backend",
     ] + select({
         ":darwin": ["//ios-app"],
         ":darwin_x86_64": ["//ios-app"],

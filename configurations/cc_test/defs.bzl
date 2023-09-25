@@ -2,9 +2,7 @@
 # //command_line_option:<option-name> syntax
 _BUILD_SETTING = "//command_line_option:test_arg"
 
-def _test_arg_transition_impl(settings, attr):
-    _ignore = (settings, attr)
-
+def _test_arg_transition_impl(_, __):
     return {_BUILD_SETTING: ["new arg"]}
 
 _test_arg_transition = transition(

@@ -1,5 +1,5 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Use a fork version of glog with http_archive.
 http_archive(
@@ -12,17 +12,17 @@ http_archive(
 # Use a fork version of gflags with git_repository.
 git_repository(
     name = "com_github_gflags_gflags",
-    remote = "https://github.com/meteorcloudy/gflags.git",
     commit = "95995169e86f3fedd19696df5b1811d441c462a2",
+    remote = "https://github.com/meteorcloudy/gflags.git",
 )
 
 # Use a patched version of bazel_skylib
 http_archive(
     name = "bazel_skylib",
-    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/1.2.0/bazel-skylib-1.2.0.tar.gz"],
-    sha256 = "af87959afe497dc8dfd4c6cb66e1279cb98ccc84284619ebfec27d9c09a903de",
-    patches = ["//:bazel_skylib.patch"],
     patch_args = ["-p1"],
+    patches = ["//:bazel_skylib.patch"],
+    sha256 = "af87959afe497dc8dfd4c6cb66e1279cb98ccc84284619ebfec27d9c09a903de",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/1.2.0/bazel-skylib-1.2.0.tar.gz"],
 )
 
 # Depend on lib_a at a local path.

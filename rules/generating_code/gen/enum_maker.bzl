@@ -27,8 +27,8 @@ enum_maker = rule(
     implementation = _impl,
     attrs = {
         "values_file": attr.label(
-           allow_single_file = True,
-           mandatory = True,
+            allow_single_file = True,
+            mandatory = True,
         ),
         "out_py": attr.output(),
         "out_h": attr.output(),

@@ -1,4 +1,5 @@
 load("//:deps.bzl", "world_cities")
+
 world_cities()
 
 # Depend on lib_a at a local path.
@@ -9,4 +10,5 @@ local_repository(
 
 # This has to be defined after defining lib_a.
 load("@lib_a//:deps.bzl", "emojis")
+
 emojis()

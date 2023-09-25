@@ -1,6 +1,7 @@
 # Load the provider of the pre-made settings defined in bazel_skylib
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
+# buildifier: disable=print
 def _impl(ctx):
     # Access the value of --//use_skylib_build_setting:flavor for the target.
     print("flavor: " + ctx.attr._flavor[BuildSettingInfo].value)

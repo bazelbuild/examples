@@ -1,5 +1,6 @@
 ToolInfo = provider(fields = ["type"])
 
+# buildifier: disable=print
 def _toolbox_impl(ctx):
     # Access the label flag attribute and you can expect the providers
     # of the value of the label flag.

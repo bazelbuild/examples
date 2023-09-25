@@ -12,23 +12,29 @@ string_setting(
     build_setting_default = "abc",
 )
 
-my_rule(name = "dont-do-transition", do_transition = False)
-my_rule(name = "do-transition", do_transition = True)
+my_rule(
+    name = "dont-do-transition",
+    do_transition = False,
+)
+
+my_rule(
+    name = "do-transition",
+    do_transition = True,
+)
 
 # This target will cause an issue because it tries to implement
-# a rule transition that reads a configured attribute. 
+# a rule transition that reads a configured attribute.
 my_rule(
     name = "will-break",
     do_transition = select({
         ":true": True,
         "//conditions:default": False,
-    })
+    }),
 )
 
 config_setting(
     name = "true",
     flag_values = {
         ":some-string": "abc",
-    }
+    },
 )
-

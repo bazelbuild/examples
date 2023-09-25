@@ -2,9 +2,9 @@ load("//generating_code/gen:enum_maker.bzl", "enum_maker")
 
 enum_maker(
     name = "gen_enums",
-    values_file = "values.txt",
-    out_py = "values.py",
     out_h = "values.h",
+    out_py = "values.py",
+    values_file = "values.txt",
 )
 
 py_library(

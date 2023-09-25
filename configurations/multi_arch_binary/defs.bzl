@@ -1,6 +1,4 @@
-def _transition_impl(settings, attr):
-    _ignore = [settings, attr]
-
+def _transition_impl(_, __):
     # Return a dict of dicts. The values are the updates to the configuration.
     # The keys are arbitrary helpful strings that can be used to access the split
     # targets in the rule context.
@@ -20,6 +18,7 @@ fat_transition = transition(
     outputs = ["//command_line_option:cpu"],
 )
 
+# buildifier: disable=print
 def _rule_impl(ctx):
     # Access the split dependencies via `ctx.split_attr.<split-attr-name>`.
     # See: https://docs.bazel.build/skylark/lib/ctx.html#split_attr.

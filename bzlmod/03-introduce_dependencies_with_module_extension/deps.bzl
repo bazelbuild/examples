@@ -7,7 +7,7 @@ def world_cities():
         sha256 = "4d2469729be61b55fcc758ab16bf590196733ff99f1c80e361623decb34ac35d",
     )
 
-def _data_deps_extension_impl(ctx):
+def _data_deps_extension_impl(_):
     world_cities()
 
 data_deps_ext = module_extension(

@@ -15,6 +15,7 @@ my_transition = transition(
     outputs = ["//read_attr_in_transition:some-string"],
 )
 
+# buildifier: disable=print
 def _impl(ctx):
     print(ctx.attr.do_transition)
     print("value of some-string: " + ctx.attr._some_string[BuildSettingInfo].value)

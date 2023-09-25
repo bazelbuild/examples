@@ -1,5 +1,5 @@
-load("@rules_cc//cc:defs.bzl", "objc_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load("@rules_cc//cc:defs.bzl", "objc_library")
 load(
     "@rules_xcodeproj//xcodeproj:defs.bzl",
     "top_level_target",
@@ -39,7 +39,10 @@ xcodeproj(
     top_level_targets = [
         top_level_target(
             ":ios-app",
-            target_environments = ["device", "simulator"],
+            target_environments = [
+                "device",
+                "simulator",
+            ],
         ),
     ],
 )

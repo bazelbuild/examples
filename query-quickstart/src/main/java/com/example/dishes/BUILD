@@ -1,7 +1,7 @@
 java_library(
     name = "macAndCheese",
-    visibility = ["//visibility:public"],
     srcs = ["MacAndCheese.java"],
+    visibility = ["//visibility:public"],
     deps = [
         "//src/main/java/com/example/ingredients:cheese",
         "//src/main/java/com/example/ingredients:macaroni",
@@ -10,8 +10,8 @@ java_library(
 
 java_library(
     name = "pizza",
-    visibility = ["//visibility:public"],
     srcs = ["Pizza.java"],
+    visibility = ["//visibility:public"],
     deps = [
         "//src/main/java/com/example/ingredients:cheese",
         "//src/main/java/com/example/ingredients:dough",

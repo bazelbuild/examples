@@ -6,7 +6,5 @@ This is an example on how to introduce dependencies on Bazel modules in the MODU
 To test it out, `cd` into this directory and run the following:
 
 ```bash
-export USE_BAZEL_VERSION=last_green
-bazelisk build --enable_bzlmod //:main
-GLOG_logtostderr=1 ./bazel-bin/main
+GLOG_logtostderr=1 bazel run main
 ```

@@ -1,0 +1,52 @@
+#
+# Bazel releases
+#
+lts: &lts
+  bazel: latest
+
+rolling: &rolling
+  bazel: rolling
+
+#
+# Commmon features by platform
+#
+linux: &linux
+  platform: ubuntu1804
+
+macos: &macos
+  platform: macos
+
+#
+# Test sets
+#
+basics: &basics
+  working_directory: ../frontend
+  build_targets:
+  - "..."
+  test_targets:
+  - "..."
+
+#
+# Finally, the cross product of tests X platforms X bazel release
+#
+tasks:
+  basics_linux_lts:
+    name: basics_linux_lts
+    <<: *linux
+    <<: *lts
+    <<: *basics
+  basics_linux_latest:
+    name: basics_linux_latest
+    <<: *linux
+    <<: *rolling
+    <<: *basics
+  basics_macos_lts:
+    name: basics_macos_lts
+    <<: *macos
+    <<: *lts
+    <<: *basics
+  basics_macos_latest:
+    name: basics_macos_latest
+    <<: *macos
+    <<: *rolling
+    <<: *basics

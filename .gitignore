@@ -10,3 +10,4 @@ bazel-*
 target/
 # Xcode
 *.xcodeproj
+node_modules

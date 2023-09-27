@@ -1,7 +1,6 @@
 *~
 bazel-*
 .idea
-.vscode
 # Eclipse
 .project
 .classpath

@@ -1,3 +1,5 @@
 node_modules
 next.js/node_modules
 packages/one/node_modules
+vue/node_modules
+vue/libraries/simple/node_modules

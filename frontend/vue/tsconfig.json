@@ -1,0 +1,17 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      // Only necessary for IDE support, see https://docs.aspect.build/rules/aspect_rules_js/docs/faq#making-the-editor-happy
+      "@yourname/yourlibrary": ["./libraries/simple/src/index.ts"]
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}

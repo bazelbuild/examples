@@ -1,0 +1,58 @@
+# TODO: add unit tests instead of only testing building
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//vue:vite/package_json.bzl", vite_bin = "bin")
+load("@npm//vue:vue-tsc/package_json.bzl", vue_tsc_bin = "bin")
+
+# This macro expands to a link_npm_package for each third-party package in package.json
+npm_link_all_packages(name = "node_modules")
+
+SRCS = [
+    "env.d.ts",
+    "index.html",
+    "package.json",
+    "vite.config.ts",
+    "tsconfig.json",
+    "tsconfig.config.json",
+    "//vue/src",
+]
+
+BUILD_DEPS = [":node_modules/" + d for d in [
+    "@bazel-example/vue-library",
+    "@vitejs/plugin-vue",
+    "@vitejs/plugin-vue-jsx",
+    "@vue/tsconfig",
+    "vite",
+    "vue",
+    "vue-router",
+]]
+
+vite_bin.vite(
+    name = "build",
+    srcs = SRCS + BUILD_DEPS,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = ["dist"],
+)
+
+vue_tsc_bin.vue_tsc_test(
+    name = "type-check",
+    args = ["--noEmit"],
+    chdir = package_name(),
+    data = SRCS + BUILD_DEPS,
+    include_declarations = True,
+)
+
+vite_bin.vite_binary(
+    name = "vite",
+    chdir = package_name(),
+    data = SRCS + BUILD_DEPS,
+)
+
+build_test(
+    name = "build_test",
+    targets = [
+        ":build",
+        ":type-check",
+    ],
+)

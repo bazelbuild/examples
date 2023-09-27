@@ -1,0 +1,7 @@
+"Declares the third-party dependencies when bzlmod is enabled"
+
+bazel_dep(name = "buildifier_prebuilt", version = "6.3.3", dev_dependency = True)
+
+bazel_dep(name = "rules_cc", version = "0.0.9")
+bazel_dep(name = "catch2", version = "3.4.0")
+bazel_dep(name = "googletest", version = "1.14.0", repo_name = "gtest")

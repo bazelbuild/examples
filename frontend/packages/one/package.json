@@ -1,0 +1,11 @@
+{
+  "name": "@bazel-example/one",
+  "private": true,
+  "main": "src/main.js",
+  "dependencies": {
+    "is-odd": "3.x.x"
+  },
+  "devDependencies": {
+    "@types/is-odd": "3.x.x"
+  }
+}

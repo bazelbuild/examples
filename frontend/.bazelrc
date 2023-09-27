@@ -1,0 +1,9 @@
+common --enable_bzlmod
+
+# passes an argument `--skipLibCheck` to *every* spawn of the TypeScript compiler, tsc
+build --@aspect_rules_ts//ts:skipLibCheck=always
+fetch --@aspect_rules_ts//ts:skipLibCheck=always
+query --@aspect_rules_ts//ts:skipLibCheck=always
+
+# Required for rules_js
+build --enable_runfiles

@@ -1,3 +1,5 @@
 packages:
     - next.js
     - packages/*
+    - vue
+    - vue/libraries/*

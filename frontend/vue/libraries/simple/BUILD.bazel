@@ -1,0 +1,65 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//vue:vite/package_json.bzl", vite_bin = "bin")
+load("@npm//vue:vue-tsc/package_json.bzl", vue_tsc_bin = "bin")
+
+npm_link_all_packages(name = "node_modules")
+
+_SRCS = [
+    "src/InputText.vue",
+    "src/InputTextarea.vue",
+    "src/components.ts",
+    "src/index.ts",
+]
+
+js_library(
+    name = "vite.config",
+    srcs = ["vite.config.ts"],
+    deps = [
+        ":node_modules/@vitejs/plugin-vue",
+        ":node_modules/vite",
+    ],
+)
+
+vite_bin.vite(
+    name = "build",
+    srcs = _SRCS + ["vite.config"],
+    outs = ["dist/index.es.js"],
+    args = [
+        "build",
+        package_name(),
+    ],
+)
+
+vue_tsc_bin.vue_tsc(
+    name = "types",
+    srcs = _SRCS + [
+        "tsconfig.json",
+        "//vue:node_modules/vite",
+        "//vue:node_modules/vue",
+    ],
+    outs = [
+        "dist/types/InputText.vue.d.ts",
+        "dist/types/InputTextarea.vue.d.ts",
+        "dist/types/components.d.ts",
+        "dist/types/index.d.ts",
+    ],
+    args = [
+        "--project",
+        package_name(),
+    ],
+)
+
+# TODO(alexeagle): show how this could be published to npm
+npm_package(
+    name = "simple",
+    srcs = [
+        "package.json",
+        ":build",
+        ":types",
+    ],
+    # This is a perf improvement; the default will be flipped to False in rules_js 2.0
+    include_runfiles = False,
+    visibility = ["//visibility:public"],
+)

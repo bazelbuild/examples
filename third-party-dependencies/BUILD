@@ -1,4 +1,4 @@
-load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
@@ -28,7 +28,7 @@ cc_test(
     deps = [
         ":my_lib",
         "@catch2",
-        "@catch2//:catch2_with_main",
+        "@catch2//:catch2_main",
     ],
 )
 

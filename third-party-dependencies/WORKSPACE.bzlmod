@@ -1,0 +1,1 @@
+# This file replaces `WORKSPACE` when --enable_bzlmod is set.

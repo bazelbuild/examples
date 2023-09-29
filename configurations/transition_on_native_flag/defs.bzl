@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _transition_impl(_, attr):
     # Attaching the special prefix "//comand_line_option" to the name of a native
     # flag makes the flag available to transition on. The result of this transition

@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 FruitInfo = provider(fields = ["type"])
 
 # buildifier: disable=print

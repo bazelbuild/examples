@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _get_librarian_path(ctx):
     if ctx.os.name.find("windows") != -1:
         return ctx.path(Label("//:librarian.cmd"))

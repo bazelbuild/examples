@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _transition_impl(_, __):
     # Return a dict of dicts. The values are the updates to the configuration.
     # The keys are arbitrary helpful strings that can be used to access the split

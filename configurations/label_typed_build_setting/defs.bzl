@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 ToolInfo = provider(fields = ["type"])
 
 # buildifier: disable=print

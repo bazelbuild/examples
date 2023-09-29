@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 # Load the provider of the pre-made settings defined in bazel_skylib
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 

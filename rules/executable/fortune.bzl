@@ -1,9 +1,11 @@
-# A rule that generates a "fortune"-style executable for haikus. It takes haiku
-# files as inputs, and produces a data file consisting of their concatenation,
-# along with a shell script.
-#
-# To run, use
-#     bazel run //executable:bazel_haikus
+"""A rule that generates a "fortune"-style executable for haikus.
+
+It takes haiku
+files as inputs, and produces a data file consisting of their concatenation,
+along with a shell script.
+To run, use
+    bazel run //executable:bazel_haikus
+"""
 
 # The script content, with placeholders for the data file name and number of
 # haikus.

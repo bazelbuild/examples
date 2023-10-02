@@ -4,7 +4,7 @@ For more information about aspects, see the documentation:
   https://docs.bazel.build/versions/master/skylark/aspects.html
 """
 
-FileCollector = provider(
+CollectedFileInfo = provider(
     fields = {"files": "collected files"},
 )
 
@@ -21,10 +21,10 @@ def _file_collector_aspect_impl(_, ctx):
     # Combine direct files with the files from the dependencies.
     files = depset(
         direct = direct,
-        transitive = [dep[FileCollector].files for dep in ctx.rule.attr.deps],
+        transitive = [dep[CollectedFileInfo].files for dep in ctx.rule.attr.deps],
     )
 
-    return [FileCollector(files = files)]
+    return [CollectedFileInfo(files = files)]
 
 file_collector_aspect = aspect(
     implementation = _file_collector_aspect_impl,
@@ -40,7 +40,7 @@ def _file_collector_rule_impl(ctx):
     # Write the collected information to the output file.
     content = []
     for dep in ctx.attr.deps:
-        files = [f.short_path for f in dep[FileCollector].files.to_list()]
+        files = [f.short_path for f in dep[CollectedFileInfo].files.to_list()]
         content.append("files from {}: {}".format(dep.label, files))
     content.append("")  # trailing newline
 

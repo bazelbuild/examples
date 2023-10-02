@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-FruitInfo = provider(fields = ["type"])
+FruitInfo = provider(doc = "", fields = ["type"])
 
 # buildifier: disable=print
 def _impl(ctx):

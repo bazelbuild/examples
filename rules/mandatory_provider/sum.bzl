@@ -6,7 +6,7 @@ file. This shows how to transfer information from a dependency to its
 dependents.
 """
 
-NumberInfo = provider("number")
+NumberInfo = provider(doc = "", fields = ["number"])
 
 def _impl(ctx):
     result = ctx.attr.number

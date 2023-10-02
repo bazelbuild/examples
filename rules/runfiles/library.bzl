@@ -7,7 +7,7 @@ such a scenario.
 
 # When possible, use custom providers to manage propagating information
 # between dependencies and their dependers.
-RuntimeRequiredFilesInfo = provider(fields = ["file", "data_files"])
+RuntimeRequiredFilesInfo = provider(doc = "", fields = ["file", "data_files"])
 
 def _library_impl(ctx):
     # Expand the label in the command string to a runfiles-relative path.

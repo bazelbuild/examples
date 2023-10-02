@@ -15,4 +15,4 @@ repos:
       - id: buildifier
       - id: buildifier-lint
         args:
-          - --warnings=-provider-params,-unnamed-macro
+          - --warnings=-unnamed-macro

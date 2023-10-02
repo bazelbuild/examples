@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-BuildSettingInfo = provider()
+BuildSettingInfo = provider(doc = "", fields = ["value"])
 
 def _string_imp(ctx):
     value = ctx.build_setting_value

@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _var_providing_rule_impl(ctx):
     return [
         platform_common.TemplateVariableInfo({

@@ -1,19 +1,21 @@
-# A rule that takes in a series of "declarations" and produces "compiled
-# output" for some of those declarations, along with a manifest. Here, the
-# declarations are simply words in a dictionary text file, and the compiled
-# output of a word is just its hash.
-#
-# The compiled outputs are specified by the user, while the manifest file is
-# created automatically. Both kinds of outputs are predeclared, and can be
-# referred to in the target graph or built in the command line, e.g.:
-#
-#     bazel build //predeclared_outputs:dog.md5
-#
-# If you do not need to refer to the output files as labels, it may be simpler
-# to pass in the words as an attr.string_list, and declare the files in the
-# implementation function instead.
-#
-# This rule assumes the presence of shell commands "grep", "md5sum", and "cut".
+"""
+A rule that takes in a series of "declarations" and produces "compiled
+output" for some of those declarations, along with a manifest. Here, the
+declarations are simply words in a dictionary text file, and the compiled
+output of a word is just its hash.
+
+The compiled outputs are specified by the user, while the manifest file is
+created automatically. Both kinds of outputs are predeclared, and can be
+referred to in the target graph or built in the command line, e.g.:
+
+    bazel build //predeclared_outputs:dog.md5
+
+If you do not need to refer to the output files as labels, it may be simpler
+to pass in the words as an attr.string_list, and declare the files in the
+implementation function instead.
+
+This rule assumes the presence of shell commands "grep", "md5sum", and "cut".
+"""
 
 def _word_hashes_impl(ctx):
     dictionary = ctx.file.dictionary

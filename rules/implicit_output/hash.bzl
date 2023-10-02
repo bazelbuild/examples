@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _impl(ctx):
     # Create actions to generate the three output files.
     # Actions are run only when the corresponding file is requested.

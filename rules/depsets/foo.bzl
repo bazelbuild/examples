@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 FooFiles = provider("transitive_sources")
 
 def get_transitive_srcs(srcs, deps):

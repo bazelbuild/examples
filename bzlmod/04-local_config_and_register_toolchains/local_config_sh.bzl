@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _is_windows(repository_ctx):
     """Returns true if the host OS is Windows."""
     return repository_ctx.os.name.startswith("windows")

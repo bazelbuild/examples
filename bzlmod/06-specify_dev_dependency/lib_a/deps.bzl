@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 load("@librarian//:librarian.bzl", "fetch_book")
 
 def deps():

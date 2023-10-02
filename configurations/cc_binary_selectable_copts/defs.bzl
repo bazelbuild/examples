@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _copt_transition_impl(_, attr):
     # settings provides read access to existing flags. But
     # this transition doesn't need to read any flags.

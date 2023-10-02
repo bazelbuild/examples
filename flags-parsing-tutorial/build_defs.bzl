@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 BuildSettingInfo = provider()
 
 def _string_imp(ctx):

@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 TemperatureProvider = provider(fields = ["type"])
 
 temperatures = ["HOT", "LUKEWARM", "ICED"]

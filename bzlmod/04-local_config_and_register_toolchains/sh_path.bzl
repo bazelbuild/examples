@@ -1,3 +1,4 @@
+# buildifier: disable=module-docstring
 def _write_sh_path_impl(ctx):
     # Save the shell path to the given output file.
     sh_path = ctx.toolchains["@bazel_tools//tools/sh:toolchain_type"].path

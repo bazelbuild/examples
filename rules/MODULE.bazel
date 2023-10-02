@@ -1,0 +1,4 @@
+"Bazel dependencies, see https://registry.bazel.build"
+
+bazel_dep(name = "bazel_skylib", version = "1.4.2")
+bazel_dep(name = "rules_python", version = "0.25.0")

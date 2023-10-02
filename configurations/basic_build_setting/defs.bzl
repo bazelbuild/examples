@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-TemperatureProvider = provider(fields = ["type"])
+TemperatureInfo = provider(fields = ["type"])
 
 temperatures = ["HOT", "LUKEWARM", "ICED"]
 
@@ -18,7 +18,7 @@ def _impl(ctx):
              raw_temperature)
 
     # Returns a provider like a normal rule
-    return TemperatureProvider(type = raw_temperature)
+    return TemperatureInfo(type = raw_temperature)
 
 temperature = rule(
     implementation = _impl,
@@ -35,7 +35,7 @@ def _day_impl(ctx):
     # rule implementation is evaluated. This means if there was
     # a command-line change or a transition change in the ancestors
     # of the target this is running for, those will be reflected here.
-    print(ctx.attr._temperature[TemperatureProvider].type)
+    print(ctx.attr._temperature[TemperatureInfo].type)
     return []
 
 breakfast = rule(

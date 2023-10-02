@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-FooFiles = provider("transitive_sources")
+FooFilesInfo = provider("transitive_sources")
 
 def get_transitive_srcs(srcs, deps):
     """Obtain the source files for a target and its transitive dependencies.
@@ -12,13 +12,13 @@ def get_transitive_srcs(srcs, deps):
     """
     return depset(
         srcs,
-        transitive = [dep[FooFiles].transitive_sources for dep in deps],
+        transitive = [dep[FooFilesInfo].transitive_sources for dep in deps],
     )
 
 def _foo_library_impl(ctx):
     trans_srcs = get_transitive_srcs(ctx.files.srcs, ctx.attr.deps)
     return [
-        FooFiles(transitive_sources = trans_srcs),
+        FooFilesInfo(transitive_sources = trans_srcs),
         DefaultInfo(files = trans_srcs),
     ]
 

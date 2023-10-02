@@ -7,7 +7,7 @@ such a scenario.
 
 # When possible, use custom providers to manage propagating information
 # between dependencies and their dependers.
-RuntimeRequiredFiles = provider(fields = ["file", "data_files"])
+RuntimeRequiredFilesInfo = provider(fields = ["file", "data_files"])
 
 def _library_impl(ctx):
     # Expand the label in the command string to a runfiles-relative path.
@@ -22,7 +22,7 @@ def _library_impl(ctx):
     )
 
     return [
-        RuntimeRequiredFiles(file = my_out, data_files = depset(ctx.files.data)),
+        RuntimeRequiredFilesInfo(file = my_out, data_files = depset(ctx.files.data)),
     ]
 
 runfiles_library = rule(
@@ -31,21 +31,21 @@ runfiles_library = rule(
         "command": attr.string(),
         "data": attr.label_list(allow_files = True),
     },
-    provides = [RuntimeRequiredFiles],
+    provides = [RuntimeRequiredFilesInfo],
 )
 
 def _binary_impl(ctx):
     # Create the output executable file, which simply runs the library's
-    # primary output file (obtained from RuntimeRequiredFiles.file).
+    # primary output file (obtained from RuntimeRequiredFilesInfo.file).
     ctx.actions.write(
         output = ctx.outputs.executable,
-        content = "$(cat " + ctx.attr.lib[RuntimeRequiredFiles].file.short_path + ")",
+        content = "$(cat " + ctx.attr.lib[RuntimeRequiredFilesInfo].file.short_path + ")",
         is_executable = True,
     )
 
     my_runfiles = ctx.runfiles(
-        files = [ctx.attr.lib[RuntimeRequiredFiles].file],
-        transitive_files = ctx.attr.lib[RuntimeRequiredFiles].data_files,
+        files = [ctx.attr.lib[RuntimeRequiredFilesInfo].file],
+        transitive_files = ctx.attr.lib[RuntimeRequiredFilesInfo].data_files,
     )
 
     return [DefaultInfo(
@@ -56,6 +56,6 @@ runfiles_binary = rule(
     implementation = _binary_impl,
     executable = True,
     attrs = {
-        "lib": attr.label(mandatory = True, providers = [RuntimeRequiredFiles]),
+        "lib": attr.label(mandatory = True, providers = [RuntimeRequiredFilesInfo]),
     },
 )

@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-ToolInfo = provider(fields = ["type"])
+ToolInfo = provider(doc = "", fields = ["type"])
 
 # buildifier: disable=print
 def _toolbox_impl(ctx):

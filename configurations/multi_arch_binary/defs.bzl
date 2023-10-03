@@ -47,7 +47,7 @@ foo_binary = rule(
     },
 )
 
-CpuInfo = provider(fields = ["value"])
+CpuInfo = provider(doc = "", fields = ["value"])
 
 def _impl(ctx):
     # Get the current cpu using `ctx.var` which contains a

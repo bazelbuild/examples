@@ -5,6 +5,7 @@ For more information about aspects, see the documentation:
 """
 
 CollectedFileInfo = provider(
+    doc = "",
     fields = {"files": "collected files"},
 )
 

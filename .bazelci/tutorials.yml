@@ -1,27 +1,5 @@
 # Getting started tutorials
 tasks:
-  tutorial-linux:
-    name: "Bazel end-to-end example"
-    platform: ubuntu1804
-    working_directory: ../tutorial
-    build_targets:
-      - "//backend"
-      - "//android"
-  tutorial-macos:
-    name: "Bazel end-to-end example"
-    platform: macos
-    working_directory: ../tutorial
-    build_targets:
-      - "//backend"
-      - "//android"
-      - "//ios-app"
-  tutorial-windows:
-    name: "Bazel end-to-end example"
-    platform: windows
-    working_directory: ../tutorial
-    build_targets:
-      - "//backend"
-      - "//android"
   cpp-stage1-linux:
     name: "C++ Stage 1"
     platform: ubuntu1804

@@ -1,0 +1,97 @@
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_swc//swc:defs.bzl", "swc")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("@bazel_skylib//lib:partial.bzl", "partial")
+load("@npm//react:eslint/package_json.bzl", eslint_bin = "bin")
+
+ASSET_PATTERNS = [
+    "*.svg",
+    "*.css",
+]
+
+SRC_PATTERNS = [
+    "*.tsx",
+    "*.ts",
+]
+
+TRANSPILER = partial.make(
+    swc,
+    swcrc = "//react:.swcrc",
+)
+
+# Filename conventions described at
+# https://create-react-app.dev/docs/running-tests#filename-conventions
+TEST_PATTERNS = [
+    "*.test.tsx",
+    "*.test.ts",
+    "*.spec.tsx",
+    "*.spec.ts",
+]
+
+js_library(
+    name = "src",
+    srcs = glob(ASSET_PATTERNS),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":src_ts",
+    ],
+)
+
+ts_project(
+    name = "src_ts",
+    srcs = glob(
+        include = SRC_PATTERNS,
+        exclude = TEST_PATTERNS,
+    ),
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react:tsconfig",
+    deps = [
+        "//react:node_modules/react",
+        "//react:node_modules/react-dom",
+        "//react:node_modules/web-vitals",
+    ],
+)
+
+ts_project(
+    name = "src_test_ts",
+    srcs = glob(TEST_PATTERNS),
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react:tsconfig",
+    deps = [
+        ":src_ts",
+        "//react:node_modules/@testing-library/jest-dom",
+        "//react:node_modules/@testing-library/react",
+        "//react:node_modules/@types/jest",
+    ],
+)
+
+jest_test(
+    name = "src_test",
+    config = "//react:jest_config",
+    data = [
+        ":src",
+        ":src_test_ts",
+        "//react:node_modules/jest-environment-jsdom",
+        "//react:node_modules/jest-transform-stub",
+        "//react:node_modules/react",
+    ],
+    node_modules = "//react:node_modules",
+)
+
+eslint_bin.eslint_test(
+    name = "eslint_test",
+    timeout = "short",
+    args = ["{}/{}".format(
+        package_name(),
+        p,
+    ) for p in SRC_PATTERNS],
+    data = [
+        "//react:node_modules/eslint-config-react-app",
+        "//react:package_json",
+    ] + glob(SRC_PATTERNS),
+)

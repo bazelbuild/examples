@@ -1,6 +1,6 @@
 lockfileVersion: 5.4
 
-packageExtensionsChecksum: e437e7cf9553f9badc244460f5eb4ade
+packageExtensionsChecksum: deeac1d29f935a842ceee4c748391e67
 
 importers:
 
@@ -44,7 +44,7 @@ importers:
       '@angular/platform-browser': 14.2.3_aryoalwxgr43u4krtv6zz65zni
       '@angular/platform-browser-dynamic': 14.2.3_os5nft2oqiimw43y5rxbvauiru
       '@angular/router': 14.2.3_bzitv6nc6qyeo4tcxlc4thruh4
-      ng2-dragula: 1.5.0_vil5jls56al5srtnszooyqrirm
+      ng2-dragula: 1.5.0_nm32bwkorhjm2rkvv2egyicgiy
       rxjs: 7.5.7
       tslib: 2.4.1
       zone.js: 0.12.0
@@ -486,7 +486,6 @@ packages:
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /@angular/compiler/14.2.3_@angular+core@14.2.3:
     resolution: {integrity: sha512-DG2lqSqD5hx6Qk362jhjU9O+I2gOlsV8oUSTOkH4eFQ54PUad1D3hjqfcs3/lsvWggALCSjv9X8BOG8jb7n8vw==}
@@ -6641,7 +6640,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
-    dev: true
 
   /clone-deep/4.0.1:
     resolution: {integrity: sha512-neHB9xuzh/wk0dIHweyAXv2aPGZIVk3pLMe+/RNzINf17fe0OG96QroktYAUm7SM1PBnzTabaLboqqxDyMU+SQ==}
@@ -7389,7 +7387,6 @@ packages:
   /dependency-graph/0.11.0:
     resolution: {integrity: sha512-JeMq7fEshyepOWDfcfHK06N3MhyPhz++vtqWhMT5O9A3K42rdsEDpfdVqjaqaAhsw6a+ZqeDvQVtD0hFHQWrzg==}
     engines: {node: '>= 0.6.0'}
-    dev: true
 
   /dequal/2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -11956,7 +11953,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       sourcemap-codec: 1.4.8
-    dev: true
 
   /magic-string/0.30.4:
     resolution: {integrity: sha512-Q/TKtsC5BPm0kGqgBIF9oXAs/xEf2vRKiIB4wCRQTJOQIByZ1d+NnUOotvJOvNpi5RNIgVOMC3pOuaP1ZTDlVg==}
@@ -12422,16 +12418,18 @@ packages:
       - supports-color
     dev: true
 
-  /ng2-dragula/1.5.0_vil5jls56al5srtnszooyqrirm:
+  /ng2-dragula/1.5.0_nm32bwkorhjm2rkvv2egyicgiy:
     resolution: {integrity: sha512-uSVq66Rv+ZhDLBGYCGZ7mTaseP7rvYJOijiQZlzfy8dxL614Sw7rhtnLqvK8nqa3tI/wVv8CEGZaZkMnWJokwQ==}
     peerDependencies:
       '@angular/common': ^2.3.1 || >=4.0.0
       '@angular/compiler': ^2.3.1 || >=4.0.0
+      '@angular/compiler-cli': '*'
       '@angular/core': ^2.3.1 || >=4.0.0
       '@angular/forms': ^2.3.1 || >=4.0.0
     dependencies:
       '@angular/common': 14.2.3_dl6nhes4q4z2qmdibnjjcqvs3m
       '@angular/compiler': 14.2.3_@angular+core@14.2.3
+      '@angular/compiler-cli': 14.2.3_nftm4gvtckfxo3v4dp2rvmjvc4
       '@angular/core': 14.2.3_rxjs@7.5.7+zone.js@0.12.0
       '@angular/forms': 14.2.3_bzitv6nc6qyeo4tcxlc4thruh4
       dragula: 3.7.3
@@ -14669,7 +14667,6 @@ packages:
 
   /reflect-metadata/0.1.13:
     resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
-    dev: true
 
   /reflect.getprototypeof/1.0.4:
     resolution: {integrity: sha512-ECkTw8TmJwW60lOTR+ZkODISW6RQ8+2CL3COqtiJKLd6MmB45hN51HprHFziKLGkAuTGQhBb91V8cy+KHlaCjw==}
@@ -16199,7 +16196,6 @@ packages:
     resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /typescript/4.9.3:
     resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
@@ -17267,7 +17263,6 @@ packages:
   /yargs-parser/21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
-    dev: true
 
   /yargs/16.2.0:
     resolution: {integrity: sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==}
@@ -17305,7 +17300,6 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
-    dev: true
 
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}

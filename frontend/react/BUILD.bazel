@@ -1,0 +1,73 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_devserver", "js_test")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//react:react-scripts/package_json.bzl", cra_bin = "bin")
+load("@npm//react:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
+
+npm_link_all_packages()
+
+CRA_DEPS = [
+    "//react/src",
+    "//react/public",
+    ":package_json",
+    ":node_modules/eslint-config-react-app",
+    ":node_modules/react-dom",
+    ":node_modules/react-scripts",
+    ":node_modules/react",
+    ":node_modules/typescript",
+    ":node_modules/web-vitals",
+]
+
+cra_bin.react_scripts(
+    # Note: If you want to change the name make sure you update BUILD_PATH below accordingly
+    # https://create-react-app.dev/docs/advanced-configuration/
+    name = "build",
+    srcs = CRA_DEPS,
+    args = ["build"],
+    chdir = package_name(),
+    env = {"BUILD_PATH": "./build"},
+    out_dirs = ["build"],
+)
+
+js_test(
+    name = "build_smoke_test",
+    timeout = "short",
+    data = ["build"],
+    entry_point = "build_smoke_test.js",
+)
+
+js_run_devserver(
+    name = "start",
+    args = ["start"],
+    command = "node_modules/.bin/react-scripts",
+    data = CRA_DEPS,
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+tsconfig_to_swcconfig.t2s(
+    name = "write_swcrc",
+    srcs = ["tsconfig.json"],
+    args = [
+        "--filename",
+        "$(location tsconfig.json)",
+    ],
+    stdout = ".swcrc",
+    visibility = ["//react:__subpackages__"],
+)
+
+js_library(
+    name = "package_json",
+    srcs = ["package.json"],
+    visibility = ["//visibility:public"],
+)
+
+js_library(
+    name = "jest_config",
+    srcs = ["jest.config.js"],
+    visibility = ["//visibility:public"],
+)

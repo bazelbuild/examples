@@ -1,0 +1,49 @@
+{
+  "name": "create-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "13.4.0",
+    "@testing-library/user-event": "14.4.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "3.1.0"
+  },
+  "devDependencies": {
+    "@bazel/ibazel": "0.16.2",
+    "@types/jest": "29.2.3",
+    "@typescript-eslint/eslint-plugin": "5.44.0",
+    "@typescript-eslint/parser": "5.44.0",
+    "jest-cli": "29.5.0",
+    "jest-junit": "16.0.0",
+    "jest-environment-jsdom": "29.3.1",
+    "jest-transform-stub": "2.0.0",
+    "tsconfig-to-swcconfig": "2.4.0",
+    "typescript": "4.9.3"
+  },
+  "scripts": {
+    "start": "ibazel run start",
+    "build": "bazel build build",
+    "test": "ibazel test src:src_test"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -3,6 +3,7 @@
 bazel_dep(name = "aspect_bazel_lib", version = "1.33.0")
 bazel_dep(name = "aspect_rules_jest", version = "0.19.5")
 bazel_dep(name = "aspect_rules_js", version = "1.32.2")
+bazel_dep(name = "aspect_rules_swc", version = "1.0.2")
 bazel_dep(name = "aspect_rules_ts", version = "2.0.0")
 bazel_dep(name = "aspect_rules_rollup", version = "1.0.0")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
@@ -14,6 +15,8 @@ npm.npm_translate_lock(
     pnpm_lock = "//:pnpm-lock.yaml",
     public_hoist_packages = {
         "@next/eslint-plugin-next": ["next.js"],
+        "eslint-config-react-app": ["react"],
+        "eslint@8.28.0": ["react"],
     },
     verify_node_modules_ignored = "//:.bazelignore",
 )

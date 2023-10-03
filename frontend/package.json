@@ -7,6 +7,18 @@
           "peerDependencies": {
             "vue": "*"
           }
+        },
+        "@typescript-eslint/eslint-plugin": {
+          "peerDependencies": {
+            "eslint": "*"
+          }
+        },
+        "postcss-loader": {
+          "peerDependencies": {
+            "postcss-flexbugs-fixes": "*",
+            "postcss-preset-env": "*",
+            "postcss-normalize": "*"
+          }
         }
       }
     }

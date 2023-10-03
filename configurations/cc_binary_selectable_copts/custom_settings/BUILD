@@ -2,7 +2,7 @@
 # Skylib provides convenience macros that reduce boilerplate, so we'll use that
 # here.
 #
-# See https://docs.bazel.build/versions/master/skylark/config.html and
+# See https://bazel.build/extending/config and
 # https://github.com/bazelbuild/bazel-skylib) for more info.
 
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
@@ -22,7 +22,7 @@ string_flag(
     # It's also possible to disallow command line access (in this example
     # we don't need that because cc_binary sets this implicitly without the
     # end user even having to know this flag exists). See
-    # https://docs.bazel.build/versions/master/skylark/config.html#the-build_setting-rule-parameter
+    # https://bazel.build/extending/config#the-build_setting-rule-parameter
     # for details.
     name = "mycopts",
     build_setting_default = "unset",

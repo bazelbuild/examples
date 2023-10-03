@@ -11,6 +11,6 @@ def _string_imp(ctx):
 
 string_flag = rule(
     implementation = _string_imp,
-    # https://docs.bazel.build/versions/main/skylark/config.html#the-build_setting-rule-parameter
+    # https://bazel.build/extending/config#the-build_setting-rule-parameter
     build_setting = config.string(flag = True),
 )

@@ -1,5 +1,7 @@
 # Examples to build C++ code
 
+This folder is part of the C++ Bazel Tutorial, found at <https://bazel.build/start/cpp>
+
 This package will showcase how to build C++ code in stages.
 
 ### Stage 1

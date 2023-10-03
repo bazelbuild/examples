@@ -21,7 +21,7 @@ cpu_transition = transition(
 def _impl(ctx):
     # Print the current cpu using `ctx.var` which contains a
     # dict of configuration variable
-    # https://docs.bazel.build/versions/master/skylark/lib/ctx.html#var
+    # https://bazel.build/rules/lib/builtins/ctx#var
     print("--cpu=" + ctx.var["TARGET_CPU"])
     return []
 
@@ -34,7 +34,7 @@ cpu_rule = rule(
     attrs = {
         # This attribute is required to use starlark transitions. It allows
         # allowlisting usage of this rule. For more information, see
-        # https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions
+        # https://bazel.build/extending/config#user-defined-transitions
         "_allowlist_function_transition": attr.label(
             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),

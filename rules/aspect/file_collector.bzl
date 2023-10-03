@@ -1,7 +1,7 @@
 """Example of using an aspect to collect information from dependencies.
 
 For more information about aspects, see the documentation:
-  https://docs.bazel.build/versions/master/skylark/aspects.html
+  https://bazel.build/extending/aspects
 """
 
 CollectedFileInfo = provider(

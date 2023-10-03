@@ -39,10 +39,10 @@ my_sh_config = repository_rule(
 )
 
 # Used by WORKSPACE
-def sh_configure():
+def sh_configure(name = "my_local_config_sh"):
     """Detect the local shell interpreter and register its toolchain."""
-    my_sh_config(name = "my_local_config_sh")
-    native.register_toolchains("@my_local_config_sh//:local_sh_toolchain")
+    my_sh_config(name)
+    native.register_toolchains("@{}//:local_sh_toolchain".format(name))
 
 # Used by MODULE.bazel
 my_sh_config_extension = module_extension(

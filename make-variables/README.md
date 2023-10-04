@@ -1,7 +1,6 @@
 # Examples demonstrating "Make" variables
 
-These examples demonstrate Bazel's ["Make"
-variable](https://docs.bazel.build/versions/master/be/make-variables.html)
+These examples demonstrate Bazel's ["Make" variable](https://bazel.build/reference/be/make-variables)
 support.
 
 ## Predefined variables

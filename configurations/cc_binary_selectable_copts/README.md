@@ -1,11 +1,11 @@
-### Example showing how to use [Starlark configuration](https://docs.bazel.build/versions/master/skylark/config.html) so a `cc_binary` can set custom "features" for `cc_library` dependencies to include.
+### Example showing how to use [Starlark configuration](https://bazel.build/extending/config) so a `cc_binary` can set custom "features" for `cc_library` dependencies to include.
 
 
 This example has five files:
 
 * [custom_settings/BUILD](custom_settings/BUILD) - This defines a [custom
   Starlark
-  flag](https://docs.bazel.build/versions/master/skylark/config.html#user-defined-build-settings)
+  flag](https://bazel.build/extending/config#user-defined-build-settings)
   called `//custom_settings:mycopts` which defines the set of possible features
   and stores whatever features the `cc_binary` sets.
   
@@ -21,7 +21,7 @@ This example has five files:
   omit `transition_rule` and just add the functionality directly.
   
   `transition_rule` applies a [Starlark
-  transition](https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions)
+  transition](https://bazel.build/extending/config#user-defined-transitions)
   called `_copt_transition` that reads the value of `set_features` and sets
   `//custom-settings:mycopts` accordingly.
   

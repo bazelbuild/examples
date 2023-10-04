@@ -5,7 +5,7 @@ package(features = ["foo"])
 # features have no specific meaning in Bazel. Each rule can decide how to use
 # the features.
 # See the documentation:
-#   https://docs.bazel.build/versions/master/be/common-definitions.html#common.features
+#   https://bazel.build/reference/be/common-definitions#common.features
 
 # in target1, the enabled features are ["foo"]
 myrule(

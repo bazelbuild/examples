@@ -2,7 +2,7 @@
 
 ## Documentation
 
-For the full documentation, please visit the [Bazel documentation page](https://docs.bazel.build/versions/master/android-ndk.html).
+For the full documentation, please visit the [Bazel documentation page](https://bazel.build/docs/android-ndk).
 
 ## Instructions
 

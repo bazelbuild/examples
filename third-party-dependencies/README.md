@@ -4,7 +4,7 @@ Bazel with third party dependencies
 Goal
 ----
 
-This is a small Bazel example that uses third party dependencies ([also called external dependencies](https://docs.bazel.build/versions/master/external.html))
+This is a small Bazel example that uses third party dependencies ([also called external dependencies](https://bazel.build/external/overview))
 but is well structured following the principles of software development. The main goal is that the principles and guidelines shown here they should scale big.
 Bazel consultants with access to over 40 codebases have seen this pattern deployed successfully at scale.
 
@@ -57,6 +57,6 @@ For the Catch2 test, you can add additinal parameters for a nicer output:
 bazel test //:catch2_test --test_arg "--reporter compact" --test_arg --success --test_output=streamed
 ```
 
-If you want to know more about the parameters of the bazel command, you can check [here](https://docs.bazel.build/versions/master/command-line-reference.html)
+If you want to know more about the parameters of the bazel command, you can check [here](https://bazel.build/reference/command-line-reference)
 
 To try with bzlmod, add the `--enable_bzlmod` flag to any of the bazel commands above.

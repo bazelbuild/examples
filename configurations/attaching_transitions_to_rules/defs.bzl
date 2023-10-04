@@ -54,7 +54,7 @@ shirt = rule(
         "_color": attr.label(default = ":color"),
         # This attribute is required to use starlark transitions. It allows
         # allowlisting usage of this rule. For more information, see
-        # https://docs.bazel.build/versions/master/skylark/config.html#user-defined-transitions
+        # https://bazel.build/extending/config#user-defined-transitions
         "_allowlist_function_transition": attr.label(
             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),

@@ -1,7 +1,7 @@
 # Bazel Rules
 
 This directory contains examples of Bazel rules. For additional information,
-please refer to [the documentation](https://docs.bazel.build/versions/master/skylark/concepts.html).
+please refer to [the documentation](https://bazel.build/extending/concepts).
 
 ## Getting started
 

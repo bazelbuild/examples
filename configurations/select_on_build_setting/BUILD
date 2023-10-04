@@ -2,7 +2,7 @@
 # Skylib provides convenience macros that reduce boilerplate, so we'll use that
 # here.
 #
-# See https://docs.bazel.build/versions/master/skylark/config.html and
+# See https://bazel.build/extending/config and
 # https://github.com/bazelbuild/bazel-skylib) for more info.
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load(":defs.bzl", "fruit", "harvest")

@@ -1,13 +1,13 @@
 Bazel flags parsing examples
 ========================
 
-This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://docs.bazel.build/build-ref.html#workspace) and writing a [BUILD](https://docs.bazel.build/versions/main/build-ref.html#BUILD_files) file. Users should also be familiar with [built-in](https://docs.bazel.build/versions/main/configurable-attributes.html#built-in-flags) (non-Starlark) and [user-defined](https://docs.bazel.build/versions/main/configurable-attributes.html#custom-flags) (Starlark) flags. 
+This provides examples for the current behavior of flag parsing. This tutorial assumes that users have basic knowledge of creating a Bazel [WORKSPACE](https://bazel.build/concepts/build-ref#workspace) and writing a [BUILD](https://bazel.build/concepts/build-ref#BUILD_files) file. Users should also be familiar with [built-in](https://bazel.build/docs/configurable-attributes#built-in-flags) (non-Starlark) and [user-defined](https://bazel.build/docs/configurable-attributes#custom-flags) (Starlark) flags. 
 
-Note that a broader term, [options](https://docs.bazel.build/versions/main/command-line-reference.html#option-syntax) is often used interchangeably with flags. An important distinction is that only flags can be set on the command line. 
+Note that a broader term, [options](https://bazel.build/reference/command-line-reference#option-syntax) is often used interchangeably with flags. An important distinction is that only flags can be set on the command line. 
 
 Terminologies
 ========================
-`--config`: Throughout this tutorial, users will see regular usage of `--config`. Although, it's already defined [here](https://docs.bazel.build/guide.html#bazelrc), we will repeat important points for first-time Bazel users.
+`--config`: Throughout this tutorial, users will see regular usage of `--config`. Although, it's already defined [here](https://bazel.build/run/bazelrc), we will repeat important points for first-time Bazel users.
 * `--config` can be used to represent a group of flags with a short name following the convention `<command>:<config_name>`. For example:
 ```
 # bazelrc
@@ -26,7 +26,7 @@ Instructions
 cd examples/flags-parsing-tutorial
 ```
 In this WORKSPACE, we have:
-* <b>[bazelrc](https://docs.bazel.build/guide.html#bazelrc-the-bazel-configuration-file) file</b>: This is the user-defined bazelrc where flags can be defined.
+* <b>[bazelrc](https://bazel.build/run/bazelrc) file</b>: This is the user-defined bazelrc where flags can be defined.
 * <b>build_defs.bzl</b>: This contains the Starlark rules' implementations.
 * <b>BUILD</b>: This contains rules Bazel uses to build a package.
 
@@ -44,7 +44,7 @@ For user-defined (Starlark) flags, the evaluated value can be observed by adding
 DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for flag: cmd
 ```
 ### B. The last option on the command line takes precedence. ###
-⭐ <b>Tips</b>: Use [--announce_rc](https://docs.bazel.build/user-manual.html#flag--announce_rc) to debug flag parsing.
+⭐ <b>Tips</b>: Use [--announce_rc](https://bazel.build/docs/user-manual#flag--announce_rc) to debug flag parsing.
 
 <u><b>Example B.1</b></u>
 ```
@@ -112,5 +112,5 @@ If the host platform (where Bazel is running) is `macos` and the `build` command
 ```
 bazel --bazelrc=./bazelrc build :wibble
 ```
-Note that Bazel will only enable flags based on the host platform, instead of execution platform or target platform. The definitions for these platforms can be found [here](https://docs.bazel.build/platforms.html). 
+Note that Bazel will only enable flags based on the host platform, instead of execution platform or target platform. The definitions for these platforms can be found [here](https://bazel.build/extending/platforms). 
 

@@ -9,7 +9,7 @@ $ bazel build :do-transition # "value of some-string: abc-transitioned"
 ```
 
 Caveat: <b>You cannot read a
-[configured attribute](https://docs.bazel.build/versions/master/configurable-attributes.html)
+[configured attribute](https://bazel.build/docs/configurable-attributes)
 in a rule transition.</b> This can create a dependency cycle between attribute
 values and configuration. To see an example of this cycle, run the following:
 ```

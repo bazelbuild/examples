@@ -1,0 +1,17 @@
+"Bazel dependencies"
+
+bazel_dep(name = "rules_jvm_external", version = "5.3")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        "junit:junit:4.12",
+        "com.google.guava:guava:28.0-jre",
+    ],
+    fetch_sources = True,
+    repositories = [
+        "http://uk.maven.org/maven2",
+        "https://jcenter.bintray.com/",
+    ],
+)
+use_repo(maven, "maven")

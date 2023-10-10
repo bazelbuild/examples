@@ -1,9 +1,9 @@
 "Bazel dependencies"
 
-bazel_dep(name = "aspect_bazel_lib", version = "2.0.0-beta1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.0.0-rc0")
 bazel_dep(name = "container_structure_test", version = "1.16.0")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
-bazel_dep(name = "rules_oci", version = "1.2.0")
+bazel_dep(name = "rules_oci", version = "1.4.0")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(

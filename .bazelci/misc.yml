@@ -16,14 +16,19 @@ tasks:
     - "..."
     test_targets:
     - "..."
+    test_flags:
+    # FIXME: either have a docker/podman runtime on our Mac images,
+    # or use a remote container service like TestContainers Cloud
+    - "--test_tag_filters=-requires-docker"
   java-maven-windows:
     name: "Maven Java App"
     platform: windows
     working_directory: ../java-maven
-    build_targets:
-    - "..."
     test_targets:
-    - "..."
+    # FIXME: Our Windows CI machines need some DLL and/or Visual C++ redistributable.
+    # running bsdtar.exe results in `Exit -1073741515: STATUS_DLL_NOT_FOUND`
+    # for now, only run the java_test target.
+    - "//:tests"
   third-party-dependencies-linux:
     name: "Example with third party dependencies"
     platform: ubuntu1804

@@ -2,7 +2,7 @@
 tasks:
   java-maven-linux:
     name: "Maven Java App"
-    platform: ubuntu1804
+    platform: ubuntu2004
     working_directory: ../java-maven
     build_targets:
     - "..."

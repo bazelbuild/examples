@@ -9,6 +9,15 @@ common:
       - "--android_platforms=//:arm64-v8a"
     build_targets:
       - "//app:app"
+  android-ndk: &android-ndk:
+    name: "Android NDK"
+    bazel: last_green
+    working_directory: ../android/ndk
+    build_flags:
+      - "--fat_apk_cpu=arm64-v8a,x86"
+      - "--android_crosstool_top=@androidndk//:toolchain"
+    build_targets:
+      - "//app/src/main:app"
 
 tasks:
   android-firebase-linux:
@@ -21,35 +30,20 @@ tasks:
     platform: windows
     <<: *android-firebase
   android-ndk-linux:
-    name: "Android NDK"
     platform: ubuntu1804
-    working_directory: ../android/ndk
     environment:
       ANDROID_NDK_HOME: /opt/android-ndk-r25b
-    build_flags:
-      - "--fat_apk_cpu=arm64-v8a,x86"
-      - "--android_crosstool_top=@androidndk//:toolchain"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-ndk
   android-ndk-macos:
-    name: "Android NDK"
     platform: macos
-    working_directory: ../android/ndk
     environment:
       ANDROID_NDK_HOME: /Users/buildkite/android-ndk-r25b
-    build_flags:
-      - "--fat_apk_cpu=arm64-v8a,x86"
-      - "--android_crosstool_top=@androidndk//:toolchain"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-ndk
   # NDK project is not building on Windows yet.
   # https://github.com/bazelbuild/examples/issues/94
   # android-ndk-windows:
-  #   name: "Android NDK"
   #   platform: windows
-  #   working_directory: ../android/ndk
-  #   build_targets:
-  #   - "//app/src/main:app"
+  #   <<: *android-ndk
   android-jetpack-compose-linux:
     name: "Android Jetpack Compose"
     platform: ubuntu1804

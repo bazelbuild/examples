@@ -37,45 +37,24 @@ maven_install(
 
 ## Android
 
-_RULES_ANDROID_COMMIT = "81ff9b103c620e14b6f11b5a382576e935087796"
-
 http_archive(
-    name = "rules_android",
-    sha256 = "0c3451323951f5a68d92993c5e0cb45506554e656fe7d137e7878a2b513f7c4f",
-    strip_prefix = "rules_android-%s" % _RULES_ANDROID_COMMIT,
-    urls = [
-        "https://github.com/bazelbuild/rules_android/archive/%s.zip" % _RULES_ANDROID_COMMIT,
-    ],
+    name = "build_bazel_rules_android",
+    sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
+    strip_prefix = "rules_android-0.1.1",
+    urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
 )
 
-load("@rules_android//:prereqs.bzl", "rules_android_prereqs")
-
-rules_android_prereqs()
-
-load("@rules_android//:defs.bzl", "rules_android_workspace")
-
-rules_android_workspace()
-
-register_toolchains(
-    "@rules_android//toolchains/android:android_default_toolchain",
-    "@rules_android//toolchains/android_sdk:android_sdk_tools",
-)
-
-load("@rules_android//android:rules.bzl", "android_sdk_repository")
+load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
 
 android_sdk_repository(
     name = "androidsdk",
 )
 
-_RULES_ANDROID_NDK_COMMIT = "349d5cbacc7784e8bd3d209e3e4987c9bcad9f84"
-
 http_archive(
     name = "rules_android_ndk",
-    sha256 = "70c42af12412f0bb1100089bd74da91f02e86461f4b6e369de436318878cc9fd",
-    strip_prefix = "rules_android_ndk-%s" % _RULES_ANDROID_NDK_COMMIT,
-    urls = [
-        "https://github.com/bazelbuild/rules_android_ndk/archive/%s.zip" % _RULES_ANDROID_NDK_COMMIT,
-    ],
+    sha256 = "3fa4a58f4df356bca277219763f91c64f33dcc59e10843e9762fc5e7947644f9",
+    strip_prefix = "rules_android_ndk-63fa7637902fb1d7db1bf86182e939ed3fe98477",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/63fa7637902fb1d7db1bf86182e939ed3fe98477.zip",
 )
 
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")

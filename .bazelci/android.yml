@@ -9,7 +9,7 @@ common:
       - "--android_platforms=//:arm64-v8a"
     build_targets:
       - "//app:app"
-  android-ndk: &android-ndk:
+  android-ndk: &android-ndk
     name: "Android NDK"
     bazel: last_green
     working_directory: ../android/ndk
@@ -28,7 +28,7 @@ common:
       - "--remote_download_outputs=all"
     build_targets:
       - "//app/src/main:app"
-  android-robolectric: &android-robolectric:
+  android-robolectric: &android-robolectric
     name: "Android Robolectric Testing"
     # Cannot upgrade this until rules_kotlin is compatible.
     bazel: 6.3.2

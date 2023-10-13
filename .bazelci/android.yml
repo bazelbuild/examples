@@ -1,23 +1,24 @@
 ---
+common:
+  android-firebase: &android-firebase
+    name: "Android Firebase Cloud Messaging"
+    working_directory: ../android/firebase-cloud-messaging
+    build_flags:
+      - "--incompatible_enable_android_toolchain_resolution"
+      - "--android_platforms=//:arm64-v8a"
+    build_targets:
+      - "//app:app"
+
 tasks:
   android-firebase-linux:
-    name: "Android Firebase Cloud Messaging"
     platform: ubuntu1804
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-firebase-macos:
-    name: "Android Firebase Cloud Messaging"
     platform: macos
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-firebase-windows:
-    name: "Android Firebase Cloud Messaging"
     platform: windows
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-ndk-linux:
     name: "Android NDK"
     platform: ubuntu1804

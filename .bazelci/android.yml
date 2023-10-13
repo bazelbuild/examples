@@ -2,6 +2,7 @@
 common:
   android-firebase: &android-firebase
     name: "Android Firebase Cloud Messaging"
+    bazel: last_green
     working_directory: ../android/firebase-cloud-messaging
     build_flags:
       - "--incompatible_enable_android_toolchain_resolution"

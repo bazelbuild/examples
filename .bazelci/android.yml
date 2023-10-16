@@ -1,98 +1,86 @@
 ---
+common:
+  android-firebase: &android-firebase
+    name: "Android Firebase Cloud Messaging"
+    bazel: last_green
+    working_directory: ../android/firebase-cloud-messaging
+    build_flags:
+      - "--incompatible_enable_android_toolchain_resolution"
+      - "--android_platforms=//:arm64-v8a"
+    build_targets:
+      - "//app:app"
+  android-ndk: &android-ndk
+    name: "Android NDK"
+    bazel: 6.3.2
+    working_directory: ../android/ndk
+    build_flags:
+      # TODO(https://github.com/bazelbuild/rules_android/issues/77):
+      #   Enable Android Platforms.
+      - "--noincompatible_enable_android_toolchain_resolution"
+      - "--fat_apk_cpu=arm64-v8a,x86"
+      - "--android_crosstool_top=@androidndk//:toolchain"
+    build_targets:
+      - "//app/src/main:app"
+  android-jetpack: &android-jetpack
+    name: "Android Jetpack Compose"
+    # Cannot upgrade this until rules_kotlin is compatible.
+    bazel: 6.3.2
+    working_directory: ../android/jetpack-compose
+    build_flags:
+      - "--noincompatible_enable_android_toolchain_resolution"
+      - "--remote_download_outputs=all"
+    build_targets:
+      - "//app/src/main:app"
+  android-robolectric: &android-robolectric
+    name: "Android Robolectric Testing"
+    # Cannot upgrade this until rules_kotlin is compatible.
+    bazel: 6.3.2
+    working_directory: ../android/robolectric-testing
+    build_flags:
+      - "--noincompatible_enable_android_toolchain_resolution"
+    test_targets:
+      - "//app:test"
+
 tasks:
   android-firebase-linux:
-    name: "Android Firebase Cloud Messaging"
     platform: ubuntu1804
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-firebase-macos:
-    name: "Android Firebase Cloud Messaging"
     platform: macos
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-firebase-windows:
-    name: "Android Firebase Cloud Messaging"
     platform: windows
-    working_directory: ../android/firebase-cloud-messaging
-    build_targets:
-      - "..."
+    <<: *android-firebase
   android-ndk-linux:
-    name: "Android NDK"
     platform: ubuntu1804
-    working_directory: ../android/ndk
     environment:
       ANDROID_NDK_HOME: /opt/android-ndk-r25b
-    build_flags:
-      - "--fat_apk_cpu=arm64-v8a,x86"
-      - "--android_crosstool_top=@androidndk//:toolchain"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-ndk
   android-ndk-macos:
-    name: "Android NDK"
     platform: macos
-    working_directory: ../android/ndk
     environment:
       ANDROID_NDK_HOME: /Users/buildkite/android-ndk-r25b
-    build_flags:
-      - "--fat_apk_cpu=arm64-v8a,x86"
-      - "--android_crosstool_top=@androidndk//:toolchain"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-ndk
   # NDK project is not building on Windows yet.
   # https://github.com/bazelbuild/examples/issues/94
   # android-ndk-windows:
-  #   name: "Android NDK"
   #   platform: windows
-  #   working_directory: ../android/ndk
-  #   build_targets:
-  #   - "//app/src/main:app"
+  #   <<: *android-ndk
   android-jetpack-compose-linux:
-    name: "Android Jetpack Compose"
     platform: ubuntu1804
-    working_directory: ../android/jetpack-compose
-    build_flags:
-      - "--remote_download_outputs=all"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-jetpack
   android-jetpack-compose-macos:
-    name: "Android Jetpack Compose"
     platform: macos
-    working_directory: ../android/jetpack-compose
-    build_flags:
-      - "--remote_download_outputs=all"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-jetpack
   android-jetpack-compose-windows:
-    name: "Android Jetpack Compose"
     platform: windows
-    working_directory: ../android/jetpack-compose
-    build_flags:
-      - "--remote_download_outputs=all"
-    build_targets:
-      - "//app/src/main:app"
+    <<: *android-jetpack
   android-robolectric-testing-linux:
-    name: "Android Robolectric Testing"
     platform: ubuntu1804
-    working_directory: ../android/robolectric-testing
-    build_targets:
-      - "..."
-    test_targets:
-      - "..."
+    <<: *android-robolectric
   android-robolectric-testing-macos:
-    name: "Android Robolectric Testing"
     platform: macos
-    working_directory: ../android/robolectric-testing
-    build_targets:
-      - "..."
-    test_targets:
-      - "..."
+    <<: *android-robolectric
   #  android-robolectric-testing-windows:
-  #    name: "Android Robolectric Testing"
   #    platform: windows
-  #    working_directory: ../android/robolectric-testing
-  #    build_targets:
-  #      - "..."
-  #    test_targets:
-  #      - "..."
+  #    <<: *android-robolectric

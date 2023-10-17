@@ -1,0 +1,7 @@
+# See https://github.com/GoogleContainerTools/container-structure-test#command-tests
+schemaVersion: 2.0.0
+commandTests:
+  - name: test
+    command: java
+    args: ['-jar', '/java-maven_deploy.jar']
+    expectedOutput: ['Success: 1']

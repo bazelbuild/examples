@@ -3,6 +3,7 @@ load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//next.js:next/package_json.bzl", next_bin = "bin")
+load("//:sbom.bzl", "spdx_merge")
 load("//next.js:defs.bzl", "next")
 
 npm_link_all_packages(name = "node_modules")
@@ -76,4 +77,15 @@ build_test(
         # TODO: fix in Next.js (https://github.com/vercel/next.js/issues/43344) or find work-around.
         # ":next_export",
     ],
+)
+
+sh_binary(
+    name = "merger",
+    srcs = ["merger.sh"],
+)
+
+spdx_merge(
+    name = "merge",
+    my_database = "db.json",
+    target = "//next.js:next",
 )

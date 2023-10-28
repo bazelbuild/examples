@@ -7,6 +7,17 @@ bazel_dep(name = "aspect_rules_swc", version = "1.0.2")
 bazel_dep(name = "aspect_rules_ts", version = "2.0.0")
 bazel_dep(name = "aspect_rules_rollup", version = "1.0.0")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
+bazel_dep(name = "rules_license", version = "0.0.0")
+
+local_path_override(
+    module_name = "aspect_rules_js",
+    path = "../../rules_js",
+)
+
+local_path_override(
+    module_name = "rules_license",
+    path = "../../rules_license",
+)
 
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(

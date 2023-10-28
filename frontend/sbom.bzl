@@ -13,7 +13,7 @@ def _licenses_aspect_impl(target, ctx):
     transitive = []
 
     # direct
-    if PackageInfo in target and target[PackageInfo].license:
+    if PackageInfo in target:
         #direct = [TransitivePkgInfo(pkgs = depset(target[PackageInfo])]
         direct = [target[PackageInfo]]
 
@@ -26,9 +26,6 @@ def _licenses_aspect_impl(target, ctx):
     return [
         TransitivePkgInfo(pkgs = depset(direct = direct, transitive = transitive)),
     ]
-    # if PackageInfo in target and target[PackageInfo].license:
-    #     print("", target[PackageInfo].package_name, target[PackageInfo].package_version, target[PackageInfo].license)
-    #print(target.label, len(result))
 
 gather_licenses = aspect(
     implementation = _licenses_aspect_impl,
@@ -82,6 +79,8 @@ def _spdx_impl(target, ctx):
                 (t.package_name[1:] if t.package_name.startswith("@") else t.package_name).replace("/", "."),
                 t.package_version,
             ),
+            # TODO:
+            # "licenseDeclared": t.license
             # node.package?.license || NO_ASSERTION,
         })
 

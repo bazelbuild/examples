@@ -4,13 +4,20 @@ A collection of examples of how to use the Bazel build system.
 
 ## Introductory tutorials
 
+Some tutorials under <https://bazel.build/start> point to code in this repository:
+
  * [C++ basics](/cpp-tutorial)
+   <br/>Working examples for the [C++ Bazel Tutorial](https://bazel.build/start/cpp)
  * [Java basics](/java-tutorial)
- * [End to End](/tutorial)
-   <br/>A full end-to-end system with a backend, an Android app, and an iOS app.
- * [iOS basics](/tutorial/ios-app)
+   <br/>Working examples for the [Java Bazel Tutorial](https://bazel.build/start/java)
  * [Using query](/query-quickstart)
    <br/>Working examples for [The Query quickstart](https://bazel.build/query/quickstart)
+
+Note that tutorials for other languages may be found under other repositories:
+
+ * [iOS tutorial](https://github.com/bazelbuild/rules_apple/blob/master/doc/tutorials/ios-app.md)
+ * [Go tutorial](https://bazel-contrib.github.io/SIG-rules-authors/go-tutorial.html) along with
+   [sources](https://github.com/bazelbuild/rules_go/tree/master/examples/basic-gazelle)
 
  ## Example cookbook
 
@@ -24,11 +31,17 @@ A collection of examples of how to use the Bazel build system.
  * [Using Android Jetpack Compose](/firebase-cloud-messaging)
  * [Using Firebase Cloud Messaging](/jetpack-compose)
  * [Using the NDK](/android/ndk)
- * [Using Roboelectic tests and Kotlin](/android/robolectric-testing)
+ * [Using Roboelectric tests and Kotlin](/android/robolectric-testing)
 
  ### Java
 
  * [Using Java with Maven](/java-maven)
+
+ ### Frontend
+
+ * [Next.js](/frontend/next.js)
+ * [react](/frontend/react)
+ * [vue](/frontend/vue)
 
  ### [Rule writing](/rules)
 

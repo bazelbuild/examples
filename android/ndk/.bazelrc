@@ -1,4 +1,0 @@
-# Flags from @bencodes, don't know if these should remain.
-build:d8 --incremental_dexing=true
-build:d8 --define=android_dexmerger_tool=d8_dexmerger --define=android_incremental_dexing_tool=d8_dexbuilder --define=android_standalone_dexing_tool=d8_compat_dx
-build:d8 --experimental_use_dex_splitter_for_incremental_dexing=true --experimental_incremental_dexing_after_proguard_by_default=true --experimental_incremental_dexing_after_proguard=50

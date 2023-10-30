@@ -13,7 +13,7 @@ importers:
       '@bazel/ibazel': 0.16.2
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 13.4.0
-      '@types/is-even': 1.0.0
+      '@types/is-even': 1.0.1
       '@types/jest': 29.2.3
       '@types/node': 18.11.9
       '@types/react': 18.0.25
@@ -39,7 +39,7 @@ importers:
       '@bazel/ibazel': 0.16.2
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
-      '@types/is-even': 1.0.0
+      '@types/is-even': 1.0.1
       '@types/jest': 29.2.3
       '@types/node': 18.11.9
       '@types/react': 18.0.25
@@ -2901,8 +2901,8 @@ packages:
       '@types/node': 20.8.2
     dev: false
 
-  /@types/is-even/1.0.0:
-    resolution: {integrity: sha512-TMfo5j24wiKIP0MzLWTJZao3xN3TxUtx8LFy2sEsxvtc2jb2fSMpPZKzMjCoYJ380m23F6Fr6E+u+0Za24V53g==}
+  /@types/is-even/1.0.1:
+    resolution: {integrity: sha512-8FbDpWHrWEiXXCuuwkuPT2p4tHr7fhOR2STGdSyQ0ljlqJT7sIqtHSRDXFSLTHqtizXmvThht0Hx3+2+7MAewg==}
     dev: true
 
   /@types/is-odd/3.0.2:

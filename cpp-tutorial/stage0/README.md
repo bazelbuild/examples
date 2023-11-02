@@ -1,6 +1,8 @@
 
 # Stage 0
 
+**Linux-only**
+
 In this initial stage, we'll focus on setting up a hermetic GCC toolchain for
 our Bazel build environment, utilizing the hermetic GCC toolchain provided here.
 A hermetic toolchain is crucial for achieving deterministic builds, ensuring

@@ -1,0 +1,7 @@
+common --enable_platform_specific_config
+
+# Prevent Bazel from detecting the system's C++ toolchain.
+build:linux --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+build:linux --incompatible_strict_action_env=true
+# Enable the CC toolchain resolution based on platforms.
+build:linux --incompatible_enable_cc_toolchain_resolution

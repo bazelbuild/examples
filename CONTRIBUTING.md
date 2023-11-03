@@ -1,5 +1,15 @@
+# Contributing Financially
 
-# Contributing to this repository.
+This repository welcomes community funding of new examples, via the
+[Rules Authors SIG](https://github.com/bazelbuild/community/blob/main/sigs/rules-authors/CHARTER.md).
+
+You may contribute at <https://opencollective.com/bazel-rules-authors-sig>.
+
+If you'd like your donation to be used to fund development of a specific example of Bazel usage,
+please file an issue on this repository first, describing your scenario, and indicate that you
+intend to provide a "feature bounty" for it in the form of a donation.
+
+# Contributing Code
 
 We put these examples together because we needed them, and because
 they seemed instructive. We encourage you to come up with variations

@@ -9,6 +9,10 @@ A hermetic toolchain is crucial for achieving deterministic builds, ensuring
 that our build outputs are solely dependent on our input sources and build
 instructions, unaffected by the external system environment.
 
+Note that there are several options for hermetic toolchains, depending on which
+compiler you use.
+See <https://github.com/bazelbuild/rules_cc#using-the-rules_cc-toolchain>.
+
 ## Load the hermetic GCC toolchain
 
 Add to your WORKSPACE file:

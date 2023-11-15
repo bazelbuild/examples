@@ -52,9 +52,9 @@ android_sdk_repository(
 
 http_archive(
     name = "rules_android_ndk",
-    sha256 = "3fa4a58f4df356bca277219763f91c64f33dcc59e10843e9762fc5e7947644f9",
-    strip_prefix = "rules_android_ndk-63fa7637902fb1d7db1bf86182e939ed3fe98477",
-    url = "https://github.com/bazelbuild/rules_android_ndk/archive/63fa7637902fb1d7db1bf86182e939ed3fe98477.zip",
+    sha256 = "b1a5ddd784e6ed915c2035c0db536a278b5f50c64412128c06877115991391ef",
+    strip_prefix = "rules_android_ndk-877c68ef34c9f3353028bf490d269230c1990483",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/877c68ef34c9f3353028bf490d269230c1990483.zip",
 )
 
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")

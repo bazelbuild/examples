@@ -30,6 +30,7 @@ common:
     build_flags:
       - "--noincompatible_enable_android_toolchain_resolution"
       - "--remote_download_outputs=all"
+      - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
   android-robolectric: &android-robolectric

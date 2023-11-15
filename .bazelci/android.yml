@@ -19,6 +19,7 @@ common:
       - "--noincompatible_enable_android_toolchain_resolution"
       - "--fat_apk_cpu=arm64-v8a,x86"
       - "--android_crosstool_top=@androidndk//:toolchain"
+      - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
   android-jetpack: &android-jetpack

@@ -19,6 +19,11 @@
             "postcss-preset-env": "*",
             "postcss-normalize": "*"
           }
+        },
+        "ng2-dragula": {
+          "peerDependencies": {
+            "@angular/compiler-cli": "*"
+          }
         }
       }
     }

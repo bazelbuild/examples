@@ -1,4 +1,5 @@
 packages:
+    - angular
     - next.js
     - packages/*
     - react

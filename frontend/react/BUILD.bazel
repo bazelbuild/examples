@@ -39,6 +39,7 @@ js_test(
 js_run_devserver(
     name = "start",
     args = ["start"],
+    chdir = package_name(),
     command = "node_modules/.bin/react-scripts",
     data = CRA_DEPS,
 )

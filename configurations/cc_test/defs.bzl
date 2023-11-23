@@ -26,6 +26,7 @@ def _test_transition_rule_impl(ctx):
     return [DefaultInfo(runfiles = runfiles, executable = executable_dst)]
 
 transition_rule_test = rule(
+    cfg = _test_arg_transition,
     implementation = _test_transition_rule_impl,
     attrs = {
         "actual_test": attr.label(cfg = _test_arg_transition, executable = True),

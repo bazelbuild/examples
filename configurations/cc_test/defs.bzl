@@ -38,9 +38,15 @@ transition_rule_test = rule(
 )
 
 def test_arg_cc_test(name, **kwargs):
-    cc_test_name = name + "_native_test"
+    # Prepend leading underscore (_) to mark the native test as internal.
+    cc_test_name = "_" + name + "_native_test"
     transition_rule_test(
         name = name,
+        # bazel test picks up the args from the transitioned test.
+        args = kwargs.pop("args", None),
         actual_test = ":%s" % cc_test_name,
     )
-    native.cc_test(name = cc_test_name, **kwargs)
+
+    # The native test is built as usual, but mark as "manual" so that blaze test :all
+    # does not run it.
+    native.cc_test(name = cc_test_name, tags = kwargs.pop("tags", []) + ["manual"], **kwargs)

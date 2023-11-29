@@ -22,14 +22,14 @@ def _test_transition_rule_impl(ctx):
         outputs = [executable_dst],
         command = "cp %s %s" % (executable_src.path, executable_dst.path),
     )
-    runfiles = ctx.attr.actual_test[0][DefaultInfo].default_runfiles
+    runfiles = ctx.attr.actual_test[DefaultInfo].default_runfiles
     return [DefaultInfo(runfiles = runfiles, executable = executable_dst)]
 
 transition_rule_test = rule(
     cfg = _test_arg_transition,
     implementation = _test_transition_rule_impl,
     attrs = {
-        "actual_test": attr.label(cfg = _test_arg_transition, executable = True),
+        "actual_test": attr.label(cfg = "target", executable = True),
         "_allowlist_function_transition": attr.label(
             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
         ),

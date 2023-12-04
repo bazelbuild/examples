@@ -14,6 +14,11 @@
             "eslint": "*"
           }
         },
+        "eslint-config-next": {
+          "peerDependencies": {
+            "next": "*"
+          }
+        },
         "postcss-loader": {
           "peerDependencies": {
             "postcss-flexbugs-fixes": "*",

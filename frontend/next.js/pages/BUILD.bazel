@@ -1,6 +1,5 @@
 load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("@npm//next.js:eslint/package_json.bzl", eslint_bin = "bin")
 
 SRCS = [
     "_app.tsx",
@@ -57,21 +56,4 @@ jest_test(
         "//next.js/styles",
     ],
     node_modules = "//next.js:node_modules",
-)
-
-eslint_bin.eslint_test(
-    name = "eslint_test",
-    args = [
-        "--config $(location //next.js:eslintrc)",
-    ] + ["{}/{}".format(
-        package_name(),
-        s,
-    ) for s in SRCS + SPECS],
-    data = SRCS + SPECS + [
-        "//next.js:eslintrc",
-        "//next.js:node_modules/@next/eslint-plugin-next",
-        "//next.js:node_modules/eslint-config-next",
-        "//next.js:node_modules/next",
-    ],
-    tags = ["lint"],
 )

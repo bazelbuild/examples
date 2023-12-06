@@ -2,7 +2,6 @@ load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm//next.js:eslint/package_json.bzl", eslint_bin = "bin")
 load("@npm//next.js:next/package_json.bzl", next_bin = "bin")
 load("//next.js:defs.bzl", "next")
 
@@ -61,15 +60,10 @@ js_library(
     deps = [":node_modules/next"],
 )
 
-eslint_bin.eslint_binary(
-    name = "eslint",
-    visibility = ["//next.js:__subpackages__"],
-)
-
 js_library(
     name = "eslintrc",
     srcs = [".eslintrc.js"],
-    visibility = ["//next.js:__subpackages__"],
+    visibility = ["//:__subpackages__"],
     deps = [
         ":node_modules/@next/eslint-plugin-next",
         ":node_modules/eslint-config-next",

@@ -14,7 +14,7 @@
     "vue-router": "4.1.6"
   },
   "devDependencies": {
-    "@bazel/ibazel": "0.16.2",
+    "@bazel/ibazel": "0.24.0",
     "@types/node": "18.11.9",
     "@vitejs/plugin-vue": "3.2.0",
     "@vitejs/plugin-vue-jsx": "2.1.1",

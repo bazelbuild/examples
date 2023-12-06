@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-packageExtensionsChecksum: 1137c84cb3f5d653debe824f83a85f54
+packageExtensionsChecksum: a122f03ed0dc3605ecb32517e9cf5c4c
 
 importers:
 
@@ -33,8 +33,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.24.0
+        version: 0.24.0
       '@testing-library/jest-dom':
         specifier: 4.2.4
         version: 4.2.4
@@ -113,8 +113,8 @@ importers:
         version: 2.1.4
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.24.0
+        version: 0.24.0
       '@types/jest':
         specifier: 29.2.3
         version: 29.2.3
@@ -183,8 +183,8 @@ importers:
         version: 4.1.6(vue@3.2.45)
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.24.0
+        version: 0.24.0
       '@types/node':
         specifier: 18.11.9
         version: 18.11.9
@@ -1645,8 +1645,8 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@bazel/ibazel@0.16.2:
-    resolution: {integrity: sha512-KgqAWMH0emL6f3xH6nqyTryoBMqlJ627LBIe9PT1PRRQPz2FtHib3FIHJPukp1slzF3hJYZvdiVwgPnHbaSOOA==}
+  /@bazel/ibazel@0.24.0:
+    resolution: {integrity: sha512-lA0Ey6iorssDTJDwBQW0bCmzQyBTAtOj7L4mqmmlFT6LhIzTc3r0iFOuzxFBsDq8NbxVs/W9PRNIsC/LfpI1nA==}
     hasBin: true
     dev: true
 

@@ -17,7 +17,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@bazel/ibazel": "0.16.2",
+    "@bazel/ibazel": "0.24.0",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "13.4.0",
     "@types/is-even": "1.0.1",

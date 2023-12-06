@@ -32,7 +32,7 @@ maven_install(
         # Dependencies needed to manage version conflicts
         "androidx.core:core:1.6.0",
         "androidx.core:core-ktx:1.6.0",
-        "androidx.savedstate:savedstate-ktx:1.2.0",
+        "androidx.savedstate:savedstate-ktx:1.2.1",
         "androidx.savedstate:savedstate:1.2.0",
         "androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1",
         "androidx.lifecycle:lifecycle-livedata-core:2.5.1",

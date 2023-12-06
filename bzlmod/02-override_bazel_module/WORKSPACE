@@ -4,9 +4,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Use a fork version of glog with http_archive.
 http_archive(
     name = "com_github_google_glog",
-    sha256 = "e544cb12dc528b8951452e3968f4034fc28aaa81f2859cba05b5832dbe5dfa8f",
-    strip_prefix = "glog-0faaf10108e9894276b0de593d0f98330db9ea88",
-    urls = ["https://github.com/meteorcloudy/glog/archive/0faaf10108e9894276b0de593d0f98330db9ea88.tar.gz"],
+    sha256 = "43e83154e0e5a76b5959f9e25e1ac84c04d97c07db412f68783ef9d714b408e7",
+    strip_prefix = "glog-e364e754a60af6f0eadd9902c4e76ecc060fee9c",
+    urls = ["https://github.com/meteorcloudy/glog/archive/e364e754a60af6f0eadd9902c4e76ecc060fee9c.tar.gz"],
 )
 
 # Use a fork version of gflags with git_repository.

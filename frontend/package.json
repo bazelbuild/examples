@@ -1,6 +1,9 @@
 {
     "// To install dependencies with Bazel-managed pnpm, run": "bazel run @pnpm//:pnpm -- --dir $PWD install",
     "private": true,
+    "devDependencies": {
+      "eslint": "^8.55.0"
+    },
     "pnpm": {
       "//packageExtensions": "Fix missing dependencies in npm packages, see https://pnpm.io/package_json#pnpmpackageextensions",
       "packageExtensions": {

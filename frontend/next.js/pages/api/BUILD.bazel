@@ -1,34 +1,12 @@
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("@npm//next.js:eslint/package_json.bzl", eslint_bin = "bin")
-
-SRCS = [
-    "hello.ts",
-]
 
 ts_project(
     name = "api",
-    srcs = SRCS,
+    srcs = ["hello.ts"],
     declaration = True,
     resolve_json_module = True,
     transpiler = "tsc",
     tsconfig = "//next.js:tsconfig",
     visibility = ["//next.js/pages:__subpackages__"],
     deps = ["//next.js:node_modules/next"],
-)
-
-eslint_bin.eslint_test(
-    name = "eslint_test",
-    args = [
-        "--config $(location //next.js:eslintrc)",
-    ] + ["{}/{}".format(
-        package_name(),
-        s,
-    ) for s in SRCS],
-    data = SRCS + [
-        "//next.js:eslintrc",
-        "//next.js:node_modules/@next/eslint-plugin-next",
-        "//next.js:node_modules/eslint-config-next",
-        "//next.js:node_modules/next",
-    ],
-    tags = ["lint"],
 )

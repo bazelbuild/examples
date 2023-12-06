@@ -10,6 +10,12 @@ bazel_dep(name = "aspect_rules_rollup", version = "1.0.0")
 bazel_dep(name = "aspect_rules_webpack", version = "0.13.0")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
 
+git_override(
+    module_name = "aspect_rules_lint",
+    commit = "270a3ea55ba4ee75f8fe15636c053c1cc7941e41",
+    remote = "https://github.com/aspect-build/rules_lint",
+)
+
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm")
 use_repo(pnpm, "pnpm")
 

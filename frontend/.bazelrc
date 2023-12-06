@@ -11,8 +11,11 @@ build --enable_runfiles
 ###########################
 # Linting
 # Enable with --config=lint
-build:lint --aspects=//next.js:lint.bzl%eslint
-# Gather lint reports
+# This is demonstrated by the next.js example:
+# cd next.js; npm run lint
+build:lint --aspects=//:lint.bzl%eslint
+# Gather lint reports.
+# Note: --remote_download_regex is for RBE and was added in Bazel 7.
 build:lint --output_groups=rules_lint_report --remote_download_regex='.*aspect_rules_lint.report'
 # Cause build failures when there are lint warnings.
 # This is a simple configuration, but you probably want to report them as code review comments instead.

@@ -20,7 +20,7 @@ maven_install(
         "androidx.appcompat:appcompat:1.5.1",
         "androidx.constraintlayout:constraintlayout:2.1.4",
         # Needed to enforce version conflict resolution
-        "androidx.savedstate:savedstate:1.2.0",
+        "androidx.savedstate:savedstate:1.2.1",
         "androidx.lifecycle:lifecycle-livedata-core:2.5.1",
         "androidx.lifecycle:lifecycle-livedata:2.5.1",
         "androidx.lifecycle:lifecycle-process:2.5.1",

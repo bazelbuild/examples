@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-packageExtensionsChecksum: 1137c84cb3f5d653debe824f83a85f54
+packageExtensionsChecksum: a122f03ed0dc3605ecb32517e9cf5c4c
 
 importers:
 
@@ -42,8 +42,8 @@ importers:
         specifier: 13.4.0
         version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
       '@types/is-even':
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 1.0.2
+        version: 1.0.2
       '@types/jest':
         specifier: 29.2.3
         version: 29.2.3
@@ -3088,8 +3088,8 @@ packages:
     dependencies:
       '@types/node': 18.11.9
 
-  /@types/is-even@1.0.1:
-    resolution: {integrity: sha512-8FbDpWHrWEiXXCuuwkuPT2p4tHr7fhOR2STGdSyQ0ljlqJT7sIqtHSRDXFSLTHqtizXmvThht0Hx3+2+7MAewg==}
+  /@types/is-even@1.0.2:
+    resolution: {integrity: sha512-qXDiw1zrRSrExwuJHRvxr5eGANlWscPwvQw3xURyax0GkY+fSwwei2uy0ReJBF2N0EeniUr+h2iD9e/KQNroaQ==}
     dev: true
 
   /@types/is-odd@3.0.2:

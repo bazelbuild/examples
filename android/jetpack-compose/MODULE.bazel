@@ -1,9 +1,7 @@
 "Bazel dependencies"
 
 bazel_dep(name = "platforms", version = "0.0.6")
-bazel_dep(name = "rules_android", version = "0.1.1")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
-bazel_dep(name = "rules_kotlin", version = "1.9.0")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
@@ -38,4 +36,3 @@ maven.install(
     ],
 )
 use_repo(maven, "maven")
-

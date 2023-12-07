@@ -2,31 +2,30 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
-    name = "build_bazel_rules_android",
+    name = "rules_android",
     sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
     strip_prefix = "rules_android-0.1.1",
     urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
 )
 
-load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
+load("@rules_android//android:rules.bzl", "android_sdk_repository")
 
 android_sdk_repository(name = "androidsdk")
 
 ## Kotlin
 
-_KOTLIN_COMPILER_VERSION = "1.7.20"
-
-_KOTLIN_COMPILER_SHA = "5e3c8d0f965410ff12e90d6f8dc5df2fc09fd595a684d514616851ce7e94ae7d"
-
-load("@rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "kotlinc_version")
-
-kotlin_repositories(
-    compiler_release = kotlinc_version(
-        release = _KOTLIN_COMPILER_VERSION,
-        sha256 = _KOTLIN_COMPILER_SHA,
-    ),
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "rules_kotlin",
+    sha256 = "5766f1e599acf551aa56f49dab9ab9108269b03c557496c54acaf41f98e2b8d6",
+    url = "https://github.com/bazelbuild/rules_kotlin/releases/download/v1.9.0/rules_kotlin-v1.9.0.tar.gz",
 )
+
+load("@rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories")
+
+kotlin_repositories()
 
 load("@rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 
 kt_register_toolchains()
+

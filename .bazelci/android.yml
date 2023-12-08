@@ -38,7 +38,7 @@ common:
     # Cannot upgrade this until rules_kotlin is compatible.
     bazel: 6.3.2
     working_directory: ../android/robolectric-testing
-    build_flags:
+    test_flags:
       - "--noincompatible_enable_android_toolchain_resolution"
       - "--enable_bzlmod"
     test_targets:

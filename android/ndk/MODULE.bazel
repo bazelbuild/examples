@@ -1,0 +1,27 @@
+"Bazel dependencies"
+
+bazel_dep(name = "platforms", version = "0.0.6")
+bazel_dep(name = "rules_android", version = "0.1.1")
+bazel_dep(name = "rules_jvm_external", version = "5.3")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        "androidx.appcompat:appcompat:1.5.1",
+        "androidx.constraintlayout:constraintlayout:2.1.4",
+        # Needed to enforce version conflict resolution
+        "androidx.savedstate:savedstate:1.2.0",
+        "androidx.lifecycle:lifecycle-livedata-core:2.5.1",
+        "androidx.lifecycle:lifecycle-livedata:2.5.1",
+        "androidx.lifecycle:lifecycle-process:2.5.1",
+        "androidx.lifecycle:lifecycle-runtime:2.5.1",
+        "androidx.lifecycle:lifecycle-service:2.5.1",
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1",
+        "androidx.lifecycle:lifecycle-viewmodel:2.5.1",
+    ],
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+use_repo(maven, "maven")

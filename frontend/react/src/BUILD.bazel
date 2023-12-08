@@ -1,86 +1,56 @@
-load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
-load("@aspect_rules_swc//swc:defs.bzl", "swc")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("@bazel_skylib//lib:partial.bzl", "partial")
 load("//:lint.bzl", "eslint_test")
-
-ASSET_PATTERNS = [
-    "*.svg",
-    "*.css",
-]
-
-SRC_PATTERNS = [
-    "*.tsx",
-    "*.ts",
-]
-
-TRANSPILER = partial.make(
-    swc,
-    swcrc = "//react:.swcrc",
-)
-
-# Filename conventions described at
-# https://create-react-app.dev/docs/running-tests#filename-conventions
-TEST_PATTERNS = [
-    "*.test.tsx",
-    "*.test.ts",
-    "*.spec.tsx",
-    "*.spec.ts",
-]
+load("//:vitest.bzl", "vitest")
+load("//react:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
 
 js_library(
-    name = "src",
+    name = "assets",
     srcs = glob(ASSET_PATTERNS),
-    visibility = ["//visibility:public"],
-    deps = [
-        ":src_ts",
-    ],
+    visibility = ["//react:__subpackages__"],
 )
 
 ts_project(
-    name = "src_ts",
+    name = "src",
     srcs = glob(
         include = SRC_PATTERNS,
         exclude = TEST_PATTERNS,
     ),
+    data = [":assets"],
     declaration = True,
     resolve_json_module = True,
     transpiler = TRANSPILER,
     tsconfig = "//react:tsconfig",
+    visibility = ["//react:__subpackages__"],
     deps = [
+        "//react:node_modules/@types/react",
         "//react:node_modules/react",
         "//react:node_modules/react-dom",
+        "//react:node_modules/vite-plugin-svgr",
         "//react:node_modules/web-vitals",
     ],
 )
 
 ts_project(
-    name = "src_test_ts",
+    name = "test_lib",
     srcs = glob(TEST_PATTERNS),
     declaration = True,
     resolve_json_module = True,
     transpiler = TRANSPILER,
     tsconfig = "//react:tsconfig",
     deps = [
-        ":src_ts",
+        ":src",
+        "//:node_modules/vitest",
         "//react:node_modules/@testing-library/jest-dom",
         "//react:node_modules/@testing-library/react",
         "//react:node_modules/@types/jest",
     ],
 )
 
-jest_test(
-    name = "src_test",
-    config = "//react:jest_config",
-    data = [
-        ":src",
-        ":src_test_ts",
-        "//react:node_modules/jest-environment-jsdom",
-        "//react:node_modules/jest-transform-stub",
-        "//react:node_modules/react",
-    ],
-    node_modules = "//react:node_modules",
+vitest(
+    name = "test",
+    config = "//react:vite.config",
+    deps = [":test_lib"],
 )
 
 # Test that fails if the lint report is non-empty
@@ -88,5 +58,5 @@ jest_test(
 eslint_test(
     name = "lint",
     timeout = "short",
-    srcs = [":src_ts_typings"],
+    srcs = [":src_typings"],
 )

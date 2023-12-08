@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css';
 import { one } from '@bazel-example/one';
 import isEven from 'is-even';
 
+// Uncomment this line to get a linting violation:
+// debugger;
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>

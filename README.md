@@ -41,6 +41,7 @@ Note that tutorials for other languages may be found under other repositories:
 
  * [Next.js](/frontend/next.js)
  * [react](/frontend/react)
+ * [react-webpack](/frontend/react-webpack)
  * [vue](/frontend/vue)
 
  ### [Rule writing](/rules)

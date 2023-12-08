@@ -63,8 +63,11 @@ js_library(
 js_library(
     name = "eslintrc",
     srcs = [".eslintrc.js"],
-    visibility = ["//visibility:public"],
-    deps = [":node_modules/eslint-config-next"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        ":node_modules/@next/eslint-plugin-next",
+        ":node_modules/eslint-config-next",
+    ],
 )
 
 build_test(

@@ -8,7 +8,6 @@ _KOTLIN_COMPILER_VERSION = "1.7.20"
 _KOTLIN_COMPILER_SHA = "5e3c8d0f965410ff12e90d6f8dc5df2fc09fd595a684d514616851ce7e94ae7d"
 
 ## Android
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_bazel_rules_android",

@@ -3,34 +3,6 @@ workspace(name = "bazel_android_sample_project")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-## rules_jvm_external
-
-http_archive(
-    name = "rules_jvm_external",
-    sha256 = "d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac",
-    strip_prefix = "rules_jvm_external-5.3",
-    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/5.3/rules_jvm_external-5.3.tar.gz",
-)
-
-load("@rules_jvm_external//:defs.bzl", "maven_install")
-
-maven_install(
-    name = "maven",
-    artifacts = [
-        "org.robolectric:robolectric:4.9",
-        "junit:junit:4.13.2",
-        "com.google.truth:truth:1.1.3",
-        "org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10",
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10",
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10",
-        "org.jetbrains.kotlin:kotlin-stdlib:1.7.10",
-    ],
-    repositories = [
-        "https://maven.google.com",
-        "https://repo1.maven.org/maven2",
-    ],
-)
-
 ## Android
 
 http_archive(
@@ -42,9 +14,7 @@ http_archive(
 
 load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
 
-android_sdk_repository(
-    name = "androidsdk",
-)
+android_sdk_repository(name = "androidsdk")
 
 ## Kotlin
 

@@ -1,4 +1,4 @@
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver")
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver", "js_test")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//react:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
@@ -82,4 +82,13 @@ bin.vite_binary(
     args = ["preview"],
     chdir = package_name(),
     data = [":build"],
+)
+
+# Just verify that the bundle produced "something reasonable" but doesn't verify it functions in a browser.
+# TODO: use something like Cypress for a true end-to-end test
+js_test(
+    name = "build_smoke_test",
+    timeout = "short",
+    data = [":build"],
+    entry_point = "build_smoke_test.js",
 )

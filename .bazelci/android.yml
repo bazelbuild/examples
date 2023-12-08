@@ -40,6 +40,7 @@ common:
     working_directory: ../android/robolectric-testing
     build_flags:
       - "--noincompatible_enable_android_toolchain_resolution"
+      - "--enable_bzlmod"
     test_targets:
       - "//app:test"
 

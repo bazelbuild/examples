@@ -1,6 +1,6 @@
 "Bazel dependencies"
 
-bazel_dep(name = "platforms", version = "0.0.6")
+bazel_dep(name = "platforms", version = "0.0.8")
 bazel_dep(name = "rules_android", version = "0.1.1")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
 

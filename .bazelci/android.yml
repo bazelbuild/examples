@@ -5,7 +5,6 @@ common:
     bazel: last_green
     working_directory: ../android/firebase-cloud-messaging
     build_flags:
-      - "--incompatible_enable_android_toolchain_resolution"
       - "--android_platforms=//:arm64-v8a"
     build_targets:
       - "//app:app"
@@ -14,11 +13,7 @@ common:
     bazel: 6.3.2
     working_directory: ../android/ndk
     build_flags:
-      # TODO(https://github.com/bazelbuild/rules_android/issues/77):
-      #   Enable Android Platforms.
-      - "--noincompatible_enable_android_toolchain_resolution"
-      - "--fat_apk_cpu=arm64-v8a,x86"
-      - "--android_crosstool_top=@androidndk//:toolchain"
+      - "--android_platforms=//:arm64-v8a,//:x86"
       - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
@@ -28,7 +23,7 @@ common:
     bazel: 6.3.2
     working_directory: ../android/jetpack-compose
     build_flags:
-      - "--noincompatible_enable_android_toolchain_resolution"
+      - "--android_platforms=//:arm64-v8a"
       - "--remote_download_outputs=all"
       - "--enable_bzlmod"
     build_targets:
@@ -39,7 +34,7 @@ common:
     bazel: 6.3.2
     working_directory: ../android/robolectric-testing
     test_flags:
-      - "--noincompatible_enable_android_toolchain_resolution"
+      - "--android_platforms=//:arm64-v8a"
       - "--enable_bzlmod"
     test_targets:
       - "//app:test"

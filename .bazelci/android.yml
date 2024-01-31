@@ -28,6 +28,7 @@ common:
       - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
+    skip_in_bazel_downstream_pipeline: "Due to https://github.com/bazelbuild/examples/issues/400"
   android-robolectric: &android-robolectric
     name: "Android Robolectric Testing"
     # Cannot upgrade this until rules_kotlin is compatible.
@@ -38,6 +39,7 @@ common:
       - "--enable_bzlmod"
     test_targets:
       - "//app:test"
+    skip_in_bazel_downstream_pipeline: "Due to https://github.com/bazelbuild/examples/issues/400"
 
 tasks:
   android-firebase-linux:

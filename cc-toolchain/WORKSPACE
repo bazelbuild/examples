@@ -1,0 +1,3 @@
+load("//basic/gcc/toolchain:defs.bzl", "instal_basic_gcc_toolchain")
+
+instal_basic_gcc_toolchain()

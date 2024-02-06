@@ -6,7 +6,7 @@ std::string get_greet(const std::string& who) {
 
 
 int main(int argc, char** argv) {
-  std::string who = "world";
-  std::cout << get_greet(who) << std::endl;
+//   std::string who = "world";
+//   std::cout << get_greet(who) << std::endl;
   return 0;
 }

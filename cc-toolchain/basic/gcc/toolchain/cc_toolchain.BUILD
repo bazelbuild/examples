@@ -98,7 +98,13 @@ filegroup(
             # libc.so.6 is not found.
             # See https://stackoverflow.com/questions/52386530/linker-fails-in-sandbox-when-running-through-bazel-but-works-when-sandboxed-comm
             # Symlinks in Bazel sandbox messes up the sysroot so libc.so.6 and libc_nonshared.a can't be found
-            # Running the link action outsize of Bazel works.
+            # even though running the link action outsize of Bazel works.
+            # If we can't fix bazel symlinks to work with gcc toolchain's sysroot, we have to tweak
+            # libc.so from
+            # GROUP ( /lib64/libc.so.6 /usr/lib64/libc_nonshared.a  AS_NEEDED ( /lib64/ld-linux-x86-64.so.2 ) )
+            # to
+            # GROUP ( /libc.so.6 /libc_nonshared.a  AS_NEEDED ( /lib64/ld-linux-x86-64.so.2 ) )
+            # so that they're discoverable from system's /lib/x86_64-linux-gnu
             "x86_64-buildroot-linux-gnu/sysroot/lib64/libc.so.6",
             "x86_64-buildroot-linux-gnu/sysroot/usr/lib64/**",
             "lib64/gcc/x86_64-buildroot-linux-gnu/12.3.0/**",

@@ -1,3 +1,3 @@
-load("//basic/gcc/toolchain:defs.bzl", "instal_basic_gcc_toolchain")
+load("//01-minimal-gcc-toolchain:defs.bzl", "instal_minimal_gcc_toolchain")
 
-instal_basic_gcc_toolchain()
+instal_minimal_gcc_toolchain()

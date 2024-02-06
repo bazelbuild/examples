@@ -30,11 +30,6 @@ cc_toolchain_config(
     ],
     host_system_name = "local",
     link_flags = [
-        # "-Wl,--sysroot=/usr/local/google/home/vinhdaitran/github/daivinhtran/examples/cc-toolchain/bazel-cc-toolchain/external/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot",
-        # FIX ME: Needed to link to libc.so.6 from toolchain's sysroot instead of /lib/x86_64-linux-gnu/libc.so.6
-        # Error: cannot find /lib64/libc.so.6: cannot find /usr/lib64/libc_nonshared.a:
-        # Symlinks in Bazel sandbox messes up the sysroot so libc.so.6 and libc_nonshared.a can't be found
-        # Running the link action outsize of Bazel works.
         "-Bexternal/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot/bin",
         "-Bexternal/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot/usr/lib64",
         "-Bexternal/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot/lib64",
@@ -42,7 +37,6 @@ cc_toolchain_config(
         "-Lexternal/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot/usr/lib64",
         "-Lexternal/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot/lib64",
     ],
-    # link_flags = ["--specs=nosys.specs"],
     target_libc = "unknown",
     target_system_name = "local",
     tool_paths = {
@@ -97,14 +91,13 @@ filegroup(
             # FIX ME: Even though link action sets --sysroot=external/gcc_toolchain/x86_64-buildroot-linux-gnu/sysroot
             # libc.so.6 is not found.
             # See https://stackoverflow.com/questions/52386530/linker-fails-in-sandbox-when-running-through-bazel-but-works-when-sandboxed-comm
-            # Symlinks in Bazel sandbox messes up the sysroot so libc.so.6 and libc_nonshared.a can't be found
+            # Bazel symlinks sandbox messes up the sysroot so that libc.so.6 and libc_nonshared.a can't be found
             # even though running the link action outsize of Bazel works.
-            # If we can't fix bazel symlinks to work with gcc toolchain's sysroot, we have to tweak
-            # libc.so from
+            # A workaround is to run
+            # ln -s /lib/x86_64-linux-gnu/libc_nonshared.a /usr/lib64/libc_nonshared.a
+            # ln -s /lib/x86_64-linux-gnu/libc.so.6 /lib64/libc.so.6
+            # because libc.so expects
             # GROUP ( /lib64/libc.so.6 /usr/lib64/libc_nonshared.a  AS_NEEDED ( /lib64/ld-linux-x86-64.so.2 ) )
-            # to
-            # GROUP ( /libc.so.6 /libc_nonshared.a  AS_NEEDED ( /lib64/ld-linux-x86-64.so.2 ) )
-            # so that they're discoverable from system's /lib/x86_64-linux-gnu
             "x86_64-buildroot-linux-gnu/sysroot/lib64/libc.so.6",
             "x86_64-buildroot-linux-gnu/sysroot/usr/lib64/**",
             "lib64/gcc/x86_64-buildroot-linux-gnu/12.3.0/**",

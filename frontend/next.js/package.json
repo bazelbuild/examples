@@ -12,7 +12,7 @@
   "dependencies": {
     "@bazel-example/one": "workspace:*",
     "is-even": "1.0.0",
-    "next": "13.0.5",
+    "next": "^14.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
@@ -26,7 +26,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "eslint": "8.28.0",
-    "eslint-config-next": "13.0.5",
+    "eslint-config-next": "^14.1.1",
     "jest-cli": "29.5.0",
     "jest-junit": "16.0.0",
     "jest-environment-jsdom": "29.5.0",

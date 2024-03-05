@@ -1,0 +1,4 @@
+proto_library(
+    name = "foo",
+    srcs = ["foo.proto"],
+)

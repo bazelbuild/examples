@@ -1,0 +1,13 @@
+diff --git a/MODULE.bazel b/MODULE.bazel
+index a701b57..128699b 100644
+--- a/MODULE.bazel
++++ b/MODULE.bazel
+@@ -18,7 +18,7 @@ bazel_dep(name = "platforms", version = "0.0.8")
+ # no such package '@@[unknown repo 'rules_python' requested from @@rules_proto~override]//python/proto':
+ # The repository '@@[unknown repo 'rules_python' requested from @@rules_proto~override]' could not be resolved:
+ # No repository visible as '@rules_python' from repository '@@rules_proto~override'
+-bazel_dep(name = "rules_python", version = "0.31.0")
++# bazel_dep(name = "rules_python", version = "0.31.0")
+ 
+ # Dependencies needed in tests
+ bazel_dep(name = "stardoc", version = "0.5.6", dev_dependency = True, repo_name = "io_bazel_stardoc")

@@ -8,6 +8,8 @@ git_override(
     module_name = "rules_proto",
     remote = "https://github.com/bazelbuild/rules_proto.git",
     commit = "a6eb5eb3ba2c41a2b5945d755007f318729b0849",
+    patch_strip = 1,
+    patches = ["//:rules_proto.patch"],
 )
 
 # Update to include

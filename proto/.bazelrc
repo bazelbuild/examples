@@ -1,0 +1,5 @@
+# The main ingredient: allow us to register toolchains other than com_google_protobuf targets
+common --incompatible_enable_proto_toolchain_resolution
+
+# Needed because we don't register any python toolchain in this repo (yet)
+common --@aspect_rules_py//py:interpreter_version=3.9.18

@@ -1,9 +1,21 @@
 bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
+bazel_dep(name = "rules_python", version = "0.31.0")
+bazel_dep(name = "aspect_rules_py", version = "0.7.1")
 
 # Update to include
 # https://github.com/bazelbuild/rules_proto/pull/206
 git_override(
     module_name = "rules_proto",
     remote = "https://github.com/bazelbuild/rules_proto.git",
-    commit = "d373829e59d94c95e470f4250d9da4617c4951eb",
+    commit = "a6eb5eb3ba2c41a2b5945d755007f318729b0849",
 )
+
+# Update to include
+# https://github.com/bazelbuild/rules_python/pull/1577
+git_override(
+    module_name = "rules_python",
+    remote = "https://github.com/bazelbuild/rules_python.git",
+    commit = "1d4895229159e624d4f41a6f4f5ea25f60c4e4f9",
+)
+
+register_toolchains("//toolchains:all")

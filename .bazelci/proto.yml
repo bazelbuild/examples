@@ -1,0 +1,9 @@
+---
+tasks:
+  test:
+    platform: ubuntu2004
+    working_directory: ../proto
+    build_targets:
+      - "..."
+    environment:
+      RULES_PYTHON_ENABLE_PYSTAR: 0

@@ -1,0 +1,9 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+
+# https://pypi.org/project/protobuf/4.25.3/
+http_file(
+    name = "protobuf_4_25_3",
+    downloaded_file_path = "protobuf-4.25.3-py3-none-any.whl",
+    sha256 = "f0700d54bcf45424477e46a9f0944155b46fb0639d69728739c0e47bab83f2b9",
+    urls = ["https://files.pythonhosted.org/packages/f4/d5/db585a5e8d64af6b384c7b3a63da13df2ff86933e486ba78431736c67c25/protobuf-4.25.3-py3-none-any.whl"],
+)

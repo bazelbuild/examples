@@ -1,4 +1,13 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_python//python:proto.bzl", "py_proto_library")
+
 proto_library(
-    name = "foo",
+    name = "foo_proto",
     srcs = ["foo.proto"],
+)
+
+py_proto_library(
+    name = "foo_py_proto",
+    visibility = ["//visibility:public"],
+    deps = [":foo_proto"],
 )

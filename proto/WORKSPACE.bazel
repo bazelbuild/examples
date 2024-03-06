@@ -1,6 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
-# https://pypi.org/project/protobuf/4.25.3/
+# Fetch the runtime package that applications need to marshal proto files.
+# This does NOT do any code generation of .pb2.py files, we still use protoc for that.
+# From https://pypi.org/project/protobuf/4.25.3/
 http_file(
     name = "protobuf_4_25_3",
     downloaded_file_path = "protobuf-4.25.3-py3-none-any.whl",

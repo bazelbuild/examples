@@ -7,7 +7,7 @@ bazel_dep(name = "aspect_rules_py", version = "0.7.1")
 git_override(
     module_name = "rules_proto",
     remote = "https://github.com/bazelbuild/rules_proto.git",
-    commit = "a6eb5eb3ba2c41a2b5945d755007f318729b0849",
+    commit = "d373829e59d94c95e470f4250d9da4617c4951eb",
 )
 
 # Update to include
@@ -15,7 +15,7 @@ git_override(
 git_override(
     module_name = "rules_python",
     remote = "https://github.com/bazelbuild/rules_python.git",
-    commit = "1d4895229159e624d4f41a6f4f5ea25f60c4e4f9",
+    commit = "3edcae33dcc43051ca6f200c2d0cb3692df79d03",
 )
 
 register_toolchains("//toolchains:all")

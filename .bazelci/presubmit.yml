@@ -6,3 +6,4 @@ imports:
 - rules.yml
 - tutorials.yml
 - bzlmod.yml
+- proto.yml

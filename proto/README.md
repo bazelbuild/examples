@@ -110,3 +110,16 @@ sys     0m0.012s
 ```
 
 Nice, still fast and only one more action required to generate the Python proto stubs.
+
+## Java
+
+This follows the same methodology as for Python, above.
+
+We fetch the protobuf-java package from Maven central in the WORKSPACE.bazel file.
+It's passed as the runtime to the proto_lang_toolchain, and also as a dep of the Java code.
+
+```
+% bazel run java
+INFO: Running command line: bazel-bin/java/java
+msg: "Hello World!"
+```

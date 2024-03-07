@@ -1,4 +1,4 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file", "http_jar")
 
 # Fetch the runtime package that applications need to marshal proto files.
 # This does NOT do any code generation of .pb2.py files, we still use protoc for that.
@@ -8,4 +8,10 @@ http_file(
     downloaded_file_path = "protobuf-4.25.3-py3-none-any.whl",
     sha256 = "f0700d54bcf45424477e46a9f0944155b46fb0639d69728739c0e47bab83f2b9",
     urls = ["https://files.pythonhosted.org/packages/f4/d5/db585a5e8d64af6b384c7b3a63da13df2ff86933e486ba78431736c67c25/protobuf-4.25.3-py3-none-any.whl"],
+)
+
+http_jar(
+    name = "protobuf-java_3_25_3",
+    sha256 = "e90d8ddb963b20a972a6a59b5093ade2b07cbe546cab3279aaf4383260385f58",
+    urls = ["https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.25.3/protobuf-java-3.25.3.jar"],
 )

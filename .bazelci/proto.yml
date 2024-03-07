@@ -5,5 +5,7 @@ tasks:
     working_directory: ../proto
     build_targets:
       - "..."
+    test_targets:
+      - "..."
     environment:
       RULES_PYTHON_ENABLE_PYSTAR: 0

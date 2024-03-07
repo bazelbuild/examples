@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option java_package = "proto";
+
 message Foo {
     string msg = 1;
 }

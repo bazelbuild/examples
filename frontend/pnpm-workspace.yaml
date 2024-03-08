@@ -5,3 +5,4 @@ packages:
     - react-webpack
     - vue
     - vue/libraries/*
+    - astro

@@ -1,0 +1,53 @@
+load("@aspect_rules_js//js:defs.bzl", "js_run_binary", "js_run_devserver")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//astro:astro/package_json.bzl", "bin")
+
+npm_link_all_packages()
+
+SRCS = [
+    "package.json",
+    "tsconfig.json",
+    "astro.config.mjs",
+    "//astro/src",
+    "//astro/public",
+]
+
+BUILD_DEPS = [":node_modules/" + d for d in [
+    "astro",
+]]
+
+bin.astro_binary(
+    name = "astro",
+    chdir = package_name(),
+    # prevents modifying the host machine filesystem
+    env = {
+        "ASTRO_TELEMETRY_DISABLED": "1",
+    },
+)
+
+js_run_devserver(
+    name = "dev",
+    args = ["dev"],
+    data = SRCS + BUILD_DEPS,
+    tool = ":astro",
+)
+
+js_run_binary(
+    name = "build",
+    srcs = SRCS + BUILD_DEPS,
+    args = ["build"],
+    mnemonic = "AstroBuild",
+    out_dirs = ["dist"],
+    tool = ":astro",
+)
+
+bin.astro_binary(
+    name = "preview",
+    args = ["preview"],
+    chdir = package_name(),
+    data = [":build"],
+    # prevents modifying the host machine filesystem
+    env = {
+        "ASTRO_TELEMETRY_DISABLED": "1",
+    },
+)

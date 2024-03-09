@@ -19,6 +19,10 @@ BUILD_DEPS = [":node_modules/" + d for d in [
 bin.astro_binary(
     name = "astro",
     chdir = package_name(),
+    # prevents modifying the host machine filesystem
+    env = {
+        "ASTRO_TELEMETRY_DISABLED": "1",
+    },
 )
 
 js_run_devserver(
@@ -42,4 +46,8 @@ bin.astro_binary(
     args = ["preview"],
     chdir = package_name(),
     data = [":build"],
+    # prevents modifying the host machine filesystem
+    env = {
+        "ASTRO_TELEMETRY_DISABLED": "1",
+    },
 )

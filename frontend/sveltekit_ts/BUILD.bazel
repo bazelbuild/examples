@@ -1,0 +1,28 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_devserver")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load(":defs.bzl", "sveltekit_ts")
+
+npm_link_all_packages(name = "node_modules")
+
+sveltekit_ts(
+    name = "example",
+    data = [
+        ":node_modules/@sveltejs/adapter-auto",
+        ":node_modules/@sveltejs/kit",
+        ":node_modules/@sveltejs/vite-plugin-svelte",
+        ":node_modules/svelte",
+        ":node_modules/svelte-check",
+        ":node_modules/vite",
+        ":node_modules/vitest",
+        "//sveltekit_ts/src",
+        "//sveltekit_ts/static",
+    ],
+)
+
+#js_run_devserver(
+#    name = "dev",
+#    args = ["dev"],
+#    data = BUILD_DEPS,
+#    grant_sandbox_write_permissions = True,
+#    tool = ":vite",
+#)

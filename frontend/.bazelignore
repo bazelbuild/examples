@@ -3,5 +3,6 @@ next.js/node_modules
 packages/one/node_modules
 react/node_modules
 react-webpack/node_modules
+sveltekit_ts/node_modules
 vue/node_modules
 vue/libraries/simple/node_modules

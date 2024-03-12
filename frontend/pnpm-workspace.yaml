@@ -1,7 +1,8 @@
 packages:
-    - next.js
-    - packages/*
-    - react
-    - react-webpack
-    - vue
-    - vue/libraries/*
+  - next.js
+  - packages/*
+  - react
+  - react-webpack
+  - vue
+  - sveltekit_ts
+  - vue/libraries/*

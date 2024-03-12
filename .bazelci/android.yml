@@ -80,6 +80,8 @@ tasks:
     <<: *android-robolectric
   android-robolectric-testing-macos:
     platform: macos
+    environment:
+      JAVA_HOME: /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
     <<: *android-robolectric
   #  android-robolectric-testing-windows:
   #    platform: windows

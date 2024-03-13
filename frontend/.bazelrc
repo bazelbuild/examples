@@ -1,12 +1,13 @@
-common --enable_bzlmod
-
 # passes an argument `--skipLibCheck` to *every* spawn of the TypeScript compiler, tsc
-build --@aspect_rules_ts//ts:skipLibCheck=always
-fetch --@aspect_rules_ts//ts:skipLibCheck=always
-query --@aspect_rules_ts//ts:skipLibCheck=always
+common --@aspect_rules_ts//ts:skipLibCheck=always
 
 # Required for rules_js
 build --enable_runfiles
+
+# Allow the Bazel server to check directory sources for changes.
+# Recommended when using copy_directory, see
+# https://github.com/aspect-build/bazel-lib/blob/main/docs/copy_directory.md
+startup --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1
 
 ###########################
 # Linting

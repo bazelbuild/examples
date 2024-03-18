@@ -1,0 +1,9 @@
+bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
+
+# Update to include
+# https://github.com/bazelbuild/rules_proto/pull/206
+git_override(
+    module_name = "rules_proto",
+    remote = "https://github.com/bazelbuild/rules_proto.git",
+    commit = "d373829e59d94c95e470f4250d9da4617c4951eb",
+)

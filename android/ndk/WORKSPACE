@@ -13,9 +13,9 @@ android_sdk_repository(name = "androidsdk")
 
 http_archive(
     name = "rules_android_ndk",
-    sha256 = "b1a5ddd784e6ed915c2035c0db536a278b5f50c64412128c06877115991391ef",
-    strip_prefix = "rules_android_ndk-877c68ef34c9f3353028bf490d269230c1990483",
-    url = "https://github.com/bazelbuild/rules_android_ndk/archive/877c68ef34c9f3353028bf490d269230c1990483.zip",
+    sha256 = "2ab6a97748772f289331d75caaaee0593825935d1d9d982231a437fb8ab5a14d",
+    strip_prefix = "rules_android_ndk-010f4f17dd13a8baaaacc28ba6c8c2c75f54c68b",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/010f4f17dd13a8baaaacc28ba6c8c2c75f54c68b.zip",
 )
 
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")

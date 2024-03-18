@@ -1,0 +1,47 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+js_library(
+    name = "assets",
+    srcs = glob([
+        "**/*.svg",
+        "**/*.webp",
+        "**/*.png",
+        "**/*.jpg",
+    ]),
+    visibility = ["//sveltekit_ts:__subpackages__"],
+)
+
+ts_project(
+    name = "src",
+    srcs = glob(
+        include = [
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.svelte",
+        ],
+        exclude = [
+            "**/*.test.ts",
+            "**/*.test.tsx",
+            "**/*_test.ts",
+            "**/*_test.tsx",
+        ],
+    ),
+    data = [":assets"],
+    #declaration = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    # transpiler = TRANSPILER,
+    tsconfig = "//sveltekit_ts:tsconfig",
+    validate = False,
+    visibility = ["//sveltekit_ts:__subpackages__"],
+    deps = [
+        "//sveltekit_ts:node_modules/@sveltejs",
+        "//sveltekit_ts:node_modules/@sveltejs/adapter-auto",
+        "//sveltekit_ts:node_modules/@sveltejs/kit",
+        "//sveltekit_ts:node_modules/@sveltejs/vite-plugin-svelte",
+        "//sveltekit_ts:node_modules/@types",
+        "//sveltekit_ts:node_modules/svelte",
+        "//sveltekit_ts:node_modules/svelte-check",
+    ],
+)

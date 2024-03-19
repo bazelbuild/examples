@@ -1,10 +1,10 @@
 load("@rules_android//android:rules.bzl", "android_binary")
-load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
+#load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
 
-GOOGLE_SERVICES_XML = google_services_xml(
-    package_name = "com.example.myapplication",
-    google_services_json = "google-services.json",
-)
+# GOOGLE_SERVICES_XML = google_services_xml(
+#     package_name = "com.example.myapplication",
+#     google_services_json = "google-services.json",
+# )
 
 android_binary(
     name = "app",
@@ -18,7 +18,7 @@ android_binary(
         "minSdkVersion": "15",
         "applicationId": "com.example.myapplication",
     },
-    resource_files = glob(["src/main/res/**"]) + GOOGLE_SERVICES_XML,
+    resource_files = glob(["src/main/res/**"]),  # + GOOGLE_SERVICES_XML,
     deps = [
         "@maven//:com_google_firebase_firebase_messaging",
         "@maven//:com_google_firebase_firebase_iid",

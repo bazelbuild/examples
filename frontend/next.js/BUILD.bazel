@@ -1,4 +1,4 @@
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test", "js_binary")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@npm//:defs.bzl", "npm_link_all_packages")
@@ -24,6 +24,7 @@ next(
         "//next.js/pages",
         "//next.js/public",
         "//next.js/styles",
+        "workaround.js",
     ],
     data = [
         "next.config.js",
@@ -34,10 +35,57 @@ next(
         ":node_modules/react",
         ":node_modules/react-dom",
         ":node_modules/typescript",
+        
     ],
     next_bin = "./node_modules/next/dist/bin/next",
+    next_build_out = ".next/standalone",
     next_js_binary = ":next_js_binary",
+    
+
+    #     Failed to compile.
+    # ../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/next.js/styles/globals.css
+    # Global CSS cannot be imported from files other than your Custom <App>. Due to the Global nature of stylesheets, and to avoid conflicts, Please move all first-party global CSS imports to pages/_app.js. Or convert the import to Component-Level CSS (CSS Modules).
+    # Read more: https://nextjs.org/docs/messages/css-global
+    # Location: ../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/next.js/pages/_app.js
+    # Import trace for requested module:
+    # ../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/next.js/styles/globals.css
+    # ../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/next.js/styles/globals.css
+    # Module build failed: Error: Final loader (../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/build/webpack/loaders/error-loader.js) didn't return a Buffer or String
+    #     at processResult (/tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:28:395049)
+    #     at /tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:28:396519
+    #     at /tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:283578
+    #     at iterateNormalLoaders (/tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:280385)
+    #     at iterateNormalLoaders (/tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:280470)
+    #     at /tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:280699
+    #     at runSyncOrAsync (/tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:279045)
+    #     at iterateNormalLoaders (/tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:280602)
+    #     at /tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:1:280244
+    #     at /tmp/bazel-execroot/_main/bazel-out/k8-fastbuild/bin/node_modules/.aspect_rules_js/next@13.0.5_-1955910335/node_modules/next/dist/compiled/webpack/bundle5.js:28:395994
+    # Import trace for requested module:
+    # ../../../../../../bazel-execroot/_main/bazel-out/k8-fastbuild/bin/next.js/styles/globals.css
+    # > Build failed because of webpack errors
+    #patch_node_fs = False,
 )
+load("@aspect_bazel_lib//lib:directory_path.bzl", "directory_path")
+directory_path(
+    name = "standalone_entry_point",
+    directory = ":next",
+    path = "server.js",
+)
+
+js_binary(
+    name = "run_standalone",
+    entry_point = ":standalone_entry_point",
+    data = [":next"],
+)
+
+# load("@aspect_rules_js//js:defs.bzl", "js_image_layer")
+
+# js_image_layer(
+#     name = "layers",
+#     binary = ":next",
+#     root = "/app",
+# )
 
 # A smoke test on the artifact produced by the :next target
 js_test(

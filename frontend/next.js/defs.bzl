@@ -140,7 +140,9 @@ def next(
     js_run_binary(
         name = name,
         tool = next_js_binary,
-        args = ["build"],
+        args = [
+            "build",
+        ] + ["--node_options=--require=./workaround.js"],
         srcs = srcs + data,
         out_dirs = [next_build_out],
         chdir = native.package_name(),

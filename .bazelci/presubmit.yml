@@ -1,8 +1,8 @@
 imports:
 - android.yml
+- bzlmod.yml
 - configurations.yml
+- javascript.yml
 - misc.yml
-- frontend.yml
 - rules.yml
 - tutorials.yml
-- bzlmod.yml

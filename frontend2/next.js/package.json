@@ -1,0 +1,36 @@
+{
+  "name": "@bazel-example/next.js",
+  "private": true,
+  "scripts": {
+    "dev": "ibazel run next_dev",
+    "build": "bazel build next",
+    "export": "bazel build next_export",
+    "start": "ibazel run next_start",
+    "lint": "bazel build --config=lint //next.js/pages/...",
+    "test": "bazel test ... --test_lang_filters=jest --build_tests_only"
+  },
+  "dependencies": {
+    "@bazel-example/one": "workspace:*",
+    "is-even": "1.0.0",
+    "next": "13.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@bazel/ibazel": "0.16.2",
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "13.4.0",
+    "@types/is-even": "1.0.1",
+    "@types/jest": "29.2.3",
+    "@types/node": "18.19.18",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "eslint": "8.28.0",
+    "eslint-config-next": "13.0.5",
+    "jest-cli": "29.5.0",
+    "jest-junit": "16.0.0",
+    "jest-environment-jsdom": "29.5.0",
+    "jest-transform-stub": "2.0.0",
+    "typescript": "4.9.3"
+  }
+}

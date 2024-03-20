@@ -1,0 +1,62 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("//:lint.bzl", "eslint_test")
+load("//:vitest.bzl", "vitest")
+load("//react:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
+
+js_library(
+    name = "assets",
+    srcs = glob(ASSET_PATTERNS),
+    visibility = ["//react:__subpackages__"],
+)
+
+ts_project(
+    name = "src",
+    srcs = glob(
+        include = SRC_PATTERNS,
+        exclude = TEST_PATTERNS,
+    ),
+    data = [":assets"],
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react:tsconfig",
+    visibility = ["//react:__subpackages__"],
+    deps = [
+        "//react:node_modules/@types/react",
+        "//react:node_modules/react",
+        "//react:node_modules/react-dom",
+        "//react:node_modules/vite-plugin-svgr",
+        "//react:node_modules/web-vitals",
+    ],
+)
+
+ts_project(
+    name = "test_lib",
+    srcs = glob(TEST_PATTERNS),
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react:tsconfig",
+    deps = [
+        ":src",
+        "//:node_modules/vitest",
+        "//react:node_modules/@testing-library/jest-dom",
+        "//react:node_modules/@testing-library/react",
+        "//react:node_modules/@types/jest",
+    ],
+)
+
+vitest(
+    name = "test",
+    config = "//react:vite.config",
+    deps = [":test_lib"],
+)
+
+# Test that fails if the lint report is non-empty
+# Remove the `eslint-disable-next-line` line from index.tsx to see this test fail.
+eslint_test(
+    name = "lint",
+    timeout = "short",
+    srcs = [":src_typings"],
+)

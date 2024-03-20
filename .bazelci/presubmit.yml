@@ -3,6 +3,7 @@ imports:
 - configurations.yml
 - misc.yml
 - frontend.yml
+- frontend2.yml
 - rules.yml
 - tutorials.yml
 - bzlmod.yml

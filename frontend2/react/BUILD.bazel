@@ -1,0 +1,94 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver", "js_test")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//react:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
+load("@npm//react:vite/package_json.bzl", "bin")
+
+npm_link_all_packages()
+
+RUNTIME_DEPS = [
+    "//react/src:assets",
+    "//react/src",
+    "//react/public",
+    "index.html",
+    "package.json",
+    ":node_modules/react-dom",
+    ":node_modules/react",
+    ":node_modules/web-vitals",
+]
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+tsconfig_to_swcconfig.t2s(
+    name = "write_swcrc",
+    srcs = ["tsconfig.json"],
+    args = [
+        "--filename",
+        "$(location tsconfig.json)",
+    ],
+    stdout = ".swcrc",
+    visibility = ["//react:__subpackages__"],
+)
+
+js_library(
+    name = "package_json",
+    srcs = ["package.json"],
+    visibility = ["//visibility:public"],
+    deps = [":node_modules/eslint-config-react-app"],
+)
+
+js_library(
+    name = "vite.config",
+    srcs = ["vite.config.js"],
+    data = [
+        ":node_modules/@vitejs/plugin-react",
+        ":node_modules/vite-plugin-svgr",
+        "//:node_modules/vitest",
+    ],
+    visibility = ["//react:__subpackages__"],
+)
+
+bin.vite_binary(
+    name = "vite",
+    chdir = package_name(),
+    data = ["vite.config"],
+)
+
+# Fast developer round-trip under ibazel
+js_run_devserver(
+    name = "start",
+    args = ["."],
+    data = RUNTIME_DEPS,
+    tool = ":vite",
+)
+
+# Create production release artifacts
+js_run_binary(
+    name = "build",
+    srcs = RUNTIME_DEPS,
+    args = ["build"],
+    mnemonic = "ViteBuild",
+    out_dirs = ["dist"],
+    tool = ":vite",
+)
+
+# Hosts the production-bundled application in a web server
+bin.vite_binary(
+    name = "preview",
+    args = ["preview"],
+    chdir = package_name(),
+    data = [":build"],
+)
+
+# Just verify that the bundle produced "something reasonable" but doesn't verify it functions in a browser.
+# TODO: use something like Cypress for a true end-to-end test
+js_test(
+    name = "build_smoke_test",
+    timeout = "short",
+    data = [":build"],
+    entry_point = "build_smoke_test.js",
+)

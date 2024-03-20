@@ -23,6 +23,8 @@ basics: &basics
   working_directory: ../frontend
   build_targets:
   - "..."
+  build_flags:
+  - "--noexperimental_repository_cache_hardlinks"
   test_targets:
   - "..."
 

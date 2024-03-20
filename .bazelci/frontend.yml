@@ -23,6 +23,9 @@ basics: &basics
   working_directory: ../frontend
   build_targets:
   - "..."
+  build_flags:
+  - "--remote_download_outputs=all"
+  - "--noexperimental_repository_cache_hardlinks"
   test_targets:
   - "..."
 

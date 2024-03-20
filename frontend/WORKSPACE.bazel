@@ -1,1 +1,122 @@
-# Marker that this folder is the root of a Bazel workspace
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+#### rules_js
+
+# http_archive(
+#     name = "aspect_rules_js",
+#     sha256 = "6148188cfa5cb76397b8745b71d57c47a7c1a8e00ff2f1e2e7955206846197f1",
+#     strip_prefix = "rules_js-1.39.0",
+#     url = "https://github.com/aspect-build/rules_js/releases/download/v1.39.0/rules_js-v1.39.0.tar.gz",
+# )
+
+http_archive(
+    name = "aspect_rules_js",
+    integrity = "sha256-2pzqFt5K93WwWyRKdbqR48orFziNaNse8hdOZZe8dQc=",
+    strip_prefix = "rules_js-f14de4a567678754221a2f622a80e0c309da4fb2",
+    urls = ["https://github.com/aspect-build/rules_js/archive/f14de4a567678754221a2f622a80e0c309da4fb2.tar.gz"],
+)
+
+load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
+
+rules_js_dependencies()
+
+load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
+
+nodejs_register_toolchains(
+    name = "nodejs",
+    node_version = DEFAULT_NODE_VERSION,
+)
+
+load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
+
+npm_translate_lock(
+    name = "npm",
+    npmrc = "//:.npmrc",
+    pnpm_lock = "//:pnpm-lock.yaml",
+    public_hoist_packages = {
+        "@next/eslint-plugin-next": ["next.js"],
+        "eslint-config-react-app": ["react"],
+        "eslint@8.28.0": ["react"],
+    },
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+
+load("@npm//:repositories.bzl", "npm_repositories")
+
+npm_repositories()
+
+#### rules_jest
+
+http_archive(
+    name = "aspect_rules_jest",
+    sha256 = "49c688e3838c855a9acf3b77bc25cfb18bdd70b03ff0810fbfd6353dd6055feb",
+    strip_prefix = "rules_jest-0.20.0",
+    url = "https://github.com/aspect-build/rules_jest/releases/download/v0.20.0/rules_jest-v0.20.0.tar.gz",
+)
+
+load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
+
+rules_jest_dependencies()
+
+#### rules_swc
+
+http_archive(
+    name = "aspect_rules_swc",
+    sha256 = "cde09df7dea773adaed896612434559f8955d2dfb2cfd6429ee333f30299ed34",
+    strip_prefix = "rules_swc-1.2.2",
+    url = "https://github.com/aspect-build/rules_swc/releases/download/v1.2.2/rules_swc-v1.2.2.tar.gz",
+)
+
+load("@aspect_rules_swc//swc:dependencies.bzl", "rules_swc_dependencies")
+
+rules_swc_dependencies()
+
+load("@aspect_rules_swc//swc:repositories.bzl", "LATEST_SWC_VERSION", "swc_register_toolchains")
+
+swc_register_toolchains(
+    name = "swc",
+    swc_version = LATEST_SWC_VERSION,
+)
+
+#### rules_ts
+
+http_archive(
+    name = "aspect_rules_ts",
+    sha256 = "c77f0dfa78c407893806491223c1264c289074feefbf706721743a3556fa7cea",
+    strip_prefix = "rules_ts-2.2.0",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v2.2.0/rules_ts-v2.2.0.tar.gz",
+)
+
+load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies", "LATEST_TYPESCRIPT_VERSION")
+
+rules_ts_dependencies(ts_version = LATEST_TYPESCRIPT_VERSION)
+
+load("@bazel_features//:deps.bzl", "bazel_features_deps")
+
+bazel_features_deps()
+
+#### rules_rollup
+
+http_archive(
+    name = "aspect_rules_rollup",
+    sha256 = "6694a42c99b8b46a8788575597419d31cdf6c163fe77354730eb1ab4007fb6aa",
+    strip_prefix = "rules_rollup-1.0.2",
+    url = "https://github.com/aspect-build/rules_rollup/releases/download/v1.0.2/rules_rollup-v1.0.2.tar.gz",
+)
+
+load("@aspect_rules_rollup//rollup:dependencies.bzl", "rules_rollup_dependencies")
+
+rules_rollup_dependencies()
+
+#### rules_webpack
+
+http_archive(
+    name = "aspect_rules_webpack",
+    sha256 = "ff7746cd5c7e8ef32d8fbccc720e37c5ec9054fbe705f3576013dbaa1fb5ad40",
+    strip_prefix = "rules_webpack-0.14.0",
+    url = "https://github.com/aspect-build/rules_webpack/releases/download/v0.14.0/rules_webpack-v0.14.0.tar.gz",
+)
+
+load("@aspect_rules_webpack//webpack:dependencies.bzl", "rules_webpack_dependencies")
+
+rules_webpack_dependencies()

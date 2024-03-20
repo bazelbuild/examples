@@ -1,4 +1,4 @@
-# Frontends with Bazel
+# Frontends with Bazel!
 
 This folder contains various examples for writing JavaScript applications with Bazel.
 

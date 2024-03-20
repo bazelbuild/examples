@@ -20,7 +20,7 @@ macos: &macos
 # Test sets
 #
 basics: &basics
-  working_directory: ../frontend
+  working_directory: ../javascript
   build_targets:
   - "..."
   test_targets:

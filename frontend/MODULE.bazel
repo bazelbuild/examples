@@ -10,6 +10,13 @@ bazel_dep(name = "aspect_rules_rollup", version = "1.0.0")
 bazel_dep(name = "aspect_rules_webpack", version = "0.13.0")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
 
+archive_override(
+    module_name = "aspect_rules_js",
+    urls = ["https://github.com/aspect-build/rules_js/archive/7c3d145792389f2a4cacb94bd2f0b90a290c11e9.tar.gz"],
+    strip_prefix = "rules_js-7c3d145792389f2a4cacb94bd2f0b90a290c11e9",
+    integrity = "sha256-0c36QCdPzM4NhZv5cEo9G59VTVAg1Th5KZQvagmRQd8=",
+)
+
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
 use_repo(pnpm, "pnpm")
 

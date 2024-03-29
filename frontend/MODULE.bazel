@@ -1,14 +1,14 @@
 "Bazel module dependencies, see https://bazel.build/external/overview#bzlmod"
 
-bazel_dep(name = "aspect_bazel_lib", version = "1.33.0")
-bazel_dep(name = "aspect_rules_lint", version = "0.12.0")
-bazel_dep(name = "aspect_rules_jest", version = "0.19.6")
+bazel_dep(name = "aspect_bazel_lib", version = "2.5.0")
+bazel_dep(name = "aspect_rules_lint", version = "0.15.0")
+bazel_dep(name = "aspect_rules_jest", version = "0.20.0")
 bazel_dep(name = "aspect_rules_js", version = "1.38.0")
 bazel_dep(name = "aspect_rules_swc", version = "1.1.0")
 bazel_dep(name = "aspect_rules_ts", version = "2.2.0")
 bazel_dep(name = "aspect_rules_rollup", version = "1.0.0")
-bazel_dep(name = "aspect_rules_webpack", version = "0.13.0")
-bazel_dep(name = "bazel_skylib", version = "1.4.2")
+bazel_dep(name = "aspect_rules_webpack", version = "0.14.0")
+bazel_dep(name = "bazel_skylib", version = "1.5.0")
 
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
 use_repo(pnpm, "pnpm")

@@ -44,7 +44,7 @@ For user-defined (Starlark) flags, the evaluated value can be observed by adding
 DEBUG: /my/root/examples/flags-parsing-tutorial/build_defs.bzl:6:10: evaluated value for flag: cmd
 ```
 ### B. The last option on the command line takes precedence. ###
-⭐ <b>Tips</b>: Use [--announce_rc](https://bazel.build/docs/user-manual#flag--announce_rc) to debug flag parsing.
+⭐ <b>Tips</b>: Use [--announce_rc](https://bazel.build/docs/user-manual#announce-rc) to debug flag parsing.
 
 <u><b>Example B.1</b></u>
 ```

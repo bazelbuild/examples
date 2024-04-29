@@ -39,8 +39,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.25.0
+        version: 0.25.0
       '@testing-library/jest-dom':
         specifier: 4.2.4
         version: 4.2.4
@@ -107,8 +107,8 @@ importers:
         version: 2.1.4
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.25.0
+        version: 0.25.0
       '@testing-library/jest-dom':
         specifier: 4.2.4
         version: 4.2.4
@@ -198,8 +198,8 @@ importers:
         version: 4.1.6(vue@3.2.45)
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.25.0
+        version: 0.25.0
       '@types/node':
         specifier: 18.19.18
         version: 18.19.18
@@ -2007,8 +2007,8 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@bazel/ibazel@0.16.2:
-    resolution: {integrity: sha512-KgqAWMH0emL6f3xH6nqyTryoBMqlJ627LBIe9PT1PRRQPz2FtHib3FIHJPukp1slzF3hJYZvdiVwgPnHbaSOOA==}
+  /@bazel/ibazel@0.25.0:
+    resolution: {integrity: sha512-dtosfsuZCSaqlUe5EyxNdaN7Gow0Y+ZJixdlciytcSieUcB/1lXPFTx6OihxhjgtTHkeFovlQ/QbvArRPnk+nQ==}
     hasBin: true
     dev: true
 

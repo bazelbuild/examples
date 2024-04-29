@@ -74,9 +74,5 @@ build_test(
     name = "build_test",
     targets = [
         ":next",
-        # Not build testing the `:next_export` target since this `next export` writes back to the `.next` directory which
-        # causes issues with trying to write to an input. See https://github.com/vercel/next.js/issues/43344.
-        # TODO: fix in Next.js (https://github.com/vercel/next.js/issues/43344) or find work-around.
-        # ":next_export",
     ],
 )

@@ -11,7 +11,7 @@ rolling: &rolling
 # Commmon features by platform
 #
 linux: &linux
-  platform: ubuntu1804
+  platform: ubuntu2004
 
 macos: &macos
   platform: macos

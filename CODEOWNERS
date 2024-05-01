@@ -1,6 +1,7 @@
-* @gregestren
+* @gregestren @Wyverald
 
-AUTHORS  @sventiffe @philwo
+.bazelci @fweikert
+AUTHORS  @meteorcloudy
 android/ @ahumesky @jin
 bzlmod/ @wyverald
 cpp-tutorial @oquenchil

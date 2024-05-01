@@ -1,6 +1,6 @@
 "Bazel dependencies"
 
-bazel_dep(name = "platforms", version = "0.0.8")
+bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")

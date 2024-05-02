@@ -1,5 +1,5 @@
 packages:
-    - next.js
+    - next.js*
     - packages/*
     - react
     - react-webpack

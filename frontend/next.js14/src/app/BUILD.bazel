@@ -1,0 +1,24 @@
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+SRCS = [
+    "layout.tsx",
+    "page.tsx",
+]
+
+ts_project(
+    name = "app",
+    assets = ["page.module.css"],
+    srcs = SRCS,
+    allow_js = True,
+    declaration = True,
+    preserve_jsx = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    tsconfig = "//next.js14:tsconfig",
+    visibility = ["//next.js14:__subpackages__"],
+    deps = [
+        "//next.js14:node_modules/@types/react",
+        "//next.js14:node_modules/@types/react-dom",
+        "//next.js14:node_modules/next",
+    ],
+)

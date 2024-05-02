@@ -1,5 +1,6 @@
 node_modules
 next.js/node_modules
+next.js14/node_modules
 packages/one/node_modules
 react/node_modules
 react-webpack/node_modules

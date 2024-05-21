@@ -53,7 +53,7 @@ vue_tsc_bin.vue_tsc(
 
 # TODO(alexeagle): show how this could be published to npm
 npm_package(
-    name = "simple",
+    name = "pkg",
     srcs = [
         "package.json",
         ":build",

@@ -1,11 +1,6 @@
 # FIXME(alexeagle): move to bzlmod
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Requires ANDROID_HOME set to the path of your Android SDK.
-android_sdk_repository(name = "androidsdk")
-
-android_ndk_repository(name = "androidndk")
-
 RULES_JVM_EXTERNAL_TAG = "5.3"
 
 RULES_JVM_EXTERNAL_SHA = "d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac"
@@ -27,7 +22,6 @@ maven_install(
         "com.android.support.constraint:constraint-layout:1.0.2",
         "com.google.code.gson:gson:2.8.2",
     ],
-    fetch_sources = True,
     # See https://github.com/bazelbuild/rules_jvm_external/#repository-aliases
     # This can be removed if none of your external dependencies uses `maven_jar`.
     generate_compat_repositories = True,
@@ -37,6 +31,8 @@ maven_install(
         "https://repo1.maven.org/maven2",
     ],
     version_conflict_policy = "pinned",
+    use_starlark_android_rules = True,
+    aar_import_bzl_label = "@rules_android//rules:rules.bzl",
 )
 
 load("@maven//:compat.bzl", "compat_repositories")
@@ -55,16 +51,27 @@ http_archive(
     url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_COMMIT,
 )
 
-http_archive(
-    name = "rules_android",
-    sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
-    strip_prefix = "rules_android-0.1.1",
-    urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
-)
+RULES_ANDROID_COMMIT = "93e27030d3f0defa39cbbc35195638cb772b0c27"
 
 http_archive(
-    name = "rules_cc",
-    sha256 = "5f862a44bbd032e1b48ed53c9c211ba2a1da60e10c5baa01c97369c249299ecb",
-    strip_prefix = "rules_cc-c8c38f8c710cbbf834283e4777916b68261b359c",
-    url = "https://github.com/bazelbuild/rules_cc/archive/c8c38f8c710cbbf834283e4777916b68261b359c.zip",
+    name = "rules_android",
+    sha256 = "71cae2413868a24f17d43fd595af6f3905d2e5b3235f76514f54800bfd90c903",
+    strip_prefix = "rules_android-" + RULES_ANDROID_COMMIT,
+    urls = ["https://github.com/bazelbuild/rules_android/archive/%s.zip" % RULES_ANDROID_COMMIT],
+)
+
+load("@rules_android//:prereqs.bzl", "rules_android_prereqs")
+rules_android_prereqs()
+load("@rules_android//:defs.bzl", "rules_android_workspace")
+rules_android_workspace()
+
+load("@rules_android//rules:rules.bzl", "android_sdk_repository")
+# Requires that the ANDROID_HOME environment variable is set to the Android SDK path.
+android_sdk_repository(
+    name = "androidsdk",
+)
+
+register_toolchains(
+    "@rules_android//toolchains/android:android_default_toolchain",
+    "@rules_android//toolchains/android_sdk:android_sdk_tools",
 )

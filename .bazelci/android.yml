@@ -46,9 +46,11 @@ tasks:
   android-firebase-macos:
     platform: macos
     <<: *android-firebase
-  android-firebase-windows:
-    platform: windows
-    <<: *android-firebase
+  # rules_android doesn't support windows yet.
+  # https://github.com/bazelbuild/rules_android/issues/72
+  # android-firebase-windows:
+  #   platform: windows
+  #   <<: *android-firebase
   android-ndk-linux:
     platform: ubuntu1804
     environment:

@@ -1,9 +1,6 @@
 # passes an argument `--skipLibCheck` to *every* spawn of the TypeScript compiler, tsc
 common --@aspect_rules_ts//ts:skipLibCheck=always
 
-# Required for rules_js
-build --enable_runfiles
-
 # Allow the Bazel server to check directory sources for changes.
 # Recommended when using copy_directory, see
 # https://github.com/aspect-build/bazel-lib/blob/main/docs/copy_directory.md

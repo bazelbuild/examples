@@ -1,8 +1,26 @@
+load("@aspect_bazel_lib//lib:run_binary.bzl", "run_binary")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 load("//:lint.bzl", "eslint_test")
 load("//:vitest.bzl", "vitest")
 load("//react:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
+
+# Based on https://lightningcss.dev/docs.html#from-the-cli
+# FIXME: wire the result into the application as a minified asset
+run_binary(
+    name = "minify_css",
+    srcs = glob(["*.css"]),
+    outs = ["output.css"],
+    args = [
+        "--minify",
+        "--bundle",
+        "--targets >=0.25%",
+        "$(execpath App.css)",
+        "--output-file $(execpath output.css)",
+    ],
+    tags = ["no-sandbox"],
+    tool = "@multitool//tools/lightningcss",
+)
 
 js_library(
     name = "assets",

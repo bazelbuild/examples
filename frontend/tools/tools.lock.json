@@ -1,0 +1,72 @@
+{
+    "$schema": "https://raw.githubusercontent.com/theoremlp/rules_multitool/main/lockfile.schema.json",
+    "lightningcss": {
+        "binaries": [
+            {
+              "kind": "archive",
+              "os": "macos",
+              "cpu": "arm64",
+              "file": "package/lightningcss",
+              "url": "https://registry.npmjs.org/lightningcss-cli-darwin-arm64/-/lightningcss-cli-darwin-arm64-1.14.0.tgz",
+              "sha256": "8b520ccb9086d59d7bba6a86523b08c2c9577e289c944120a79f536501c2d485"
+            }
+        ]
+    },
+    "buildozer": {
+        "binaries": [
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/buildtools/releases/download/v7.1.1/buildozer-darwin-arm64",
+            "os": "macos",
+            "cpu": "arm64",
+            "sha256": "0a2f70aa7b864de9bf71d1aac39659017b7a84169506e350d9ec77c609265212"
+          },
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/buildtools/releases/download/v7.1.1/buildozer-darwin-amd64",
+            "os": "macos",
+            "cpu": "x86_64",
+            "sha256": "6286bbbcb5314d675fcb4ede30edf397a68c611005412c937b2cc0c4bf4b714b"
+          },
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/buildtools/releases/download/v7.1.1/buildozer-linux-amd64",
+            "os": "linux",
+            "cpu": "x86_64",
+            "sha256": "9a7424aca7ca911c85cfedeadf065f0d95c492e80f0e29bd07ea98f6eb087259"
+          },
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/buildtools/releases/download/v7.1.1/buildozer-linux-arm64",
+            "os": "linux",
+            "cpu": "arm64",
+            "sha256": "07c8ed5ca3efea7e20756e9060660b7e658c781953c60650a1b99cd8bb857fcf"
+          }
+        ]
+      },
+      "ibazel": {
+        "binaries": [
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.2/ibazel_darwin_arm64",
+            "os": "macos",
+            "cpu": "arm64",
+            "sha256": "e4d5e04a2a0e4dda21350ffe26623469a85ab8786570aea962b058a954dcd3f1"
+          },
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.2/ibazel_linux_amd64",
+            "os": "linux",
+            "cpu": "x86_64",
+            "sha256": "1377caf887a7a239106ad6408fca1e14dfb239b3072b3abddbb660ff994b62aa"
+          },
+          {
+            "kind": "file",
+            "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.2/ibazel_linux_arm64",
+            "os": "linux",
+            "cpu": "arm64",
+            "sha256": "3c15af15ffe77f7c4ed799a6a7c539541922a4811b8b9f4fbac044060ef89b64"
+          }
+      ]
+    }
+}

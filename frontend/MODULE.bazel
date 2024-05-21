@@ -9,6 +9,7 @@ bazel_dep(name = "aspect_rules_ts", version = "2.2.0")
 bazel_dep(name = "aspect_rules_rollup", version = "1.0.2")
 bazel_dep(name = "aspect_rules_webpack", version = "0.14.0")
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
+bazel_dep(name = "rules_multitool", version = "0.7.1")
 bazel_dep(name = "rules_nodejs", version = "6.1.0")
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
@@ -38,3 +39,7 @@ rules_ts_ext = use_extension(
 )
 rules_ts_ext.deps()
 use_repo(rules_ts_ext, "npm_typescript")
+
+multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
+multitool.hub(lockfile = "//tools:tools.lock.json")
+use_repo(multitool, "multitool")

@@ -4,8 +4,6 @@ common:
     name: "Android Firebase Cloud Messaging"
     bazel: 7.2.0rc1
     working_directory: ../android/firebase-cloud-messaging
-    build_flags:
-      - "--android_platforms=//:arm64-v8a"
     build_targets:
       - "//app:app"
   android-ndk: &android-ndk

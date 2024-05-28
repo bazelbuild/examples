@@ -1,6 +1,6 @@
 "Bazel module dependencies, see https://bazel.build/external/overview#bzlmod"
 
-bazel_dep(name = "aspect_bazel_lib", version = "2.7.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.7.6")
 bazel_dep(name = "aspect_rules_lint", version = "0.18.0")
 bazel_dep(name = "aspect_rules_jest", version = "0.20.0")
 bazel_dep(name = "aspect_rules_js", version = "1.41.2")

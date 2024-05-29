@@ -40,7 +40,7 @@ vue_tsc_bin.vue_tsc_test(
     args = ["--noEmit"],
     chdir = package_name(),
     data = SRCS + BUILD_DEPS,
-    include_declarations = True,
+    include_types = True,
 )
 
 vite_bin.vite_binary(

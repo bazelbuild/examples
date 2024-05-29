@@ -22,12 +22,10 @@ ts_project(
 
 # make this library available via node_modules
 npm_package(
-    name = "one",
+    name = "pkg",
     srcs = [
         "package.json",
         ":one_ts",
     ],
-    # This is a perf improvement; the default will be flipped to False in rules_js 2.0
-    include_runfiles = False,
     visibility = ["//visibility:public"],
 )

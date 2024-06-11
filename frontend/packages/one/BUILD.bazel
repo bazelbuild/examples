@@ -1,8 +1,18 @@
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
-load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
 npm_link_all_packages(name = "node_modules")
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    # transpile time direct dependencies
+    deps = [
+        ":node_modules/@types/is-odd",
+        #":node_modules/@types/node",
+    ],
+)
 
 ts_project(
     name = "one_ts",
@@ -13,11 +23,7 @@ ts_project(
     ],
     declaration = True,
     transpiler = "tsc",
-    # transpile time direct dependencies
-    deps = [
-        ":node_modules/@types/is-odd",
-        "//next.js:node_modules/@types/node",
-    ],
+    tsconfig = ":tsconfig",
 )
 
 # make this library available via node_modules

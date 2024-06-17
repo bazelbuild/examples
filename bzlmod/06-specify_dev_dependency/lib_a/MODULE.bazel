@@ -6,7 +6,7 @@ module(
 # This won't force the root module to use bazel_skylib 1.2.0 because it's a dev dependency.
 bazel_dep(
     name = "bazel_skylib",
-    version = "1.2.0",
+    version = "1.7.1",
     dev_dependency = True,
 )
 

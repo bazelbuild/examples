@@ -8,7 +8,7 @@ bazel_dep(name = "aspect_rules_swc", version = "2.0.0-rc0")
 bazel_dep(name = "aspect_rules_ts", version = "3.0.0-rc0")
 bazel_dep(name = "aspect_rules_rollup", version = "2.0.0-rc0")
 bazel_dep(name = "aspect_rules_webpack", version = "0.16.0-rc0")
-bazel_dep(name = "bazel_skylib", version = "1.6.1")
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "rules_nodejs", version = "6.1.1")
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)

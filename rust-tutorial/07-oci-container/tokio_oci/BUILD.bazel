@@ -1,0 +1,91 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc", "rust_doc_test")
+# OCI Container Rules
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push",  "oci_image_index")
+# Custom macro
+load("//:build/container.bzl", "build_sha265_tag")
+
+# Build binary
+rust_binary(
+    name = "bin",
+    crate_root = "src/main.rs",
+    srcs = glob([
+        "src/*/*.rs",
+        "src/*.rs",
+    ]),
+    rustc_flags = select({
+       "//:release": [
+            "-Clto",
+            "-Ccodegen-units=1",
+            "-Cpanic=abort",
+            "-Copt-level=3",
+            "-Cstrip=symbols",
+            ],
+        "//conditions:default":
+        [
+           "-Copt-level=0",
+        ],
+    }),
+    deps = [
+        # External crates
+        "@crates//:arc-swap",
+        "@crates//:serde",
+        "@crates//:serde_json",
+        "@crates//:tokio",
+        "@crates//:tokio-cron-scheduler",
+        "@crates//:warp",
+    ],
+    tags = ["service", "rest-tokio"],
+    visibility = ["//visibility:public"],
+)
+
+# Build documentation
+rust_doc(
+    name = "doc",
+    crate = ":bin",
+    tags = ["doc"],
+    visibility = ["//visibility:public"],
+)
+
+# Test documentation
+rust_doc_test(
+     name = "doc_test",
+     crate = ":bin",
+     tags = ["doc-test"],
+     visibility = ["//visibility:public"],
+)
+
+# 1) Compress the Rust binary to tar
+pkg_tar(
+    name = "tar",
+    srcs = [":bin"],
+)
+
+# 2) Build container image
+# https://github.com/bazel-contrib/rules_oci/blob/main/docs/image.md
+oci_image(
+    name = "image",
+    base = "@distroless",
+    tars = [":tar"],
+    entrypoint = ["/bin"],
+    exposed_ports = ["4242"],
+    visibility = ["//visibility:public"],
+)
+
+# 3) Build an unique and immutable image tag
+build_sha265_tag(
+    name = "remote_tag",
+    image = ":image",
+    input = "image.json.sha256",
+    output = "_tag.txt",
+)
+
+# 4) Define a registry to publish the image
+# https://github.com/bazel-contrib/rules_oci/blob/main/docs/push.md)
+oci_push(
+    name = "push",
+    image = ":image",
+    repository = "my.registry.com/rest-tokio",
+    remote_tags = ":remote_tag",
+    visibility = ["//visibility:public"],
+)

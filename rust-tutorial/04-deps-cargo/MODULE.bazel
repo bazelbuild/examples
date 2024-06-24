@@ -1,26 +1,5 @@
-
-# Hello World 
-
-In this first example, the goal is to build a minimal Hello World Rust binary with Bazel.
-
-## Requirements
-
-* Cargo & Rust
-* C compiler (gcc, or clang)
-
-## Configuration 
-
-A minimal MODULE.bazel file for Rust contains three parts:
-
-1) A module declaration with a name and version
-2) Loading the Rust rules
-3) Configuration of the Rust toolchain
-
-Add to your WORKSPACE file:
-
-```Starlark
 module(
-    name = "hello_world",
+    name = "deps-cargo",
     version = "0.0.0"
 )
 ###############################################################################
@@ -44,28 +23,16 @@ rust.toolchain(
 )
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
-```
 
-## Rust targets
-
-Next, you declare your Rust binary target in a BUILD file.
-
-```Starlark
-load("@rules_rust//rust:defs.bzl", "rust_binary")
-
-rust_binary(
-    name = "bin",
-    srcs = ["src/main.rs"],
-    deps = [],
-    visibility = ["//visibility:public"],
+###############################################################################
+# R U S T  C R A T E S
+###############################################################################
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+#
+# External crates
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "//:Cargo.lock",
+    manifests = ["//:Cargo.toml"],
 )
-```
-
-This is it. Now run your build:
-
-`bazel build //...`
-
-And run your target:
-
-`bazel run //hello_world:bin`
-
+use_repo(crate, "crates")

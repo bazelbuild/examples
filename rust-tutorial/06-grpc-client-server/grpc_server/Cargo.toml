@@ -1,0 +1,19 @@
+[package]
+name = "grpc_server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+
+
+[[bin]]
+name = "grpc_server"
+path = "src/main.rs"
+
+
+[dependencies]
+# Internal crates
+proto_bindings = { workspace = true }
+# External crates
+tokio = { workspace = true }
+tonic = { workspace = true }

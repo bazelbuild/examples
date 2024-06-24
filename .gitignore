@@ -11,3 +11,5 @@ target/
 *.xcodeproj
 node_modules
 /rust-tutorial/*/MODULE.bazel.lock
+/rust-tutorial/*/target/
+/rust-tutorial/*/*/target/

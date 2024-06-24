@@ -3,12 +3,12 @@ load("@rules_rust//rust:defs.bzl", "rust_binary")
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
-    name = "bin",
+    name = "all",
     srcs = [
         ":hello_world_host",
         ":hello_world_x86_64",
+        ":hello_world_aarch64",
     ],
-    visibility = ["//visibility:public"],
 )
 
 rust_binary(

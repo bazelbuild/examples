@@ -1,0 +1,21 @@
+[package]
+name = "proto_bindings"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+
+
+
+[lib]
+name = "proto_bindings"
+path = "src/lib.rs"
+
+
+[dependencies]
+tonic = { workspace = true }
+prost = { workspace = true }
+
+
+[build-dependencies]
+tonic-build = { workspace = true }

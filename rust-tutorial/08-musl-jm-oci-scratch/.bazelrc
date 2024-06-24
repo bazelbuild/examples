@@ -1,0 +1,78 @@
+###############################################################################
+## Bazel Configuration Flags
+##
+## `.bazelrc` is a Bazel configuration file.
+## https://bazel.build/docs/best-practices#bazelrc-file
+###############################################################################
+
+
+###############################################################################
+## Windows configuration
+###############################################################################
+
+# https://bazel.build/reference/command-line-reference#flag--enable_platform_specific_config
+common --enable_platform_specific_config
+
+# https://bazel.build/docs/windows#symlink
+startup --windows_enable_symlinks
+build:windows --enable_runfiles
+
+###############################################################################
+## Build configuration
+###############################################################################
+
+# Don't create bazel-* symlinks in the WORKSPACE directory.
+# Instead, set a prefix and put it in .gitignore
+# build --symlink_prefix=target-bzl/
+
+###############################################################################
+## Test configuration
+###############################################################################
+
+# Reduce test output to just error cases
+test --test_output=errors
+test --verbose_failures
+
+###############################################################################
+## Common configuration
+###############################################################################
+
+# Enable Bzlmod for every Bazel command
+common --enable_bzlmod
+
+# Write build outputs in a platform-specific directory;
+# avoid outputs being wiped and rewritten when switching between platforms.
+common --experimental_platform_in_output_dir
+
+# Enable misc. performance optimizations.
+common --nolegacy_important_outputs
+common --verbose_failures
+common --reuse_sandbox_directories
+common --noexperimental_merged_skyframe_analysis_execution
+
+# Enable a more detailed performance profile
+common --noslim_profile
+common --experimental_profile_include_target_label
+common --experimental_profile_include_primary_output
+
+###############################################################################
+## Rust configuration
+###############################################################################
+
+# Enable rustfmt for all targets in the workspace
+build:rustfmt --aspects=@rules_rust//rust:defs.bzl%rustfmt_aspect
+build:rustfmt --output_groups=+rustfmt_checks
+
+# Enable clippy for all targets in the workspace
+build:clippy --aspects=@rules_rust//rust:defs.bzl%rust_clippy_aspect
+build:clippy --output_groups=+clippy_checks
+
+###############################################################################
+## Custom user flags
+##
+## This should always be the last thing in the `.bazelrc` file to ensure
+## consistent behavior when setting flags in that file as `.bazelrc` files are
+## evaluated top to bottom.
+###############################################################################
+
+try-import %workspace%/user.bazelrc

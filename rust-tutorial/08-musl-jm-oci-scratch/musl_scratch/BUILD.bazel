@@ -1,0 +1,119 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc", "rust_doc_test")
+# OCI Container Rules
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push",  "oci_image_index")
+# Custom container macro
+load("//:build/container.bzl", "build_sha265_tag")
+# Custom platform transition macro
+load("//:build/transition.bzl", "multi_arch")
+
+# Build binary
+rust_binary(
+    name = "bin",
+    crate_root = "src/main.rs",
+    srcs = glob([
+        "src/*/*.rs",
+        "src/*.rs",
+    ]),
+    # Compiler optimization
+    rustc_flags = select({
+       "//:release": [
+            "-Clto",
+            "-Ccodegen-units=1",
+            "-Cpanic=abort",
+            "-Copt-level=3",
+            "-Cstrip=symbols",
+            ],
+        "//conditions:default":
+        [
+           "-Copt-level=0",
+        ],
+    }),
+
+    deps = [
+        # Jemallocator Memory Allocator fixes a concurrency performance issue in MUSL
+        # https://www.linkedin.com/pulse/testing-alternative-c-memory-allocators-pt-2-musl-mystery-gomes
+        "@crates//:jemallocator",
+        # External crates
+        "@crates//:arc-swap",
+        "@crates//:serde",
+        "@crates//:serde_json",
+        "@crates//:tokio",
+        "@crates//:tokio-cron-scheduler",
+        "@crates//:warp",
+    ],
+    tags = ["service", "musl-tokio"],
+    visibility = ["//visibility:public"],
+)
+
+# Compress binary to a layer using pkg_tar
+pkg_tar(
+    name = "tar",
+    srcs = [":bin"],
+)
+
+# Build container image
+# https://github.com/bazel-contrib/rules_oci/blob/main/docs/image.md
+oci_image(
+    name = "image",
+    base = "@scratch",
+    tars = [":tar"],
+    entrypoint = ["/bin"],
+    exposed_ports = ["3232"],
+    visibility = ["//visibility:public"],
+)
+
+# Build multi-arch images
+multi_arch(
+    name = "multi_arch_images",
+    image = ":image",
+    platforms = [
+        "//build/platforms:linux_x86_64_musl",
+        "//build/platforms:linux_arm64_musl",
+    ],
+)
+
+# Build a container image index.
+oci_image_index(
+    name = "image_index",
+    images = [
+        ":multi_arch_images",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# A custom macro that simplifies building multi-arch images.
+# See the "Custom Container Macro" section in the Readme for details.
+# You would have to delete everything from pkg_tar to oci_image_index
+# to use this macro instead of the manual declaration because you cannot mix.
+# However, read the discussion at the end of the Readme to determine when
+# the macro makes sense and when to use the manual declaration of all build stages.
+#
+# load("//:build/container.bzl", "build_multi_arch_image", "build_sha265_tag")
+# Build musl multi arch container image
+#build_multi_arch_image(
+#    name = "image_index",
+#    base = "@scratch",
+#    srcs = [":bin"],
+#    exposed_ports = ["7070", "8080"],
+#    platforms = [ "//build/platforms:linux_x86_64_musl",],
+#    visibility = ["//visibility:public"],
+#)
+
+
+# Build an unique and immutable image tag based on the image SHA265 digest.
+build_sha265_tag(
+    name = "tags",
+    image = ":image_index",
+    input = "image.json.sha256",
+    output = "_tag.txt",
+)
+
+# Publish multi-arch with image index to registry
+oci_push(
+    name = "push",
+    image = ":image_index",
+    repository = "my.registry.com/musl",
+    remote_tags = ":tags",
+    visibility = ["//visibility:public"],
+)

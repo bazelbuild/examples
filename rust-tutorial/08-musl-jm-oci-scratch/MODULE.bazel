@@ -1,0 +1,123 @@
+module(
+    name = "musl",
+    version = "0.0.0"
+)
+###############################################################################
+# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
+###############################################################################
+# https://github.com/bazelbuild/rules_rust/releases
+bazel_dep(name = "rules_rust", version = "0.46.0")
+# Rules for OCI container images
+# https://github.com/bazel-contrib/rules_oci/releases
+bazel_dep(name = "rules_oci", version = "1.7.6")
+# https://github.com/bazelbuild/rules_pkg/releases
+bazel_dep(name = "rules_pkg", version = "0.10.1")
+#
+# Rules for musl cross compilation
+# https://github.com/bazel-contrib/musl-toolchain/releases
+bazel_dep(name = "toolchains_musl", version = "0.1.16", dev_dependency = True)
+# https://github.com/bazelbuild/platforms/releases
+bazel_dep(name = "platforms", version = "0.0.10")
+# https://github.com/bazel-contrib/toolchains_llvm
+bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+
+###############################################################################
+# L L V M
+# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
+###############################################################################
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+LLVM_VERSIONS = {"": "16.0.0",}
+
+# Setup for cross compile & MUSL static binary compile.
+# Both, cross compilation and MUSL still need a C/C++ toolchain with sysroot.
+# https://github.com/bazel-contrib/toolchains_llvm/tree/0d302de75f6ace071ac616fb274481eedcc20e5a?tab=readme-ov-file#sysroots
+
+# Host LLVM toolchain.
+llvm.toolchain(
+    name = "llvm_toolchain",
+    llvm_versions = LLVM_VERSIONS,
+)
+use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
+# X86 LLVM Toolchain with sysroot.
+# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/WORKSPACE.bzlmod
+llvm.toolchain(
+    name = "llvm_toolchain_x86_with_sysroot",
+    llvm_versions = LLVM_VERSIONS,
+)
+
+llvm.sysroot(
+    name = "llvm_toolchain_x86_with_sysroot",
+    targets = ["linux-x86_64"],
+    label = "@@org_chromium_sysroot_linux_x64//:sysroot",
+)
+use_repo(llvm, "llvm_toolchain_x86_with_sysroot")
+
+# ARM (aarch64) LLVM Toolchain with sysroot.
+# https://github.com/bazelbuild/rules_rust/blob/main/examples/bzlmod/cross_compile/WORKSPACE.bzlmod
+llvm.toolchain(
+    name = "llvm_toolchain_aarch64_with_sysroot",
+    llvm_versions = LLVM_VERSIONS,
+)
+
+llvm.sysroot(
+    name = "llvm_toolchain_aarch64_with_sysroot",
+    targets = ["linux-aarch64"],
+    label = "@@org_chromium_sysroot_linux_aarch64//:sysroot",
+)
+use_repo(llvm, "llvm_toolchain_aarch64_with_sysroot")
+
+# Register all LLVM toolchains
+register_toolchains("@llvm_toolchain//:all")
+
+###############################################################################
+# T O O L C H A I N S
+###############################################################################
+# Rust toolchain
+RUST_EDITION = "2021"
+RUST_VERSION = "1.79.0"
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = RUST_EDITION,
+    versions = [RUST_VERSION],
+    extra_target_triples = [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-musl",
+    ],
+)
+use_repo(rust, "rust_toolchains")
+register_toolchains("@rust_toolchains//:all")
+
+###############################################################################
+#  O C I  B A S E  I M A G E
+###############################################################################
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+#
+# https://hub.docker.com/r/hansenmarvin/rust-scratch/tags
+oci.pull(
+    name = "scratch",
+    digest = "sha256:c6d1c2b62a454d6c5606645b5adfa026516e3aa9213a6f7648b8e9b3cc520f76",
+    image = "index.docker.io/hansenmarvin/rust-scratch",
+    platforms = ["linux/amd64", "linux/arm64"],
+)
+use_repo(oci, "scratch")
+
+###############################################################################
+# R U S T  C R A T E S
+###############################################################################
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+#
+# Custom Memory Allocator
+crate.spec(package = "jemallocator", version = "0.5.4")
+#
+# External crates
+crate.spec(package = "arc-swap", version = "1.7")
+crate.spec(package = "serde", features = ["derive"], version = "1.0")
+crate.spec(package = "serde_json", version = "1.0")
+crate.spec(package = "tokio", default_features=False, features = ["macros", "net", "rt-multi-thread", "signal"], version = "1.38")
+crate.spec(package = "tokio-cron-scheduler", features = ["signal"], version = "0.10")
+crate.spec(package = "warp", version = "0.3")
+
+crate.from_specs()
+use_repo(crate, "crates")

@@ -1,5 +1,5 @@
 module(
-    name = "hello_comp_opt",
+    name = "deps-direct",
     version = "0.0.0"
 )
 ###############################################################################
@@ -23,3 +23,19 @@ rust.toolchain(
 )
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
+
+###############################################################################
+# R U S T  C R A T E S
+###############################################################################
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+#
+# External crates
+crate.spec(package = "arc-swap", version = "1.7")
+crate.spec(package = "serde", features = ["derive"], version = "1.0")
+crate.spec(package = "serde_json", version = "1.0")
+crate.spec(package = "tokio", default_features=False, features = ["macros", "net", "rt-multi-thread", "signal"], version = "1.38")
+crate.spec(package = "tokio-cron-scheduler", features = ["signal"], version = "0.10")
+crate.spec(package = "warp", version = "0.3")
+
+crate.from_specs()
+use_repo(crate, "crates")

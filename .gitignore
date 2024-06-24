@@ -10,3 +10,4 @@ target/
 # Xcode
 *.xcodeproj
 node_modules
+/rust-tutorial/*/MODULE.bazel.lock

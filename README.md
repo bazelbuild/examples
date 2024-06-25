@@ -37,6 +37,10 @@ Note that tutorials for other languages may be found under other repositories:
 
  * [Using Java with Maven](/java-maven)
 
+### Rust
+
+* [Using Rust with Bzlmod](/rust-tutorial)
+
  ### Frontend
 
  * [Next.js](/frontend/next.js)

@@ -38,6 +38,7 @@ Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
 
+
 ### Example 2: Cross Compilation
 
 This example shows how to cross-compile Rust code for Linux on both, aarch64 and x86_64. 
@@ -50,6 +51,7 @@ Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
 
+
 ### Example 3: Compiler Optimization
 
 This example shows how to apply compiler optimization to a Rust binary.
@@ -61,13 +63,15 @@ Links:
 Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 
-### Example 4: C FFI
 
-This example shows how to call into a C++ function via C FFI.
+### Example 4: FFI
+
+This example shows how to call into a C++ function via C FFI, which comes in handy when Rust 
+re-uses an existing C++ code base. 
 
 Links:
-* [Readme](04-c-ffi/README.md)
-* [Code](04-c-ffi)
+* [Readme](04-ffi/README.md)
+* [Code](04-ffi)
 
 Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
@@ -103,6 +107,7 @@ Links:
 Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 
+
 ### Example 7: Vendored Rust Dependencies
 
 Some organizations require that all external dependencies are vendored, meaning downloaded 
@@ -135,6 +140,7 @@ Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [rust_proto](https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_libraryhttps://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library)
 * [Protocol Buffers](https://protobuf.dev/)
+
 
 ### Example 9: Rust Container image
 

@@ -1,9 +1,10 @@
 # Direct Dependencies
 
 In cases where Rust targets have heavy interactions with other Bazel targets ([Cc](https://docs.bazel.build/versions/main/be/c-cpp.html), [Proto](https://rules-proto-grpc.com/en/4.5.0/lang/rust.html),
-etc.), maintaining Cargo.toml files may have diminishing returns as things like rust-analyzer begin to be confused about
-missing targets or environment variables defined only in Bazel. In workspaces like this, it may be desirable to have a
-“Cargo free” setup. crates_repository supports this through the packages attribute.
+etc.), maintaining Cargo.toml files may have diminishing returns as things like rust-analyzer 
+begin to be confused about missing targets or environment variables defined only in Bazel. 
+In situations like this, it may be desirable to have a “Cargo free” setup. 
+crates_repository supports this through the packages attribute.
 
 ```starlark
 ###############################################################################

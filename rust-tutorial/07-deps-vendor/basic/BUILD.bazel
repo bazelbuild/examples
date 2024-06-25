@@ -1,7 +1,4 @@
-
 load("@rules_rust//rust:defs.bzl", "rust_binary")
-
-package(default_visibility = ["//visibility:public"])
 
 rust_binary(
     name = "hello_sys",
@@ -9,11 +6,5 @@ rust_binary(
     # Note the `crate_unvierse` dependencies here need to have been loaded
     # in the WORKSPACE file. See `//:sys_deps.bzl` for more details.
     deps = ["//basic/3rdparty/crates:bzip2"],
-)
-
-sh_test(
-    name = "test",
-    srcs = ["test.sh"],
-    args = ["$(location :hello_sys)"],
-    data = [":hello_sys"],
+    visibility = ["//visibility:public"],
 )

@@ -82,6 +82,6 @@ repin dependencies is to run:
 CARGO_BAZEL_REPIN=1 bazel sync --only=crates
 ```
 
-This will result in all dependencies being updated for a project. The `CARGO_BAZEL_REPIN` environment variable
-can also be used to customize how dependencies are updated. For more details about
-repin, [please refer to the documentation](https://bazelbuild.github.io/rules_rust/crate_universe.html#crates_vendor).
+This will result in all dependencies being updated for a project. The `CARGO_BAZEL_REPIN` 
+environment variable can also be used to customize how dependencies are updated. 
+For more details about repin, [please refer to the documentation](https://bazelbuild.github.io/rules_rust/crate_universe.html#crates_vendor).

@@ -1,8 +1,20 @@
 # Examples to build Rust code
 
-This package shows how to build Rust code for the most common scenarios. 
-In total, eight use cases are covered and documented. All examples use the new
-Bazelmod configuration format, and some examples come with a Cargo configuration. 
+This package shows how to build Rust code for the ten most common use cases.
+
+All examples use the new Bazelmod configuration format, and some examples come with a Cargo configuration.
+There are cases when rules have not yet been updated for the new Bazelmod format. 
+In this case, you can apply the [hybrid mode](https://bazel.build/external/migration#hybrid-mode) 
+by already using the new MODULE.bazel config format while also using a dedicated WORKSPACE.bazelmod 
+file for those rules that have not been updated. 
+
+Over time, you can migrate one rule at a time from the WORKSPACE.bazelmod file to the MODULE.bazel 
+and eventually delete the WORKSPACE.bazelmod file when its no longer needed. 
+Please read the [official migration guide for details](https://bazel.build/external/migration).
+
+Finally, the new MODULE.bazel format is very different from the previous WORKSPACE format, so please
+be mindful to never mix the two in one file. 
+If unsure, please ask in the #rust channel on Bazel Slack: https://slack.bazel.build/
 
 
 ### Example 0: Hello World
@@ -21,6 +33,8 @@ This example shows how to set up the Clang C/C++ toolchain to compile C dependen
 Links:
 * [Readme](01-hello-clang/README.md)
 * [Code](01-hello-clang)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
 
@@ -31,6 +45,8 @@ This example shows how to cross-compile Rust code for Linux on both, aarch64 and
 Links:
 * [Readme](02-hello-cross/README.md)
 * [Code](02-hello-cross)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
 
@@ -41,9 +57,24 @@ This example shows how to apply compiler optimization to a Rust binary.
 Links:
 * [Readme](03-comp-opt/README.md)
 * [Code](03-comp-opt)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 
-### Example 4: Cargo Workspace Dependencies
+### Example 4: C FFI
+
+This example shows how to call into a C++ function via C FFI.
+
+Links:
+* [Readme](04-c-ffi/README.md)
+* [Code](04-c-ffi)
+
+Documentation:
+* [rules_rust](https://bazelbuild.github.io/rules_rust/)
+* [rules_cc](https://github.com/bazelbuild/rules_cc)
+
+
+### Example 5: Cargo Workspace Dependencies
 
 This example shows how to manage dependencies with Cargo and use crates_repository
 to generate Bazel dependencies from a (workspace) Cargo.toml. Note, whenever 
@@ -51,12 +82,14 @@ dependencies in  Cargo.toml change, you have to re-generate the Bazel dependenci
 See the Readme for details.
 
 Links:
-* [Readme](04-deps-cargo/README.md)
-* [Code](04-deps-cargo)
+* [Readme](05-deps-cargo/README.md)
+* [Code](05-deps-cargo)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 
 
-### Example 5: Direct Dependencies
+### Example 6: Direct Dependencies
 
 In complex or larger Bazel projects, maintaining various Cargo.toml files may have diminishing returns, 
 so managing Rust dependencies directly with Bazel is a more favorable option. 
@@ -64,34 +97,55 @@ This example shows how to directly declare and use Rust dependencies in Bazel
 to build an async REST API with Tokio.
 
 Links:
-* [Readme](05-deps-direct/README.md)
-* [Code](05-deps-direct)
+* [Readme](06-deps-direct/README.md)
+* [Code](06-deps-direct)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 
-### Example 6: gRPC Client & Server
+### Example 7: Vendored Rust Dependencies
+
+@TODO 
+
+Links:
+* [Readme](07-deps-vendor/README.md)
+* [Code](07-deps-vendor)
+
+Documentation:
+* [rules_rust](https://bazelbuild.github.io/rules_rust/)
+
+
+### Example 8: gRPC Client & Server
 
 The gRPC protocol is commonly used for communication between internal microservices. 
 This example shows how to build a gRPC client and server in Rust and how to set up a custom
-toolchain that generates all the proto bindings for Rust. Also, the example comes with a complete Cargo workspace configuration that contains three different crates,
-which helps to migrate Cargo workspaces to Bazel. 
+toolchain that generates all the proto bindings for Rust. Also, the example comes with a complete 
+Cargo workspace configuration that contains three different crates, which helps to migrate Cargo workspaces to Bazel. 
+
 
 Links:
-* [Readme](06-grpc-client-server/README.md)
-* [Code](06-grpc-client-server)
-* [rules_rust](https://bazelbuild.github.io/rules_rust/)
+* [Readme](08-grpc-client-server/README.md)
+* [Code](08-grpc-client-server)
 
-### Example 7: OCI Container image
+Documentation:
+* [rules_rust](https://bazelbuild.github.io/rules_rust/)
+* [rust_proto](https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_libraryhttps://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library)
+* [Protocol Buffers](https://protobuf.dev/)
+
+### Example 9: OCI Container image
 
 This example showcases how to configure Bazel to build and publish a Rust binary as OCI container image. 
 
 Links:
-* [Readme](07-oci-container/README.md)
-* [Code](07-oci-container)
+* [Readme](09-oci-container/README.md)
+* [Code](09-oci-container)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [rules_oci](https://github.com/bazel-contrib/rules_oci?tab=readme-ov-file#usage)
 
 
-### Example 8: MUSL Scratch Container
+### Example 10: MUSL Scratch Container
 
 In production, security and performance are important considerations.
 Golang pioneered the concept of a scratch container, an empty container image that only holds a statically compiled binary and nothing else. This has many advantages, such as:
@@ -106,9 +160,13 @@ The example touches on a handful of advanced Bazel topics, such as configuring L
 cross compiling to MUSL targets, and replacing the default memory allocator. 
 
 Links:
-* [Readme](08-musl-jm-oci-scratch/README.md)
-* [Code](08-musl-jm-oci-scratch)
+* [Readme](10-musl-cross-compilation/README.md)
+* [Code](10-musl-cross-compilation)
+
+Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [rules_oci](https://github.com/bazel-contrib/rules_oci?tab=readme-ov-file#usage)
 * [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
+* [musl-toolchain](https://github.com/bazel-contrib/musl-toolchain)
+
 

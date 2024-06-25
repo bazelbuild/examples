@@ -1,6 +1,6 @@
 # OCI Container
 
-This example expands the previous [direct dependency example](../05-deps-direct) code 
+This example expands the previous [direct dependency example](../06-deps-direct) code 
 and adds rules_oci to build an OCI container image. 
 
 To build the example:

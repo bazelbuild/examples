@@ -39,7 +39,7 @@ Note that tutorials for other languages may be found under other repositories:
 
 ### Rust
 
-* [Using Rust with Bzlmod](/rust-tutorial)
+* [Building Rust](/rust-tutorial)
 
  ### Frontend
 

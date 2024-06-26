@@ -1,0 +1,4 @@
+*~
+/rust-tutorial/*/MODULE.bazel.lock
+/rust-tutorial/*/target/
+/rust-tutorial/*/*/target/

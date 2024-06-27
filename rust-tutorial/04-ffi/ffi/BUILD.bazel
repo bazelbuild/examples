@@ -1,0 +1,29 @@
+load("@rules_cc//cc:defs.bzl", "cc_import", "cc_library")
+load("@rules_rust//rust:defs.bzl", "rust_shared_library")
+
+# A rust_shared_library (forcing the use of pic) that depends on a native
+# linker library with only a static_library member.
+rust_shared_library(
+    name = "rust_shared_lib_with_static_dep",
+    srcs = ["src/rust_shared_lib_with_static_dep.rs"],
+    deps = [":static_cclib"],
+)
+
+cc_library(
+    name = "nonstandard_name_cc_lib",
+    srcs = ["c/cc_library.cc"],
+)
+
+genrule(
+    name = "nonstandard_name_gen",
+    srcs = [":nonstandard_name_cc_lib"],
+    outs = ["nonstandard_name_gen.a"],
+    # Copy the first member (libnonstandard_name_cc_lib.a) from the srcs to the
+    # output nonstandard_name_gen.a.
+    cmd = "cp $$(awk '{print $$1}' <<< '$(SRCS)') $@",
+)
+
+cc_import(
+    name = "static_cclib",
+    static_library = "nonstandard_name_gen.a",
+)

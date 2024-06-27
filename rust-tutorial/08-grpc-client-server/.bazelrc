@@ -1,0 +1,7 @@
+# Required on windows
+common --enable_platform_specific_config
+startup --windows_enable_symlinks
+build:windows --enable_runfiles
+
+# Required for cargo_build_script support before Bazel 7
+build --incompatible_merge_fixed_and_default_shell_env

@@ -1,0 +1,20 @@
+load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+
+crates_vendor(
+    name = "crates_vendor",
+    annotations = {
+        "bzip2-sys": [crate.annotation(
+            gen_build_script = True,
+        )],
+    },
+    cargo_lockfile = "Cargo.Bazel.lock",
+    generate_build_scripts = False,
+    mode = "remote",
+    packages = {
+        "bzip2": crate.spec(
+            version = "=0.3.3",
+        ),
+    },
+    repository_name = "basic",
+    tags = ["manual"],
+)

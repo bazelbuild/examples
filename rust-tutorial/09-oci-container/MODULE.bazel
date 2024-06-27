@@ -1,18 +1,21 @@
 module(
     name = "oci-container",
-    version = "0.0.0"
+    version = "0.0.0",
 )
+
 ###############################################################################
 # B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
 ###############################################################################
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
+
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
 # OCI Container rules
 # https://github.com/bazel-contrib/rules_oci/releases
 bazel_dep(name = "rules_oci", version = "1.7.6")
+
 # https://github.com/bazelbuild/rules_pkg/releases
 bazel_dep(name = "rules_pkg", version = "0.10.1")
 
@@ -21,6 +24,7 @@ bazel_dep(name = "rules_pkg", version = "0.10.1")
 # https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
 ###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+
 LLVM_VERSIONS = {
     "": "16.0.0",
 }
@@ -31,6 +35,7 @@ llvm.toolchain(
     llvm_versions = LLVM_VERSIONS,
 )
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
 register_toolchains("@llvm_toolchain//:all")
 
 ###############################################################################
@@ -38,6 +43,7 @@ register_toolchains("@llvm_toolchain//:all")
 ###############################################################################
 # Rust toolchain
 RUST_EDITION = "2021"
+
 RUST_VERSION = "1.79.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -46,19 +52,24 @@ rust.toolchain(
     versions = [RUST_VERSION],
 )
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")
 
 ###############################################################################
 #  O C I  B A S E  I M A G E
 ###############################################################################
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
 #
 # https://github.com/GoogleContainerTools/distroless
 oci.pull(
     name = "distroless",
     digest = "sha256:e1065a1d58800a7294f74e67c32ec4146d09d6cbe471c1fa7ed456b2d2bf06e0",
     image = "gcr.io/distroless/cc-debian12",
-    platforms = ["linux/amd64", "linux/arm64/v8"],
+    platforms = [
+        "linux/amd64",
+        "linux/arm64/v8",
+    ],
 )
 use_repo(oci, "distroless")
 
@@ -66,14 +77,41 @@ use_repo(oci, "distroless")
 # R U S T  C R A T E S
 ###############################################################################
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+
 #
 # External crates
-crate.spec(package = "arc-swap", version = "1.7")
-crate.spec(package = "serde", features = ["derive"], version = "1.0")
-crate.spec(package = "serde_json", version = "1.0")
-crate.spec(package = "tokio", default_features=False, features = ["macros", "net", "rt-multi-thread", "signal"], version = "1.38")
-crate.spec(package = "tokio-cron-scheduler", features = ["signal"], version = "0.10")
-crate.spec(package = "warp", version = "0.3")
-
+crate.spec(
+    package = "arc-swap",
+    version = "1.7",
+)
+crate.spec(
+    features = ["derive"],
+    package = "serde",
+    version = "1.0",
+)
+crate.spec(
+    package = "serde_json",
+    version = "1.0",
+)
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.38",
+)
+crate.spec(
+    features = ["signal"],
+    package = "tokio-cron-scheduler",
+    version = "0.10",
+)
+crate.spec(
+    package = "warp",
+    version = "0.3",
+)
 crate.from_specs()
 use_repo(crate, "crates")

@@ -1,19 +1,17 @@
-load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_image_index")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("//:build/transition.bzl", "multi_arch")
 
 # Build a Bazel Macro
 # https://belov.nz/posts/bazel-rules-macros/
 
 def build_multi_arch_image(
-    name,
-    base,
-    srcs,
-    exposed_ports = [],
-    platforms = [],
-    visibility=None
-    ):
-
+        name,
+        base,
+        srcs,
+        exposed_ports = [],
+        platforms = [],
+        visibility = None):
     # https://codilime.com/blog/bazel-build-system-build-containerized-applications/
     entry_point = "bin"
     layer_name = "tar_layer"
@@ -47,8 +45,7 @@ def build_multi_arch_image(
         visibility = visibility,
     )
 
-def build_image(name, base, srcs, exposed_ports = [], visibility=None):
-
+def build_image(name, base, srcs, exposed_ports = [], visibility = None):
     # Build a Bazel Macro
     # https://belov.nz/posts/bazel-rules-macros/
     # https://codilime.com/blog/bazel-build-system-build-containerized-applications/
@@ -72,9 +69,7 @@ def build_image(name, base, srcs, exposed_ports = [], visibility=None):
         visibility = visibility,
     )
 
-
 def _build_sha265_tag_impl(ctx):
-
     # Both the input and output files are specified by the BUILD file.
     in_file = ctx.file.input
     out_file = ctx.outputs.output
@@ -88,7 +83,6 @@ def _build_sha265_tag_impl(ctx):
         arguments = [in_file.path, out_file.path],
         command = "sed -n 's/.*sha256:\\([[:alnum:]]\\{7\\}\\).*/\\1/p' < \"$1\" > \"$2\"",
     )
-
 
 build_sha265_tag = rule(
     doc = "Extracts a 7 characters long short hash from the image digest.",
@@ -104,7 +98,7 @@ build_sha265_tag = rule(
             doc = "The image digest file. Usually called image.json.sha256",
         ),
         "output": attr.output(
-            doc = "The generated tag file. Usually named _tag.txt"
+            doc = "The generated tag file. Usually named _tag.txt",
         ),
     },
 )

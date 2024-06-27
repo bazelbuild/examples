@@ -5,9 +5,9 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "all",
     srcs = [
+        ":hello_world_aarch64",
         ":hello_world_host",
         ":hello_world_x86_64",
-        ":hello_world_aarch64",
     ],
 )
 
@@ -30,4 +30,3 @@ rust_binary(
     platform = "//build/platforms:linux-aarch64",
     deps = [],
 )
-

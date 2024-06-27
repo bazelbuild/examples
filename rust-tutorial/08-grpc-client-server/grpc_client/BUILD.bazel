@@ -1,27 +1,26 @@
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc", "rust_doc_test", "rust_test_suite")
 
-
 # Build binary
 # https://bazelbuild.github.io/rules_rust/defs.html#rust_binary
 rust_binary(
     name = "bin",
-    crate_root = "src/main.rs",
     srcs = glob([
         "src/*.rs",
     ]),
+    crate_root = "src/main.rs",
     rustc_flags = select({
-       "//:release": [
+        "//:release": [
             "-Clto",
             "-Ccodegen-units=1",
             "-Cpanic=abort",
             "-Copt-level=3",
             "-Cstrip=symbols",
-            ],
-        "//conditions:default":
-        [
-           "-Copt-level=0",
+        ],
+        "//conditions:default": [
+            "-Copt-level=0",
         ],
     }),
+    visibility = ["//visibility:public"],
     deps = [
         # Internal crates
         "//proto_bindings:rust_proto",
@@ -29,7 +28,6 @@ rust_binary(
         "@crates//:tokio",
         "@crates//:tonic",
     ],
-    visibility = ["//visibility:public"],
 )
 
 # Build documentation
@@ -43,8 +41,7 @@ rust_doc(
 # Test documentation
 # https://bazelbuild.github.io/rules_rust/rust_doc.html#rust_doc_test
 rust_doc_test(
-     name = "client_doc_test",
-     crate = ":bin",
-     visibility = ["//visibility:public"],
- )
-
+    name = "client_doc_test",
+    crate = ":bin",
+    visibility = ["//visibility:public"],
+)

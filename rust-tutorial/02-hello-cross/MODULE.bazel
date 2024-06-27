@@ -1,7 +1,8 @@
 module(
     name = "hello_cross",
-    version = "0.0.0"
+    version = "0.0.0",
 )
+
 ###############################################################################
 # B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
 ###############################################################################
@@ -10,8 +11,10 @@ bazel_dep(name = "rules_rust", version = "0.46.0")
 
 # Rules for cross compilation
 bazel_dep(name = "toolchains_musl", version = "0.1.16", dev_dependency = True)
+
 # https://github.com/bazelbuild/platforms/releases
 bazel_dep(name = "platforms", version = "0.0.10")
+
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
@@ -20,6 +23,7 @@ bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 # https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
 ###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+
 LLVM_VERSIONS = {
     "": "16.0.0",
 }
@@ -43,11 +47,10 @@ llvm.toolchain(
     name = "llvm_toolchain_x86_with_sysroot",
     llvm_versions = LLVM_VERSIONS,
 )
-
 llvm.sysroot(
     name = "llvm_toolchain_x86_with_sysroot",
-    targets = ["linux-x86_64"],
     label = "@@org_chromium_sysroot_linux_x64//:sysroot",
+    targets = ["linux-x86_64"],
 )
 use_repo(llvm, "llvm_toolchain_x86_with_sysroot")
 
@@ -58,11 +61,10 @@ llvm.toolchain(
     name = "llvm_toolchain_aarch64_with_sysroot",
     llvm_versions = LLVM_VERSIONS,
 )
-
 llvm.sysroot(
     name = "llvm_toolchain_aarch64_with_sysroot",
-    targets = ["linux-aarch64"],
     label = "@@org_chromium_sysroot_linux_aarch64//:sysroot",
+    targets = ["linux-aarch64"],
 )
 use_repo(llvm, "llvm_toolchain_aarch64_with_sysroot")
 
@@ -75,16 +77,18 @@ register_toolchains("@llvm_toolchain//:all")
 
 # Rust toolchain
 RUST_EDITION = "2021"
+
 RUST_VERSION = "1.79.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = RUST_EDITION,
-    versions = [RUST_VERSION],
     extra_target_triples = [
         "aarch64-unknown-linux-gnu",
         "x86_64-unknown-linux-gnu",
     ],
+    versions = [RUST_VERSION],
 )
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")

@@ -1,7 +1,8 @@
 module(
     name = "hello_cross",
-    version = "0.0.0"
+    version = "0.0.0",
 )
+
 ###############################################################################
 # B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
 ###############################################################################
@@ -16,6 +17,7 @@ bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 # https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
 ###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+
 LLVM_VERSIONS = {
     "": "16.0.0",
 }
@@ -31,6 +33,7 @@ llvm.toolchain(
     llvm_versions = LLVM_VERSIONS,
 )
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
 register_toolchains("@llvm_toolchain//:all")
 
 ###############################################################################
@@ -39,6 +42,7 @@ register_toolchains("@llvm_toolchain//:all")
 
 # Rust toolchain
 RUST_EDITION = "2021"
+
 RUST_VERSION = "1.79.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -47,4 +51,5 @@ rust.toolchain(
     versions = [RUST_VERSION],
 )
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")

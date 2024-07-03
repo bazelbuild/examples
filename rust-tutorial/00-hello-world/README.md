@@ -16,7 +16,7 @@ A minimal MODULE.bazel file for Rust contains three parts:
 2) Loading the Rust rules
 3) Configuration of the Rust toolchain
 
-Add to your WORKSPACE file:
+Add to your MODULE.bazel file:
 
 ```Starlark
 module(

@@ -54,7 +54,7 @@ supports linux on both, X86 and ARM. In that case, you have to setup three LLVM 
 3) LLVM for ARM (aarch64)
 
 For the host LLVM, you just specify a LLVM version and then register the toolchain as usual. The target LLVM toolchains,
-however, have dependencies on system libraries for the target platform. Therefore, it is requires to download a so
+however, have dependencies on system libraries for the target platform. Therefore, it is required to download a so-
 called sysroot that contains a root file system with all those system libraries for the specific target platform. In
 this case, you have to use the WORKSPACE.bzlmod file that bridges between the legacy WORKSPACE format and the newer
 MODULE.bazel format.

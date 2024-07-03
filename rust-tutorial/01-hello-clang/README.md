@@ -6,7 +6,7 @@ However, this is not always wanted and this example shows how to setup the toolc
 
 ## Configuration 
 
-First, you have to declare the toolchains_llvm dependency and then configure the toolchain to ensure Bazel downloads the LLVM toolchain matching the host.
+First, you have to declare the `toolchains_llvm` dependency and then configure the toolchain to ensure Bazel downloads the LLVM toolchain matching the host.
 
 Add to your WORKSPACE file:
 

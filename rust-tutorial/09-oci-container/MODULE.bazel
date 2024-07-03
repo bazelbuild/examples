@@ -3,9 +3,6 @@ module(
     version = "0.0.0",
 )
 
-###############################################################################
-# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
-###############################################################################
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 
@@ -19,10 +16,6 @@ bazel_dep(name = "rules_oci", version = "1.7.6")
 # https://github.com/bazelbuild/rules_pkg/releases
 bazel_dep(name = "rules_pkg", version = "0.10.1")
 
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 
 LLVM_VERSIONS = {
@@ -38,9 +31,6 @@ use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
 register_toolchains("@llvm_toolchain//:all")
 
-###############################################################################
-# T O O L C H A I N S
-###############################################################################
 # Rust toolchain
 RUST_EDITION = "2021"
 
@@ -55,9 +45,6 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-###############################################################################
-#  O C I  B A S E  I M A G E
-###############################################################################
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 
 #
@@ -73,9 +60,6 @@ oci.pull(
 )
 use_repo(oci, "distroless")
 
-###############################################################################
-# R U S T  C R A T E S
-###############################################################################
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 
 #

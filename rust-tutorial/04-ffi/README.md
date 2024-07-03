@@ -17,15 +17,11 @@ module(
     name = "ffi",
     version = "0.0.0"
 )
-###############################################################################
-# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
-###############################################################################
+ 
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 
-###############################################################################
-# T O O L C H A I N S
-###############################################################################
+ 
 # Rust toolchain
 RUST_EDITION = "2021"
 RUST_VERSION = "1.79.0"

@@ -3,9 +3,6 @@ module(
     version = "0.0.0",
 )
 
-###############################################################################
-# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
-###############################################################################
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 
@@ -24,10 +21,6 @@ bazel_dep(name = "protobuf", version = "27.1")
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 
 LLVM_VERSIONS = {
@@ -42,10 +35,6 @@ llvm.toolchain(
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
 register_toolchains("@llvm_toolchain//:all")
-
-###############################################################################
-# T O O L C H A I N S
-###############################################################################
 
 # Rust toolchain
 RUST_EDITION = "2021"
@@ -67,9 +56,6 @@ register_toolchains("@rules_rust//proto/protobuf:default-proto-toolchain")
 # Custom Prost toolchain
 register_toolchains("@//build/prost_toolchain")
 
-###############################################################################
-# R U S T  C R A T E S
-###############################################################################
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 
 #
@@ -110,7 +96,7 @@ crate.annotation(
 )
 
 #
-# External crates
+# Other external crates
 crate.spec(
     default_features = False,
     features = [

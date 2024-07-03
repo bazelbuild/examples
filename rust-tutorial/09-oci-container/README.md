@@ -63,10 +63,7 @@ The LLVM toolchain is configured just as in the previous example for
 example](../02-hello-cross).
 
 ```Starlark
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
+  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = {
     "": "16.0.0",

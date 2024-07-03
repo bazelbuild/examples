@@ -77,9 +77,7 @@ However, in addition to LLVM and platform support, we also add the MUSL toolchai
 Let's start with adding the requires rules to the MODULE.bazel file:
 
 ```Starlark
-###############################################################################
-# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
-###############################################################################
+ 
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 # Rules for OCI container images
@@ -148,10 +146,7 @@ Here, we declare to new http downloads that retrieve the sysroot for linux_x64 a
 needs to be configured and to do that, please add the following to your MODULE.bazel
 
 ```Starlark
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
+  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = {"": "16.0.0",}
 
@@ -347,9 +342,7 @@ multi-threading workload.
 Make sure jemallocator is declared a dependency in your MODULE.bazelmod file:
 
 ```Starlark
-###############################################################################
-# R U S T  C R A T E S
-###############################################################################
+ 
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 #
 # Custom Memory Allocator

@@ -7,9 +7,7 @@ In situations like this, it may be desirable to have a “Cargo free” setup.
 crates_repository supports this through the packages attribute.
 
 ```starlark
-###############################################################################
-# R U S T  C R A T E S
-###############################################################################
+ 
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 #
 # External crates

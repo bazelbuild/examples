@@ -15,18 +15,13 @@ module(
     name = "hello_clang",
     version = "0.0.0"
 )
-###############################################################################
-# B A Z E L  C E N T R A L  R E G I S T R Y # https://registry.bazel.build/
-###############################################################################
+ 
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
+  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = {
     "": "16.0.0",
@@ -42,9 +37,7 @@ use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 # Register all LLVM toolchains
 register_toolchains("@llvm_toolchain//:all")
 
-###############################################################################
-# T O O L C H A I N S
-###############################################################################
+ 
 # Rust toolchain
 RUST_EDITION = "2021"
 RUST_VERSION = "1.79.0"

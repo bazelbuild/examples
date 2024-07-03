@@ -3,9 +3,7 @@
 One of the simpler ways to wire up dependencies would be to first structure your project into a Cargo workspace. The crates_repository rule can ingest a root Cargo.toml file and generate Bazel dependencies from there. 
 
 ```starlark
-###############################################################################
-# R U S T  C R A T E S
-###############################################################################
+ 
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 #
 # External crates

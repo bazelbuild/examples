@@ -99,10 +99,7 @@ sysroots, that means you have to configure LLVM next to use these files. As ment
 needs to be configured and to do that, please add the following to your MODULE.bazel
 
 ```Starlark
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
+  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = {
     "": "16.0.0",

@@ -57,10 +57,7 @@ bazel_dep(name = "protobuf", version = "27.1")
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
 # 1 Register LLVM 
-###############################################################################
-# L L V M
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/MODULE.bazel
-###############################################################################
+  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = { "": "16.0.0",}
 

@@ -664,7 +664,7 @@
     },
     "@@rules_rust~//rust:extensions.bzl%rust": {
       "general": {
-        "bzlTransitiveDigest": "I3KD/tWxmrJras+oNCHwVLc55nIxmythTlYkBkmH1yk=",
+        "bzlTransitiveDigest": "E0PTgt7FFtzIpCxiDP7I3cAgtHZQSXiUtCwTnrmGPc4=",
         "usagesDigest": "tD3tYtg7EISQ+h5jnHP44/oGX45htu72dFE7DYM7YjY=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -12906,7 +12906,7 @@
     "@@toolchains_llvm~//toolchain/extensions:llvm.bzl%llvm": {
       "general": {
         "bzlTransitiveDigest": "1w0wdH2QnKapJmTbk88f5iQjNlw7vw4f4r1cNf1vWVI=",
-        "usagesDigest": "0/FNYTiE2AU0aXLGswoInUm5Jt+TIIyUC4spbgeJq2U=",
+        "usagesDigest": "HndwzqaRGROdlRfZeQBibeDqqXnGdYZpLQXcM5gQJqY=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -12938,7 +12938,7 @@
               "unfiltered_compile_flags": {},
               "toolchain_roots": {},
               "sysroot": {
-                "linux-x86_64": "'@@org_chromium_sysroot_linux_x64//:sysroot'"
+                "linux-x86_64": "'@@_main~_repo_rules~org_chromium_sysroot_linux_x64//:sysroot'"
               }
             }
           },
@@ -13018,7 +13018,7 @@
               "unfiltered_compile_flags": {},
               "toolchain_roots": {},
               "sysroot": {
-                "linux-aarch64": "'@@org_chromium_sysroot_linux_aarch64//:sysroot'"
+                "linux-aarch64": "'@@_main~_repo_rules~org_chromium_sysroot_linux_aarch64//:sysroot'"
               }
             }
           },

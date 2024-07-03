@@ -313,7 +313,7 @@ However, when you build for multiple targets, it is sensible to group all of the
 
 ```Starlark
 filegroup(
-    name = "bin",
+    name = "all",
     srcs = [
         ":hello_world_host",
         ":hello_world_x86_64",
@@ -325,4 +325,4 @@ filegroup(
 
 Then you build for all platforms by calling the filegroup target:
 
-`bazel build //hello_cross:bin`
+`bazel build //hello_cross:all`

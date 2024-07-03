@@ -665,7 +665,7 @@
     "@@rules_rust~//rust:extensions.bzl%rust": {
       "general": {
         "bzlTransitiveDigest": "I3KD/tWxmrJras+oNCHwVLc55nIxmythTlYkBkmH1yk=",
-        "usagesDigest": "WHYWiuBRqhQfXUxxdSOvxxomUX4Y/5whTAXtgIcOueM=",
+        "usagesDigest": "tD3tYtg7EISQ+h5jnHP44/oGX45htu72dFE7DYM7YjY=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -12906,7 +12906,7 @@
     "@@toolchains_llvm~//toolchain/extensions:llvm.bzl%llvm": {
       "general": {
         "bzlTransitiveDigest": "1w0wdH2QnKapJmTbk88f5iQjNlw7vw4f4r1cNf1vWVI=",
-        "usagesDigest": "LdD9akdKzuO9eh+FGYO3zaMVovq3JVnLlbfFUlsSArA=",
+        "usagesDigest": "0/FNYTiE2AU0aXLGswoInUm5Jt+TIIyUC4spbgeJq2U=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},

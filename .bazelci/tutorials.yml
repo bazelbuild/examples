@@ -102,7 +102,7 @@ tasks:
   rust-02-hello-cross:
     name: "Rust Cross Compilation"
     platform: macos
-    working_directory: ..'/rust-tutorial/02-hello-cross
+    working_directory: ../rust-tutorial/02-hello-cross
     build_targets:
       - "//:all"
   rust-03-comp-opt-linux:

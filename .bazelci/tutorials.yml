@@ -117,3 +117,15 @@ tasks:
     working_directory: ../rust-tutorial/03-comp-opt
     build_targets:
       - "//..."
+  rust-04-ffi-linux:
+    name: "Rust FFI"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/04-ffi
+    build_targets:
+      - "//..."
+  rust-04-ffi-macos:
+    name: "Rust FFI"
+    platform: macos
+    working_directory: ../rust-tutorial/04-ffi
+    build_targets:
+      - "//..."

@@ -4,3 +4,11 @@ config_setting(
         "compilation_mode": "opt",
     },
 )
+
+filegroup(
+    name = "all",
+    srcs = [
+        "//grpc_client:bin",
+        "//grpc_server:bin",
+    ],
+)

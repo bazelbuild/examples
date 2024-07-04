@@ -153,7 +153,6 @@ tasks:
     working_directory: ../rust-tutorial/06-deps-direct
     build_targets:
       - "//..."
-
   rust-07-deps-vendor-linux:
     name: "Rust Vendored Deps"
     platform: ubuntu1804
@@ -166,3 +165,15 @@ tasks:
     working_directory: ../rust-tutorial/07-deps-vendor
     build_targets:
       - "//..."
+  rust-08-grpc-client-server-linux:
+    name: "Rust grpc"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/08-grpc-client-server
+    build_targets:
+      - "//:all"
+  rust-08-grpc-client-server-macos:
+    name: "Rust grpc"
+    platform: macos
+    working_directory: ../rust-tutorial/08-grpc-client-server
+    build_targets:
+      - "//:all"

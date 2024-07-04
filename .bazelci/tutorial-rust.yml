@@ -6,19 +6,13 @@ tasks:
     working_directory: ../rust-tutorial/01-hello-world
     build_targets:
       - "//..."
-  rust-01-hello-world-macos:
-    name: "Rust Hello World"
-    platform: macos
-    working_directory: ../rust-tutorial/01-hello-world
-    build_targets:
-      - "//..."
   rust-02-hello-cross-linux:
     name: "Rust Cross Compilation"
     platform: ubuntu1804
     working_directory: ../rust-tutorial/02-hello-cross
     build_targets:
       - "//:all"
-  rust-02-hello-cross:
+  rust-02-hello-cross-mac:
     name: "Rust Cross Compilation"
     platform: macos
     working_directory: ../rust-tutorial/02-hello-cross
@@ -30,21 +24,9 @@ tasks:
     working_directory: ../rust-tutorial/03-comp-opt
     build_targets:
       - "//..."
-  rust-03-comp-opt-macos:
-    name: "Rust Compiler Optimization"
-    platform: macos
-    working_directory: ../rust-tutorial/03-comp-opt
-    build_targets:
-      - "//..."
   rust-04-ffi-linux:
     name: "Rust FFI"
     platform: ubuntu1804
-    working_directory: ../rust-tutorial/04-ffi
-    build_targets:
-      - "//..."
-  rust-04-ffi-macos:
-    name: "Rust FFI"
-    platform: macos
     working_directory: ../rust-tutorial/04-ffi
     build_targets:
       - "//..."
@@ -54,33 +36,15 @@ tasks:
     working_directory: ../rust-tutorial/05-deps-cargo
     build_targets:
       - "//..."
-  rust-05-deps-cargo-macos:
-    name: "Rust Cargo Deps"
-    platform: macos
-    working_directory: ../rust-tutorial/05-deps-cargo
-    build_targets:
-      - "//..."
   rust-06-deps-direct-linux:
     name: "Rust Direct Deps"
     platform: ubuntu1804
     working_directory: ../rust-tutorial/06-deps-direct
     build_targets:
       - "//..."
-  rust-06-deps-direct-macos:
-    name: "Rust Direct Deps"
-    platform: macos
-    working_directory: ../rust-tutorial/06-deps-direct
-    build_targets:
-      - "//..."
   rust-07-deps-vendor-linux:
     name: "Rust Vendored Deps"
     platform: ubuntu1804
-    working_directory: ../rust-tutorial/07-deps-vendor
-    build_targets:
-      - "//..."
-  rust-07-deps-vendor-macos:
-    name: "Rust Vendored Deps"
-    platform: macos
     working_directory: ../rust-tutorial/07-deps-vendor
     build_targets:
       - "//..."
@@ -103,13 +67,7 @@ tasks:
     build_targets:
       - "//..."
       - "//tokio_oci:image"
-  rust-09-oci-container-macos:
-    name: "Rust OCI"
-    platform: macos
-    working_directory: ../rust-tutorial/09-oci-container
-    build_targets:
-      - "//..."
-      - "//tokio_oci:image"
+
   rust-10-musl-cross-compilation-linux:
     name: "Rust MUSL"
     platform: ubuntu1804

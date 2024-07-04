@@ -5,6 +5,5 @@ imports:
 - misc.yml
 - frontend.yml
 - rules.yml
-- tutorial-cpp.yml
-- tutorial-java.yml
-- tutorial-rust.yml
+- tutorials.yml
+- bzlmod.yml

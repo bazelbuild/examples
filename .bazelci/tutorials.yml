@@ -86,16 +86,16 @@ tasks:
     platform: ubuntu1804
     working_directory: ../rust-tutorial/00-hello-world
     build_targets:
-      - "//:..."
+      - "//..."
   rust-00-hello-world-windows:
     name: "Rust Hello World"
     platform: windows
     working_directory: ../rust-tutorial/00-hello-world
     build_targets:
-      - "//:..."
+      - "//..."
   rust-00-hello-world-macos:
     name: "Rust Hello World"
     platform: macos
     working_directory: ../rust-tutorial/00-hello-world
     build_targets:
-      - "//:..."
+      - "//..."

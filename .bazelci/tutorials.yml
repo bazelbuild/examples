@@ -110,10 +110,10 @@ tasks:
     platform: ubuntu1804
     working_directory: ../rust-tutorial/03-comp-opt
     build_targets:
-      - "-c opt //..."
+      - "//..."
   rust-03-comp-opt-macos:
     name: "Rust Compiler Optimization"
     platform: macos
     working_directory: ../rust-tutorial/03-comp-opt
     build_targets:
-      - "-c opt //..."
+      - "//..."

@@ -16454,7 +16454,7 @@
     "@@toolchains_llvm~//toolchain/extensions:llvm.bzl%llvm": {
       "general": {
         "bzlTransitiveDigest": "1w0wdH2QnKapJmTbk88f5iQjNlw7vw4f4r1cNf1vWVI=",
-        "usagesDigest": "0W4o+ljHo0Q9KL3Cfdhu95GmxiQKEt71tv4QEFnR5wg=",
+        "usagesDigest": "22jubH71gmngGKP+MOyiFmV/Gtb4X0KlMdDJBzO9Juc=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -16477,7 +16477,9 @@
               "link_flags": {},
               "link_libs": {},
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "opt_compile_flags": {},
               "opt_link_flags": {},
@@ -16508,7 +16510,9 @@
               "link_flags": {},
               "link_libs": {},
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "opt_compile_flags": {},
               "opt_link_flags": {},
@@ -16531,7 +16535,9 @@
               "llvm_mirror": "",
               "llvm_version": "",
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "netrc": "",
               "sha256": {},
@@ -16557,7 +16563,9 @@
               "link_flags": {},
               "link_libs": {},
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "opt_compile_flags": {},
               "opt_link_flags": {},
@@ -16582,7 +16590,9 @@
               "llvm_mirror": "",
               "llvm_version": "",
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "netrc": "",
               "sha256": {},
@@ -16602,7 +16612,9 @@
               "llvm_mirror": "",
               "llvm_version": "",
               "llvm_versions": {
-                "": "16.0.0"
+                "": "16.0.0",
+                "darwin-aarch64": "16.0.3",
+                "darwin-x86_64": "15.0.7"
               },
               "netrc": "",
               "sha256": {},

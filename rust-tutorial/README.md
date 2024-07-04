@@ -2,7 +2,7 @@
 
 This package shows how to build Rust code for the ten most common use cases.
 
-All examples use the new Bazelmod configuration format, and some examples come with a Cargo configuration.
+All examples use the Bazelmod configuration format, and some examples come with a Cargo configuration.
 There are cases when rules have not yet been updated for the new Bazelmod format. 
 In this case, you can apply the [hybrid mode](https://bazel.build/external/migration#hybrid-mode) 
 by already using the new MODULE.bazel config format while also using a dedicated WORKSPACE.bazelmod 
@@ -16,28 +16,18 @@ Finally, the new MODULE.bazel format is very different from the previous WORKSPA
 be mindful to never mix the two in one file. 
 If unsure, please ask in the #rust channel on Bazel Slack: https://slack.bazel.build/
 
+All code examples support Linux and MacOS. All examples are build on the CI on Ubuntu Linux 18.05
+and all cross compilation examples are also build for MacOS. We do not have sufficient maintainer capacity
+to support Windows. Please use WSL as a workaround or, alternatively, 
+see using [Bazel on Windows](https://bazel.build/configure/windows) for more Windows-specific recommendations.
 
-### Example 0: Hello World
+### Example 1: Hello World
 
 The first example is straightforward and shows how to compile a basic binary with a single source file.
 
 Links:
 * [Readme](01-hello-world/README.md)
 * [Code](01-hello-world)
-
-
-### Example 1: Hello Clang
-
-This example shows how to set up the Clang C/C++ toolchain to compile C dependencies of Rust code, making the build more portable and reproducible on other computers.
-
-Links:
-* [Readme](01-hello-clang/README.md)
-* [Code](01-hello-clang)
-
-Documentation:
-* [rules_rust](https://bazelbuild.github.io/rules_rust/)
-* [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
-
 
 ### Example 2: Cross Compilation
 

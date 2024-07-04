@@ -177,3 +177,31 @@ tasks:
     working_directory: ../rust-tutorial/08-grpc-client-server
     build_targets:
       - "//:all"
+  rust-09-oci-container-linux:
+    name: "Rust OCI"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/09-oci-container
+    build_targets:
+      - "//..."
+      - "//tokio_oci:image"
+  rust-09-oci-container-macos:
+    name: "Rust OCI"
+    platform: macos
+    working_directory: ../rust-tutorial/09-oci-container
+    build_targets:
+      - "//..."
+      - "//tokio_oci:image"
+  rust-10-musl-cross-compilation-linux:
+    name: "Rust MUSL"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/10-musl-cross-compilation
+    build_targets:
+      - "//:..."
+      - "//musl_scratch:image_index"
+  rust-10-musl-cross-compilation-macos:
+    name: "Rust MUSL"
+    platform: macos
+    working_directory: ../rust-tutorial/10-musl-cross-compilation
+    build_targets:
+      - "//:..."
+      - "//musl_scratch:image_index"

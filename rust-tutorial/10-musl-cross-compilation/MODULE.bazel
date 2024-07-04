@@ -55,7 +55,13 @@ http_archive(
 # https://github.com/bazel-contrib/toolchains_llvm/tree/0d302de75f6ace071ac616fb274481eedcc20e5a?tab=readme-ov-file#sysroots
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 
-LLVM_VERSIONS = {"": "16.0.0"}
+# LLVM Versions and platforms
+# https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl
+LLVM_VERSIONS = {
+    "": "16.0.0",
+    "darwin-aarch64": "16.0.3",
+    "darwin-x86_64": "15.0.7",
+}
 
 # Host LLVM toolchain.
 llvm.toolchain(

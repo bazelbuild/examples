@@ -54,6 +54,7 @@ tasks:
     working_directory: ../cpp-tutorial/stage3
     build_targets:
     - "..."
+
   java-tutorial-linux:
     name: "Java Tutorial"
     platform: ubuntu1804
@@ -72,9 +73,29 @@ tasks:
     working_directory: ../java-tutorial
     build_targets:
     - "//:ProjectRunner"
+
   query-quickstart:
     name: "Query Quickstart"
     platform: macos
     working_directory: ../query-quickstart
     build_targets:
     - "//:runner"
+
+  rust-00-hello-world-linux:
+    name: "Rust Hello World"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/00-hello-world
+    build_targets:
+      - "//:..."
+  rust-00-hello-world-windows:
+    name: "Rust Hello World"
+    platform: windows
+    working_directory: ../rust-tutorial/00-hello-world
+    build_targets:
+      - "//:..."
+  rust-00-hello-world-macos:
+    name: "Rust Hello World"
+    platform: macos
+    working_directory: ../rust-tutorial/00-hello-world
+    build_targets:
+      - "//:..."

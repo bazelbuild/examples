@@ -55,22 +55,14 @@ supports linux on both, X86 and ARM. In that case, you have to setup three LLVM 
 
 For the host LLVM, you just specify a LLVM version and then register the toolchain as usual. The target LLVM toolchains,
 however, have dependencies on system libraries for the target platform. Therefore, it is required to download a so-
-called sysroot that contains a root file system with all those system libraries for the specific target platform. In
-this case, you have to use the WORKSPACE.bzlmod file that bridges between the legacy WORKSPACE format and the newer
-MODULE.bazel format.
-Either crate a new WORKSPACE.bzlmod file if you don't have one yet or open an existing one and add
-the following:
+called sysroot that contains a root file system with all those system libraries for the specific target platform.
+To do so, please add the following to your MODULE.bazel
 
 ```Starlark
-###############################################################################
-# rule http_archive
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+# https://github.com/bazelbuild/bazel/blob/master/tools/build_defs/repo/http.bzl
+http_archive = use_repo_rule("@bazel_tools//:http.bzl", "http_archive")
 
-###############################################################################
-# SYSROOT FOR LLVM CROSS COMPILATION
-# https://github.com/bazel-contrib/toolchains_llvm/tree/master?tab=readme-ov-file#sysroots
-###############################################################################
-
+# Both, cross compilation and MUSL still need a C/C++ toolchain with sysroot.
 _BUILD_FILE_CONTENT = """
 filegroup(
   name = "{name}",
@@ -79,11 +71,13 @@ filegroup(
 )
 """
 
+# Download sysroot
+# https://commondatastorage.googleapis.com/chrome-linux-sysroot/
 http_archive(
     name = "org_chromium_sysroot_linux_x64",
     build_file_content = _BUILD_FILE_CONTENT.format(name = "sysroot"),
-    sha256 = "84656a6df544ecef62169cfe3ab6e41bb4346a62d3ba2a045dc5a0a2ecea94a3",
-    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2202c161310ffde63729f29d27fe7bb24a0bc540/debian_stretch_amd64_sysroot.tar.xz"],
+    sha256 = "f6b758d880a6df264e2581788741623320d548508f07ffc2ae6a29d0c13d647d",
+    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2e7ada854015a4cc60fc812112d261af44213ed0/debian_bullseye_amd64_sysroot.tar.xz"],
 )
 
 http_archive(
@@ -94,22 +88,15 @@ http_archive(
 )
 ```
 
-Here, we declare to new http downloads that retrieve the sysroot for linux_x64 and linux_aarch64. Note, these are only
+Here, we declare to new http downloads that retrieve the sysroot for linux_x64 (Intel/AMD) and linux_aarch64 (ARM/Apple Silicon). Note, these are only
 sysroots, that means you have to configure LLVM next to use these files. As mentioned earlier, three LLVM toolchains
 needs to be configured and to do that, please add the following to your MODULE.bazel
 
 ```Starlark
-  
-llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 LLVM_VERSIONS = {
     "": "16.0.0",
 }
 
-# Setup for cross compile & MUSL static binary compile.
-# Both, cross compilation and MUSL still need a C/C++ toolchain with sysroot.
-# https://github.com/bazel-contrib/toolchains_llvm/tree/0d302de75f6ace071ac616fb274481eedcc20e5a?tab=readme-ov-file#sysroots
-
-#
 # Host LLVM toolchain.
 llvm.toolchain(
     name = "llvm_toolchain",
@@ -117,18 +104,16 @@ llvm.toolchain(
 )
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
-#
 # X86 LLVM Toolchain with sysroot.
 # https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/WORKSPACE.bzlmod
 llvm.toolchain(
     name = "llvm_toolchain_x86_with_sysroot",
     llvm_versions = LLVM_VERSIONS,
 )
-
 llvm.sysroot(
     name = "llvm_toolchain_x86_with_sysroot",
+    label = "@org_chromium_sysroot_linux_x64//:sysroot",
     targets = ["linux-x86_64"],
-    label = "@@org_chromium_sysroot_linux_x64//:sysroot",
 )
 use_repo(llvm, "llvm_toolchain_x86_with_sysroot")
 
@@ -139,11 +124,10 @@ llvm.toolchain(
     name = "llvm_toolchain_aarch64_with_sysroot",
     llvm_versions = LLVM_VERSIONS,
 )
-
 llvm.sysroot(
     name = "llvm_toolchain_aarch64_with_sysroot",
-    targets = ["linux-x86_64"],
-    label = "@@org_chromium_sysroot_linux_aarch64//:sysroot",
+    label = "@org_chromium_sysroot_linux_aarch64//:sysroot",
+    targets = ["linux-aarch64"],
 )
 use_repo(llvm, "llvm_toolchain_aarch64_with_sysroot")
 

@@ -81,21 +81,39 @@ tasks:
     build_targets:
     - "//:runner"
 
-  rust-00-hello-world-linux:
+  rust-01-hello-world-linux:
     name: "Rust Hello World"
     platform: ubuntu1804
-    working_directory: ../rust-tutorial/00-hello-world
+    working_directory: ../rust-tutorial/01-hello-world
     build_targets:
       - "//..."
-  rust-00-hello-world-windows:
-    name: "Rust Hello World"
-    platform: windows
-    working_directory: ../rust-tutorial/00-hello-world
-    build_targets:
-      - "//..."
-  rust-00-hello-world-macos:
+  rust-01-hello-world-macos:
     name: "Rust Hello World"
     platform: macos
-    working_directory: ../rust-tutorial/00-hello-world
+    working_directory: ../rust-tutorial/01-hello-world
     build_targets:
       - "//..."
+  rust-02-hello-cross-linux:
+    name: "Rust Cross Compilation"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/02-hello-cross
+    build_targets:
+      - "//:all"
+  rust-02-hello-cross:
+    name: "Rust Cross Compilation"
+    platform: macos
+    working_directory: ..'/rust-tutorial/02-hello-cross
+    build_targets:
+      - "//:all"
+  rust-03-comp-opt-linux:
+    name: "Rust Compiler Optimization"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/03-comp-opt
+    build_targets:
+      - "-c opt //..."
+  rust-03-comp-opt-macos:
+    name: "Rust Compiler Optimization"
+    platform: macos
+    working_directory: ../rust-tutorial/03-comp-opt
+    build_targets:
+      - "-c opt //..."

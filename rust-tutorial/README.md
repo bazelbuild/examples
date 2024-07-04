@@ -22,8 +22,8 @@ If unsure, please ask in the #rust channel on Bazel Slack: https://slack.bazel.b
 The first example is straightforward and shows how to compile a basic binary with a single source file.
 
 Links:
-* [Readme](00-hello-world/README.md)
-* [Code](00-hello-world)
+* [Readme](01-hello-world/README.md)
+* [Code](01-hello-world)
 
 
 ### Example 1: Hello Clang

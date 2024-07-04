@@ -17,14 +17,17 @@ bazel_dep(name = "toolchains_protoc", version = "0.3.1")
 # https://registry.bazel.build/modules/protobuf
 bazel_dep(name = "protobuf", version = "27.1")
 
-#
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.0.0")
 
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 
+# LLVM Versions and platforms
+# https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl
 LLVM_VERSIONS = {
     "": "16.0.0",
+    "darwin-aarch64": "16.0.3",
+    "darwin-x86_64": "15.0.7",
 }
 
 # Host LLVM toolchain.

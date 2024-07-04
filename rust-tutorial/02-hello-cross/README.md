@@ -13,18 +13,18 @@ The example code is setup to cross compile from the following hosts to the the f
 
 You cross-compile by calling the target.
 
-`bazel build //hello_cross:hello_world_x86_64`
+`bazel build //:hello_world_x86_64`
 
 or
 
-`bazel build //hello_cross:hello_world_aarch64`
+`bazel build //:hello_world_aarch64`
 
 Notice, the default target `//...` does not know about the 
 many different target platform and will report an error. 
 Instead, if you want to build for all platforms at once, 
 call the filegroup target:
 
-`bazel build //hello_cross:all`
+`bazel build //:all`
 
 
 ## Setup
@@ -285,11 +285,11 @@ rust_binary(
 
 You then cross-compile by calling the target.
 
-`bazel build //hello_cross:hello_world_x86_64`
+`bazel build //:hello_world_x86_64`
 
 or
 
-`bazel build //hello_cross:hello_world_aarch64`
+`bazel build //:hello_world_aarch64`
 
 You may have to make the target public when see an access error.
 
@@ -309,4 +309,4 @@ filegroup(
 
 Then you build for all platforms by calling the filegroup target:
 
-`bazel build //hello_cross:all`
+`bazel build //:all`

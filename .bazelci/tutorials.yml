@@ -130,14 +130,26 @@ tasks:
     build_targets:
       - "//..."
   rust-05-deps-cargo-linux:
-    name: "Rust Cargo deps"
+    name: "Rust Cargo Deps"
     platform: ubuntu1804
     working_directory: ../rust-tutorial/05-deps-cargo
     build_targets:
       - "//..."
   rust-05-deps-cargo-macos:
-    name: "Rust Cargo deps"
+    name: "Rust Cargo Deps"
     platform: macos
     working_directory: ../rust-tutorial/05-deps-cargo
+    build_targets:
+      - "//..."
+  rust-06-deps-direct-linux:
+    name: "Rust Direct Deps"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/06-deps-direct
+    build_targets:
+      - "//..."
+  rust-06-deps-direct-macos:
+    name: "Rust Direct Deps"
+    platform: macos
+    working_directory: ../rust-tutorial/06-deps-direct
     build_targets:
       - "//..."

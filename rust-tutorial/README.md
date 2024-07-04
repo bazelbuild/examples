@@ -16,10 +16,8 @@ Finally, the new MODULE.bazel format is very different from the previous WORKSPA
 be mindful to never mix the two in one file. 
 If unsure, please ask in the #rust channel on Bazel Slack: https://slack.bazel.build/
 
-All code examples support Linux and MacOS. All examples are build on the CI on Ubuntu Linux 18.05
-and all cross compilation examples are also build for MacOS. We do not have sufficient maintainer capacity
-to support Windows. Please use WSL as a workaround or, alternatively, 
-see using [Bazel on Windows](https://bazel.build/configure/windows) for more Windows-specific recommendations.
+All code examples support Linux and MacOS. The CI builds all examples on Ubuntu Linux 18.05 and all cross compilation examples are also build for MacOS. 
+The Rust examples do not officially support Windows because Bazel on Windows requires some special configuration. Please use WSL as a workaround or, alternatively, find more Windows-specific recommendations in the official [Bazel on Windows guide](https://bazel.build/configure/windows).
 
 ### Example 1: Hello World
 

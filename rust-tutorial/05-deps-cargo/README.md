@@ -1,6 +1,12 @@
 # Cargo Workspace Dependencies 
 
-One of the simpler ways to wire up dependencies would be to first structure your project into a Cargo workspace. The crates_repository rule can ingest a root Cargo.toml file and generate Bazel dependencies from there. 
+One of the simpler ways to wire up dependencies would be to first structure your project into a Cargo workspace.
+
+To build the example code, run:
+
+`bazel build //...`
+
+The crates_repository rule can ingest a root Cargo.toml file and generate Bazel dependencies from there. 
 
 ```starlark
  

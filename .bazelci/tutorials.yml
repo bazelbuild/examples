@@ -129,3 +129,15 @@ tasks:
     working_directory: ../rust-tutorial/04-ffi
     build_targets:
       - "//..."
+  rust-05-deps-cargo-linux:
+    name: "Rust Cargo deps"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/05-deps-cargo
+    build_targets:
+      - "//..."
+  rust-05-deps-cargo-macos:
+    name: "Rust Cargo deps"
+    platform: macos
+    working_directory: ../rust-tutorial/05-deps-cargo
+    build_targets:
+      - "//..."

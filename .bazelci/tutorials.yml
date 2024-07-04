@@ -153,3 +153,16 @@ tasks:
     working_directory: ../rust-tutorial/06-deps-direct
     build_targets:
       - "//..."
+
+  rust-07-deps-vendor-linux:
+    name: "Rust Vendored Deps"
+    platform: ubuntu1804
+    working_directory: ../rust-tutorial/07-deps-vendor
+    build_targets:
+      - "//..."
+  rust-07-deps-vendor-macos:
+    name: "Rust Vendored Deps"
+    platform: macos
+    working_directory: ../rust-tutorial/07-deps-vendor
+    build_targets:
+      - "//..."

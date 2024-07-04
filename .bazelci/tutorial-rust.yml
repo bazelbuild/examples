@@ -73,12 +73,12 @@ tasks:
     platform: ubuntu1804
     working_directory: ../rust-tutorial/10-musl-cross-compilation
     build_targets:
-      - "//:..."
+      - "//..."
       - "//musl_scratch:image_index"
   rust-10-musl-cross-compilation-macos:
     name: "Rust MUSL"
     platform: macos
     working_directory: ../rust-tutorial/10-musl-cross-compilation
     build_targets:
-      - "//:..."
+      - "//..."
       - "//musl_scratch:image_index"

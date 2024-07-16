@@ -39,7 +39,7 @@ Note that tutorials for other languages may be found under other repositories:
 
 ### Rust
 
-* [Building Rust](/rust-tutorial)
+* [Building Rust](/rust-examples)
 
  ### Frontend
 

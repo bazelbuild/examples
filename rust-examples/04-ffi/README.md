@@ -20,7 +20,6 @@ module(
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.46.0")
 
- 
 # Rust toolchain
 RUST_EDITION = "2021"
 RUST_VERSION = "1.79.0"

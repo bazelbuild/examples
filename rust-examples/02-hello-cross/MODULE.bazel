@@ -4,7 +4,7 @@ module(
 )
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.46.0")
+bazel_dep(name = "rules_rust", version = "0.47.1")
 
 # Rules for cross compilation
 bazel_dep(name = "toolchains_musl", version = "0.1.16", dev_dependency = True)

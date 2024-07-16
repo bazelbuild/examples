@@ -30,7 +30,8 @@
     "https://bcr.bazel.build/modules/bazel_skylib/1.4.2/MODULE.bazel": "3bd40978e7a1fac911d5989e6b09d8f64921865a45822d8b09e815eaa726a651",
     "https://bcr.bazel.build/modules/bazel_skylib/1.5.0/MODULE.bazel": "32880f5e2945ce6a03d1fbd588e9198c0a959bb42297b2cfaf1685b7bc32e138",
     "https://bcr.bazel.build/modules/bazel_skylib/1.6.1/MODULE.bazel": "8fdee2dbaace6c252131c00e1de4b165dc65af02ea278476187765e1a617b917",
-    "https://bcr.bazel.build/modules/bazel_skylib/1.6.1/source.json": "082ed5f9837901fada8c68c2f3ddc958bb22b6d654f71dd73f3df30d45d4b749",
+    "https://bcr.bazel.build/modules/bazel_skylib/1.7.1/MODULE.bazel": "3120d80c5861aa616222ec015332e5f8d3171e062e3e804a2a0253e1be26e59b",
+    "https://bcr.bazel.build/modules/bazel_skylib/1.7.1/source.json": "f121b43eeefc7c29efbd51b83d08631e2347297c95aac9764a701f2a6a2bb953",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/MODULE.bazel": "2e8dd40ede9c454042645fd8d8d0cd1527966aa5c919de86661e62953cd73d84",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/source.json": "c9028a501d2db85793a6996205c8de120944f50a0d570438fcae0457a5f9d1f8",
     "https://bcr.bazel.build/modules/gazelle/0.27.0/MODULE.bazel": "3446abd608295de6d90b4a8a118ed64a9ce11dcb3dda2dc3290a22056bd20996",
@@ -558,7 +559,7 @@
     },
     "@@rules_nodejs~//nodejs:extensions.bzl%node": {
       "general": {
-        "bzlTransitiveDigest": "liNCpme8abwnUcdsL6FZlbuEqQRiO4GmDTZyX6QuOH4=",
+        "bzlTransitiveDigest": "N8+Tk3wV7XC+ICv9b1FAlvzCQRRo4oz/EOsvKHXwu1A=",
         "usagesDigest": "ra91/HxLYvJNMJkOfSCRDj3W73y8k6mHMvVpFFZu6e4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -658,8 +659,8 @@
     },
     "@@rules_rust~//rust:extensions.bzl%rust": {
       "general": {
-        "bzlTransitiveDigest": "abr38EkZlSQwN8GN13TlxoIkH9gAKJ+Vit03kw2PTCs=",
-        "usagesDigest": "NfiatU0SOpMvlYg1q6Dl3OvXqC1DNQ6y+PUsv0a8Z68=",
+        "bzlTransitiveDigest": "96QThNm55F/sOfnmvZVxuv2ZZajaBI9uM4LIx/aVTI8=",
+        "usagesDigest": "WKHtBsIsohcEUxdBpEUtT9DkCV/q00QSw9M7JuoyGxc=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -2245,7 +2246,7 @@
     },
     "@@rules_rust~//rust/private:extensions.bzl%i": {
       "general": {
-        "bzlTransitiveDigest": "QgeOeutpgMTY0hCbSfSwseE66KMVH9quIJSrcwhuBpk=",
+        "bzlTransitiveDigest": "RMssVjfTAP6PzMNoTMAcZbhA6VggvVS8RrrVeGOmfNI=",
         "usagesDigest": "KU28o/npI2P84qcjs0fRR5zlBEZMLVxyani0kz0po50=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},

@@ -1,6 +1,6 @@
 # Examples to build Rust code
 
-This package shows how to build Rust code for the ten most common use cases.
+This package shows how to build Rust code for the most common use cases.
 
 All examples use the Bazelmod configuration format, and some examples come with a Cargo configuration.
 There are cases when rules have not yet been updated for the new Bazelmod format. 
@@ -142,27 +142,3 @@ Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
 * [rules_oci](https://github.com/bazel-contrib/rules_oci?tab=readme-ov-file#usage)
 
-
-### Example 10: MUSL Static Scratch Container
-
-In production, security and performance are important considerations.
-Golang pioneered the concept of a scratch container, an empty container image that only holds a statically compiled binary and nothing else. This has many advantages, such as:
-
-1) Improved security. No shell, kernel, or libc are packaged in the container.
-2) Much smaller container size. This saves storage space and related expenses.
-3) Lower maintenance. Because no libc or kernel are included, no patching is required other than updating the application binary, thus saving valuable engineering time.
-
-This example code showcases how to cross-compile a simple Tokio API as a statically linked MUSL binary and how to package this binary in a scratch container. Furthermore, the example code eliminates a non-trivial performance bottleneck in MUSL by adding a custom memory allocator.
-
-The example touches on a handful of advanced Bazel topics, such as configuring LLVM with a platform sysroot,
-cross compiling to MUSL targets, and replacing the default memory allocator. 
-
-Links:
-* [Readme](10-musl-cross-compilation/README.md)
-* [Code](10-musl-cross-compilation)
-
-Documentation:
-* [rules_rust](https://bazelbuild.github.io/rules_rust/)
-* [rules_oci](https://github.com/bazel-contrib/rules_oci?tab=readme-ov-file#usage)
-* [llvm_toolchain](https://github.com/bazel-contrib/toolchains_llvm)
-* [musl-toolchain](https://github.com/bazel-contrib/musl-toolchain)

@@ -6,9 +6,8 @@ declaration to generate the C compatibility required for FFI.
 
 ## Setup
 
-The setup is twofold, the Rust rules are declared in the MODULE file, 
-but the rules_cc are not yet available in the Bazelmod format and thus are declared in 
-the WORKSPACE.bzlmod file.
+The setup is easy, you only have to declare the Rust rules declared in the MODULE file file
+because Bazel supports C++ out of the box.
 
 In your MODULE.bazel file, ensure to have the following entry:
 
@@ -34,27 +33,6 @@ rust.toolchain(
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
 ```
-
-Then, create or open the  WORKSPACE.bzlmod file and add the CC rules:
-
-```starlark
-###############################################################################
-# Bzlmod and WORKSPACE can work side by side, which allows migrating dependencies
-# from the WORKSPACE file to Bzlmod to be a gradual process.
-# https://bazel.build/external/migration#hybrid-mode
-###############################################################################
-# rule http_archive
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# rules_cc
-# https://github.com/bazelbuild/rules_cc/releases
-http_archive(
-    name = "rules_cc",
-    urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.0.10-rc1/rules_cc-0.0.10-rc1.tar.gz"],
-    sha256 = "d75a040c32954da0d308d3f2ea2ba735490f49b3a7aa3e4b40259ca4b814f825",
-)
-```
-
 
 ## C++ Target
 

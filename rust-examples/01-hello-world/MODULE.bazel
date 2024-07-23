@@ -1,0 +1,21 @@
+module(
+    name = "hello_world",
+    version = "0.0.0",
+)
+
+# https://github.com/bazelbuild/rules_rust/releases
+bazel_dep(name = "rules_rust", version = "0.47.1")
+
+# Rust toolchain
+RUST_EDITION = "2021"
+
+RUST_VERSION = "1.79.0"
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = RUST_EDITION,
+    versions = [RUST_VERSION],
+)
+use_repo(rust, "rust_toolchains")
+
+register_toolchains("@rust_toolchains//:all")

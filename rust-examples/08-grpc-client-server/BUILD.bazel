@@ -1,0 +1,14 @@
+config_setting(
+    name = "release",
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+filegroup(
+    name = "all",
+    srcs = [
+        "//grpc_client:bin",
+        "//grpc_server:bin",
+    ],
+)

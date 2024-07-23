@@ -1,0 +1,42 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "proto_bindings",
+    "grpc_server",
+    "grpc_client",
+]
+
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.78.0"
+readme = "README.md"
+
+
+[workspace.dependencies]
+# Internal crates
+proto_bindings = { path = "proto_bindings" }
+# External crates
+prost = { version = "0.12.6" }
+prost-types = { version = "0.12.6", default-features = false }
+tonic = { version = "0.11.0", features = ["transport"] }
+tonic-build = "0.11.0"
+tokio = { version = "1.38", default-features = false, features = ["macros", "net", "rt-multi-thread", "signal"] }
+
+
+# Optimize all crates
+[profile.release]
+opt-level = 3
+strip = true  # Automatically strip debug symbols from the binary
+lto = true    # Enable Link Time Optimization (LTO)
+codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization
+
+
+# There's a Cargo feature named profile-overrides
+# that lets you override the optimization level of dependencies.
+# https://docs.rust-embedded.org/book/unsorted/speed-vs-size.html
+[profile.release.package."*"]
+opt-level = 3
+strip = 'debuginfo'  # Automatically strip debug infos from the binary to reduce size
+codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization

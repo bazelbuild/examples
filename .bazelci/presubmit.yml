@@ -1,8 +1,10 @@
 imports:
 - android.yml
-- configurations.yml
-- misc.yml
-- frontend.yml
-- rules.yml
-- tutorials.yml
 - bzlmod.yml
+- configurations.yml
+- frontend.yml
+- misc.yml
+- rules.yml
+- tutorial-cpp.yml
+- tutorial-java.yml
+- tutorial-rust.yml

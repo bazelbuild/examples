@@ -1,0 +1,10 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+rust_binary(
+    name = "hello_sys",
+    srcs = ["src/main.rs"],
+    visibility = ["//visibility:public"],
+    # Note the `crate_unvierse` dependencies here need to have been loaded
+    # in the WORKSPACE file. See `//:sys_deps.bzl` for more details.
+    deps = ["//basic/3rdparty/crates:bzip2"],
+)

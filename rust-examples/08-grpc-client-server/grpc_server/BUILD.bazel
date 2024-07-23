@@ -1,0 +1,61 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc", "rust_doc_test", "rust_test_suite")
+
+# Build binary
+# https://bazelbuild.github.io/rules_rust/defs.html#rust_binary
+rust_binary(
+    name = "bin",
+    srcs = glob([
+        "src/*.rs",
+    ]),
+    crate_root = "src/main.rs",
+    rustc_flags = select({
+        "//:release": [
+            "-Clto",
+            "-Ccodegen-units=1",
+            "-Cpanic=abort",
+            "-Copt-level=3",
+            "-Cstrip=symbols",
+        ],
+        "//conditions:default": [
+            "-Copt-level=0",
+        ],
+    }),
+    visibility = ["//visibility:public"],
+    deps = [
+        # Internal crates
+        "//proto_bindings:rust_proto",
+        # External crates
+        "@crates//:tokio",
+        "@crates//:tonic",
+    ],
+)
+
+# Build documentation
+# https://bazelbuild.github.io/rules_rust/rust_doc.html
+rust_doc(
+    name = "server_doc",
+    crate = ":bin",
+    visibility = ["//visibility:public"],
+)
+
+# Test documentation
+# https://bazelbuild.github.io/rules_rust/rust_doc.html#rust_doc_test
+rust_doc_test(
+    name = "server_doc_test",
+    crate = ":bin",
+    visibility = ["//visibility:public"],
+)
+
+rust_test_suite(
+    name = "demo_tests",
+    srcs = glob([
+        "tests/*_tests.rs",
+    ]),
+    tags = ["unit"],
+    visibility = ["//visibility:public"],
+    deps = [
+        # Crate to test
+        "//proto_bindings:rust_proto",
+        # External crates
+    ],
+)

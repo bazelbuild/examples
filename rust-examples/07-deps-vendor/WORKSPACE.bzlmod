@@ -1,0 +1,10 @@
+###############################################################################
+# Bzlmod and WORKSPACE can work side by side, which allows migrating dependencies
+# from the WORKSPACE file to Bzlmod to be a gradual process.
+# https://bazel.build/external/migration#hybrid-mode
+###############################################################################
+# rule http_archive
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+load("//:sys_deps.bzl", "sys_deps")
+sys_deps()

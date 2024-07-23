@@ -1,0 +1,114 @@
+module(
+    name = "grpc-client-server",
+    version = "0.0.0",
+)
+
+# https://github.com/bazelbuild/rules_rust/releases
+bazel_dep(name = "rules_rust", version = "0.47.1")
+
+# Rules for protobuf / gRPC
+# https://github.com/bazelbuild/rules_proto/releases
+bazel_dep(name = "rules_proto", version = "6.0.2")
+
+# https://github.com/aspect-build/toolchains_protoc/releases
+bazel_dep(name = "toolchains_protoc", version = "0.3.1")
+
+# https://registry.bazel.build/modules/protobuf
+bazel_dep(name = "protobuf", version = "27.1")
+
+# https://github.com/bazel-contrib/toolchains_llvm
+bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+
+# LLVM Versions and platforms
+# https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl
+LLVM_VERSIONS = {
+    "": "16.0.0",
+    "darwin-aarch64": "16.0.3",
+    "darwin-x86_64": "15.0.7",
+}
+
+# Host LLVM toolchain.
+llvm.toolchain(
+    name = "llvm_toolchain",
+    llvm_versions = LLVM_VERSIONS,
+)
+use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
+register_toolchains("@llvm_toolchain//:all")
+
+# Rust toolchain
+RUST_EDITION = "2021"
+
+RUST_VERSION = "1.79.0"
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = RUST_EDITION,
+    versions = [RUST_VERSION],
+)
+use_repo(rust, "rust_toolchains")
+
+register_toolchains("@rust_toolchains//:all")
+
+# Proto toolchain
+register_toolchains("@rules_rust//proto/protobuf:default-proto-toolchain")
+
+# Custom Prost toolchain
+register_toolchains("@//build/prost_toolchain")
+
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+
+#
+# protobuf / gRPC dependencies
+crate.spec(
+    package = "prost",
+    version = "0.12",
+)
+crate.spec(
+    default_features = False,
+    package = "prost-types",
+    version = "0.12",
+)
+crate.spec(
+    features = ["transport"],
+    package = "tonic",
+    version = "0.11",
+)
+crate.spec(
+    package = "tonic-build",
+    version = "0.11",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.3.1",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4.0",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+
+#
+# Other external crates
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.38",
+)
+crate.from_specs()
+use_repo(crate, "crates")

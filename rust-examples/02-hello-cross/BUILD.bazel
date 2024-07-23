@@ -1,0 +1,32 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "all",
+    srcs = [
+        ":hello_world_aarch64",
+        ":hello_world_host",
+        ":hello_world_x86_64",
+    ],
+)
+
+rust_binary(
+    name = "hello_world_host",
+    srcs = ["src/main.rs"],
+    deps = [],
+)
+
+rust_binary(
+    name = "hello_world_x86_64",
+    srcs = ["src/main.rs"],
+    platform = "//build/platforms:linux-x86_64",
+    deps = [],
+)
+
+rust_binary(
+    name = "hello_world_aarch64",
+    srcs = ["src/main.rs"],
+    platform = "//build/platforms:linux-aarch64",
+    deps = [],
+)

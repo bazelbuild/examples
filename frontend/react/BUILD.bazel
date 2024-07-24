@@ -21,6 +21,7 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.json",
     visibility = ["//visibility:public"],
+    deps = [":node_modules/@types/react"],
 )
 
 tsconfig_to_swcconfig.t2s(

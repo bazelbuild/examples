@@ -1,3 +1,5 @@
+load("@rules_android//android:rules.bzl", "android_library")
+
 package(
     default_visibility = ["//visibility:public"],
 )

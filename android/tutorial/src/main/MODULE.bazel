@@ -1,0 +1,31 @@
+module(
+    name = "testapp",
+)
+
+bazel_dep(name = "rules_java", version = "7.4.0")
+bazel_dep(name = "bazel_skylib", version = "1.3.0")
+
+bazel_dep(
+    name = "rules_android",
+    version = "0.5.1",
+)
+
+local_path_override(
+    module_name = "rules_android",
+    path = "../../../../rules_android",
+)
+
+remote_android_extensions = use_extension(
+    "@rules_android//bzlmod_extensions:android_extensions.bzl",
+    "remote_android_tools_extensions")
+use_repo(remote_android_extensions, "android_gmaven_r8", "android_tools")
+
+register_toolchains(
+    "@rules_android//toolchains/android:android_default_toolchain",
+    "@rules_android//toolchains/android_sdk:android_sdk_tools",
+)
+
+android_sdk_repository_extension = use_extension("@rules_android//rules/android_sdk_repository:rule.bzl", "android_sdk_repository_extension")
+use_repo(android_sdk_repository_extension, "androidsdk")
+
+register_toolchains("@androidsdk//:sdk-toolchain", "@androidsdk//:all")

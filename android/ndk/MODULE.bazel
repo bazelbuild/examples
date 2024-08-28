@@ -8,7 +8,7 @@ bazel_dep(name = "rules_android", version = "0.1.1")
 git_override(
   module_name = "rules_android",
   remote = "https://github.com/bazelbuild/rules_android",
-  commit = "93e27030d3f0defa39cbbc35195638cb772b0c27",
+  commit = "4e0ee11bfa7554e9b0293a45ddd9bed309638fe1",
 )
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")

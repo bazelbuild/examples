@@ -14,9 +14,7 @@ linux: &linux
   platform: ubuntu1804
 
 macos: &macos
-  platform: macos_arm64
-  shell_commands:
-    - brew install coreutils
+  platform: macos
 
 windows: &windows
   platform: windows

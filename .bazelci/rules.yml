@@ -14,7 +14,7 @@ linux: &linux
   platform: ubuntu1804
 
 macos: &macos
-  platform: macos
+  platform: macos_arm64
 
 windows: &windows
   platform: windows

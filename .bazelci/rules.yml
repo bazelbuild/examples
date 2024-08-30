@@ -11,7 +11,7 @@ rolling: &rolling
 # Commmon features by platform
 #
 linux: &linux
-  platform: ubuntu1804
+  platform: ubuntu2204
 
 macos: &macos
   platform: macos_arm64
@@ -51,8 +51,6 @@ tasks:
   basics_macos_latest:
     name: basics_macos_latest
     <<: *macos
-    # It seems there is no rolling Bazel for macos.
-    bazel: last_green
     <<: *basics
   basics_windows_lts:
     name: basics_windows_lts

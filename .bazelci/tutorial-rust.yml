@@ -2,67 +2,68 @@
 tasks:
   rust-01-hello-world-linux:
     name: "Rust Hello World"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/01-hello-world
     build_targets:
       - "//..."
   rust-02-hello-cross-linux:
     name: "Rust Cross Compilation"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/02-hello-cross
     build_targets:
       - "//:all"
   rust-02-hello-cross-mac:
     name: "Rust Cross Compilation"
-    platform: macos
+    platform: macos_arm64
     working_directory: ../rust-examples/02-hello-cross
     build_targets:
       - "//:all"
   rust-03-comp-opt-linux:
     name: "Rust Compiler Optimization"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/03-comp-opt
     build_targets:
       - "//..."
   rust-04-ffi-linux:
     name: "Rust FFI"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/04-ffi
     build_targets:
       - "//..."
   rust-05-deps-cargo-linux:
     name: "Rust Cargo Deps"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/05-deps-cargo
     build_targets:
       - "//..."
   rust-06-deps-direct-linux:
     name: "Rust Direct Deps"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/06-deps-direct
     build_targets:
       - "//..."
   rust-07-deps-vendor-linux:
     name: "Rust Vendored Deps"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/07-deps-vendor
     build_targets:
       - "//..."
-  rust-08-grpc-client-server-linux:
-    name: "Rust grpc"
-    platform: ubuntu1804
-    working_directory: ../rust-examples/08-grpc-client-server
-    build_targets:
-      - "//:all"
+  # TODO: Renable after addressing https://github.com/bazelbuild/examples/pull/489#issuecomment-2321617323
+  # rust-08-grpc-client-server-linux:
+  #   name: "Rust grpc"
+  #   platform: ubuntu2204
+  #   working_directory: ../rust-examples/08-grpc-client-server
+  #   build_targets:
+  #     - "//:all"
   rust-08-grpc-client-server-macos:
     name: "Rust grpc"
-    platform: macos
+    platform: macos_arm64
     working_directory: ../rust-examples/08-grpc-client-server
     build_targets:
       - "//:all"
   rust-09-oci-container-linux:
     name: "Rust OCI"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../rust-examples/09-oci-container
     build_targets:
       - "//..."

@@ -8,7 +8,6 @@ common:
       - "//app:app"
   android-ndk: &android-ndk
     name: "Android NDK"
-    bazel: 7.2.0rc1
     working_directory: ../android/ndk
     build_flags:
       - "--android_platforms=//:arm64-v8a,//:x86"
@@ -57,7 +56,7 @@ tasks:
       ANDROID_NDK_HOME: /opt/android-ndk-r25b
     <<: *android-ndk
   android-ndk-macos:
-    platform: macos
+    platform: macos_arm64
     environment:
       ANDROID_NDK_HOME: /Users/buildkite/android-ndk-r25b
     <<: *android-ndk

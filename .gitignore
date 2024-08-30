@@ -10,3 +10,5 @@ target/
 # Xcode
 *.xcodeproj
 node_modules
+# Bazel lockfile
+*MODULE.bazel.lock

@@ -6,18 +6,21 @@ def _impl(ctx):
     ctx.actions.run_shell(
         outputs = [ctx.outputs.md5],
         inputs = [ctx.file.src],
+        use_default_shell_env = True,
         command = "md5sum {} > {}".format(ctx.file.src.path, ctx.outputs.md5.path),
     )
 
     ctx.actions.run_shell(
         outputs = [ctx.outputs.sha1],
         inputs = [ctx.file.src],
+        use_default_shell_env = True,
         command = "sha1sum {} > {}".format(ctx.file.src.path, ctx.outputs.sha1.path),
     )
 
     ctx.actions.run_shell(
         outputs = [ctx.outputs.sha256],
         inputs = [ctx.file.src],
+        use_default_shell_env = True,
         command = "sha256sum {} > {}".format(ctx.file.src.path, ctx.outputs.sha256.path),
     )
 

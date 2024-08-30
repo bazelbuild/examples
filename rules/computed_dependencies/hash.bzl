@@ -47,6 +47,7 @@ def _impl(ctx):
     ctx.actions.run_shell(
         outputs = [out],
         inputs = [processed],
+        use_default_shell_env = True,
         command = "md5sum < %s > %s" % (processed.path, out.path),
     )
 

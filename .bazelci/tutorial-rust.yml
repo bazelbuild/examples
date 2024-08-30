@@ -52,6 +52,8 @@ tasks:
     name: "Rust grpc"
     platform: ubuntu1804
     working_directory: ../rust-examples/08-grpc-client-server
+    build_flags:
+      - "--noremote_accept_cached"
     build_targets:
       - "//:all"
   rust-08-grpc-client-server-macos:

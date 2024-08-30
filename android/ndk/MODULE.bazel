@@ -3,13 +3,7 @@
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
 bazel_dep(name = "rules_cc", version = "0.0.9")
-
-bazel_dep(name = "rules_android", version = "0.1.1")
-git_override(
-  module_name = "rules_android",
-  remote = "https://github.com/bazelbuild/rules_android",
-  commit = "93e27030d3f0defa39cbbc35195638cb772b0c27",
-)
+bazel_dep(name = "rules_android", version = "0.5.1")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(

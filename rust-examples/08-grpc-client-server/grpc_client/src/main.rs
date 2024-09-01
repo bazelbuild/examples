@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 use proto_bindings::proto::greeter_client::GreeterClient;
 use proto_bindings::proto::HelloRequest;
 

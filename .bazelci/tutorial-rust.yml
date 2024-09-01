@@ -48,19 +48,18 @@ tasks:
     working_directory: ../rust-examples/07-deps-vendor
     build_targets:
       - "//..."
-  # TODO: Renable after addressing https://github.com/bazelbuild/examples/pull/489#issuecomment-2321617323
-  # rust-08-grpc-client-server-linux:
-  #   name: "Rust grpc"
-  #   platform: ubuntu2204
-  #   working_directory: ../rust-examples/08-grpc-client-server
-  #   build_targets:
-  #     - "//:all"
+  rust-08-grpc-client-server-linux:
+     name: "Rust grpc"
+     platform: ubuntu2204
+     working_directory: ../rust-examples/08-grpc-client-server
+     build_targets:
+       - "//..."
   rust-08-grpc-client-server-macos:
     name: "Rust grpc"
     platform: macos_arm64
     working_directory: ../rust-examples/08-grpc-client-server
     build_targets:
-      - "//:all"
+      - "//..."
   rust-09-oci-container-linux:
     name: "Rust OCI"
     platform: ubuntu2204

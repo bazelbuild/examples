@@ -18,10 +18,10 @@ readme = "README.md"
 # Internal crates
 proto_bindings = { path = "proto_bindings" }
 # External crates
-prost = { version = "0.12.6" }
-prost-types = { version = "0.12.6", default-features = false }
-tonic = { version = "0.11.0", features = ["transport"] }
-tonic-build = "0.11.0"
+prost = { version = "0.13.2" }
+prost-types = { version = "0.13.2", default-features = false }
+tonic = { version = "0.12.2", features = ["transport"] }
+tonic-build = "0.12.2"
 tokio = { version = "1.38", default-features = false, features = ["macros", "net", "rt-multi-thread", "signal"] }
 
 

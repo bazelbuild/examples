@@ -23,7 +23,6 @@ ts_project(
     tsconfig = "//react:tsconfig",
     visibility = ["//react:__subpackages__"],
     deps = [
-        "//react:node_modules/@types/react",
         "//react:node_modules/react",
         "//react:node_modules/react-dom",
         "//react:node_modules/vite-plugin-svgr",
@@ -43,7 +42,7 @@ ts_project(
         "//:node_modules/vitest",
         "//react:node_modules/@testing-library/jest-dom",
         "//react:node_modules/@testing-library/react",
-        "//react:node_modules/@types/jest",
+        "//react:node_modules/@types",
     ],
 )
 

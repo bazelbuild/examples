@@ -1,8 +1,8 @@
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("//:lint.bzl", "eslint_test")
 load("//:vitest.bzl", "vitest")
 load("//react:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
+load("//tools/lint:linters.bzl", "eslint_test")
 
 js_library(
     name = "assets",

@@ -14,7 +14,7 @@ crates_vendor(
             ),
         ],
     },
-    mode = "local",
+    mode = "remote",
     packages = {
         # protobufs/gRPC in Rust
         "prost": crate.spec(

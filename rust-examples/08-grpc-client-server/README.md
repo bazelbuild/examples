@@ -125,7 +125,26 @@ crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 
 ### Dependencies
 
-Dependencies are vendored to keep the build as hermetic as possible. See the [vendoring example](../07-deps-vendor) for details. Three steps are required to configure vendoring:
+Dependencies are vendored to keep the build as hermetic as possible. 
+See the [vendoring example](../07-deps-vendor) for details. 
+
+This example uses the from_spec vendoring of direct dependencies, which supports two modes:
+1)  mode = "local",
+2)  mode = "remote"
+
+Local means Bazel downloads each crate and stores the entire crate in the repo under the thirdparty folder. This comes 
+handy when you need to debug or patch a dependency. Also, this is recommended for very large projects to enable things
+like licence scanning over dependencies and helps with remote builds especially when the entire repo is too large
+to fit in a single Bazel cache.
+
+Remote means Bazel only stores the BUILD.bazel files thirdparty folder and puts the downloaded crates in the cache.
+This works well when you don't need to debug or patch a crate and your project is small enough to fit in the Bazel cache.
+
+To keep the repo tidy, we use the remote mode in this example.
+However, it is also possible to use the local mode so that you checkin the entire source code of each crate into git. 
+Change the mode according to your requirements. 
+
+Three steps are required to configure vendoring:
 
 1) Create a folder thirdparty with a build file (see [vendoring example](../07-deps-vendor) for details)
 2) Vendor the dependencies by running the bazel target defined in the build file

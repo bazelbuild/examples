@@ -1,0 +1,68 @@
+load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+
+crates_vendor(
+    name = "crates_vendor",
+    annotations = {
+        "protoc-gen-prost": [
+            crate.annotation(
+                gen_binaries = ["protoc-gen-prost"],
+            ),
+        ],
+        "protoc-gen-tonic": [
+            crate.annotation(
+                gen_binaries = ["protoc-gen-tonic"],
+            ),
+        ],
+    },
+    mode = "remote",
+    packages = {
+        # protobufs/gRPC in Rust
+        "prost": crate.spec(
+            package = "prost",
+            version = "0.13.0",
+        ),
+        "prost-types": crate.spec(
+            default_features = False,
+            package = "prost-types",
+            version = "0.13.0",
+        ),
+        "tonic": crate.spec(
+            features = ["transport"],
+            package = "tonic",
+            version = "0.12.0",
+        ),
+        "tonic-build": crate.spec(
+            package = "tonic-build",
+            version = "0.12.0",
+        ),
+        "tonic-health": crate.spec(
+            default_features = False,
+            features = ["transport"],
+            package = "tonic-health",
+            version = "0.12.0",
+        ),
+        "protoc-gen-prost": crate.spec(
+            package = "protoc-gen-prost",
+            version = "0.3.1",
+        ),
+        "protoc-gen-tonic": crate.spec(
+            package = "protoc-gen-tonic",
+            version = "0.4.0",
+        ),
+
+        # Other external crates
+        "tokio": crate.spec(
+            default_features = False,
+            features = [
+                "macros",
+                "net",
+                "rt-multi-thread",
+                "signal",
+            ],
+            package = "tokio",
+            version = "1.38",
+        ),
+    },
+    repository_name = "grpc_example_vendored",
+    tags = ["manual"],
+)

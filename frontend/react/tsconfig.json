@@ -16,5 +16,6 @@
     "declaration": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": []
 }

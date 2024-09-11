@@ -3,7 +3,7 @@ index dc7f0ef..47768d8 100644
 --- a/version.bzl
 +++ b/version.bzl
 @@ -14,3 +14,4 @@
- """The version of bazel-skylib."""
  
- version = "1.2.0"
+ # Keep in sync with MODULE.bazel and @bazel_skylib_gazelle_plugin//:MODULE.bazel
+ version = "1.7.1"
 +hello_msg = "Hello skylib"

@@ -18,7 +18,7 @@
     "@types/node": "18.19.48",
     "@vitejs/plugin-vue": "3.2.0",
     "@vitejs/plugin-vue-jsx": "2.1.1",
-    "@vue/tsconfig": "0.1.3",
+    "@vue/tsconfig": "0.5.1",
     "npm-run-all": "4.1.5",
     "typescript": "4.9.3",
     "vite": "3.2.10",

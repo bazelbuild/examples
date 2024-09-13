@@ -15,6 +15,7 @@ common:
       - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
+    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/501"
   android-jetpack: &android-jetpack
     name: "Android Jetpack Compose"
     # Cannot upgrade this until rules_kotlin is compatible.

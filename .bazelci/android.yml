@@ -6,6 +6,7 @@ common:
     working_directory: ../android/firebase-cloud-messaging
     build_targets:
       - "//app:app"
+    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/487"
   android-ndk: &android-ndk
     name: "Android NDK"
     working_directory: ../android/ndk
@@ -14,6 +15,7 @@ common:
       - "--enable_bzlmod"
     build_targets:
       - "//app/src/main:app"
+    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/501"
   android-jetpack: &android-jetpack
     name: "Android Jetpack Compose"
     # Cannot upgrade this until rules_kotlin is compatible.

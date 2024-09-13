@@ -1,3 +1,5 @@
+common --enable_workspace
+
 # Required on windows
 common --enable_platform_specific_config
 startup --windows_enable_symlinks

@@ -6,6 +6,7 @@ common:
     working_directory: ../android/firebase-cloud-messaging
     build_targets:
       - "//app:app"
+    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/487"
   android-ndk: &android-ndk
     name: "Android NDK"
     working_directory: ../android/ndk

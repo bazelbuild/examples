@@ -1,0 +1,44 @@
+load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+
+crates_vendor(
+    name = "crates_vendor",
+    annotations = {},
+    mode = "local",
+    packages = {
+        "arc-swap": crate.spec(
+            package = "arc-swap",
+            version = "1.7.0",
+        ),
+        "serde": crate.spec(
+            features = ["derive"],
+            package = "serde",
+            version = "1.0",
+        ),
+        "serde_json": crate.spec(
+            package = "serde_json",
+            version = "1.0",
+        ),
+        "tokio": crate.spec(
+            default_features = False,
+            features = [
+                "macros",
+                "net",
+                "rt-multi-thread",
+                "signal",
+            ],
+            package = "tokio",
+            version = "1.40.0",
+        ),
+        "tokio-cron-scheduler": crate.spec(
+            features = ["signal"],
+            package = "tokio-cron-scheduler",
+            version = "0.11",
+        ),
+        "warp": crate.spec(
+            package = "warp",
+            version = "0.3",
+        ),
+    },
+    repository_name = "queng_vendored",
+    tags = ["manual"],
+)

@@ -7,7 +7,7 @@ module(
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.49.3")
+bazel_dep(name = "rules_rust", version = "0.50.1")
 
 # Rules for protobuf / gRPC
 # https://github.com/bazelbuild/rules_proto/releases
@@ -17,7 +17,7 @@ bazel_dep(name = "rules_proto", version = "6.0.2")
 bazel_dep(name = "toolchains_protoc", version = "0.3.3")
 
 # https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "27.3")
+bazel_dep(name = "protobuf", version = "28.1")
 
 # https://github.com/bazel-contrib/toolchains_llvm
 bazel_dep(name = "toolchains_llvm", version = "1.1.2")
@@ -44,7 +44,7 @@ register_toolchains("@llvm_toolchain//:all")
 # Rust toolchain
 RUST_EDITION = "2021"
 
-RUST_VERSION = "1.80.0"
+RUST_VERSION = "1.81.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(

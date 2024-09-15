@@ -1,0 +1,46 @@
+version: 1.0.0
+checklist:
+  - name: Checkout master and sync with remote
+    type: auto
+    run:
+      - git checkout master
+      - git pull
+  - name: Check syntax
+    type: auto
+    run:
+      - cargo check --release --features="all"
+  - name: Run tests
+    type: auto
+    run:
+      - cargo test --release --features="all"
+  - name: Make sure code is formatted
+    type: auto
+    run:
+      - cargo fmt
+  - name: Bump version
+    type: manual
+    instructions:
+      - Please update version with ${VERSION} in Cargo.toml file.
+      - Please update version with ${VERSION} in README.md file if needed.
+  - name: Commit changes
+    type: auto
+    run:
+      - git add --all && git commit -m "Bump version"
+  - name: Create a release tag
+    type: auto
+    run:
+      - git tag "v${VERSION}" -a
+  - name: Push branches and tags to Github
+    type: auto
+    run:
+      - git push origin master
+      - git push --tags
+  - name: Edit tag on Github
+    type: manual
+    instructions:
+      - Tag is pushed to Github(https://github.com/rousan/multer-rs/releases). Edit it there and make it a release.
+  - name: Publish to crates.io
+    type: auto
+    confirm: Are you sure to publish it to crates.io?
+    run:
+      - cargo publish

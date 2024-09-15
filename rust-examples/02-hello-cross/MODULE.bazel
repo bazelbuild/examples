@@ -4,16 +4,17 @@ module(
 )
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.47.1")
+bazel_dep(name = "rules_rust", version = "0.50.1")
 
 # Rules for cross compilation
-bazel_dep(name = "toolchains_musl", version = "0.1.19", dev_dependency = True)
+# https://github.com/bazel-contrib/musl-toolchain/releases
+bazel_dep(name = "toolchains_musl", version = "0.1.20", dev_dependency = True)
 
 # https://github.com/bazelbuild/platforms/releases
 bazel_dep(name = "platforms", version = "0.0.10")
 
 # https://github.com/bazel-contrib/toolchains_llvm
-bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+bazel_dep(name = "toolchains_llvm", version = "1.1.2")
 
 # https://github.com/bazelbuild/bazel/blob/master/tools/build_defs/repo/http.bzl
 http_archive = use_repo_rule("@bazel_tools//:http.bzl", "http_archive")
@@ -92,7 +93,7 @@ register_toolchains("@llvm_toolchain//:all")
 # Rust toolchain
 RUST_EDITION = "2021"
 
-RUST_VERSION = "1.79.0"
+RUST_VERSION = "1.81.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(

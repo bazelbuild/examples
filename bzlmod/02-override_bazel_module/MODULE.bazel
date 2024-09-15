@@ -21,13 +21,13 @@ git_override(
     remote = "https://github.com/meteorcloudy/gflags.git",
 )
 
-# Patch bazel skylib 1.2.0 with a local patch file.
-bazel_dep(name = "bazel_skylib", version = "1.2.0")
+# Patch bazel skylib 1.7.1 with a local patch file.
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
 single_version_override(
     module_name = "bazel_skylib",
     patch_strip = 1,
     patches = ["//:bazel_skylib.patch"],
-    version = "1.2.0",
+    version = "1.7.1",
 )
 
 # Depend on module lib_a at a local path.

@@ -17,6 +17,9 @@ build:windows --enable_runfiles
 ## Build configuration
 ###############################################################################
 
+# Required for cargo_build_script support before Bazel 7
+build --incompatible_merge_fixed_and_default_shell_env
+
 # Enable C++ toolchain resolution.
 build --incompatible_enable_cc_toolchain_resolution
 
@@ -38,16 +41,9 @@ build --incompatible_enable_cc_toolchain_resolution
 # build --jobs=32
 
 ###############################################################################
-## Test configuration
-###############################################################################
-
-# Reduce test output to just error cases and report timeout warnings.
-test --test_output=errors
-test --verbose_failures
-
-###############################################################################
 ## Common configuration
 ###############################################################################
+
 # Enable Bzlmodby default
 common --enable_bzlmod
 
@@ -66,6 +62,14 @@ common --noexperimental_merged_skyframe_analysis_execution
 common --noslim_profile
 common --experimental_profile_include_target_label
 common --experimental_profile_include_primary_output
+
+###############################################################################
+## Test configuration
+###############################################################################
+
+# Reduce test output to just error cases and report timeout warnings.
+test --test_output=errors
+test --verbose_failures
 
 ###############################################################################
 ## Custom user flags

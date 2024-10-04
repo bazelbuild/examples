@@ -33,8 +33,8 @@ importers:
         version: 5.4.2
     devDependencies:
       '@bazel/ibazel':
-        specifier: 0.16.2
-        version: 0.16.2
+        specifier: 0.25.0
+        version: 0.25.0
 
   next.js:
     dependencies:
@@ -2118,11 +2118,6 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
-
-  /@bazel/ibazel@0.16.2:
-    resolution: {integrity: sha512-KgqAWMH0emL6f3xH6nqyTryoBMqlJ627LBIe9PT1PRRQPz2FtHib3FIHJPukp1slzF3hJYZvdiVwgPnHbaSOOA==}
-    hasBin: true
-    dev: true
 
   /@bazel/ibazel@0.25.0:
     resolution: {integrity: sha512-dtosfsuZCSaqlUe5EyxNdaN7Gow0Y+ZJixdlciytcSieUcB/1lXPFTx6OihxhjgtTHkeFovlQ/QbvArRPnk+nQ==}

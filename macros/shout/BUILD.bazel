@@ -1,0 +1,7 @@
+# Declare the script file used by the fancy_count_words macro as a tool.
+exports_files(
+    srcs = ["shout.py"],
+    # But don't expose it to the world, just to fancy_count_word's package.
+    # (This BUILD file, and macros defined in this package, can still see it.)
+    visibility = ["//fancy_word_counter:__pkg__"],
+)

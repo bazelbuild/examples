@@ -66,6 +66,10 @@ Note that tutorials for other languages may be found under other repositories:
  * [Using mandatory providers to ensure your dependencies are of the right type](/rules/mandatory_provider)
  * [Using runfiles](/rules/runfiles)
 
+### [Macro writing]
+
+* [Using Symbolic Macros](/macros)
+
 
 CI:
 [![Build status](https://badge.buildkite.com/260bbace6a4067a3c60539a31fed1191d341a24cb0bfeb0e23.svg)](https://buildkite.com/bazel/bazel-bazel-examples)

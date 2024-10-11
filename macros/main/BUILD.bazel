@@ -1,6 +1,6 @@
 load("//word_counter:defs.bzl", "count_words")
 load("//fancy_word_counter:defs.bzl", "fancy_count_words")
-load("//letter_metrics:defs.bzl", "generate_letter_frequencies", "gather_all_letter_frequencies")
+load("//letter_metrics:defs.bzl", "gather_all_letter_frequencies", "generate_letter_frequencies")
 
 # A simple symbolic macro.
 count_words(
@@ -33,8 +33,11 @@ fancy_count_words(
 # though those targets are not visible to the current package.
 generate_letter_frequencies(
     name = "aggregate",
-    deps = [":hamlet", ":loud_macbeth"],
     out = "aggregate_stats",
+    deps = [
+        ":hamlet",
+        ":loud_macbeth",
+    ],
 )
 
 # Same as above, but the deps are computed automatically using a finalizer.
@@ -43,7 +46,6 @@ gather_all_letter_frequencies(
     name = "auto_aggregate",
     out = "auto_aggregate_stats",
 )
-
 
 # Examples of build failures:
 
@@ -54,7 +56,6 @@ gather_all_letter_frequencies(
 #     name = "cant_touch_this",
 #     actual = ":hamlet_letter_freq",
 # )
-
 
 # Calling a symbolic macro with the wrong attribute type is an error, just like
 # for a rule. (For legacy macros the error might not fail-fast.)

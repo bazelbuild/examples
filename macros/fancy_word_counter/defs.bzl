@@ -59,3 +59,12 @@ fancy_count_words = macro(
     Wraps the count_words macro, adding a shouting (capitalization) feature.
     """,
 )
+
+# A word about select() promotion: An initial version of this macro had it
+# accepting a "src" attr.label() attribute, and instantiating count_words with
+# `srcs = [src]`. This failed because src was promoted to a select(), which is
+# not permitted as a list element. Had this been a legacy macro, we would not
+# discover this problem until a client attempted to pass in a select() for src.
+# Thanks to select() promotion, we found the problem immediately and could
+# address it by changing the schema to be a attr.label_list(). We could have
+# also kept it an attr.label() and set configurable=False.

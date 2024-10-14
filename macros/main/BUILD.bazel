@@ -11,8 +11,11 @@ count_words(
     srcs = ["//data:hamlet.txt"],
     # The output target, like any target created by a symbolic macro, is
     # subject to a naming convention that requires it to suffix the macro name.
-    # (We could get around this by declaring an alias target here if we
-    # wanted.)
+    # If needed, we could declare an `alias` target in this file to make it
+    # available under an additional, unrestricted name. To avoid the
+    # possibility of the user specifying an invalid name here, we could have
+    # also eliminated the `out` attribute and just had the macro body create a
+    # target of form "<name>_word_freq".
     out = "hamlet_word_freq",
     # All symbolic macro targets take a visibility attribute. Any exported
     # target (like :count.txt) created by the macro is visible to at least the

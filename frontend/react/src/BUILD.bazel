@@ -14,6 +14,7 @@ ts_project(
     name = "src",
     srcs = glob(
         include = SRC_PATTERNS,
+        allow_empty = True,
         exclude = TEST_PATTERNS,
     ),
     data = [":assets"],
@@ -33,7 +34,10 @@ ts_project(
 
 ts_project(
     name = "test_lib",
-    srcs = glob(TEST_PATTERNS),
+    srcs = glob(
+        TEST_PATTERNS,
+        allow_empty = True,
+    ),
     declaration = True,
     resolve_json_module = True,
     transpiler = TRANSPILER,

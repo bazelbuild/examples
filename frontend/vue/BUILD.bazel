@@ -47,6 +47,8 @@ vite_bin.vite_binary(
     name = "vite",
     chdir = package_name(),
     data = SRCS + BUILD_DEPS,
+    # Under ibazel, let vite hot-reload changed files rather than restart it
+    tags = ["ibazel_notify_changes"],
 )
 
 build_test(

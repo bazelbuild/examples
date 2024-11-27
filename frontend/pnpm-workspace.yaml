@@ -2,6 +2,7 @@ packages:
     - next.js
     - packages/*
     - react
+    - react-router
     - react-webpack
     - vue
     - vue/libraries/*

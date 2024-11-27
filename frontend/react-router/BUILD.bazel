@@ -1,0 +1,132 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver", "js_test")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//react-router:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
+load("@npm//react-router:@react-router/dev/package_json.bzl", react_router_bin = "bin")
+load("@npm//react-router:@react-router/serve/package_json.bzl", react_router_serve_bin = "bin")
+
+package(default_visibility = ["//visibility:public"])
+
+npm_link_all_packages(name = "node_modules")
+
+RUNTIME_DEPS = [
+    "//react-router/app:assets",
+    "//react-router/app:srcs",
+    "//react-router/public",
+    "package.json",
+    "react-router.config.ts",
+    "tailwind.config.ts",
+    "vite.config.mts",
+]
+
+NPM_DEPS = [
+    ":node_modules/@react-router/dev",
+    ":node_modules/@react-router/node",
+    ":node_modules/@react-router/serve",
+    ":node_modules/autoprefixer",
+    ":node_modules/isbot",
+    ":node_modules/react",
+    ":node_modules/react-dom",
+    ":node_modules/react-router",
+    ":node_modules/tailwindcss",
+    ":node_modules/vite",
+    ":node_modules/vite-tsconfig-paths",
+]
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+tsconfig_to_swcconfig.t2s(
+    name = "write_swcrc",
+    srcs = ["tsconfig.json"],
+    args = [
+        "--filename",
+        "$(location tsconfig.json)",
+    ],
+    stdout = ".swcrc",
+    visibility = ["//react-router:__subpackages__"],
+)
+
+js_library(
+    name = "vite.config",
+    srcs = [
+        "package.json",
+        "react-router.config.ts",
+        "tailwind.config.ts",
+        "tsconfig.json",
+        "vite.config.mts",
+    ],
+    data = [
+        ":node_modules/@react-router/dev",
+        ":node_modules/autoprefixer",
+        ":node_modules/tailwindcss",
+        ":node_modules/vite",
+        ":node_modules/vite-tsconfig-paths",
+        "//:node_modules/vitest",
+    ],
+    visibility = ["//react-router:__subpackages__"],
+)
+
+react_router_bin.react_router_binary(
+    name = "react_router",
+)
+
+# Runs a development server. Run this target under ibazel to use hot reloading.
+js_run_devserver(
+    name = "dev",
+    tool = ":react_router",
+    chdir = package_name(),
+    args = ["dev"],
+    data = RUNTIME_DEPS + NPM_DEPS,
+)
+
+js_run_binary(
+    name = "build",
+    tool = ":react_router",
+    chdir = package_name(),
+    args = ["build"],
+    srcs = RUNTIME_DEPS + NPM_DEPS,
+    out_dirs = [
+        "build",
+        "public/build",
+    ],
+)
+
+react_router_serve_bin.react_router_serve_binary(
+    name = "react_router_serve",
+)
+
+# Runs the production server.
+js_run_devserver(
+    name = "start",
+    tool = ":react_router_serve",
+    chdir = package_name(),
+    args = ["./build/server/index.js"],
+    data = NPM_DEPS + [
+        ":build",
+        "package.json",
+    ],
+)
+
+# Just verify that the bundle produced "something reasonable" but doesn't verify it functions in a browser.
+# TODO: use something like Cypress for a true end-to-end test
+js_test(
+    name = "build_smoke_test",
+    timeout = "short",
+    data = [":build"],
+    entry_point = "build_smoke_test.js",
+)
+
+js_run_binary(
+    name = "typegen",
+    tool = ":react_router",
+    chdir = package_name(),
+    args = ["typegen"],
+    srcs = RUNTIME_DEPS + NPM_DEPS,
+    out_dirs = [
+        ".react-router",
+    ],
+)

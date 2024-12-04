@@ -7,9 +7,9 @@ For the full documentation, please visit the [Bazel documentation page](https://
 ## Instructions
 
 1) Launch emulator
-2) Run `bazel mobile-install //app/src/main:app --fat_apk_cpu=x86 --start_app --android_crosstool_top=@androidndk//:toolchain`
+2) Run `bazel mobile-install //app/src/main:app --android_platforms=//:x86 --start_app`
 
-<img src="/images/result.png" width="400px" />
+<img src="images/result.png" width="400px" />
 
 ## Build graph
 

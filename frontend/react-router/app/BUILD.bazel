@@ -1,0 +1,71 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("//:vitest.bzl", "vitest")
+load("//react-router:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
+
+js_library(
+    name = "assets",
+    srcs = glob(ASSET_PATTERNS),
+    visibility = ["//react-router:__subpackages__"],
+)
+
+js_library(
+    name = "srcs",
+    srcs = glob(SRC_PATTERNS),
+    visibility = ["//react-router:__subpackages__"],
+)
+
+ts_project(
+    name = "app",
+    srcs = glob(
+        include = SRC_PATTERNS,
+        allow_empty = True,
+        exclude = TEST_PATTERNS,
+    ),
+    data = [
+        ":assets",
+        "//react-router:typegen",
+    ],
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react-router:tsconfig",
+    visibility = ["//react-router:__subpackages__"],
+    deps = [
+        "//react-router:node_modules/@react-router/dev",
+        "//react-router:node_modules/@react-router/node",
+        "//react-router:node_modules/@react-router/serve",
+        "//react-router:node_modules/@types/node",
+        "//react-router:node_modules/@types/react",
+        "//react-router:node_modules/isbot",
+        "//react-router:node_modules/react",
+        "//react-router:node_modules/react-dom",
+        "//react-router:node_modules/react-router",
+        "//react-router:node_modules/vite",
+    ],
+)
+
+ts_project(
+    name = "test_lib",
+    srcs = glob(
+        TEST_PATTERNS,
+        allow_empty = True,
+    ),
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react:tsconfig",
+    deps = [
+        ":app",
+        "//:node_modules/vitest",
+        "//react-router:node_modules/@testing-library/jest-dom",
+        "//react-router:node_modules/@testing-library/react",
+        "//react-router:node_modules/@types/jest",
+    ],
+)
+
+vitest(
+    name = "test",
+    config = "//react-router:vite.config",
+    deps = [":test_lib"],
+)

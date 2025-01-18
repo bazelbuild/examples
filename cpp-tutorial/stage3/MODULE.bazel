@@ -1,0 +1,17 @@
+###############################################################################
+# Bazel now uses Bzlmod by default to manage external dependencies.
+# Please consider migrating your external dependencies from WORKSPACE to MODULE.bazel.
+#
+# For more details, please check https://github.com/bazelbuild/bazel/issues/18958
+###############################################################################
+
+# load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+
+# new_git_repository(
+#     name = "googletest",
+#     build_file = "gmock.BUILD",
+#     remote = "https://github.com/google/googletest",
+#     tag = "release-1.11.0",
+# )
+
+bazel_dep(name = "googletest", version = "1.14.0")

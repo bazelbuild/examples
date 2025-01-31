@@ -1,1 +1,3 @@
-# Marker that this folder is the root of a Bazel workspace
+# This file should be removed once issues are fixed:
+# https://github.com/bazel-contrib/bazel-gazelle/issues/2012
+# https://github.com/bazelbuild/bazel-watcher/issues/646

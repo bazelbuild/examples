@@ -1,9 +1,9 @@
 load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver", "js_test")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm//react-router:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
 load("@npm//react-router:@react-router/dev/package_json.bzl", react_router_bin = "bin")
 load("@npm//react-router:@react-router/serve/package_json.bzl", react_router_serve_bin = "bin")
+load("@npm//react-router:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -77,32 +77,32 @@ react_router_bin.react_router_binary(
 # Runs a development server. Run this target under ibazel to use hot reloading.
 js_run_devserver(
     name = "dev",
-    tool = ":react_router",
-    chdir = package_name(),
     args = ["dev"],
+    chdir = package_name(),
     data = RUNTIME_DEPS + NPM_DEPS,
+    tool = ":react_router",
 )
 
 js_run_binary(
     name = "build",
-    tool = ":react_router",
-    chdir = package_name(),
-    args = ["build"],
     srcs = RUNTIME_DEPS + NPM_DEPS,
+    args = ["build"],
+    chdir = package_name(),
     out_dirs = [
         "build",
         "public/build",
     ],
+    tool = ":react_router",
 )
 
 # Runs the production server.
 react_router_serve_bin.react_router_serve_binary(
     name = "start",
-    chdir = package_name(),
     args = ["build/server/index.js"],
+    chdir = package_name(),
     data = NPM_DEPS + [
-        ":build",
         "package.json",
+        ":build",
     ],
 )
 
@@ -115,13 +115,15 @@ js_test(
     entry_point = "build_smoke_test.js",
 )
 
+# Produce `+types/<route file>.d.ts` files, see
+# https://reactrouter.com/explanation/type-safety#typegen-command
 js_run_binary(
     name = "typegen",
-    tool = ":react_router",
-    chdir = package_name(),
-    args = ["typegen"],
     srcs = RUNTIME_DEPS + NPM_DEPS,
+    args = ["typegen"],
+    chdir = package_name(),
     out_dirs = [
         ".react-router",
     ],
+    tool = ":react_router",
 )

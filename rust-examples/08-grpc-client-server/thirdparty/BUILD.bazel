@@ -14,7 +14,7 @@ crates_vendor(
             ),
         ],
     },
-    mode = "remote",
+    mode = "local",
     packages = {
         # protobufs/gRPC in Rust
         "prost": crate.spec(
@@ -43,11 +43,11 @@ crates_vendor(
         ),
         "protoc-gen-prost": crate.spec(
             package = "protoc-gen-prost",
-            version = "0.3.1",
+             version = "0.4",
         ),
         "protoc-gen-tonic": crate.spec(
             package = "protoc-gen-tonic",
-            version = "0.4.0",
+            version = "0.4",
         ),
 
         # Other external crates

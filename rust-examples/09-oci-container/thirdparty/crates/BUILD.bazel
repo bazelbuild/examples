@@ -31,32 +31,68 @@ filegroup(
 
 # Workspace Member Dependencies
 alias(
+    name = "arc-swap-1.7.1",
+    actual = "//thirdparty/crates/arc-swap-1.7.1:arc_swap",
+    tags = ["manual"],
+)
+
+alias(
     name = "arc-swap",
     actual = "//thirdparty/crates/arc-swap-1.7.1:arc_swap",
     tags = ["manual"],
 )
 
 alias(
+    name = "serde-1.0.217",
+    actual = "//thirdparty/crates/serde-1.0.217:serde",
+    tags = ["manual"],
+)
+
+alias(
     name = "serde",
-    actual = "//thirdparty/crates/serde-1.0.210:serde",
+    actual = "//thirdparty/crates/serde-1.0.217:serde",
+    tags = ["manual"],
+)
+
+alias(
+    name = "serde_json-1.0.138",
+    actual = "//thirdparty/crates/serde_json-1.0.138:serde_json",
     tags = ["manual"],
 )
 
 alias(
     name = "serde_json",
-    actual = "//thirdparty/crates/serde_json-1.0.128:serde_json",
+    actual = "//thirdparty/crates/serde_json-1.0.138:serde_json",
+    tags = ["manual"],
+)
+
+alias(
+    name = "tokio-1.43.0",
+    actual = "//thirdparty/crates/tokio-1.43.0:tokio",
     tags = ["manual"],
 )
 
 alias(
     name = "tokio",
-    actual = "//thirdparty/crates/tokio-1.40.0:tokio",
+    actual = "//thirdparty/crates/tokio-1.43.0:tokio",
+    tags = ["manual"],
+)
+
+alias(
+    name = "tokio-cron-scheduler-0.11.1",
+    actual = "//thirdparty/crates/tokio-cron-scheduler-0.11.1:tokio_cron_scheduler",
     tags = ["manual"],
 )
 
 alias(
     name = "tokio-cron-scheduler",
-    actual = "//thirdparty/crates/tokio-cron-scheduler-0.11.0:tokio_cron_scheduler",
+    actual = "//thirdparty/crates/tokio-cron-scheduler-0.11.1:tokio_cron_scheduler",
+    tags = ["manual"],
+)
+
+alias(
+    name = "warp-0.3.7",
+    actual = "//thirdparty/crates/warp-0.3.7:warp",
     tags = ["manual"],
 )
 

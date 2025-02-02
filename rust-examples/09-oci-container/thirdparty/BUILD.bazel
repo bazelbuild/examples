@@ -27,7 +27,7 @@ crates_vendor(
                 "signal",
             ],
             package = "tokio",
-            version = "1.40.0",
+            version = "1.40",
         ),
         "tokio-cron-scheduler": crate.spec(
             features = ["signal"],

@@ -1,0 +1,7 @@
+# Declare the script file used internally by the count_words macro as a tool.
+exports_files(
+    srcs = ["counter.py"],
+    # But don't expose it to the world. Private visibility still means visible
+    # to (macros defined in) this package.
+    visibility = ["//visibility:private"],
+)

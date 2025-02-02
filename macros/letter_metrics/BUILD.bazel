@@ -1,0 +1,5 @@
+# Script tool used by generate_letter_frequencies macro.
+exports_files(
+    srcs = ["aggregate.py"],
+    visibility = ["//visibility:private"],
+)

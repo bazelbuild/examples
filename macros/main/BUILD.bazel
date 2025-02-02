@@ -1,0 +1,85 @@
+load("//word_counter:defs.bzl", "count_words")
+load("//fancy_word_counter:defs.bzl", "fancy_count_words")
+load("//letter_metrics:defs.bzl", "gather_all_letter_frequencies", "generate_letter_frequencies")
+
+# A simple symbolic macro.
+count_words(
+    name = "hamlet",
+    # This package has permission to see hamlet.txt, but the macro definition
+    # itself does not. Nonetheless, the build passes because we delegated our
+    # permission to the macro by passing hamlet.txt in a label attribute.
+    srcs = ["//data:hamlet.txt"],
+    # The output target, like any target created by a symbolic macro, is
+    # subject to a naming convention that requires it to suffix the macro name.
+    # If needed, we could declare an `alias` target in this file to make it
+    # available under an additional, unrestricted name. To avoid the
+    # possibility of the user specifying an invalid name here, we could have
+    # also eliminated the `out` attribute and just had the macro body create a
+    # target of form "<name>_word_freq".
+    out = "hamlet_word_freq",
+    # All symbolic macro targets take a visibility attribute. Any exported
+    # target (like :count.txt) created by the macro is visible to at least the
+    # contents of this attribute, and also to our own package. In this case,
+    # :count.txt is visible to //whatever and //main.
+    visibility = ["//whatever:__pkg__"],
+)
+
+# A more complex macro.
+fancy_count_words(
+    name = "loud_macbeth",
+    srcs = ["//data:macbeth.txt"],
+    out = "loud_macbeth_word_freq",
+    make_it_loud = True,
+)
+
+# A macro that processes targets produced internally by count_words, even
+# though those targets are not visible to the current package.
+generate_letter_frequencies(
+    name = "aggregate",
+    out = "aggregate_stats",
+    deps = [
+        ":hamlet",
+        ":loud_macbeth",
+    ],
+)
+
+# Same as above, but the deps are computed automatically using a finalizer.
+# (This call can appear anywhere in the BUILD file, not just at the end.)
+gather_all_letter_frequencies(
+    name = "auto_aggregate",
+    out = "auto_aggregate_stats",
+)
+
+# Examples of build failures:
+
+# hamlet_letter_freq is an internal target of the count_words macro, so it's
+# not visible to //main even though it lives in this package.
+#
+# alias(
+#     name = "cant_touch_this",
+#     actual = ":hamlet_letter_freq",
+# )
+
+# Calling a symbolic macro with the wrong attribute type is an error, just like
+# for a rule. (For legacy macros the error might not fail-fast.)
+#
+# count_words(
+#     name = "bad_count",
+#     srcs = ["//data:hamlet.txt"],
+#     out = 123,
+# )
+
+# Some attributes are non-configurable and trigger an error if you attempt to
+# pass in a select().
+#
+# config_setting(
+#     name = "config",
+#     values = {"cpu": "k8"},
+# )
+#
+# fancy_count_words(
+#     name = "bad_fancy_count",
+#     srcs = ["//data:macbeth.txt"],
+#     out = "bad_fancy_count.txt",
+#     make_it_loud = select({":config": True, "//conditions:default": False}),
+# )

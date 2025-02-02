@@ -12,46 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use tokio;
+use std::time::Duration;
 
-use bzip2::read::BzEncoder;
-use bzip2::Compression;
-use std::io::Read;
+#[tokio::main]
+async fn main() {
+    println!("Starting the tokio example program");
 
-fn main() {
-    let stdin = std::io::stdin();
-    let stdin = stdin.lock();
-    let mut raw_counter = CountingStream::new(stdin);
+    // Create three async tasks
+    let task1 = tokio::spawn(async_timer(1, "Task 1"));
+    let task2 = tokio::spawn(async_timer(2, "Task 2"));
+    let task3 = tokio::spawn(async_timer(3, "Task 3"));
 
-    let compressed_count = {
-        let compressor = BzEncoder::new(&mut raw_counter, Compression::Best);
-        let mut compressed_counter = CountingStream::new(compressor);
-        std::io::copy(&mut compressed_counter, &mut std::io::sink()).unwrap();
-        compressed_counter.count
-    };
+    // Wait for all tasks to complete
+    let _ = tokio::join!(task1, task2, task3);
 
-    println!(
-        "Compressed {} to {} bytes",
-        raw_counter.count, compressed_count
-    );
+    println!("All tasks completed");
 }
 
-struct CountingStream<R: Read> {
-    stream: R,
-    count: usize,
-}
-
-impl<R: Read> CountingStream<R> {
-    fn new(stream: R) -> Self {
-        CountingStream { stream, count: 0 }
-    }
-}
-
-impl<R: Read> Read for CountingStream<R> {
-    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
-        let result = self.stream.read(buf);
-        if let Ok(read_bytes) = result {
-            self.count += read_bytes;
-        }
-        result
-    }
+async fn async_timer(seconds: u64, task_name: &str) {
+    println!("{} started", task_name);
+    tokio::time::sleep(Duration::from_secs(seconds)).await;
+    println!("{} finished after {} second(s)", task_name, seconds);
 }

@@ -12,7 +12,7 @@ bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
 
 ###############################################################################
 # Small (clang) LLVM toolchain
-# https://github.com/dzbarsky/static-clang
+# https://github.com/MaterializeInc/toolchains/releases
 ###############################################################################
 
 # INTEL/AMD64 Sysroot. LastModified: 2024-04-26T19:15
@@ -34,14 +34,12 @@ http_archive(
     urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/906cc7c6bf47d4bd969a3221fc0602c6b3153caa/debian_bullseye_arm64_sysroot.tar.xz"],
 )
 
-# Clang v18.1.2-4
-# https://github.com/dzbarsky/static-clang/releases
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
-    llvm_version = "18.1.8",
+    llvm_version = "19.1.6-1",
     sha256 = {
         # Generate checksums with shasum -a 256 filename.tar.zst
-        "darwin-aarch64": "41d8dea52d18c4e8b90c4fcd31965f9f297df9f40a38a33d60748dbe7f8330b8",
+        "darwin-aarch64": "",
         "darwin-x86_64": "",
         "linux-aarch64": "",
         "linux-x86_64": "",
@@ -51,10 +49,10 @@ llvm.toolchain(
         "linux-aarch64": "stdc++",
     },
     urls = {
-        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_aarch64.tar.zst"],
-        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_x86_64.tar.zst"],
-        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_aarch64.tar.zst"],
-        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_x86_64.tar.zst"],
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_x86_64.tar.zst"],
     },
 )
 llvm.sysroot(

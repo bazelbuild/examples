@@ -24,7 +24,7 @@ many different target platform and will report an error.
 Instead, if you want to build for all platforms at once, 
 call the filegroup target:
 
-`bazel build //:all`
+`bazel build //...`
 
 
 ## Setup
@@ -87,14 +87,12 @@ sysroots, that means you have to configure LLVM next to use these files. As ment
 needs to be configured and to do that, please add the following to your MODULE.bazel
 
 ```Starlark
-# Clang v18.1.2-4
-# https://github.com/dzbarsky/static-clang/releases
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
-    llvm_version = "18.1.8",
+    llvm_version = "19.1.6-1",
     sha256 = {
         # Generate checksums with shasum -a 256 filename.tar.zst
-        "darwin-aarch64": "41d8dea52d18c4e8b90c4fcd31965f9f297df9f40a38a33d60748dbe7f8330b8",
+        "darwin-aarch64": "",
         "darwin-x86_64": "",
         "linux-aarch64": "",
         "linux-x86_64": "",
@@ -104,10 +102,10 @@ llvm.toolchain(
         "linux-aarch64": "stdc++",
     },
     urls = {
-        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_aarch64.tar.zst"],
-        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_x86_64.tar.zst"],
-        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_aarch64.tar.zst"],
-        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_x86_64.tar.zst"],
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_x86_64.tar.zst"],
     },
 )
 llvm.sysroot(
@@ -125,8 +123,7 @@ use_repo(llvm, "llvm_toolchain")
 register_toolchains("@llvm_toolchain//:all")
 ```
 
-For simplicity, all toolchains are pinned to version LLVM 18. For a
-complete [list off all LLVM releases and supported platforms, see this list.](https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl)
+For simplicity, all toolchains are pinned to version LLVM 19. 1.6-1.w
 It is possible to pin different targets to different LLVM
 versions; [see the documentation for details](https://github.com/bazel-contrib/toolchains_llvm/tree/master?tab=readme-ov-file#per-host-architecture-llvm-version).
 

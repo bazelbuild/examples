@@ -1,15 +1,32 @@
 # Vendored Rust Dependencies
 
 This example shows how to vendor Rust dependencies and use those vendored dependencies 
-in a binary target. You can run the example vendoring target:
+in a binary target. 
+ 
+Before you can run the example, you must vendor all dependencies. You can do this as follows:
 
-`bazel run //thirdparty:crates_vendor`
+`
+bazel run //thirdparty:crates_vendor
+`
 
-This downloads all the dependencies and creates the folder `thirdparty/crates`. 
+This may take a moment because Bazel downloads all the dependencies and stores them in the folder `thirdparty/crates`.
 
 And then build the binary target:
 
 `bazel build //...`
+
+If you  ever see an error stating:
+
+```text
+no such package 'thirdparty/crates':
+BUILD file not found in any of the following directories. 
+``` 
+
+Just run:
+
+`bazel run //thirdparty:crates_vendor`
+
+And then build again; the build will succeed.
 
 ## Setup
 

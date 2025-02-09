@@ -39,10 +39,10 @@ llvm.toolchain(
     llvm_version = "19.1.6-1",
     sha256 = {
         # Generate checksums with shasum -a 256 filename.tar.zst
-        "darwin-aarch64": "",
-        "darwin-x86_64": "",
-        "linux-aarch64": "",
-        "linux-x86_64": "",
+        "darwin-aarch64": "94ed965925dbdc25b29e6fcfa9a84b28d915d5c9da7c71405fc20bbcf8396bd1",
+        "darwin-x86_64": "9395b07fd5018816bcaee84522d9c9386fdbefe62fdf8afff89b57e1b7095463",
+        "linux-aarch64": "24fd3405f65ccbc39f0d14a5126ee2edb5904d7a9525ae483f34a510a1bdce3e",
+        "linux-x86_64": "bad3d776c222c99056eba8b64c085a1e08edd783cb102e1b6eba43b78ce2fe2b",
     },
     stdlib = {
         "linux-x86_64": "stdc++",

@@ -46,6 +46,8 @@ tasks:
     name: "Rust Vendored Deps"
     platform: ubuntu2204
     working_directory: ../rust-examples/07-deps-vendor
+    run_targets:
+      - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
   rust-08-grpc-client-server-linux:

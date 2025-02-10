@@ -34,12 +34,12 @@ rust_binary(
     visibility = ["//visibility:public"],
     deps = [
         # External crates
-        "//thirdparty/crates:arc-swap",
-        "//thirdparty/crates:serde",
-        "//thirdparty/crates:serde_json",
-        "//thirdparty/crates:tokio",
-        "//thirdparty/crates:tokio-cron-scheduler",
-        "//thirdparty/crates:warp",
+        "@crates//:arc-swap",
+        "@crates//:serde",
+        "@crates//:serde_json",
+        "@crates//:tokio",
+        "@crates//:tokio-cron-scheduler",
+        "@crates//:warp",
     ],
 )
 

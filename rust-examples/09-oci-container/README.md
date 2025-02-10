@@ -20,15 +20,6 @@ You have to define your target registry in the [binary BUILD](tokio_oci/BUILD.ba
 before you can publish your image. For details of how to configure a container registry,
 please [consult the official documentation.](https://github.com/bazel-contrib/rules_oci/blob/main/docs/push.md)
 
-## Updating dependencies
-
-* Add or update dependencies in `thirdparty/BUILD.bazel`.
-* Then run the vendoring target: `bazel run //thirdparty:crates_vendor`
-* Rebuild the project: `bazel build //...`
-* Run all tests: `bazel test //...`
-
-See the [vendoring example](../07-deps-vendor) for details.
-
 ## Setup
 
 The new rules_oci build container images in Bazel without Docker. The setup is a straightforward three step process:

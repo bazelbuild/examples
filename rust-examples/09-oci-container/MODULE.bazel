@@ -76,6 +76,42 @@ use_repo(
     "distroless_linux_arm64_v8",
 )
 
-# RUST DEPENDENCIES
-##################
-# See thirdparty/BUILD.bazel
+
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+
+# External crates
+crate.spec(
+    package = "arc-swap",
+    version = "1.7",
+)
+crate.spec(
+    features = ["derive"],
+    package = "serde",
+    version = "1.0",
+)
+crate.spec(
+    package = "serde_json",
+    version = "1.0",
+)
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.40",
+)
+crate.spec(
+    features = ["signal"],
+    package = "tokio-cron-scheduler",
+    version = "0.10",
+)
+crate.spec(
+    package = "warp",
+    version = "0.3",
+)
+crate.from_specs()
+use_repo(crate, "crates")

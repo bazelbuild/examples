@@ -50,6 +50,8 @@ tasks:
     name: "Rust Vendored Deps"
     platform: ubuntu2204
     working_directory: ../rust-examples/07-deps-vendor
+    run_targets: # This step is needed to generate the vendor directory required for the build to succeed.
+      - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
     skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
@@ -57,6 +59,8 @@ tasks:
      name: "Rust grpc"
      platform: ubuntu2204
      working_directory: ../rust-examples/08-grpc-client-server
+     run_targets: # This step is needed to generate the vendor directory required for the build to succeed.
+       - "//thirdparty:crates_vendor"
      build_targets:
        - "//..."
      skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
@@ -64,6 +68,8 @@ tasks:
     name: "Rust grpc"
     platform: macos_arm64
     working_directory: ../rust-examples/08-grpc-client-server
+    run_targets: # This step is needed to generate the vendor directory required for the build to succeed.
+      - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
     skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"

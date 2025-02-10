@@ -13,7 +13,6 @@ To build the example code, run:
 To declare Rust crate dependencies directly, add them to your MODULE file as shown below:
 
 ```starlark
- 
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 #
 # External crates

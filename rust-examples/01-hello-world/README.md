@@ -5,6 +5,8 @@ In this first example, the goal is to build a minimal Hello World Rust binary wi
 
 ## Requirements
 
+On your computer, you need:
+
 * Cargo & Rust
 * C compiler (gcc, or clang)
 
@@ -25,9 +27,7 @@ module(
 )
  
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.46.0")
-
- 
+bazel_dep(name = "rules_rust", version = "0.50.1")
 
 # Rust toolchain
 RUST_EDITION = "2021"

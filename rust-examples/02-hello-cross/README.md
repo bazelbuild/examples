@@ -24,7 +24,7 @@ many different target platform and will report an error.
 Instead, if you want to build for all platforms at once, 
 call the filegroup target:
 
-`bazel build //:all`
+`bazel build //...`
 
 
 ## Setup
@@ -40,7 +40,7 @@ You add the required rules for cross compilation to your MODULE.bazel as shown b
 # https://github.com/bazelbuild/platforms/releases
 bazel_dep(name = "platforms", version = "0.0.10")
 # https://github.com/bazel-contrib/toolchains_llvm
-bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
 ```
 
 ## LLVM Configuration
@@ -62,29 +62,23 @@ To do so, please add the following to your MODULE.bazel
 # https://github.com/bazelbuild/bazel/blob/master/tools/build_defs/repo/http.bzl
 http_archive = use_repo_rule("@bazel_tools//:http.bzl", "http_archive")
 
-# Both, cross compilation and MUSL still need a C/C++ toolchain with sysroot.
-_BUILD_FILE_CONTENT = """
-filegroup(
-  name = "{name}",
-  srcs = glob(["*/**"]),
-  visibility = ["//visibility:public"],
+# INTEL/AMD64 Sysroot. LastModified: 2024-04-26T19:15
+# https://commondatastorage.googleapis.com/chrome-linux-sysroot/
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "sysroot_linux_x64",
+    build_file = "//build/sysroot:BUILD.bazel",
+    sha256 = "5df5be9357b425cdd70d92d4697d07e7d55d7a923f037c22dc80a78e85842d2c",
+    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/4f611ec025be98214164d4bf9fbe8843f58533f7/debian_bullseye_amd64_sysroot.tar.xz"],
 )
-"""
 
-# Download sysroot
+# ARM 64 Sysroot. LastModified: 2024-04-26T18:33
 # https://commondatastorage.googleapis.com/chrome-linux-sysroot/
 http_archive(
-    name = "org_chromium_sysroot_linux_x64",
-    build_file_content = _BUILD_FILE_CONTENT.format(name = "sysroot"),
-    sha256 = "f6b758d880a6df264e2581788741623320d548508f07ffc2ae6a29d0c13d647d",
-    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2e7ada854015a4cc60fc812112d261af44213ed0/debian_bullseye_amd64_sysroot.tar.xz"],
-)
-
-http_archive(
-    name = "org_chromium_sysroot_linux_aarch64",
-    build_file_content = _BUILD_FILE_CONTENT.format(name = "sysroot"),
-    sha256 = "902d1a40a5fd8c3764a36c8d377af5945a92e3d264c6252855bda4d7ef81d3df",
-    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/41a6c8dec4c4304d6509e30cbaf9218dffb4438e/debian_bullseye_arm64_sysroot.tar.xz"],
+    name = "sysroot_linux_aarch64",
+    build_file = "//build/sysroot:BUILD.bazel",
+    sha256 = "d303cf3faf7804c9dd24c9b6b167d0345d41d7fe4bfb7d34add3ab342f6a236c",
+    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/906cc7c6bf47d4bd969a3221fc0602c6b3153caa/debian_bullseye_arm64_sysroot.tar.xz"],
 )
 ```
 
@@ -93,51 +87,43 @@ sysroots, that means you have to configure LLVM next to use these files. As ment
 needs to be configured and to do that, please add the following to your MODULE.bazel
 
 ```Starlark
-LLVM_VERSIONS = {
-    "": "16.0.0",
-}
-
-# Host LLVM toolchain.
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
-    name = "llvm_toolchain",
-    llvm_versions = LLVM_VERSIONS,
-)
-use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
-
-# X86 LLVM Toolchain with sysroot.
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/tests/WORKSPACE.bzlmod
-llvm.toolchain(
-    name = "llvm_toolchain_x86_with_sysroot",
-    llvm_versions = LLVM_VERSIONS,
+    llvm_version = "19.1.6-1",
+    sha256 = {
+        # Generate checksums with shasum -a 256 filename.tar.zst
+        "darwin-aarch64": "",
+        "darwin-x86_64": "",
+        "linux-aarch64": "",
+        "linux-x86_64": "",
+    },
+    stdlib = {
+        "linux-x86_64": "stdc++",
+        "linux-aarch64": "stdc++",
+    },
+    urls = {
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_x86_64.tar.zst"],
+    },
 )
 llvm.sysroot(
-    name = "llvm_toolchain_x86_with_sysroot",
-    label = "@org_chromium_sysroot_linux_x64//:sysroot",
+    name = "llvm_toolchain",
+    label = "@sysroot_linux_x64//:sysroot",
     targets = ["linux-x86_64"],
 )
-use_repo(llvm, "llvm_toolchain_x86_with_sysroot")
-
-#
-# ARM (aarch64) LLVM Toolchain with sysroot.
-# https://github.com/bazelbuild/rules_rust/blob/main/examples/bzlmod/cross_compile/WORKSPACE.bzlmod
-llvm.toolchain(
-    name = "llvm_toolchain_aarch64_with_sysroot",
-    llvm_versions = LLVM_VERSIONS,
-)
 llvm.sysroot(
-    name = "llvm_toolchain_aarch64_with_sysroot",
-    label = "@org_chromium_sysroot_linux_aarch64//:sysroot",
+    name = "llvm_toolchain",
+    label = "@sysroot_linux_aarch64//:sysroot",
     targets = ["linux-aarch64"],
 )
-use_repo(llvm, "llvm_toolchain_aarch64_with_sysroot")
+use_repo(llvm, "llvm_toolchain")
 
-# Register all LLVM toolchains
 register_toolchains("@llvm_toolchain//:all")
 ```
 
-For simplicity, all toolchains are pinned to version LLVM 16 because it is one of the few releases that supports the
-host (apple-darwin / Ubuntu), and the two targets. For a
-complete [list off all LLVM releases and supported platforms, see this list.](https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl)
+For simplicity, all toolchains are pinned to version LLVM 19. 1.6-1.w
 It is possible to pin different targets to different LLVM
 versions; [see the documentation for details](https://github.com/bazel-contrib/toolchains_llvm/tree/master?tab=readme-ov-file#per-host-architecture-llvm-version).
 
@@ -177,20 +163,21 @@ The Rust toolchain only need to know the additional platform triplets to downloa
 or or modify your MODULE.bazel with the following entry:
 
 ```Starlark
-# Rust toolchain
-RUST_EDITION = "2021"
-RUST_VERSION = "1.79.0"
+RUST_EDITION = "2021"  
+
+RUST_VERSION = "1.84.1"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = RUST_EDITION,
-    versions = [RUST_VERSION],
     extra_target_triples = [
         "aarch64-unknown-linux-gnu",
         "x86_64-unknown-linux-gnu",
     ],
+    versions = [RUST_VERSION],
 )
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")
 ```
 

@@ -63,19 +63,27 @@ The LLVM toolchain is configured just as in the previous example for
 example](../02-hello-cross).
 
 ```Starlark
-  
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
-LLVM_VERSIONS = {
-    "": "16.0.0",
-}
-
-# Host LLVM toolchain.
 llvm.toolchain(
-    name = "llvm_toolchain",
-    llvm_versions = LLVM_VERSIONS,
+    llvm_version = "18.1.8",
+    sha256 = {
+        # Generate checksums with shasum -a 256 filename.tar.zst
+        "darwin-aarch64": "41d8dea52d18c4e8b90c4fcd31965f9f297df9f40a38a33d60748dbe7f8330b8",
+        "darwin-x86_64": "",
+        "linux-aarch64": "",
+        "linux-x86_64": "",
+    },
+    stdlib = {
+        "linux-x86_64": "stdc++",
+        "linux-aarch64": "stdc++",
+    },
+    urls = {
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_x86_64.tar.zst"],
+    },
 )
-use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
-register_toolchains("@llvm_toolchain//:all")
 ```
 
 ### 2) Declare base image

@@ -12,14 +12,12 @@ tasks:
     working_directory: ../rust-examples/02-hello-cross
     build_targets:
       - "//:all"
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-02-hello-cross-mac:
     name: "Rust Cross Compilation"
     platform: macos_arm64
     working_directory: ../rust-examples/02-hello-cross
     build_targets:
       - "//:all"
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-03-comp-opt-linux:
     name: "Rust Compiler Optimization"
     platform: ubuntu2204
@@ -38,14 +36,12 @@ tasks:
     working_directory: ../rust-examples/05-deps-cargo
     build_targets:
       - "//..."
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-06-deps-direct-linux:
     name: "Rust Direct Deps"
     platform: ubuntu2204
     working_directory: ../rust-examples/06-deps-direct
     build_targets:
       - "//..."
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-07-deps-vendor-linux:
     name: "Rust Vendored Deps"
     platform: ubuntu2204
@@ -54,7 +50,6 @@ tasks:
       - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-08-grpc-client-server-linux:
      name: "Rust grpc"
      platform: ubuntu2204
@@ -63,7 +58,6 @@ tasks:
        - "//thirdparty:crates_vendor"
      build_targets:
        - "//..."
-     skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-08-grpc-client-server-macos:
     name: "Rust grpc"
     platform: macos_arm64
@@ -72,7 +66,6 @@ tasks:
       - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"
   rust-09-oci-container-linux:
     name: "Rust OCI"
     platform: ubuntu2204
@@ -80,4 +73,3 @@ tasks:
     build_targets:
       - "//..."
       - "//tokio_oci:image"
-    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/540"

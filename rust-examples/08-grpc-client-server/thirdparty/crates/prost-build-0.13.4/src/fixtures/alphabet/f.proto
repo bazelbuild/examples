@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package f;
-
-message Foxtrot {
-  string sign = 1;
-  string pronunciation = 2;
-}

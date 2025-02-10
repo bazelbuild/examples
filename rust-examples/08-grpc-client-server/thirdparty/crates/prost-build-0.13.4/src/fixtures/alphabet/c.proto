@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package c;
-
-message Charlie {
-  string sign = 1;
-  string pronunciation = 2;
-}

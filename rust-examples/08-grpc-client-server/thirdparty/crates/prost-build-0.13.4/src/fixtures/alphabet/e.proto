@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package e;
-
-message Echo {
-  string sign = 1;
-  string pronunciation = 2;
-}

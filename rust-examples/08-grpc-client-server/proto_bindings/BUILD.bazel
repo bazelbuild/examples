@@ -1,5 +1,5 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_rust//proto/prost:defs.bzl", "rust_prost_library")
+load("@rules_rust_prost//:defs.bzl", "rust_prost_library")
 
 # Build proto files
 # https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library

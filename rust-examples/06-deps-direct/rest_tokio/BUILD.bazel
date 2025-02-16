@@ -10,7 +10,7 @@ rust_binary(
     crate_root = "src/main.rs",
     rustc_flags = select({
         "//:release": [
-            "-Clto=true",
+            "-Clink-arg=-flto",
             "-Ccodegen-units=1",
             "-Cpanic=abort",
             "-Copt-level=3",

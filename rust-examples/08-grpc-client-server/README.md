@@ -4,31 +4,6 @@ This example shows how to build a gRPC server and client in Rust with Bazel.
 There is a Cargo Workspace configuration and a Bazelmod configuration. Furthermore,
 all binary targets apply optimization from the [compiler optimization example](../03-comp-opt). 
 
-Before you can run the example, you must vendor all dependencies. You can do this as follows:
-
-`
-bazel run //thirdparty:crates_vendor
-`
-
-This may take a moment because Bazel downloads all the dependencies and stores them in the folder `thirdparty/crates`.
-
-And then build all targets:
-
-`bazel build //...`
-
-If you  ever see an error stating:
-
-```text
-no such package 'thirdparty/crates':
-BUILD file not found in any of the following directories. 
-``` 
-
-Just run:
-
-`bazel run //thirdparty:crates_vendor`
-
-And then build again; the build will succeed.
-
 
 To run the example with Cargo, open one terminal and start the server with:
 

@@ -54,16 +54,12 @@ tasks:
      name: "Rust grpc"
      platform: ubuntu2204
      working_directory: ../rust-examples/08-grpc-client-server
-     run_targets: # This step is needed to generate the vendor directory required for the build to succeed.
-       - "//thirdparty:crates_vendor"
      build_targets:
        - "//..."
   rust-08-grpc-client-server-macos:
     name: "Rust grpc"
     platform: macos_arm64
     working_directory: ../rust-examples/08-grpc-client-server
-    run_targets: # This step is needed to generate the vendor directory required for the build to succeed.
-      - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
   rust-09-oci-container-linux:

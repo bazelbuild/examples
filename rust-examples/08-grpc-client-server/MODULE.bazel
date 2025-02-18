@@ -22,23 +22,23 @@ bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
 ###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
-    llvm_version = "18.1.8",
+    llvm_version = "19.1.6-1",
     sha256 = {
         # Generate checksums with shasum -a 256 filename.tar.zst
-        "darwin-aarch64": "41d8dea52d18c4e8b90c4fcd31965f9f297df9f40a38a33d60748dbe7f8330b8",
-        "darwin-x86_64": "",
-        "linux-aarch64": "",
-        "linux-x86_64": "",
+        "darwin-aarch64": "94ed965925dbdc25b29e6fcfa9a84b28d915d5c9da7c71405fc20bbcf8396bd1",
+        "darwin-x86_64": "9395b07fd5018816bcaee84522d9c9386fdbefe62fdf8afff89b57e1b7095463",
+        "linux-aarch64": "24fd3405f65ccbc39f0d14a5126ee2edb5904d7a9525ae483f34a510a1bdce3e",
+        "linux-x86_64": "bad3d776c222c99056eba8b64c085a1e08edd783cb102e1b6eba43b78ce2fe2b",
     },
     stdlib = {
         "linux-x86_64": "stdc++",
         "linux-aarch64": "stdc++",
     },
     urls = {
-        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_aarch64.tar.zst"],
-        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_x86_64.tar.zst"],
-        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_aarch64.tar.zst"],
-        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_x86_64.tar.zst"],
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_x86_64.tar.zst"],
     },
 )
 
@@ -59,7 +59,62 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-# Custom Rust Prost toolchain
-register_toolchains("@//build/prost_toolchain")
+# Custom Prost toolchain
+register_toolchains(
+    "@//build/prost_toolchain",
+)
 
-# Rust dependencies. See thirdparty/BUILD.bazel
+###############################################################################
+# Rust direct dependencies.
+# https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies
+###############################################################################
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+
+crate.spec(
+    package = "prost",
+    version = "0.13.0",
+)
+crate.spec(
+    default_features = False,
+    package = "prost-types",
+    version = "0.13.0",
+)
+crate.spec(
+    features = ["transport"],
+    package = "tonic",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "tonic-build",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.39.3",
+)
+crate.from_specs()
+use_repo(crate, "crates")

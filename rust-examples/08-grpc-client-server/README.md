@@ -2,74 +2,35 @@
 
 This example shows how to build a gRPC server and client in Rust with Bazel.
 There is a Cargo Workspace configuration and a Bazelmod configuration. Furthermore,
-all binary targets apply optimization from the [compiler optimization example](../03-comp-opt). 
+all binary targets apply optimization from the [compiler optimization example](../03-comp-opt).
 
-Before you can run the example, you must vendor all dependencies. You can do this as follows:
-
-`
-bazel run //thirdparty:crates_vendor
-`
-
-This may take a moment because Bazel downloads all the dependencies and stores them in the folder `thirdparty/crates`.
-
-And then build all targets:
-
-`bazel build //...`
-
-If you  ever see an error stating:
-
-```text
-no such package 'thirdparty/crates':
-BUILD file not found in any of the following directories. 
-``` 
-
-Just run:
-
-`bazel run //thirdparty:crates_vendor`
-
-And then build again; the build will succeed.
-
-
-To run the example with Cargo, open one terminal and start the server with:
-
-`
-cargo run --bin grpc_server
-`
-
-And, in a second terminal, to run the client:
-
-`
-cargo run --bin grpc_client
-`
-
-The equivalent Bazel targets are:
+To run the example with Bazel, open one terminal and use:
 
 Server:
 
-`bazel run //grpc_server:bin`
+`
+bazel run //grpc_server:bin
+`
 
 Client:
 
-`bazel run //grpc_client:bin`
+`
+bazel run //grpc_client:bin
+`
 
 Build with optimization:
 
-`bazel build -c opt //grpc_server:bin`
+`
+bazel build -c opt //grpc_server:bin
+`
 
 And run the optimized binary:
 
-`bazel run -c opt //grpc_server:bin`
+`
+bazel run -c opt //grpc_server:bin
+`
 
-See the compiler [optimization example](../03-comp-opt) for configuration details. 
-
-## Updating dependencies
-
-* Add or update dependencies in `thirdparty/BUILD.bazel`.
-* Then run the vendoring target: `bazel run //thirdparty:crates_vendor`
-* Rebuild the project: `bazel build //...`
-* Run all tests: `bazel test //...`
-
-See the [vendoring example](../07-deps-vendor) for details.
+See the compiler [optimization example](../03-comp-opt) for configuration details.
 
 ## Setup
 
@@ -78,7 +39,7 @@ While the Tonic toolchain works out of the box when its dependencies are matched
 Prost requires a custom toolchain that you have to define.
 
 The setup requires three steps to complete: 
-1. Configure rules and dependencies vendoring 
+1. Configure rules and dependencies 
 2. Configure a custom Prost toolchain
 3. Register custom Prost toolchain.
 
@@ -154,114 +115,63 @@ is in a different folder, you have to update this path to make the build work.
 
 ### Dependencies
 
-Dependencies are vendored to keep the build as hermetic as possible. 
-See the [vendoring example](../07-deps-vendor) for details. 
+This example uses [direct dependencies]( https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies), so you add the following to your MODULE.bazel file:
 
-This example uses the from_spec vendoring of direct dependencies, which supports two modes:
-1)  mode = "local",
-2)  mode = "remote"
-
-Local means Bazel downloads each crate and stores the entire crate in the repo under the thirdparty folder. This comes handy when you need to debug or patch a dependency. Also, this is recommended for very large projects to enable things like licence scanning over dependencies and helps with remote builds especially when the entire repo is too large
-to fit in a single Bazel cache.
-
-Remote means Bazel only stores the BUILD.bazel files thirdparty folder and puts the downloaded crates in the cache. This works well when you don't need to debug or patch a crate and your project is small enough to fit in the Bazel cache.
-
-This repo uses the local mode to because it is small enough to fit in the Bazel cache and
-we have to annotate some crates, as shown below.
-
-Three steps are required to configure vendoring:
-
-1) Create a folder thirdparty with a build file (see [vendoring example](../07-deps-vendor) for details)
-2) Vendor the dependencies by running the bazel target defined in the build file
-3) Use the vendored dependencies in your build
-
-For step 1), add the following to your BUILD file in thirdparty/BUILD.bazel:
+Notice the crate annotations are required for tonic and prost and
+are later used in the toolchain setup. 
 
 ```starlark
-load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 
-crates_vendor(
-    name = "crates_vendor",
-    annotations = {
-        "protoc-gen-prost": [
-            crate.annotation(
-                gen_binaries = ["protoc-gen-prost"],
-            ),
-        ],
-        "protoc-gen-tonic": [
-            crate.annotation(
-                gen_binaries = ["protoc-gen-tonic"],
-            ),
-        ],
-    },
-    mode = "remote",
-    packages = {
-        # protobufs/gRPC in Rust
-        "prost": crate.spec(
-            package = "prost",
-            version = "0.13.0",
-        ),
-        "prost-types": crate.spec(
-            default_features = False,
-            package = "prost-types",
-            version = "0.13.0",
-        ),
-        "tonic": crate.spec(
-            features = ["transport"],
-            package = "tonic",
-            version = "0.12.0",
-        ),
-        "tonic-build": crate.spec(
-            package = "tonic-build",
-            version = "0.12.0",
-        ),
-        "tonic-health": crate.spec(
-            default_features = False,
-            features = ["transport"],
-            package = "tonic-health",
-            version = "0.12.0",
-        ),
-        "protoc-gen-prost": crate.spec(
-            package = "protoc-gen-prost",
-            version = "0.3.1",
-        ),
-        "protoc-gen-tonic": crate.spec(
-            package = "protoc-gen-tonic",
-            version = "0.4.0",
-        ),
-
-        # Other external crates
-        "tokio": crate.spec(
-            default_features = False,
-            features = [
-                "macros",
-                "net",
-                "rt-multi-thread",
-                "signal",
-            ],
-            package = "tokio",
-            version = "1.38",
-        ),
-
-    },
-    repository_name = "grpc_example_vendored",
-    tags = ["manual"],
+crate.spec(
+    package = "prost",
+    version = "0.13.0",
 )
+crate.spec(
+    default_features = False,
+    package = "prost-types",
+    version = "0.13.0",
+)
+crate.spec(
+    features = ["transport"],
+    package = "tonic",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "tonic-build",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.39.3",
+)
+crate.from_specs()
+use_repo(crate, "crates")
 ```
-
-For step 2), you just run the vendor target:
-
-```shell
-bazel run //thirdparty:crates_vendor
-``` 
-
-A few important details:
-* The crate annotations are important because they tell the bazel that the name of the binary to use for generated prost gRPC bindings. 
-* You can define multiple versions of the same dependency. In this case, you can add the version as a suffix to the package name. 
-* The repository_name can be chosen arbitrarily. 
-
-
-From there, you can use the vendored dependencies with the prefix `//thirdparty/crates` across your project. 
 
 ### 2) Configure a custom Prost toolchain
 
@@ -279,7 +189,7 @@ load("@rules_rust_prost//:defs.bzl", "rust_prost_toolchain")
 rust_library_group(
     name = "prost_runtime",
     deps = [
-        "//thirdparty/crates:prost",
+        "@crates//:prost",
     ],
 )
 
@@ -287,18 +197,18 @@ rust_library_group(
     name = "tonic_runtime",
     deps = [
         ":prost_runtime",
-        "//thirdparty/crates:tonic",
+        "@crates//:tonic",
     ],
 )
 
-# https://github.com/bazelbuild/rules_rust/blob/main/examples/bzlmod/proto_with_toolchain/build/prost_toolchain/BUILD.bazel
 rust_prost_toolchain(
     name = "prost_toolchain_impl",
-    prost_plugin = "//thirdparty/crates:protoc-gen-prost__protoc-gen-prost",
+    prost_plugin = "@crates//:protoc-gen-prost__protoc-gen-prost",
     prost_runtime = ":prost_runtime",
-    prost_types = "//thirdparty/crates:prost-types",
-    tonic_plugin = "//thirdparty/crates:protoc-gen-tonic__protoc-gen-tonic",
+    prost_types =  "@crates//:prost-types",
+    tonic_plugin = "@crates//:protoc-gen-tonic__protoc-gen-tonic",
     tonic_runtime = ":tonic_runtime",
+    visibility = ["//visibility:public"],
 )
 
 toolchain(

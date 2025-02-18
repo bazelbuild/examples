@@ -25,8 +25,8 @@ rust_binary(
         # Internal crates
         "//proto_bindings:rust_proto",
         # External crates
-        "//thirdparty/crates:tokio",
-        "//thirdparty/crates:tonic",
+        "@crates//:tokio",
+        "@crates//:tonic",
     ],
 )
 

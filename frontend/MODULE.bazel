@@ -28,6 +28,18 @@ npm.npm_translate_lock(
         "eslint@8.28.0": ["react"],
     },
     verify_node_modules_ignored = "//:.bazelignore",
+    update_pnpm_lock = True,
+    data = [
+        "//:package.json",
+        "//astro:package.json",
+        "//next.js:package.json",
+        "//packages/one:package.json",
+        "//react:package.json",
+        "//react-webpack:package.json",
+        "//vue:package.json",
+        "//vue/libraries/simple:package.json",
+        "//:pnpm-workspace.yaml",
+    ],
 )
 use_repo(npm, "npm")
 

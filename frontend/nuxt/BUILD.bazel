@@ -1,0 +1,60 @@
+#Based on ../vue
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//nuxt:nuxt/package_json.bzl", nuxt_bin = "bin")
+
+# This macro expands to a link_npm_package for each third-party package in package.json
+npm_link_all_packages(name = "node_modules")
+
+SRCS = [
+    "//nuxt/public",
+    "//nuxt/server",
+    "app.vue",
+    "nuxt.config.ts",
+    "tsconfig.json",
+]
+
+BUILD_DEPS = [":node_modules/" + d for d in [
+    "nuxt",
+    "vue",
+    "vue-router",
+]] + ["//:node_modules/" + d for d in [
+    "@unhead/dom",
+    "@vue/compiler-sfc",
+    "scule",
+    "pkg-types",
+]]
+
+# This works
+nuxt_bin.nuxt(
+    name = "prepare",
+    srcs = SRCS + BUILD_DEPS,
+    args = ["prepare"],
+    chdir = package_name(),
+    out_dirs = ["prepare.output"],
+)
+
+# So does this
+nuxt_bin.nuxt(
+    name = "generate",
+    srcs = SRCS + BUILD_DEPS,
+    args = ["generate"],
+    chdir = package_name(),
+    out_dirs = ["generate.output"],
+)
+
+# This doesn't
+nuxt_bin.nuxt(
+    name = "build",
+    srcs = SRCS + BUILD_DEPS,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = [".output"],
+)
+
+nuxt_bin.nuxt_binary(
+    name = "nuxt",
+    chdir = package_name(),
+    data = SRCS + BUILD_DEPS,
+    args = ["dev"],
+)

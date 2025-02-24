@@ -1,5 +1,6 @@
 packages:
     - next.js
+    - nuxt
     - packages/*
     - react
     - react-webpack

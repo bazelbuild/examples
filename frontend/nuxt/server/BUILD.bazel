@@ -1,0 +1,9 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+
+js_library(
+    name = "server",
+    srcs = [
+        "tsconfig.json",
+    ],
+    visibility = ["//nuxt:__subpackages__"],
+)

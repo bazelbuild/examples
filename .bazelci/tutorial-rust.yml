@@ -50,6 +50,7 @@ tasks:
       - "//thirdparty:crates_vendor"
     build_targets:
       - "//..."
+    skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/553"
   rust-08-grpc-client-server-linux:
      name: "Rust grpc"
      platform: ubuntu2204

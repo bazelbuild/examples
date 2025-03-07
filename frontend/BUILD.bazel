@@ -1,5 +1,6 @@
 "Root BUILD file for all frontend examples"
 
+load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
 package(default_visibility = ["//:__subpackages__"])
@@ -7,3 +8,12 @@ package(default_visibility = ["//:__subpackages__"])
 # Create the root of the "virtual store" of npm dependencies under bazel-out.
 # This must be done in the package where the pnpm workspace is rooted.
 npm_link_all_packages(name = "node_modules")
+
+js_library(
+    name = "eslintrc",
+    srcs = ["eslint.config.mjs"],
+    deps = [
+        ":node_modules/@eslint/js",
+        ":node_modules/typescript-eslint",
+    ],
+)

@@ -57,7 +57,7 @@ vitest(
     deps = [":test_lib"],
 )
 
-# Test that fails if the lint report is non-empty
+# Test that fails if eslint exits non-zero
 # Remove the `eslint-disable-next-line` line from index.tsx to see this test fail.
 eslint_test(
     name = "lint",

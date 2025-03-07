@@ -8,6 +8,7 @@ load("@aspect_rules_lint//lint:lint_test.bzl", "lint_test")
 eslint = lint_eslint_aspect(
     binary = Label(":eslint"),
     configs = [
+        Label("//:eslintrc"),
         Label("//react:package_json"),
         Label("//next.js:eslintrc"),
     ],

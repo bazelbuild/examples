@@ -2,7 +2,7 @@
 
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_jvm_external", version = "5.3")
-bazel_dep(name = "rules_cc", version = "0.0.9")
+bazel_dep(name = "rules_cc", version = "0.1.1")
 bazel_dep(name = "rules_android", version = "0.5.1")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")

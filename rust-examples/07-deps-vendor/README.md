@@ -95,7 +95,7 @@ crates_vendor(
                 "time",
             ],
             package = "tokio",
-            version = "1.43.0",
+            version = "=1.44.0",
         ),
     },
     repository_name = "vendored",
@@ -104,6 +104,14 @@ crates_vendor(
 ```
 
 Then you run `bazel run //thirdparty:crates_vendor` which then downloads all the dependencies and creates the folder `thirdparty/crates`. 
+
+**Important:**
+
+By default, vendoring does not pin versions defined in crate.spec, which means if you were to declare a Tokio version 1.40
+and a newer Tokio version 1.44 is already available, the newer version will be used without notifying you.
+You can pin versions by using a `=` prefix in the `version` field, for example: `version = "=1.44.0"`. Only then rules_rust  
+will use the exact version you have declared.
+
 
 At this point, you have the following folder and files:
 ```starlark
@@ -124,6 +132,13 @@ that depends on a vendored dependency. You find a list of all available vendored
 in the BUILD file of the generated folder: `basic/3rdparty/crates/BUILD.bazel`
 You declare a vendored dependency in you target as following:
 
+
+**Important:**
+
+The vendor script crates two aliases, one without version number and one with version number. 
+It is generally recommended to use the alias without version number unless you have a specific reason
+to pin a specific crate version.
+
 ```starlark
 load("@rules_rust//rust:defs.bzl", "rust_binary")
 
@@ -132,7 +147,8 @@ rust_binary(
     srcs = ["src/main.rs"],
     visibility = ["//visibility:public"],
     deps = [
-        "//thirdparty/crates:tokio-1.43.0",
+        "//thirdparty/crates:tokio", # Generally recommended to use the alis without version since mature crates rarely break. 
+        # "//thirdparty/crates:tokio-1.43.0", # Uncomment the the versioned alias if you have to pin the exact crate version. 
     ],
 )
 ```

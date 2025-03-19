@@ -51,7 +51,21 @@ angular_cli.ng(
     args = ["build"],
     chdir = package_name(),
     out_dirs = ["dist"],
-    tags = ["local"],
+    tags = ["local"],  # TODO: make this work in the Bazel sandbox / remote
+)
+
+# FIXME:
+# Fails due to running in the bazel run execroot which symlinks to the sources:
+# [ERROR] File '../../../../src/main.ts' is missing from the TypeScript compilation. [plugin angular-compiler]
+angular_cli.ng_binary(
+    name = "serve",
+    args = ["serve"],
+    chdir = package_name(),
+    data = [
+        ":config",
+        ":src",
+    ] + TOOLS + RUNTIME,
+    tags = ["local"],  # TODO: make this work in the Bazel sandbox / remote
 )
 
 http_server.http_server_binary(

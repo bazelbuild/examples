@@ -6,3 +6,4 @@ packages:
     - vue
     - vue/libraries/*
     - astro
+    - angular/app

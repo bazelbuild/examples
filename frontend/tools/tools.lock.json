@@ -1,0 +1,56 @@
+{
+    "$schema": "https://raw.githubusercontent.com/theoremlp/rules_multitool/main/lockfile.schema.json",
+    "ibazel": {
+      "binaries": [
+        {
+          "kind": "file",
+          "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.3/ibazel_linux_arm64",
+          "sha256": "3fa76bef2a1eac55975a0e6949c133d0a9898eb1e5425ce4f7df0289859f56c5",
+          "os": "linux",
+          "cpu": "arm64"
+        },
+        {
+          "kind": "file",
+          "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.3/ibazel_linux_amd64",
+          "sha256": "d8e1ea02777670a095719ed3800e9bbf814269b05edf901992c1e7c5eca0e3b6",
+          "os": "linux",
+          "cpu": "x86_64"
+        },
+        {
+          "kind": "file",
+          "url": "https://github.com/bazelbuild/bazel-watcher/releases/download/v0.25.3/ibazel_darwin_arm64",
+          "sha256": "c2da75cbab7a4b2b97ba534653bb12e4dd731157bb1c9d660f79df3b330a7239",
+          "os": "macos",
+          "cpu": "arm64"
+        }
+      ]
+    },
+    "multitool": {
+      "binaries": [
+        {
+          "kind": "archive",
+          "url": "https://github.com/theoremlp/multitool/releases/download/v0.8.0/multitool-aarch64-unknown-linux-gnu.tar.xz",
+          "file": "multitool-aarch64-unknown-linux-gnu/multitool",
+          "sha256": "e249591e31fd3f7f27782d3b3da1ce077f9432fdfc7e163bac2b7cf43c3f87a0",
+          "os": "linux",
+          "cpu": "arm64"
+        },
+        {
+          "kind": "archive",
+          "url": "https://github.com/theoremlp/multitool/releases/download/v0.8.0/multitool-x86_64-unknown-linux-gnu.tar.xz",
+          "file": "multitool-x86_64-unknown-linux-gnu/multitool",
+          "sha256": "fc7e5e78f8efa6173cb82659f48ef0acd6ae6f0b906781ab9d4b058f774f657c",
+          "os": "linux",
+          "cpu": "x86_64"
+        },
+        {
+          "kind": "archive",
+          "url": "https://github.com/theoremlp/multitool/releases/download/v0.8.0/multitool-aarch64-apple-darwin.tar.xz",
+          "file": "multitool-aarch64-apple-darwin/multitool",
+          "sha256": "3187c94895358820c656c6a1736d442b3a568a5b1dd17c4c35f3903a07b709a2",
+          "os": "macos",
+          "cpu": "arm64"
+        }
+      ]
+    }
+  }

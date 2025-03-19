@@ -27,6 +27,11 @@
             "postcss-preset-env": "*",
             "postcss-normalize": "*"
           }
+        },
+        "@angular/build": {
+          "peerDependencies": {
+            "tslib": "*"
+          }
         }
       }
     }

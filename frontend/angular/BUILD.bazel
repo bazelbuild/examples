@@ -1,0 +1,43 @@
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//angular:@angular/cli/package_json.bzl", angular_cli = "bin")
+
+npm_link_all_packages()
+
+js_library(
+    name = "config",
+    srcs = [
+        "angular.json",
+        "tsconfig.app.json",
+        "tsconfig.json",
+    ],
+)
+
+TOOLS = [
+    ":node_modules/@angular-devkit/build-angular",
+]
+
+RUNTIME = [
+    ":node_modules/@angular/core",
+    ":node_modules/@angular/platform-browser",
+    ":node_modules/@angular/router",
+    ":node_modules/zone.js",
+    ":node_modules/tslib",
+]
+
+copy_to_bin(
+    name = "src",
+    srcs = glob(["src/**"]),
+)
+
+angular_cli.ng(
+    name = "build",
+    srcs = [
+        ":config",
+        ":src",
+    ] + TOOLS + RUNTIME,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = ["dist"],
+)

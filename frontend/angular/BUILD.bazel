@@ -19,6 +19,16 @@ TOOLS = [
     ":node_modules/@angular-devkit/build-angular",
 ]
 
+TEST_DEPS = [
+    # FIXME: figure out exactly which are needed
+    ":node_modules",
+    # ":node_modules/jasmine-core",
+    # ":node_modules/karma-chrome-launcher",
+    # ":node_modules/karma-coverage",
+    # ":node_modules/karma-jasmine",
+    # ":node_modules/karma-jasmine-html-reporter",
+]
+
 RUNTIME = [
     ":node_modules/@angular/core",
     ":node_modules/@angular/platform-browser",
@@ -48,4 +58,19 @@ http_server.http_server_binary(
     name = "serve_bundle",
     args = [package_name() + "/dist/app/browser"],
     data = [":build"],
+)
+
+angular_cli.ng_test(
+    name = "test",
+    args = [
+        "test",
+        "--watch=false",
+    ],
+    chdir = package_name(),
+    data = [
+        ":config",
+        ":src",
+        ":tsconfig.spec.json",
+    ] + TOOLS + RUNTIME + TEST_DEPS,
+    tags = ["local"],
 )

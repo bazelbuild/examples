@@ -2,6 +2,7 @@ load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//angular:@angular/cli/package_json.bzl", angular_cli = "bin")
+load("@npm//angular:http-server/package_json.bzl", http_server = "bin")
 
 npm_link_all_packages()
 
@@ -40,4 +41,11 @@ angular_cli.ng(
     args = ["build"],
     chdir = package_name(),
     out_dirs = ["dist"],
+    tags = ["local"],
+)
+
+http_server.http_server_binary(
+    name = "serve_bundle",
+    args = [package_name() + "/dist/app/browser"],
+    data = [":build"],
 )

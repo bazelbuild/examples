@@ -20,13 +20,12 @@ TOOLS = [
 ]
 
 TEST_DEPS = [
-    # FIXME: figure out exactly which are needed
-    ":node_modules",
-    # ":node_modules/jasmine-core",
-    # ":node_modules/karma-chrome-launcher",
-    # ":node_modules/karma-coverage",
-    # ":node_modules/karma-jasmine",
-    # ":node_modules/karma-jasmine-html-reporter",
+    ":node_modules/jasmine-core",
+    ":node_modules/karma-chrome-launcher",
+    ":node_modules/karma-coverage",
+    ":node_modules/karma-jasmine",
+    ":node_modules/karma-jasmine-html-reporter",
+    ":node_modules/@angular",
 ]
 
 RUNTIME = [

@@ -17,9 +17,6 @@ build:windows --enable_runfiles
 ## Build configuration
 ###############################################################################
 
-# Required for cargo_build_script support before Bazel 7
-build --incompatible_merge_fixed_and_default_shell_env
-
 # Enable C++ toolchain resolution.
 build --incompatible_enable_cc_toolchain_resolution
 

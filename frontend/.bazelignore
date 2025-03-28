@@ -6,3 +6,4 @@ react-webpack/node_modules
 vue/node_modules
 vue/libraries/simple/node_modules
 astro/node_modules
+angular/node_modules

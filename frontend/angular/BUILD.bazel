@@ -1,0 +1,89 @@
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//angular:@angular/cli/package_json.bzl", angular_cli = "bin")
+load("@npm//angular:http-server/package_json.bzl", http_server = "bin")
+
+npm_link_all_packages()
+
+js_library(
+    name = "config",
+    srcs = [
+        "angular.json",
+        "tsconfig.app.json",
+        "tsconfig.json",
+    ],
+)
+
+TOOLS = [
+    ":node_modules/@angular-devkit/build-angular",
+]
+
+TEST_DEPS = [
+    ":node_modules/jasmine-core",
+    ":node_modules/karma-chrome-launcher",
+    ":node_modules/karma-coverage",
+    ":node_modules/karma-jasmine",
+    ":node_modules/karma-jasmine-html-reporter",
+    ":node_modules/@angular",
+]
+
+RUNTIME = [
+    ":node_modules/@angular/core",
+    ":node_modules/@angular/platform-browser",
+    ":node_modules/@angular/router",
+    ":node_modules/zone.js",
+    ":node_modules/tslib",
+]
+
+copy_to_bin(
+    name = "src",
+    srcs = glob(["src/**"]),
+)
+
+angular_cli.ng(
+    name = "build",
+    srcs = [
+        ":config",
+        ":src",
+    ] + TOOLS + RUNTIME,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = ["dist"],
+    tags = ["local"],  # TODO: make this work in the Bazel sandbox / remote
+)
+
+# FIXME:
+# Fails due to running in the bazel run execroot which symlinks to the sources:
+# [ERROR] File '../../../../src/main.ts' is missing from the TypeScript compilation. [plugin angular-compiler]
+angular_cli.ng_binary(
+    name = "serve",
+    args = ["serve"],
+    chdir = package_name(),
+    data = [
+        ":config",
+        ":src",
+    ] + TOOLS + RUNTIME,
+    tags = ["local"],  # TODO: make this work in the Bazel sandbox / remote
+)
+
+http_server.http_server_binary(
+    name = "serve_bundle",
+    args = [package_name() + "/dist/app/browser"],
+    data = [":build"],
+)
+
+angular_cli.ng_test(
+    name = "test",
+    args = [
+        "test",
+        "--watch=false",
+    ],
+    chdir = package_name(),
+    data = [
+        ":config",
+        ":src",
+        ":tsconfig.spec.json",
+    ] + TOOLS + RUNTIME + TEST_DEPS,
+    tags = ["local"],
+)

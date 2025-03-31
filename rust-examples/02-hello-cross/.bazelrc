@@ -24,25 +24,19 @@ build --incompatible_enable_cc_toolchain_resolution
 # build --toolchain_resolution_debug='@bazel_tools//tools/cpp:toolchain_type
 
 # Don't create bazel-* symlinks in the WORKSPACE directory.
-# Instead, set a prefix and put it in .gitignore
+# Instead, set a prefix, put all symlinks there, and put the prefix in .gitignore
 # Uncomment when needed.
 # build --symlink_prefix=target-bzl/
 
-# Non-empty glob test is disabled because some Bazels deps fail the test.
-# Only use locally and uncomment before pushing to CI.
-# build --incompatible_disallow_empty_glob
-
 # This flag improves execution throughput by executing more actions in parallel.
-# Number should be no more than twice the number of CPU cores.
+# Number should equal to the nr of CPU cores on Apple Silicon
+# or twice the number of CPU cores on X86 with Hyperthreading.
 # Uncomment when needed.
 # build --jobs=32
 
 ###############################################################################
 ## Common configuration
 ###############################################################################
-
-# Enable Bzlmodby default
-common --enable_bzlmod
 
 # Write build outputs in a platform-specific directory;
 # avoid outputs being wiped and rewritten when switching between platforms.

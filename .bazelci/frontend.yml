@@ -23,6 +23,7 @@ basics: &basics
   working_directory: ../frontend
   build_targets:
   - "..."
+  skip_in_bazel_downstream_pipeline: "https://github.com/bazelbuild/examples/issues/556#issuecomment-2699827825"
   test_targets:
   - "..."
 

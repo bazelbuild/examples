@@ -1,0 +1,22 @@
+load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+
+crates_vendor(
+    name = "crates_vendor",
+    annotations = {}, # For crate annotations
+    mode = "local", # Store crates locally in the crates folder
+    packages = {
+        "tokio": crate.spec(
+            default_features = False,
+            features = [
+                "macros",
+                "net",
+                "rt-multi-thread",
+                "time",
+            ],
+            package = "tokio",
+            version = "=1.44.0",
+        ),
+    },
+    repository_name = "vendored",
+    tags = ["manual"],
+)

@@ -1,12 +1,12 @@
-[workspace]
 [package]
 name = "all_crate_deps"
 version = "0.0.0"
 edition = "2021"
 publish = false
 
+# The dummy lib is required to let Bazel generate BUILD files from a Cargo.toml file.
 [lib]
-path = "/dev/null"
+path = "src/dummy_lib.rs"
 
 [dependencies]
-anyhow = "1.0.79"
+anyhow = "1.0"

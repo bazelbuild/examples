@@ -10,7 +10,7 @@ rust_binary(
     crate_root = "src/main.rs",
     rustc_flags = select({
         "//:release": [
-            "-Clto",
+            "-Clink-arg=-flto",
             "-Ccodegen-units=1",
             "-Cpanic=abort",
             "-Copt-level=3",
@@ -25,8 +25,8 @@ rust_binary(
         # Internal crates
         "//proto_bindings:rust_proto",
         # External crates
-        "//thirdparty/crates:tokio",
-        "//thirdparty/crates:tonic",
+        "@crates//:tokio",
+        "@crates//:tonic",
     ],
 )
 

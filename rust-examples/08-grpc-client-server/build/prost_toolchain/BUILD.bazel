@@ -1,10 +1,10 @@
-load("@rules_rust//proto/prost:defs.bzl", "rust_prost_toolchain")
 load("@rules_rust//rust:defs.bzl", "rust_library_group")
+load("@rules_rust_prost//:defs.bzl", "rust_prost_toolchain")
 
 rust_library_group(
     name = "prost_runtime",
     deps = [
-        "//thirdparty/crates:prost",
+        "@crates//:prost",
     ],
 )
 
@@ -12,25 +12,22 @@ rust_library_group(
     name = "tonic_runtime",
     deps = [
         ":prost_runtime",
-        "//thirdparty/crates:tonic",
+        "@crates//:tonic",
     ],
 )
 
 rust_prost_toolchain(
     name = "prost_toolchain_impl",
-    # Ensure the version number matches the one declared in the protoc-gen-tonic depenedency.
-    prost_plugin = "//thirdparty/crates:protoc-gen-prost-0.3.1__protoc-gen-prost",
+    prost_plugin = "@crates//:protoc-gen-prost__protoc-gen-prost",
     prost_runtime = ":prost_runtime",
-    prost_types = "//thirdparty/crates:prost-types",
-    # The proto_compiler attribute is not required anymore since rules_rust version 0.48.0
-    # If your project is pinned to an older version of rules_rust, you have to uncomment the following line below.
-    # proto_compiler = "@protobuf//:protoc",
-    tonic_plugin = "//thirdparty/crates:protoc-gen-tonic__protoc-gen-tonic",
+    prost_types =  "@crates//:prost-types",
+    tonic_plugin = "@crates//:protoc-gen-tonic__protoc-gen-tonic",
     tonic_runtime = ":tonic_runtime",
+    visibility = ["//visibility:public"],
 )
 
 toolchain(
     name = "prost_toolchain",
     toolchain = "prost_toolchain_impl",
-    toolchain_type = "@rules_rust//proto/prost:toolchain_type",
+    toolchain_type = "@rules_rust_prost//:toolchain_type",
 )

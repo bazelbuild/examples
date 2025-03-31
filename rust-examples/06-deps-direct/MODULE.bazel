@@ -4,12 +4,12 @@ module(
 )
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.47.1")
+bazel_dep(name = "rules_rust", version = "0.57.1")
 
 # Rust toolchain
 RUST_EDITION = "2021"
 
-RUST_VERSION = "1.79.0"
+RUST_VERSION = "1.84.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
@@ -45,7 +45,7 @@ crate.spec(
         "signal",
     ],
     package = "tokio",
-    version = "1.38",
+    version = "1.40",
 )
 crate.spec(
     features = ["signal"],

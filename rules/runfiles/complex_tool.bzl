@@ -53,11 +53,12 @@ sub_tool = rule(
 )
 
 def _complex_tool_impl(ctx):
-    my_runfiles = ctx.runfiles(files = [ctx.files._data[0], ctx.files._runfiles_lib[0]])
+    my_runfiles = ctx.runfiles(files = ctx.files._data)
 
     # Use runfiles.merge to merge the runfiles of both tools. All runfiles will
     # be rooted under the runfiles directory owned by this rule, however.
     my_runfiles = my_runfiles.merge(ctx.attr._subtool[DefaultInfo].default_runfiles)
+    my_runfiles = my_runfiles.merge(ctx.attr._runfiles_lib[DefaultInfo].default_runfiles)
 
     # Thus the example directory structure is:
     # runfiles/complex_tool     (executable)
@@ -102,7 +103,6 @@ complex_tool = rule(
             default = ":complex_tool_data.txt",
         ),
         "_runfiles_lib": attr.label(
-            allow_single_file = True,
             default = "@bazel_tools//tools/bash/runfiles",
         ),
     },

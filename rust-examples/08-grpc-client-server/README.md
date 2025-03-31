@@ -2,48 +2,35 @@
 
 This example shows how to build a gRPC server and client in Rust with Bazel.
 There is a Cargo Workspace configuration and a Bazelmod configuration. Furthermore,
-all binary targets apply optimization from the [compiler optimization example](../03-comp-opt). 
+all binary targets apply optimization from the [compiler optimization example](../03-comp-opt).
 
-To run the example with Cargo, open one terminal and start the server with:
-
-`
-cargo run --bin grpc_server
-`
-
-And, in a second terminal, to run the client:
-
-`
-cargo run --bin grpc_client
-`
-
-The equivalent Bazel targets are:
+To run the example with Bazel, open one terminal and use:
 
 Server:
 
-`bazel run //grpc_server:bin`
+`
+bazel run //grpc_server:bin
+`
 
 Client:
 
-`bazel run //grpc_client:bin`
+`
+bazel run //grpc_client:bin
+`
 
 Build with optimization:
 
-`bazel build -c opt //grpc_server:bin`
+`
+bazel build -c opt //grpc_server:bin
+`
 
 And run the optimized binary:
 
-`bazel run -c opt //grpc_server:bin`
+`
+bazel run -c opt //grpc_server:bin
+`
 
-See the compiler [optimization example](../03-comp-opt) for configuration details. 
-
-## Updating dependencies
-
-* Add or update dependencies in `thirdparty/BUILD.bazel`.
-* Then run the vendoring target: `bazel run //thirdparty:crates_vendor`
-* Rebuild the project: `bazel build //...`
-* Run all tests: `bazel test //...`
-
-See the [vendoring example](../07-deps-vendor) for details.
+See the compiler [optimization example](../03-comp-opt) for configuration details.
 
 ## Setup
 
@@ -52,13 +39,13 @@ While the Tonic toolchain works out of the box when its dependencies are matched
 Prost requires a custom toolchain that you have to define.
 
 The setup requires three steps to complete: 
-1. Configure rules and dependencies vendoring 
+1. Configure rules and dependencies 
 2. Configure a custom Prost toolchain
 3. Register custom Prost toolchain.
 
 To keep the build hermetic, we use the LLVM Clang compiler to compile all C/C++ dependencies. 
 
-### 1) Configure rules and dependencies
+### 1) Configure rules 
 
 ### Rules
 
@@ -67,39 +54,46 @@ In your MODULE.bazel, you add the following:
 ```starlark
 # rules for proto
 ###############################################################################
-# https://github.com/bazelbuild/bazel-skylib/releases/
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
-# https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.49.3")
-# Rules for protobuf / gRPC
-# https://github.com/bazelbuild/rules_proto/releases
-bazel_dep(name = "rules_proto", version = "6.0.2")
-# https://github.com/aspect-build/toolchains_protoc/releases
-bazel_dep(name = "toolchains_protoc", version = "0.3.3")
-# https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "27.3")
-# https://github.com/bazel-contrib/toolchains_llvm
-bazel_dep(name = "toolchains_llvm", version = "1.1.2")
+bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust_prost", version = "0.57.1")
+bazel_dep(name = "rules_proto", version = "7.1.0")
 
+# Toolchains
+bazel_dep(name = "toolchains_protoc", version = "0.3.7", dev_dependency = True)
+bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
+```
+
+### Configure clang/LLVM
+```
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
-
-# 1 Register LLVM 
-  
-llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
-LLVM_VERSIONS = { "": "16.0.0",}
-
-# LLVM toolchain.
 llvm.toolchain(
-    name = "llvm_toolchain",
-    llvm_versions = LLVM_VERSIONS,
+    llvm_version = "18.1.8",
+    sha256 = {
+        # Generate checksums with shasum -a 256 filename.tar.zst
+        "darwin-aarch64": "41d8dea52d18c4e8b90c4fcd31965f9f297df9f40a38a33d60748dbe7f8330b8",
+        "darwin-x86_64": "",
+        "linux-aarch64": "",
+        "linux-x86_64": "",
+    },
+    stdlib = {
+        "linux-x86_64": "stdc++",
+        "linux-aarch64": "stdc++",
+    },
+    urls = {
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-18.1.8-4/linux_x86_64.tar.zst"],
+    },
 )
-use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
-register_toolchains("@llvm_toolchain//:all")
+```
 
-# Rust toolchain
-RUST_EDITION = "2021"
+### Configure Rust & Prost
+```
+RUST_EDITION = "2021"  # NOTE: 2024 edition will be released with Rust 1.85.0
 
-RUST_VERSION = "1.80.0"
+RUST_VERSION = "1.84.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
@@ -110,160 +104,74 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-# 2 Register Proto toolchain 
-###############################################################################
-# Proto toolchain
-register_toolchains("@rules_rust//proto/protobuf:default-proto-toolchain")
+# Custom Rust Prost toolchain
+register_toolchains("@//build/prost_toolchain")
 
-# Custom Prost toolchain will be added later. See next section
-
-# 
-# Rust dependencies. See thirdparty/BUILD.bazel
-###############################################################################
-crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+# Rust dependencies. See thirdparty/BUILD.bazel 
 ```
+
+Pay attention to the path, `build/prost_toolchain` because if your custom prost toolchain
+is in a different folder, you have to update this path to make the build work.
 
 ### Dependencies
 
-Dependencies are vendored to keep the build as hermetic as possible. 
-See the [vendoring example](../07-deps-vendor) for details. 
+This example uses [direct dependencies]( https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies), so you add the following to your MODULE.bazel file:
 
-This example uses the from_spec vendoring of direct dependencies, which supports two modes:
-1)  mode = "local",
-2)  mode = "remote"
-
-Local means Bazel downloads each crate and stores the entire crate in the repo under the thirdparty folder. This comes 
-handy when you need to debug or patch a dependency. Also, this is recommended for very large projects to enable things
-like licence scanning over dependencies and helps with remote builds especially when the entire repo is too large
-to fit in a single Bazel cache.
-
-Remote means Bazel only stores the BUILD.bazel files thirdparty folder and puts the downloaded crates in the cache.
-This works well when you don't need to debug or patch a crate and your project is small enough to fit in the Bazel cache.
-
-To keep the repo tidy, we use the remote mode in this example.
-However, it is also possible to use the local mode so that you checkin the entire source code of each crate into git. 
-Change the mode according to your requirements. 
-
-Three steps are required to configure vendoring:
-
-1) Create a folder thirdparty with a build file (see [vendoring example](../07-deps-vendor) for details)
-2) Vendor the dependencies by running the bazel target defined in the build file
-3) Create a macro that loads all the vendored dependencies so you can use it.
-
-For step 1), add the following to your BUILD file in thirdparty/BUILD.bazel:
+Notice the crate annotations are required for tonic and prost and
+are later used in the toolchain setup. 
 
 ```starlark
-load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 
-crates_vendor(
-    name = "crates_vendor",
-    annotations = {
-        "protoc-gen-prost": [
-            crate.annotation(
-                gen_binaries = ["protoc-gen-prost"],
-            ),
-        ],
-        "protoc-gen-tonic": [
-            crate.annotation(
-                gen_binaries = ["protoc-gen-tonic"],
-            ),
-        ],
-    },
-    mode = "remote",
-    packages = {
-        # protobufs/gRPC in Rust
-        "prost": crate.spec(
-            package = "prost",
-            version = "0.13.0",
-        ),
-        "prost-types": crate.spec(
-            default_features = False,
-            package = "prost-types",
-            version = "0.13.0",
-        ),
-        "tonic": crate.spec(
-            features = ["transport"],
-            package = "tonic",
-            version = "0.12.0",
-        ),
-        "tonic-build": crate.spec(
-            package = "tonic-build",
-            version = "0.12.0",
-        ),
-        "tonic-health": crate.spec(
-            default_features = False,
-            features = ["transport"],
-            package = "tonic-health",
-            version = "0.12.0",
-        ),
-        "protoc-gen-prost": crate.spec(
-            package = "protoc-gen-prost",
-            version = "0.3.1",
-        ),
-        "protoc-gen-tonic": crate.spec(
-            package = "protoc-gen-tonic",
-            version = "0.4.0",
-        ),
-
-        # Other external crates
-        "tokio": crate.spec(
-            default_features = False,
-            features = [
-                "macros",
-                "net",
-                "rt-multi-thread",
-                "signal",
-            ],
-            package = "tokio",
-            version = "1.38",
-        ),
-
-    },
-    repository_name = "grpc_example_vendored",
-    tags = ["manual"],
+crate.spec(
+    package = "prost",
+    version = "0.13.0",
 )
+crate.spec(
+    default_features = False,
+    package = "prost-types",
+    version = "0.13.0",
+)
+crate.spec(
+    features = ["transport"],
+    package = "tonic",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "tonic-build",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.39.3",
+)
+crate.from_specs()
+use_repo(crate, "crates")
 ```
-
-Next, you run the target:
-
-
-
-A few important details:
-* The crate annotations are important because they tell the bazel that the name of the binary to use for generated prost gRPC bindings. 
-* You can define multiple versions of the same dependency. In this case, you can add the version as a suffix to the package name. 
-* The repository_name can be chosen arbitrarily. 
-
-```shell
-bazel run //thirdparty:crates_vendor
-```
-
-And lastly, you add macro to load the vendored dependencies. It is important that you run the vendor target first
-because the macro references a file generated by the target. If you don't, you will get an error.
-
-To add the macro, you add a file `thirdparty/all_deps.bzl` with the following content:
-
-
-```starlark
-# rename the default name "crate_repositories" in case you import multiple vendored folders.
-load("//thirdparty/crates:defs.bzl", all_crate_repositories = "crate_repositories")
-
-def all_deps():
-    """
-    This macro loads all vendored dependencies for the repo
-    """
-
-    # Load the vendored dependencies
-    all_crate_repositories()
-```
-
-In your WORKSPACE.bzlmod file, add the following content:
-```starlark
-load("//thirdparty:all_deps.bzl", "all_deps")
-
-all_deps()
-```
-
-From there, you can use the vendored dependencies with the prefix `//thirdparty/crates` across your project. 
 
 ### 2) Configure a custom Prost toolchain
 
@@ -275,13 +183,13 @@ dedicated folder, for example: `build/`.
 Suppose you have your BUILD.bazl file in `build/prost_toolchain/BUILD.bazel`, then add the following content:
 
 ```starlark
-load("@rules_rust//proto/prost:defs.bzl", "rust_prost_toolchain")
 load("@rules_rust//rust:defs.bzl", "rust_library_group")
+load("@rules_rust_prost//:defs.bzl", "rust_prost_toolchain")
 
 rust_library_group(
     name = "prost_runtime",
     deps = [
-        "//thirdparty/crates:prost",
+        "@crates//:prost",
     ],
 )
 
@@ -289,46 +197,29 @@ rust_library_group(
     name = "tonic_runtime",
     deps = [
         ":prost_runtime",
-        "//thirdparty/crates:tonic",
+        "@crates//:tonic",
     ],
 )
 
 rust_prost_toolchain(
     name = "prost_toolchain_impl",
-    prost_plugin = "//thirdparty/crates:protoc-gen-prost__protoc-gen-prost",
+    prost_plugin = "@crates//:protoc-gen-prost__protoc-gen-prost",
     prost_runtime = ":prost_runtime",
-    prost_types = "//thirdparty/crates:prost-types",
-    proto_compiler = "@protobuf//:protoc",
-    tonic_plugin = "//thirdparty/crates:protoc-gen-tonic__protoc-gen-tonic",
+    prost_types =  "@crates//:prost-types",
+    tonic_plugin = "@crates//:protoc-gen-tonic__protoc-gen-tonic",
     tonic_runtime = ":tonic_runtime",
+    visibility = ["//visibility:public"],
 )
 
 toolchain(
     name = "prost_toolchain",
     toolchain = "prost_toolchain_impl",
-    toolchain_type = "@rules_rust//proto/prost:toolchain_type",
+    toolchain_type = "@rules_rust_prost//:toolchain_type",
 )
 ```
 
 The Prost and Tonic dependencies are pulled from the previously configured
 crate dependencies in the MODULE file. With this custom toolchain in place, the last step is to register it.
-
-### 3. Register custom Prost toolchain.
-
-In your MODULE.bazel file, locate your toolchains and add the following entry right below the proto toolchain.
-
-```starlark
-# 2 Register Proto toolchain 
-###############################################################################
-# Proto toolchain
-register_toolchains("@rules_rust//proto/protobuf:default-proto-toolchain")
-
-# Custom Prost toolchain
-register_toolchains("@//build/prost_toolchain")
-```
-
-Pay attention to the path, `build/prost_toolchain` because if your toolchain
-is in a different folder, you have to update this path to make the build work.
 
 ## Usage
 
@@ -337,14 +228,14 @@ bindings for a proto file, just add the target:
 
 ```starlark
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_rust//proto/prost:defs.bzl", "rust_prost_library")
+load("@rules_rust_prost//:defs.bzl", "rust_prost_library")
 
 # Build proto files
 # https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library
 proto_library(
     name = "proto_bindings",
     srcs = [
-          "proto/helloworld.proto",
+        "proto/helloworld.proto",
     ],
 )
 
@@ -357,5 +248,18 @@ rust_prost_library(
 )
 ```
 
-From there, you
-just [follow the target documentation](https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library).
+
+From there you just build, test, and run the targets:
+
+```shell
+  bazel build //...
+  bazel test //...
+```
+
+Run the server:
+
+`bazel run //grpc_server:bin`
+
+Run the client:
+
+`bazel run //grpc_client:bin`

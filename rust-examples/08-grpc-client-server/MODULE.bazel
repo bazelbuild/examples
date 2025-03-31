@@ -3,48 +3,52 @@ module(
     version = "0.0.0",
 )
 
-# https://github.com/bazelbuild/bazel-skylib/releases/
+###############################################################################
+# Bazel Dependencies
+# https://registry.bazel.build/
+###############################################################################
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust_prost", version = "0.57.1")
+bazel_dep(name = "rules_proto", version = "7.1.0")
 
-# https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.49.3")
+# Toolchains
+bazel_dep(name = "toolchains_protoc", version = "0.3.7", dev_dependency = True)
+bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
 
-# Rules for protobuf / gRPC
-# https://github.com/bazelbuild/rules_proto/releases
-bazel_dep(name = "rules_proto", version = "6.0.2")
-
-# https://github.com/aspect-build/toolchains_protoc/releases
-bazel_dep(name = "toolchains_protoc", version = "0.3.3")
-
-# https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "27.3")
-
-# https://github.com/bazel-contrib/toolchains_llvm
-bazel_dep(name = "toolchains_llvm", version = "1.1.2")
-
+###############################################################################
+# Small (clang) LLVM toolchain
+# https://github.com/dzbarsky/static-clang
+###############################################################################
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
-
-# LLVM Versions and platforms
-# https://github.com/bazel-contrib/toolchains_llvm/blob/master/toolchain/internal/llvm_distributions.bzl
-LLVM_VERSIONS = {
-    "": "16.0.0",  # LLVM version that works on Ubuntu 20.04 CI.
-    "darwin-aarch64": "17.0.6",  # Apple Silicon Macs
-    "darwin-x86_64": "15.0.7",  # Apple Intel Macs
-}
-
-# Host LLVM toolchain.
 llvm.toolchain(
-    name = "llvm_toolchain",
-    llvm_versions = LLVM_VERSIONS,
+    llvm_version = "19.1.6-1",
+    sha256 = {
+        # Generate checksums with shasum -a 256 filename.tar.zst
+        "darwin-aarch64": "94ed965925dbdc25b29e6fcfa9a84b28d915d5c9da7c71405fc20bbcf8396bd1",
+        "darwin-x86_64": "9395b07fd5018816bcaee84522d9c9386fdbefe62fdf8afff89b57e1b7095463",
+        "linux-aarch64": "24fd3405f65ccbc39f0d14a5126ee2edb5904d7a9525ae483f34a510a1bdce3e",
+        "linux-x86_64": "bad3d776c222c99056eba8b64c085a1e08edd783cb102e1b6eba43b78ce2fe2b",
+    },
+    stdlib = {
+        "linux-x86_64": "stdc++",
+        "linux-aarch64": "stdc++",
+    },
+    urls = {
+        "darwin-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_aarch64.tar.zst"],
+        "darwin-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/darwin_x86_64.tar.zst"],
+        "linux-aarch64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_aarch64.tar.zst"],
+        "linux-x86_64": ["https://github.com/MaterializeInc/toolchains/releases/download/clang-19.1.6-1/linux_x86_64.tar.zst"],
+    },
 )
-use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
-register_toolchains("@llvm_toolchain//:all")
-
+###############################################################################
 # Rust toolchain
-RUST_EDITION = "2021"
+# https://github.com/bazelbuild/rules_rust/releases
+###############################################################################
+RUST_EDITION = "2021"  # NOTE: 2024 edition will be released with Rust 1.85.0
 
-RUST_VERSION = "1.80.0"
+RUST_VERSION = "1.84.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
@@ -55,11 +59,62 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-# Proto toolchain
-register_toolchains("@rules_rust//proto/protobuf:default-proto-toolchain")
-
 # Custom Prost toolchain
-register_toolchains("@//build/prost_toolchain")
+register_toolchains(
+    "@//build/prost_toolchain",
+)
 
-# Rust dependencies. See thirdparty/BUILD.bazel
-crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+###############################################################################
+# Rust direct dependencies.
+# https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies
+###############################################################################
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+
+crate.spec(
+    package = "prost",
+    version = "0.13.0",
+)
+crate.spec(
+    default_features = False,
+    package = "prost-types",
+    version = "0.13.0",
+)
+crate.spec(
+    features = ["transport"],
+    package = "tonic",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "tonic-build",
+    version = "0.12.0",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+
+crate.spec(
+    default_features = False,
+    features = [
+        "macros",
+        "net",
+        "rt-multi-thread",
+        "signal",
+    ],
+    package = "tokio",
+    version = "1.39.3",
+)
+crate.from_specs()
+use_repo(crate, "crates")

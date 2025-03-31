@@ -1,1 +1,79 @@
-common --enable_workspace
+###############################################################################
+## Bazel Configuration Flags
+##
+## `.bazelrc` is a Bazel configuration file.
+## https://bazel.build/docs/best-practices#bazelrc-file
+###############################################################################
+
+# Required on windows
+# https://bazel.build/reference/command-line-reference#flag--enable_platform_specific_config
+common --enable_platform_specific_config
+
+# https://bazel.build/docs/windows#symlink
+startup --windows_enable_symlinks
+build:windows --enable_runfiles
+
+###############################################################################
+## Build configuration
+###############################################################################
+
+# Enable C++ toolchain resolution.
+build --incompatible_enable_cc_toolchain_resolution
+
+# Debug toolchain resolution. Uncomment when needed.
+# build --toolchain_resolution_debug='@bazel_tools//tools/cpp:toolchain_type
+
+# Don't create bazel-* symlinks in the WORKSPACE directory.
+# Instead, set a prefix and put it in .gitignore
+# Uncomment when needed.
+# build --symlink_prefix=target-bzl/
+
+# Non-empty glob test is disabled because some Bazels deps fail the test.
+# Only use locally and uncomment before pushing to CI.
+# build --incompatible_disallow_empty_glob
+
+# This flag improves execution throughput by executing more actions in parallel.
+# Number should be no more than twice the number of CPU cores.
+# Uncomment when needed.
+# build --jobs=32
+
+###############################################################################
+## Common configuration
+###############################################################################
+
+# Enable Bzlmodby default
+common --enable_bzlmod
+
+# Write build outputs in a platform-specific directory;
+# avoid outputs being wiped and rewritten when switching between platforms.
+common --experimental_platform_in_output_dir
+
+# Enable misc. performance optimizations.
+# https://www.buildbuddy.io/blog/debugging-slow-bazel-builds/
+# https://www.buildbuddy.io/blog/how-bazel-7-0-makes-your-builds-faster/
+common --nolegacy_important_outputs
+common --verbose_failures
+common --noexperimental_merged_skyframe_analysis_execution
+
+# Enable a more detailed performance profile
+common --noslim_profile
+common --experimental_profile_include_target_label
+common --experimental_profile_include_primary_output
+
+###############################################################################
+## Test configuration
+###############################################################################
+
+# Reduce test output to just error cases and report timeout warnings.
+test --test_output=errors
+test --verbose_failures
+
+###############################################################################
+## Custom user flags
+##
+## This should always be the last thing in the `.bazelrc` file to ensure
+## consistent behavior when setting flags in that file as `.bazelrc` files are
+## evaluated top to bottom.
+###############################################################################
+
+try-import %workspace%/user.bazelrc

@@ -1,36 +1,51 @@
 # Vendored Rust Dependencies
 
-This example shows how to vendor Rust dependencies and use those vendored dependencies in a binary target.
-You can run the example vendoring target:
+This example shows how to vendor Rust dependencies and use those vendored dependencies 
+in a binary target. 
+ 
+Before you can run the example, you must vendor all dependencies. You can do this as follows:
 
-`bazel run //basic/3rdparty:crates_vendor`
+`
+bazel run //thirdparty:crates_vendor
+`
 
-And the build target:
+This may take a moment because Bazel downloads all the dependencies and stores them in the folder `thirdparty/crates`.
+
+And then build the binary target:
 
 `bazel build //...`
 
+If you  ever see an error stating:
+
+```text
+no such package 'thirdparty/crates':
+BUILD file not found in any of the following directories. 
+``` 
+
+Just run:
+
+`bazel run //thirdparty:crates_vendor`
+
+And then build again; the build will succeed.
+
 ## Setup
 
-For the setup,
-you need to add the skylib in addition to the rust rules to your MODUE.bazel.
+For the setup, you just add rules_rust as usual. Note, you do not declare any dependencies
+or crate_universe at this stage. 
 
 ```starlark
 module(
     name = "deps_vendored",
-    version = "0.0.0"
+    version = "0.0.0",
 )
- 
-# https://github.com/bazelbuild/bazel-skylib/releases/
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.46.0")
-
- 
+bazel_dep(name = "rules_rust", version = "0.57.1")
 
 # Rust toolchain
-RUST_EDITION = "2021"
-RUST_VERSION = "1.79.0"
+RUST_EDITION = "2021"  # NOTE: 2024 edition will be released with Rust 1.85.0
+
+RUST_VERSION = "1.84.1"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
@@ -38,68 +53,77 @@ rust.toolchain(
     versions = [RUST_VERSION],
 )
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")
 
- 
-crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+# Rust dependencies; see thirdparty/BUILD.bazel
 ```
 
-Note, it is important to load the crate_universe rules otherwise you will get an error
-as the rule set is needed in the vendored target.
 
-Assuming you have a package called `basic` in which you want to vendor dependencies, 
-then you create a folder `basic/3rdparty`. The folder name can be arbitrary, 
-but by convention, its either thirdparty or 3rdparty to indicate vendored dependencies. 
-In the 3rdparty folder, you add a target crates_vendor to declare your dependencies to vendor. In the example, we vendor a specific version of bzip2. 
+The vendor folder name can be arbitrary, but by convention, its either thirdparty or 3rdparty to indicate vendored dependencies. Also note, you can structure any number of sub-folders in the vendor folder for example. Note, in that case, each sub-folder must have a `BUILD.bazel` file that declares its vendored dependencies. 
+
+```starlark
+basic
+thirdparty
+    ├── common
+    │   ├── tokio
+    │   ├── warp     
+    ├── sys
+    │   ├── bzip2
+    ├── macros
+    │   ├── sys  
+```
+  
+
+
+In this example, the vendor folder is named thirdparty and you add a `BUILD.bazel` to declare your dependencies, for example:  
 
 ```starlark
 load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
 
 crates_vendor(
     name = "crates_vendor",
-    annotations = {
-        "bzip2-sys": [crate.annotation(
-            gen_build_script = True,
-        )],
-    },
-    cargo_lockfile = "Cargo.Bazel.lock",
-    generate_build_scripts = False,
-    mode = "remote",
+    annotations = {}, # For crate annotations
+    mode = "local", # Store crates locally in the crates folder
     packages = {
-        "bzip2": crate.spec(
-            version = "=0.3.3",
+        "tokio": crate.spec(
+            default_features = False,
+            features = [
+                "macros",
+                "net",
+                "rt-multi-thread",
+                "time",
+            ],
+            package = "tokio",
+            version = "=1.44.0",
         ),
     },
-    repository_name = "basic",
+    repository_name = "vendored",
     tags = ["manual"],
 )
 ```
 
-Next, you have to run `Cargo build` to generate a Cargo.lock file with all resolved dependencies.
-Then, you rename Cargo.lock to Cargo.Bazel.lock and place it inside the `basic/3rdparty` folder. 
+Then you run `bazel run //thirdparty:crates_vendor` which then downloads all the dependencies and creates the folder `thirdparty/crates`. 
+
+**Important:**
+
+By default, vendoring does not pin versions defined in crate.spec, which means if you were to declare a Tokio version 1.40
+and a newer Tokio version 1.44 is already available, the newer version will be used without notifying you.
+You can pin versions by using a `=` prefix in the `version` field, for example: `version = "=1.44.0"`. Only then rules_rust  
+will use the exact version you have declared.
+
 
 At this point, you have the following folder and files:
-
-```
+```starlark
 basic
-    ├── 3rdparty
-    │   ├── BUILD.bazel   
-    │   ├── Cargo.Bazel.lock   
-``` 
-
-Now you can run the `crates_vendor` target:
-
-`bazel run //basic/3rdparty:crates_vendor`
-
-This generates a crate folders with all configurations for the vendored dependencies.
-
+thirdparty
+    ├── crates/ 
+    ├── BUILD.bazel
 ```
-basic
-    ├── 3rdparty
-    │   ├── cratea    
-    │   ├── BUILD.bazel   
-    │   ├── Cargo.Bazel.lock   
-``` 
+
+Bazel generated a bunch of files and folder in the crates folder. For the most part, you just run
+a build and when it completes, you then just check these vendored dependencies into git to ensure
+all subsequent and CI build use the exact same dependencies. 
 
 ## Usage
 
@@ -108,65 +132,44 @@ that depends on a vendored dependency. You find a list of all available vendored
 in the BUILD file of the generated folder: `basic/3rdparty/crates/BUILD.bazel`
 You declare a vendored dependency in you target as following:
 
+
+**Important:**
+
+The vendor script crates two aliases, one without version number and one with version number. 
+It is generally recommended to use the alias without version number unless you have a specific reason
+to pin a specific crate version.
+
 ```starlark
 load("@rules_rust//rust:defs.bzl", "rust_binary")
 
 rust_binary(
-    name = "hello_sys",
+    name = "hello_vendored",
     srcs = ["src/main.rs"],
-    # Note the `crate_unvierse` dependencies here need to have been loaded
-    # in the WORKSPACE file. See `//:sys_deps.bzl` for more details.
-    deps = ["//basic/3rdparty/crates:bzip2"],
     visibility = ["//visibility:public"],
+    deps = [
+        "//thirdparty/crates:tokio", # Generally recommended to use the alis without version since mature crates rarely break. 
+        # "//thirdparty/crates:tokio-1.43.0", # Uncomment the the versioned alias if you have to pin the exact crate version. 
+    ],
 )
-```
-Note, the vendored dependency is not yet accessible.
-
-Before you can build, you have to define how to load the vendored dependencies. For that, 
-you first create a file `sys_deps.bzl` and add the following content:
-
-```starlark
-# rename the default name "crate_repositories" in case you import multiple vendored folders.
-load("//basic/3rdparty/crates:defs.bzl", basic_crate_repositories = "crate_repositories")
-
-def sys_deps():
-    """
-    This macro loads dependencies for the `basic` crate examples
-
-    Commonly `*-sys` crates are built on top of some existing library and
-    will have a number of dependencies. The examples here use
-    [crate_universe](https://bazelbuild.github.io/rules_rust/crate_universe.html)
-    to gather these dependencies and make them available in the workspace.
-    """
-
-    # Load the vendored dependencies
-    basic_crate_repositories()
-```
-
-This is straightforward, you import the generated crate_repositories from the crates folder,
-rename it to avoid name clashes in case you import from multiple vendored folders, and then
-just load the vendored dependencies.
-
-In a WORKSPACE configuration, you would just load and call sys_deps(), but in a MODULE configuration, you cannot do that. Instead, you create a new file `WORKSPACE.bzlmod` and add the following content.
-
-```starlark
-load("//:sys_deps.bzl", "sys_deps")
-sys_deps()
 ```
 
 Now, you can build the project as usual:
 
 `bazel build //...`
 
-If you ever see an error referring to some cyclical dependencies in a WORKSPACE, it
-is caused because you did not load the bazel_skylib at the top of the MODULE.bazel file.
-To fix this error, make sure to have the following entry in your MODULE.bazel file:
+And run the binary:
 
-```starlark
-# ...
-# https://github.com/bazelbuild/bazel-skylib/releases/
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
-# ....
+`bazel run //basic:hello_vendored`
+
+You should see the expected output.
+
+```text
+Starting the tokio example program
+Task 1 started
+Task 2 started
+Task 3 started
+Task 1 finished after 1 second(s)
+Task 2 finished after 2 second(s)
+Task 3 finished after 3 second(s)
+All tasks completed
 ```
-
-Your build will complete once skylib loads. 

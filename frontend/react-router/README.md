@@ -7,5 +7,4 @@ The app code for this example is the default template project, generated from th
 # TODO
 
 - Use the output from `//react-router:typegen` to resolve IDE type errors in `app/root.tsx` and `/app/routes/home.tsx` and fix `bazel test //react-router/app:app_typecheck`.
-- Fix `bazel test //react-router/app:test`
 - Consider alternatives to vendoring the `entry.client.tsx` and `entry.server.tsx` files, which are supposed to be optional.

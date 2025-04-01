@@ -1,0 +1,201 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_run_devserver", "js_test")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//react-router:@react-router/dev/package_json.bzl", react_router_bin = "bin")
+load("@npm//react-router:@react-router/serve/package_json.bzl", react_router_serve_bin = "bin")
+load("@npm//react-router:tsconfig-to-swcconfig/package_json.bzl", tsconfig_to_swcconfig = "bin")
+load("//:vitest.bzl", "vitest")
+load("//react-router:defs.bzl", "ASSET_PATTERNS", "SRC_PATTERNS", "TEST_PATTERNS", "TRANSPILER")
+
+package(default_visibility = ["//visibility:public"])
+
+npm_link_all_packages(name = "node_modules")
+
+RUNTIME_DEPS = [
+    ":assets",
+    ":srcs",
+    "//react-router/public",
+    "package.json",
+    "react-router.config.ts",
+    "tailwind.config.ts",
+    "vite.config.mts",
+]
+
+NPM_DEPS = [
+    ":node_modules/@react-router/dev",
+    ":node_modules/@react-router/node",
+    ":node_modules/@react-router/serve",
+    ":node_modules/autoprefixer",
+    ":node_modules/isbot",
+    ":node_modules/react",
+    ":node_modules/react-dom",
+    ":node_modules/react-router",
+    ":node_modules/tailwindcss",
+    ":node_modules/vite",
+    ":node_modules/vite-tsconfig-paths",
+]
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+tsconfig_to_swcconfig.t2s(
+    name = "write_swcrc",
+    srcs = ["tsconfig.json"],
+    args = [
+        "--filename",
+        "$(location tsconfig.json)",
+    ],
+    stdout = ".swcrc",
+    visibility = ["//react-router:__subpackages__"],
+)
+
+js_library(
+    name = "vite.config",
+    srcs = [
+        "package.json",
+        "react-router.config.ts",
+        "tailwind.config.ts",
+        "tsconfig.json",
+        "vite.config.mts",
+    ],
+    data = [
+        ":node_modules/@react-router/dev",
+        ":node_modules/autoprefixer",
+        ":node_modules/tailwindcss",
+        ":node_modules/vite",
+        ":node_modules/vite-tsconfig-paths",
+        "//:node_modules/vitest",
+    ],
+    visibility = ["//react-router:__subpackages__"],
+)
+
+react_router_bin.react_router_binary(
+    name = "react_router",
+)
+
+# Runs a development server. Run this target under ibazel to use hot reloading.
+js_run_devserver(
+    name = "dev",
+    args = ["dev"],
+    chdir = package_name(),
+    data = RUNTIME_DEPS + NPM_DEPS,
+    tool = ":react_router",
+)
+
+js_run_binary(
+    name = "build",
+    srcs = RUNTIME_DEPS + NPM_DEPS,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = [
+        "build",
+        "public/build",
+    ],
+    tool = ":react_router",
+)
+
+# Runs the production server.
+react_router_serve_bin.react_router_serve_binary(
+    name = "start",
+    args = ["build/server/index.js"],
+    chdir = package_name(),
+    data = NPM_DEPS + [
+        "package.json",
+        ":build",
+    ],
+)
+
+# Just verify that the bundle produced "something reasonable" but doesn't verify it functions in a browser.
+# TODO: use something like Cypress for a true end-to-end test
+js_test(
+    name = "build_smoke_test",
+    timeout = "short",
+    data = [":build"],
+    entry_point = "build_smoke_test.js",
+)
+
+# Produce `+types/<route file>.d.ts` files, see
+# https://reactrouter.com/explanation/type-safety#typegen-command
+js_run_binary(
+    name = "typegen",
+    srcs = RUNTIME_DEPS + NPM_DEPS,
+    args = ["typegen"],
+    chdir = package_name(),
+    out_dirs = [
+        ".react-router",
+    ],
+    tool = ":react_router",
+)
+
+js_library(
+    name = "assets",
+    srcs = glob(ASSET_PATTERNS),
+    visibility = ["//react-router:__subpackages__"],
+)
+
+js_library(
+    name = "srcs",
+    srcs = glob(
+        include = SRC_PATTERNS,
+        allow_empty = True,
+        exclude = TEST_PATTERNS,
+    ),
+    visibility = ["//react-router:__subpackages__"],
+)
+
+ts_project(
+    name = "app",
+    srcs = glob(
+        include = SRC_PATTERNS,
+        allow_empty = True,
+        exclude = TEST_PATTERNS,
+    ) + [":typegen"],
+    data = [
+        ":assets",
+    ],
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react-router:tsconfig",
+    visibility = ["//react-router:__subpackages__"],
+    deps = [
+        ":node_modules/@react-router/dev",
+        ":node_modules/@react-router/node",
+        ":node_modules/@types/node",
+        ":node_modules/@types/react",
+        ":node_modules/isbot",
+        ":node_modules/react",
+        ":node_modules/react-dom",
+        ":node_modules/react-router",
+        ":node_modules/tailwindcss",
+        ":node_modules/vite",
+    ],
+)
+
+ts_project(
+    name = "test_lib",
+    srcs = glob(
+        TEST_PATTERNS,
+        allow_empty = True,
+    ),
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = TRANSPILER,
+    tsconfig = "//react-router:tsconfig",
+    deps = [
+        ":app",
+        ":node_modules/@testing-library/jest-dom",
+        ":node_modules/@testing-library/react",
+        ":node_modules/@types/jest",
+        "//:node_modules/vitest",
+    ],
+)
+
+vitest(
+    name = "test",
+    config = "//react-router:vite.config",
+    deps = [":test_lib"],
+)

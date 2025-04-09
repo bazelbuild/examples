@@ -3,9 +3,9 @@ workspace(name = "bazel_android_sample_project")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-_KOTLIN_COMPILER_VERSION = "1.7.20"
+_KOTLIN_COMPILER_VERSION = "1.9.22"
 
-_KOTLIN_COMPILER_SHA = "5e3c8d0f965410ff12e90d6f8dc5df2fc09fd595a684d514616851ce7e94ae7d"
+_KOTLIN_COMPILER_SHA = "88b39213506532c816ff56348c07bbeefe0c8d18943bffbad11063cf97cac3e6"
 
 ## Android
 
@@ -24,8 +24,8 @@ android_sdk_repository(name = "androidsdk")
 
 http_archive(
     name = "io_bazel_rules_kotlin",
-    sha256 = "f033fa36f51073eae224f18428d9493966e67c27387728b6be2ebbdae43f140e",
-    url = "https://github.com/bazelbuild/rules_kotlin/releases/download/v1.7.0-RC-3/rules_kotlin_release.tgz",
+    sha256 = "34e8c0351764b71d78f76c8746e98063979ce08dcf1a91666f3f3bc2949a533d",
+    url = "https://github.com/bazelbuild/rules_kotlin/releases/download/v1.9.5/rules_kotlin-v1.9.5.tar.gz",
 )
 
 load("@io_bazel_rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "kotlinc_version")
@@ -40,4 +40,16 @@ kotlin_repositories(
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 
 kt_register_toolchains()
+
+## NDK
+http_archive(
+    name = "rules_android_ndk",
+    sha256 = "b1a5ddd784e6ed915c2035c0db536a278b5f50c64412128c06877115991391ef",
+    strip_prefix = "rules_android_ndk-877c68ef34c9f3353028bf490d269230c1990483",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/877c68ef34c9f3353028bf490d269230c1990483.zip",
+)
+
+load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
+
+android_ndk_repository(name = "androidndk")
 

@@ -1,4 +1,4 @@
-load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_binary.bzl", _cc_binary = "cc_binary")
 
 # buildifier: disable=module-docstring
 def _copt_transition_impl(_, attr):
@@ -86,7 +86,7 @@ def cc_binary(name, set_features = None, **kwargs):
         actual_binary = ":%s" % cc_binary_name,
         set_features = set_features,
     )
-    cc_binary(
+    _cc_binary(
         name = cc_binary_name,
         **kwargs
     )

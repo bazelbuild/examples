@@ -1,3 +1,4 @@
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 load("//testapp:defs.bzl", "var_providing_rule")
 
 # Targets demonstrating predefined variables available to all rules:

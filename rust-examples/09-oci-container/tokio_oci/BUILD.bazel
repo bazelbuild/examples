@@ -1,4 +1,4 @@
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_image_index", "oci_push")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
 
 # OCI Container Rules
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")

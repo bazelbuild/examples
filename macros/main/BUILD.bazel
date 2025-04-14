@@ -1,6 +1,6 @@
-load("//word_counter:defs.bzl", "count_words")
 load("//fancy_word_counter:defs.bzl", "fancy_count_words")
 load("//letter_metrics:defs.bzl", "gather_all_letter_frequencies", "generate_letter_frequencies")
+load("//word_counter:defs.bzl", "count_words")
 
 # A simple symbolic macro.
 count_words(

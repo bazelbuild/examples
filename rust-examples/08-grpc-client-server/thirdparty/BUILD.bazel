@@ -43,7 +43,7 @@ crates_vendor(
         ),
         "protoc-gen-prost": crate.spec(
             package = "protoc-gen-prost",
-             version = "0.4",
+            version = "0.4",
         ),
         "protoc-gen-tonic": crate.spec(
             package = "protoc-gen-tonic",

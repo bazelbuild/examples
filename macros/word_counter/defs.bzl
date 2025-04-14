@@ -43,8 +43,8 @@ def _impl(name, visibility, srcs, out, _count_tool):
 count_words = macro(
     implementation = _impl,
     attrs = {
-        "srcs": attr.label_list(mandatory=True),
-        "out": attr.output(mandatory=True),
+        "srcs": attr.label_list(mandatory = True),
+        "out": attr.output(mandatory = True),
         # An alternative to having _count_tool be an implicit dependency attribute
         # would be to just reference the label directly in the implementation
         # function. There, we could create a local variable
@@ -57,7 +57,7 @@ count_words = macro(
         #
         # since that would resolve relative to the package this macro is
         # instantiated in, rather than relative to this .bzl file.
-        "_count_tool": attr.label(default=":counter.py", configurable=False),
+        "_count_tool": attr.label(default = ":counter.py", configurable = False),
     },
     doc = """
     Emits a file containing a few of the most frequently occurring words in the

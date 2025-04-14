@@ -45,15 +45,15 @@ def _impl(name, visibility, srcs, out, make_it_loud, _shout_tool, **kwargs):
 fancy_count_words = macro(
     implementation = _impl,
     attrs = {
-        "srcs": attr.label_list(mandatory=True),
-        "out": attr.output(mandatory=True),
+        "srcs": attr.label_list(mandatory = True),
+        "out": attr.output(mandatory = True),
         # `configurable=False` means it can't be set to a select() by the user,
         # and won't be promoted to a select() when passed to the implementation
         # function. Morally, this should be used whenever the value is consumed
         # by the macro logic itself as opposed to being passed through to the
         # underlying targets.
-        "make_it_loud": attr.bool(default=False, configurable=False),
-        "_shout_tool": attr.label(default="//shout:shout.py", configurable=False),
+        "make_it_loud": attr.bool(default = False, configurable = False),
+        "_shout_tool": attr.label(default = "//shout:shout.py", configurable = False),
     },
     doc = """
     Wraps the count_words macro, adding a shouting (capitalization) feature.

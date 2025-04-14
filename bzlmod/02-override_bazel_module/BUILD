@@ -1,4 +1,5 @@
 load("@bazel_skylib//:version.bzl", "hello_msg")
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 
 # buildifier: disable=print
 print(hello_msg)

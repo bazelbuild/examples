@@ -1,3 +1,5 @@
+load("@rules_cc//cc:cc_test.bzl", "cc_test")
+
 # buildifier: disable=module-docstring
 # We can transition on native options using this
 # //command_line_option:<option-name> syntax
@@ -49,4 +51,4 @@ def test_arg_cc_test(name, **kwargs):
 
     # The native test is built as usual, but mark as "manual" so that blaze test :all
     # does not run it.
-    native.cc_test(name = cc_test_name, tags = kwargs.pop("tags", []) + ["manual"], **kwargs)
+    cc_test(name = cc_test_name, tags = kwargs.pop("tags", []) + ["manual"], **kwargs)

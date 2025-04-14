@@ -10,11 +10,15 @@ http_archive(
 )
 
 load("@rules_android//:prereqs.bzl", "rules_android_prereqs")
+
 rules_android_prereqs()
+
 load("@rules_android//:defs.bzl", "rules_android_workspace")
+
 rules_android_workspace()
 
 load("@rules_android//rules:rules.bzl", "android_sdk_repository")
+
 # Requires that the ANDROID_HOME environment variable is set to the Android SDK path.
 android_sdk_repository(
     name = "androidsdk",

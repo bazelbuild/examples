@@ -1,3 +1,5 @@
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+
 # This load statement replaces the native cc_binary (which has no "set_features"
 # attribute) with a macro that strings together the logic to make that work,
 # then passes everything else back to the native cc_binary.

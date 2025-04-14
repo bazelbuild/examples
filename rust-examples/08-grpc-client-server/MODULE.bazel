@@ -69,7 +69,6 @@ register_toolchains(
 # https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies
 ###############################################################################
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
-
 crate.spec(
     package = "prost",
     version = "0.13.0",
@@ -104,7 +103,6 @@ crate.annotation(
     crate = "protoc-gen-tonic",
     gen_binaries = ["protoc-gen-tonic"],
 )
-
 crate.spec(
     default_features = False,
     features = [

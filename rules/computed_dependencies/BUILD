@@ -1,3 +1,4 @@
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load(":hash.bzl", "md5_sum")
 
 # Run 'bazel build :hash_no_space' to compute the md5 sum of 'hello.txt'

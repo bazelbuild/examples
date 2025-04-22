@@ -10,6 +10,7 @@ module(
 bazel_dep(name = "rules_rust", version = "0.57.1")
 bazel_dep(name = "rules_oci", version = "2.2.1")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
+
 bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
 
 ###############################################################################
@@ -75,7 +76,6 @@ use_repo(
     "distroless_linux_amd64",
     "distroless_linux_arm64_v8",
 )
-
 
 crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
 

@@ -1,5 +1,5 @@
 filegroup(
     name = "sysroot",
     srcs = glob(["**"]),
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )

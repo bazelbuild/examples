@@ -10,5 +10,8 @@
         "group:monorepos",
         "workarounds:all"
     ],
+    "enabledManagers": [
+        "bazel", "bazel-module", "bazelisk", "github-actions"
+    ],
     "labels": ["dependencies"]
 }

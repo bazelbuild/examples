@@ -52,12 +52,6 @@ shirt = rule(
         # Use a private attribute (one that is prefixed with "_") so that target writers
         # can't override the value.
         "_color": attr.label(default = ":color"),
-        # This attribute is required to use starlark transitions. It allows
-        # allowlisting usage of this rule. For more information, see
-        # https://bazel.build/extending/config#user-defined-transitions
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
     },
 )
 

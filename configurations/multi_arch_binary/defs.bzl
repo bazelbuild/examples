@@ -38,12 +38,6 @@ foo_binary = rule(
     implementation = _rule_impl,
     attrs = {
         "tool": attr.label(cfg = fat_transition),
-        # This attribute is required to use Starlark transitions. It allows
-        # allowlisting usage of this rule. For more information, see
-        # https://bazel.build/extending/config#user-defined-transitions.
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
     },
 )
 

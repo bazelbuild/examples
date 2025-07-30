@@ -32,9 +32,6 @@ transition_rule_test = rule(
     implementation = _test_transition_rule_impl,
     attrs = {
         "actual_test": attr.label(cfg = "target", executable = True),
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
     },
     test = True,
 )

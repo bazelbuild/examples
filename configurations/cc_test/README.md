@@ -1,4 +1,4 @@
-### Example showing how to use [Starlark configuration](https://bazel.build/extending/config) to write a`cc_test` wrapper with a starlark transition
+### Example showing how to use [Starlark configuration](https://bazel.build/extending/config) to write a `cc_test` wrapper with a starlark transition
 
 the `test_arg_cc_test` macro in `defs.bzl` defines a wrapper for basically a `cc_test` that has been transitioned.
 This allows, e.g., the test itself to select attribute values based on the value of that transition. There is some

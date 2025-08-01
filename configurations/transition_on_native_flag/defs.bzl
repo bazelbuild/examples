@@ -32,12 +32,6 @@ cpu_rule = rule(
     # the configuration of this target, which the target's descendents will inherit.
     cfg = cpu_transition,
     attrs = {
-        # This attribute is required to use starlark transitions. It allows
-        # allowlisting usage of this rule. For more information, see
-        # https://bazel.build/extending/config#user-defined-transitions
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
         "cpu": attr.string(default = "x86"),
     },
 )

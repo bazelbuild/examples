@@ -9,7 +9,10 @@ export default defineConfig({
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // WORKAROUND: Use process.cwd() instead of import.meta.url to avoid sandbox escape
+      // See https://github.com/bazelbuild/examples/issues/614
+      // @ts-ignore - We know process exists at runtime
+      '@': process.cwd() + '/src',
     },
     dedupe: ['vue'],
   },

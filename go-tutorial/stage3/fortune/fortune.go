@@ -2,6 +2,8 @@ package fortune
 
 import "math/rand"
 
+import "C"
+
 var fortunes = []string{
 	"Your build will complete quickly.",
 	"Your dependencies will be free of bugs.",

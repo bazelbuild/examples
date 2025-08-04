@@ -5,6 +5,7 @@ go_library(
     srcs = ["fortune.go"],
     importpath = "github.com/bazelbuild/examples/go-tutorial/stage3/fortune",
     visibility = ["//visibility:public"],
+    cgo = True,
 )
 
 go_test(

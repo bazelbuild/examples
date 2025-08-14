@@ -23,7 +23,7 @@ use_repo(maven, "maven")
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
     name = "distroless_java",
-    digest = "sha256:97891db4665b347af579b94f324f94f984a1e2e6d009b0015a1d2d214a0389d3",
+    digest = "sha256:4d41893f2e35d2d1a3a14fea495798b86c39b028b7f341f7f5a6edaa07fcaf46",
     image = "gcr.io/distroless/java17",
 )
 use_repo(oci, "distroless_java")

@@ -19,7 +19,7 @@ http_archive(
 # Use a fork version of gflags with git_repository.
 git_repository(
     name = "com_github_gflags_gflags",
-    commit = "95995169e86f3fedd19696df5b1811d441c462a2",
+    commit = "986e8eed00ded8168ef4eaa6f925dc6be50b40fa",
     remote = "https://github.com/meteorcloudy/gflags.git",
 )
 

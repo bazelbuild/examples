@@ -1,6 +1,6 @@
 ---
 matrix:
-  all_platform: ["ubuntu1804", "macos", "windows"]
+  all_platform: ["ubuntu2404", "macos_arm64", "windows"]
 
 tasks:
   01-depend_on_bazel_module:

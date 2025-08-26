@@ -28,8 +28,5 @@ my_rule = rule(
     attrs = {
         "do_transition": attr.bool(),
         "_some_string": attr.label(default = Label("//read_attr_in_transition:some-string")),
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
     },
 )

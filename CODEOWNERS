@@ -4,11 +4,12 @@
 AUTHORS  @meteorcloudy
 android/ @ahumesky @jin
 bzlmod/ @wyverald
-cpp-tutorial @oquenchil
-frontend @alexeagle
-java-maven/ @jin
-java-tutorial/ @jin
-make-variables @bazelbuild/configurability
-flags-parsing-tutorial @bazelbuild/configurability
-rules/starlark-configurations @bazelbuild/configurability
-third-party-dependencies @meteorcloudy
+configurations/ @bazelbuild/configurability
+cpp-tutorial/ @oquenchil
+flags-parsing-tutorial/ @bazelbuild/configurability
+frontend/ @alexeagle
+go-tutorial/ @bazelbuild/go-maintainers
+macros/ @brandjon
+make-variables/ @bazelbuild/configurability
+rules/ @comius
+third-party-dependencies/ @meteorcloudy

@@ -34,9 +34,14 @@ def _foo_binary_impl(ctx):
     foocc = ctx.executable._foocc
     out = ctx.outputs.out
     trans_srcs = get_transitive_srcs(ctx.files.srcs, ctx.attr.deps)
+
+    args = ctx.actions.args()
+    args.add(out)
+    args.add_all(trans_srcs)
+    
     ctx.actions.run(
         executable = foocc,
-        arguments = [out.path] + [src.path for src in srcs_list],
+        arguments = [args],
         inputs = trans_srcs,
         tools = [foocc],
         outputs = [out],

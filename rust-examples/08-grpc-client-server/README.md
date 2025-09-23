@@ -34,18 +34,18 @@ See the compiler [optimization example](../03-comp-opt) for configuration detail
 
 ## Setup
 
-The Prost and Tonic rules do not specify a default toolchain in order to avoid mismatched dependency issues. 
+The Prost and Tonic rules do not specify a default toolchain in order to avoid mismatched dependency issues.
 While the Tonic toolchain works out of the box when its dependencies are matched, however,
 Prost requires a custom toolchain that you have to define.
 
-The setup requires three steps to complete: 
-1. Configure rules and dependencies 
+The setup requires three steps to complete:
+1. Configure rules and dependencies
 2. Configure a custom Prost toolchain
 3. Register custom Prost toolchain.
 
-To keep the build hermetic, we use the LLVM Clang compiler to compile all C/C++ dependencies. 
+To keep the build hermetic, we use the LLVM Clang compiler to compile all C/C++ dependencies.
 
-### 1) Configure rules 
+### 1) Configure rules
 
 ### Rules
 
@@ -55,7 +55,7 @@ In your MODULE.bazel, you add the following:
 # rules for proto
 ###############################################################################
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust", version = "0.65.0")
 bazel_dep(name = "rules_rust_prost", version = "0.57.1")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 
@@ -107,7 +107,7 @@ register_toolchains("@rust_toolchains//:all")
 # Custom Rust Prost toolchain
 register_toolchains("@//build/prost_toolchain")
 
-# Rust dependencies. See thirdparty/BUILD.bazel 
+# Rust dependencies. See thirdparty/BUILD.bazel
 ```
 
 Pay attention to the path, `build/prost_toolchain` because if your custom prost toolchain
@@ -118,7 +118,7 @@ is in a different folder, you have to update this path to make the build work.
 This example uses [direct dependencies]( https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html#direct-dependencies), so you add the following to your MODULE.bazel file:
 
 Notice the crate annotations are required for tonic and prost and
-are later used in the toolchain setup. 
+are later used in the toolchain setup.
 
 ```starlark
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")

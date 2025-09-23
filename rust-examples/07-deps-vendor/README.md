@@ -1,8 +1,8 @@
 # Vendored Rust Dependencies
 
-This example shows how to vendor Rust dependencies and use those vendored dependencies 
-in a binary target. 
- 
+This example shows how to vendor Rust dependencies and use those vendored dependencies
+in a binary target.
+
 Before you can run the example, you must vendor all dependencies. You can do this as follows:
 
 `
@@ -19,8 +19,8 @@ If you  ever see an error stating:
 
 ```text
 no such package 'thirdparty/crates':
-BUILD file not found in any of the following directories. 
-``` 
+BUILD file not found in any of the following directories.
+```
 
 Just run:
 
@@ -31,7 +31,7 @@ And then build again; the build will succeed.
 ## Setup
 
 For the setup, you just add rules_rust as usual. Note, you do not declare any dependencies
-or crate_universe at this stage. 
+or crate_universe at this stage.
 
 ```starlark
 module(
@@ -40,7 +40,7 @@ module(
 )
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust", version = "0.65.0")
 
 # Rust toolchain
 RUST_EDITION = "2021"  # NOTE: 2024 edition will be released with Rust 1.85.0
@@ -60,23 +60,23 @@ register_toolchains("@rust_toolchains//:all")
 ```
 
 
-The vendor folder name can be arbitrary, but by convention, its either thirdparty or 3rdparty to indicate vendored dependencies. Also note, you can structure any number of sub-folders in the vendor folder for example. Note, in that case, each sub-folder must have a `BUILD.bazel` file that declares its vendored dependencies. 
+The vendor folder name can be arbitrary, but by convention, its either thirdparty or 3rdparty to indicate vendored dependencies. Also note, you can structure any number of sub-folders in the vendor folder for example. Note, in that case, each sub-folder must have a `BUILD.bazel` file that declares its vendored dependencies.
 
 ```starlark
 basic
 thirdparty
     ├── common
     │   ├── tokio
-    │   ├── warp     
+    │   ├── warp
     ├── sys
     │   ├── bzip2
     ├── macros
-    │   ├── sys  
+    │   ├── sys
 ```
-  
 
 
-In this example, the vendor folder is named thirdparty and you add a `BUILD.bazel` to declare your dependencies, for example:  
+
+In this example, the vendor folder is named thirdparty and you add a `BUILD.bazel` to declare your dependencies, for example:
 
 ```starlark
 load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
@@ -103,13 +103,13 @@ crates_vendor(
 )
 ```
 
-Then you run `bazel run //thirdparty:crates_vendor` which then downloads all the dependencies and creates the folder `thirdparty/crates`. 
+Then you run `bazel run //thirdparty:crates_vendor` which then downloads all the dependencies and creates the folder `thirdparty/crates`.
 
 **Important:**
 
 By default, vendoring does not pin versions defined in crate.spec, which means if you were to declare a Tokio version 1.40
 and a newer Tokio version 1.44 is already available, the newer version will be used without notifying you.
-You can pin versions by using a `=` prefix in the `version` field, for example: `version = "=1.44.0"`. Only then rules_rust  
+You can pin versions by using a `=` prefix in the `version` field, for example: `version = "=1.44.0"`. Only then rules_rust
 will use the exact version you have declared.
 
 
@@ -117,17 +117,17 @@ At this point, you have the following folder and files:
 ```starlark
 basic
 thirdparty
-    ├── crates/ 
+    ├── crates/
     ├── BUILD.bazel
 ```
 
 Bazel generated a bunch of files and folder in the crates folder. For the most part, you just run
 a build and when it completes, you then just check these vendored dependencies into git to ensure
-all subsequent and CI build use the exact same dependencies. 
+all subsequent and CI build use the exact same dependencies.
 
 ## Usage
 
-Suppose you have an application in `basic/src` that is defined in `basic/BUILD.bazel` and 
+Suppose you have an application in `basic/src` that is defined in `basic/BUILD.bazel` and
 that depends on a vendored dependency. You find a list of all available vendored dependencies
 in the BUILD file of the generated folder: `basic/3rdparty/crates/BUILD.bazel`
 You declare a vendored dependency in you target as following:
@@ -135,7 +135,7 @@ You declare a vendored dependency in you target as following:
 
 **Important:**
 
-The vendor script crates two aliases, one without version number and one with version number. 
+The vendor script crates two aliases, one without version number and one with version number.
 It is generally recommended to use the alias without version number unless you have a specific reason
 to pin a specific crate version.
 
@@ -147,8 +147,8 @@ rust_binary(
     srcs = ["src/main.rs"],
     visibility = ["//visibility:public"],
     deps = [
-        "//thirdparty/crates:tokio", # Generally recommended to use the alis without version since mature crates rarely break. 
-        # "//thirdparty/crates:tokio-1.43.0", # Uncomment the the versioned alias if you have to pin the exact crate version. 
+        "//thirdparty/crates:tokio", # Generally recommended to use the alis without version since mature crates rarely break.
+        # "//thirdparty/crates:tokio-1.43.0", # Uncomment the the versioned alias if you have to pin the exact crate version.
     ],
 )
 ```

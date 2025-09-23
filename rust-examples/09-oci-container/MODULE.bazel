@@ -7,7 +7,7 @@ module(
 # Bazel Dependencies
 # https://registry.bazel.build/
 ###############################################################################
-bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust", version = "0.65.0")
 bazel_dep(name = "rules_oci", version = "2.2.1")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
 

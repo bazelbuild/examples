@@ -8,8 +8,8 @@ module(
 # https://registry.bazel.build/
 ###############################################################################
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "rules_rust", version = "0.57.1")
-bazel_dep(name = "rules_rust_prost", version = "0.57.1")
+bazel_dep(name = "rules_rust", version = "0.65.0")
+bazel_dep(name = "rules_rust_prost", version = "0.65.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 
 # Toolchains

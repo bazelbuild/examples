@@ -4,7 +4,7 @@ module(
 )
 
 # https://github.com/bazelbuild/rules_rust/releases
-bazel_dep(name = "rules_rust", version = "0.57.1")
+bazel_dep(name = "rules_rust", version = "0.65.0")
 bazel_dep(name = "rules_cc", version = "0.0.9")
 
 # Rust toolchain

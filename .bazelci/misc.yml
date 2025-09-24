@@ -31,13 +31,13 @@ tasks:
     - "//:tests"
   third-party-dependencies-linux:
     name: "Example with third party dependencies"
-    platform: ubuntu1804
+    platform: ubuntu2204
     working_directory: ../third-party-dependencies
     build_targets:
     - "..."
   third-party-dependencies-macos:
     name: "Example with third party dependencies"
-    platform: macos
+    platform: macos_arm64
     working_directory: ../third-party-dependencies
     build_targets:
     - "..."

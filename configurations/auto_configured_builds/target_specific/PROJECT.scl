@@ -9,8 +9,8 @@ load(
 project = project_pb2.Project.create(
     buildable_units = [
         # This buildable unit uses the "target_patterns" field so it only
-	# applies to //target_specific:one. Because it sets "is_default = True",
-	# builds of //target_specific:one use these flags by default.
+        # applies to //target_specific:one. Because it sets "is_default = True",
+        # builds of //target_specific:one use these flags by default.
         buildable_unit_pb2.BuildableUnit.create(
             name = "default_config_for_target_one",
 	    # Supported target_pattern entries:
@@ -23,7 +23,7 @@ project = project_pb2.Project.create(
 	    ],
             flags = [
 	    	"--platforms=//:myplatform",
-		'--@custom_flags//:project_flag="settings for target one"',
+                '--@custom_flags//:project_flag="settings for target one"',
             ],
             is_default = True,
 	    # If a build sets an unknown --scl_config value or omits
@@ -41,7 +41,7 @@ project = project_pb2.Project.create(
 	    ],
             flags = [
 	    	"--platforms=//:myplatform",
-		'--@custom_flags//:project_flag="settings for target two"',
+                '--@custom_flags//:project_flag="settings for target two"',
             ],
 	    is_default = True,
 	    description = "default flags for target two",

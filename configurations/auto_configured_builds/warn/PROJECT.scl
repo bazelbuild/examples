@@ -15,14 +15,14 @@ project = project_pb2.Project.create(
     enforcement_policy = "WARN",
     buildable_units = [
         # Since this buildable unit sets "is_default = True", these flags apply
-	# to any target in this package or its subpackages by default. You can
-	# also request these flags explicitly with "--scl_config=default_config".
+        # to any target in this package or its subpackages by default. You can
+        # also request these flags explicitly with "--scl_config=default_config".
         buildable_unit_pb2.BuildableUnit.create(
             name = "default_config",
             flags = [
 	    	"--platforms=//:myplatform",
                 "--compilation_mode=opt",
-		'--@custom_flags//:project_flag="custom flag value"',
+                '--@custom_flags//:project_flag="custom flag value"',
             ],
             is_default = True,
 	    # If a build sets an unknown --scl_config value or omits
@@ -39,7 +39,7 @@ project = project_pb2.Project.create(
             flags = [
 	    	"--platforms=//:myplatform",
                 "--compilation_mode=dbg",
-		'--@custom_flags//:project_flag="debug value"',
+                '--@custom_flags//:project_flag="debug value"',
             ],
 	    description = "debug configuration for developers",
         ),

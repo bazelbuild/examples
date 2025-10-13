@@ -1,0 +1,5 @@
+# This package is part of the //alias/project_main project. Use that
+# package's PROJECT.scl.
+project = {
+    "actual": "//alias/project_main:PROJECT.scl",
+}

@@ -1,0 +1,48 @@
+# A project file that automatically sets build flags for all targets in the
+# project and fails if the user sets any other flags. This is the strictest
+# form of flag enforcement: projects may only build in their official canonical
+# form.
+#
+# See the "compatible" example for a more permissive variant.
+load(
+    "@bazel_tools//src/main/protobuf/project:project_proto.scl",
+    "buildable_unit_pb2",
+    "project_pb2",
+)
+
+project = project_pb2.Project.create(
+    # "STRICT" means bazel errors if the user sets any flags that aren't
+    # already set here. This is the strictest form of flag enforcement.
+    enforcement_policy = "STRICT",
+    buildable_units = [
+        # Since this buildable unit sets "is_default = True", these flags apply
+	# to any target in this package or its subpackages by default. You can
+	# also request these flags explicitly with "--scl_config=default_config".
+        buildable_unit_pb2.BuildableUnit.create(
+            name = "default_config",
+            flags = [
+	    	"--platforms=//:myplatform",
+                "--compilation_mode=opt",
+		'--@custom_flags//:project_flag="custom flag value"',
+            ],
+            is_default = True,
+	    # If a build sets an unknown --scl_config value or omits
+	    # --scl_config on a project with no default config, bazel errors
+	    # with a summary of valid configurations. The "description" field
+	    # tells bazel how to describe this configuration.
+	    description = "this project's default flags",
+        ),
+
+        # A different flag configuration. Since this doesn't set "is_default
+        # True", you have to request it explicitly with "--scl_config=debug_config".
+        buildable_unit_pb2.BuildableUnit.create(
+            name = "debug_config",
+            flags = [
+	    	"--platforms=//:myplatform",
+                "--compilation_mode=dbg",
+		'--@custom_flags//:project_flag="debug value"',
+            ],
+	    description = "debug configuration for developers",
+        ),
+    ],
+)

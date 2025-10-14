@@ -159,7 +159,7 @@ project = {
     "actual": "//alias/project_main:PROJECT.scl",
 }
 
-bazel build //alias/project_lib:lib
+$ bazel build //alias/project_lib:lib
 INFO: Reading project settings from //alias/project_main:PROJECT.scl.
 INFO: Applying flags from the config 'default_config' defined in //alias/project_main:PROJECT.scl:
  [--platforms=//:myplatform, --compilation_mode=opt, --@custom_flags//:project_flag="custom flag value"]

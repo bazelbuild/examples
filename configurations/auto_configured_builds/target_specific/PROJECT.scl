@@ -13,38 +13,38 @@ project = project_pb2.Project.create(
         # builds of //target_specific:one use these flags by default.
         buildable_unit_pb2.BuildableUnit.create(
             name = "default_config_for_target_one",
-	    # Supported target_pattern entries:
-	    #   "//some:target"      (specific target)
-	    #   "-//some:target"     (exclude //some:target from this filter)
-	    #   "//some/path/..."    (all targets below a path)
-	    #   "-//some/path/..."   (exclude all targets below a path)
-	    target_patterns = [
-	        "//target_specific:one",
-	    ],
+            # Supported target_pattern entries:
+            #   "//some:target"      (specific target)
+            #   "-//some:target"     (exclude //some:target from this filter)
+            #   "//some/path/..."    (all targets below a path)
+            #   "-//some/path/..."   (exclude all targets below a path)
+            target_patterns = [
+                "//target_specific:one",
+            ],
             flags = [
-	    	"--platforms=//:myplatform",
-                '--@custom_flags//:project_flag="settings for target one"',
+                "--platforms=//:myplatform",
+                "--@custom_flags//:project_flag='settings for target one'",
             ],
             is_default = True,
-	    # If a build sets an unknown --scl_config value or omits
-	    # --scl_config on a project with no default config, bazel errors
-	    # with a summary of valid configurations. The "description" field
-	    # tells bazel how to describe this configuration.
-	    description = "default flags for target one",
+            # If a build sets an unknown --scl_config value or omits
+            # --scl_config on a project with no default config, bazel errors
+            # with a summary of valid configurations. The "description" field
+            # tells bazel how to describe this configuration.
+            description = "default flags for target one",
         ),
 
         # Default flags for //target_specific:two.
         buildable_unit_pb2.BuildableUnit.create(
             name = "default_config_for_target_two",
-	    target_patterns = [
-	        "//target_specific:two",
-	    ],
-            flags = [
-	    	"--platforms=//:myplatform",
-                '--@custom_flags//:project_flag="settings for target two"',
+            target_patterns = [
+                "//target_specific:two",
             ],
-	    is_default = True,
-	    description = "default flags for target two",
+            flags = [
+                "--platforms=//:myplatform",
+                "--@custom_flags//:project_flag='settings for target two'",
+            ],
+            is_default = True,
+            description = "default flags for target two",
         ),
     ],
 )

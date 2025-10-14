@@ -20,16 +20,16 @@ project = project_pb2.Project.create(
         buildable_unit_pb2.BuildableUnit.create(
             name = "default_config",
             flags = [
-	    	"--platforms=//:myplatform",
+                "--platforms=//:myplatform",
                 "--compilation_mode=opt",
                 '--@custom_flags//:project_flag="custom flag value"',
             ],
             is_default = True,
-	    # If a build sets an unknown --scl_config value or omits
-	    # --scl_config on a project with no default config, bazel errors
-	    # with a summary of valid configurations. The "description" field
-	    # tells bazel how to describe this configuration.
-	    description = "this project's default flags",
+            # If a build sets an unknown --scl_config value or omits
+            # --scl_config on a project with no default config, bazel errors
+            # with a summary of valid configurations. The "description" field
+            # tells bazel how to describe this configuration.
+            description = "this project's default flags",
         ),
     ],
 )

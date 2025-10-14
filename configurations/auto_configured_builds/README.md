@@ -64,8 +64,8 @@ INFO: Build completed successfully, 3 total actions
 ```sh
 $ bazel build //compatible:all
 INFO: Reading project settings from //compatible:PROJECT.scl.
-INFO: Applying flags from the config 'default_config' defined in //compatible:PROJECT.scl: [--platforms=//:myplatform,
- --compilation_mode=opt, --@custom_flags//:project_flag="custom flag value"]
+INFO: Applying flags from the config 'default_config' defined in //compatible:PROJECT.scl:
+ [--platforms=//:myplatform, --compilation_mode=opt, --@custom_flags//:project_flag="custom flag value"]
 INFO: Found 2 targets...
 INFO: Build completed successfully, 3 total actions
 ```
@@ -74,10 +74,10 @@ INFO: Build completed successfully, 3 total actions
 ```sh
 $ bazel build //compatible:all --copt=abc
 INFO: Reading project settings from //compatible:PROJECT.scl.
-WARNING: This build uses a project file (//compatible:PROJECT.scl), but also sets output-affecting flags in the command
- line or user bazelrc: ['--copt=abc']. Please consider removing these flags.
-INFO: Applying flags from the config 'default_config' defined in //compatible:PROJECT.scl: [--platforms=//:myplatform, 
- --compilation_mode=opt, --@custom_flags//:project_flag="custom flag value"]
+WARNING: This build uses a project file (//compatible:PROJECT.scl), but also sets output-affecting flags in
+ the command line or user bazelrc: ['--copt=abc']. Please consider removing these flags.
+INFO: Applying flags from the config 'default_config' defined in //compatible:PROJECT.scl:
+ [--platforms=//:myplatform, --compilation_mode=opt, --@custom_flags//:project_flag="custom flag value"]
 INFO: Build completed successfully, 3 total actions
 ```
 
@@ -85,9 +85,9 @@ INFO: Build completed successfully, 3 total actions
 ```sh
 $ bazel build //compatible:all --compilation_mode=fastbuild
 INFO: Reading project settings from //compatible:PROJECT.scl.
-ERROR: Cannot parse options: This build uses a project file (//compatible:PROJECT.scl) that does not allow conflicting 
- flags in the command line or user bazelrc. Found ['--compilation_mode=fastbuild']. Please remove these flags or disable
- project file resolution via --noenforce_project_configs.
+ERROR: Cannot parse options: This build uses a project file (//compatible:PROJECT.scl) that does not allow
+ conflicting flags in the command line or user bazelrc. Found ['--compilation_mode=fastbuild']. Please remove
+ these flags or disable project file resolution via --noenforce_project_configs.
 ERROR: Build did NOT complete successfully
 ```
 
@@ -108,9 +108,9 @@ INFO: Build completed successfully, 3 total actions
 ```sh
 $ bazel build //strict:all --copt=abc
 INFO: Reading project settings from //strict:PROJECT.scl.
-ERROR: Cannot parse options: This build uses a project file (//strict:PROJECT.scl) that does not allow output-affecting
- flags in the command line or user bazelrc. Found ['--copt=abc']. Please remove these flags or disable project
- file resolution via --noenforce_project_configs.
+ERROR: Cannot parse options: This build uses a project file (//strict:PROJECT.scl) that does not allow
+ output-affeccting flags in the command line or user bazelrc. Found ['--copt=abc']. Please remove these flags or
+ disable project file resolution via --noenforce_project_configs.
 ERROR: Build did NOT complete successfully
 ```
 

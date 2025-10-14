@@ -11,19 +11,19 @@ and bazel automatically adds whatever flags are appropriate for `foo`'s builds.
 
 This is similar to [bazelrc](https://bazel.build/run/bazelrc) with the crucial difference that bazelrc files are *user-registered*, not *project-registered*. That means `bazelrc`-added flags depend on who does the build and which `bazelrcs` they've registered, not which targets they're building. 
 
-The features described here make it easier for *anyone* to write `$ bazel test //foo/...` - a project dev, external contributor, library maintainer, IDE, AI agent, or CI system - and consistently get the same results with the same flags regardless of how they've set up their workspace or if they've ever built this project before. Project owners can then ensure everyone builds with project-approved correct flags.
+The features described here make it easier for *anyone* to write `$ bazel test //foo/...` - a project dev, external contributor, library maintainer, IDE, AI agent, or CI system - and consistently get the same results with the same flags regardless of how they've set up their workspace or if they've ever built the project before. Project owners can then ensure everyone builds with correct, project-approved flags.
 
 More info at https://github.com/bazelbuild/bazel/issues/24839.
 
 ### `PROJECT.scl`
-Flag settings are declared in a file called `PROJECT.scl` which lives in your source repository next to your `BUILD` files. 
+Flag settings are declared in a file called `PROJECT.scl`. This lives in your source repository next to your `BUILD` files. 
 
 `$ bazel test //foo/bar/baz:all` looks for a `PROJECT.scl` in `foo/bar/baz/` to find the project's flag settings. If that file doesn't exist, it looks in `foo/bar/`, then `foo/`, and so on until it either finds a match or determines the project has no flag settings.
 
 This also applies to `bazel build` and `bazel cquery`.
 
 ### Project-wide settings with warnings for unexpected flags
-[warn](warn) is an example that sets two sets of flags for a project. The first set - `default_config` triggers by default. The second - `debug_config` can be set with `--scl_config=debug_config`. If the user sets any other flags, bazel emits a warning that the build is non-canonical:
+[warn](warn) is an example that sets two sets of flags for a project. The first set, `default_config`, triggers by default. The second, `debug_config`, can be set with `--scl_config=debug_config`. If the user sets any other flags, bazel emits a warning that the build is non-canonical.
 
 *Default flags:*
 ```sh
@@ -58,7 +58,7 @@ INFO: Build completed successfully, 3 total actions
 ```
 
 ### Project-wide settings with incompatible flag checks
-[compatible](compatible) is an example that sets two sets of flags for a project. It lets the user set other, unrelated flags with a warning but fails the build if the user sets flags that contradict the project's flags.
+[compatible](compatible) is an example that sets two sets of flags for a project. It lets the user set other, unrelated flags with a warning but fails the build if the user sets contradictory flags.
 
 *Default flags:*
 ```sh
@@ -92,7 +92,7 @@ ERROR: Build did NOT complete successfully
 ```
 
 ### Project-wide settings with strict checks
-[strict](strict) is an example that sets two sets of flags for a project. It fails the build if the user sets any flags to any different values than those the project specifies. This is the strictest form of flag checking that ensures all builds use pre-approved, canonical settings.
+[strict](strict) is an example that sets two sets of flags for a project. It fails the build if the user sets any flags to any values different than the project settings. This is the strictest form of flag checking. It ensures all builds use pre-approved, canonical flags.
 
 *Default flags:*
 ```sh
@@ -115,7 +115,7 @@ ERROR: Build did NOT complete successfully
 ```
 
 ### Per-target flag settings
-[target_specific](target_specific) sets different default flags for different targets in a project. This example applies the [warn](warn) enforcement policy.
+[target_specific](target_specific) sets different default flags for different targets. This example applies the [warn](warn) enforcement policy.
 
 *`//target_specific:one`:*
 ```sh
@@ -158,7 +158,9 @@ $ cat alias/project_lib/PROJECT.scl
 project = {
     "actual": "//alias/project_main:PROJECT.scl",
 }
+```
 
+```sh
 $ bazel build //alias/project_lib:lib
 INFO: Reading project settings from //alias/project_main:PROJECT.scl.
 INFO: Applying flags from the config 'default_config' defined in //alias/project_main:PROJECT.scl:

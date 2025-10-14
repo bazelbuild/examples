@@ -1,4 +1,5 @@
 ## Auto-configured builds examples
+**Requirements: Bazel 9.0 or newer.**
 
 *Auto-configured builds* is a Bazel 9.0+ feature that lets project owners declare which build flags should apply to their project's targets.
 

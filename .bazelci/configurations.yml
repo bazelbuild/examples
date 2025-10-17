@@ -29,7 +29,7 @@ configurations: &configurations
   # These targets demonstrate failures: they're never meant to build.
   - "-//read_attr_in_transition:will-break"
   - "-//cc_binary_selectable_copts:app_forgets_to_set_features"
-   # These targest are not supposed to build at the top level: only as
+  # These targets are not supposed to build at the top level: only as
   # dependencies of other targets.
   - "-//cc_binary_selectable_copts:lib"
   - "-//cc_binary_selectable_copts:app_forgets_to_set_features_native_binary"
@@ -39,7 +39,7 @@ configurations: &configurations
   # auto-set flags, so building /... may trigger targets that set confliciting
   # flags and fail the build. We could mitigate this by having dedicated test
   # sets for compatible target combingations.  
-  - "--//auto_configured_builds/..."
+  - "-//auto_configured_builds/..."
   # TODO: why is this crashing bazel?
   - "-//cc_test/..."
   # test_targets:

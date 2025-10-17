@@ -1,0 +1,1 @@
+#bazel_dep(name = "bazel_skylib", version = "1.8.2")

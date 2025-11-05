@@ -1,10 +1,6 @@
 # A project file that automatically sets build flags where diferent targets use
 # different flags.
-load(
-    "@bazel_tools//src/main/protobuf/project:project_proto.scl",
-    "buildable_unit_pb2",
-    "project_pb2",
-)
+load("//:project_proto.scl", "buildable_unit_pb2", "project_pb2")
 
 project = project_pb2.Project.create(
     buildable_units = [

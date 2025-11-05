@@ -1,10 +1,6 @@
 # A project file that automatically sets build flags for all targets in the
 # project and warns if the user sets any other flags.
-load(
-    "@bazel_tools//src/main/protobuf/project:project_proto.scl",
-    "buildable_unit_pb2",
-    "project_pb2",
-)
+load("//:project_proto.scl", "buildable_unit_pb2", "project_pb2")
 
 project = project_pb2.Project.create(
     # "WARN" means bazel emits a warning if the user sets flags to different

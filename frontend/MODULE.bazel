@@ -2,7 +2,7 @@
 
 bazel_dep(name = "aspect_bazel_lib", version = "2.21.0")
 bazel_dep(name = "aspect_rules_lint", version = "1.10.2")
-bazel_dep(name = "aspect_rules_jest", version = "0.22.0")
+bazel_dep(name = "aspect_rules_jest", version = "0.24.0")
 bazel_dep(name = "aspect_rules_js", version = "2.0.2")
 bazel_dep(name = "aspect_rules_swc", version = "2.4.4")
 bazel_dep(name = "aspect_rules_ts", version = "3.1.0")

@@ -5,11 +5,7 @@
 # For example:
 #   --compilation_mode=dbg conflicts with --compilation_mode=opt
 #   --compilation_mode=dbg does not conflict with --//some:unrelated_flag=1
-load(
-    "@bazel_tools//src/main/protobuf/project:project_proto.scl",
-    "buildable_unit_pb2",
-    "project_pb2",
-)
+load("//:project_proto.scl", "buildable_unit_pb2", "project_pb2")
 
 project = project_pb2.Project.create(
     # "COMPATIBLE" means bazel errors if the user sets flags that conflict with

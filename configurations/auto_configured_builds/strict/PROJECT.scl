@@ -4,11 +4,7 @@
 # form.
 #
 # See the "compatible" example for a more permissive variant.
-load(
-    "@bazel_tools//src/main/protobuf/project:project_proto.scl",
-    "buildable_unit_pb2",
-    "project_pb2",
-)
+load("//:project_proto.scl", "buildable_unit_pb2", "project_pb2")
 
 project = project_pb2.Project.create(
     # "STRICT" means bazel errors if the user sets any flags that aren't

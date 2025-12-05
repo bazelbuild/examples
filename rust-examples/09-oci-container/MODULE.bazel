@@ -63,7 +63,7 @@ oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 # https://github.com/GoogleContainerTools/distroless
 oci.pull(
     name = "distroless",
-    digest = "sha256:00cc20b928afcc8296b72525fa68f39ab332f758c4f2a9e8d90845d3e06f1dc4",
+    digest = "sha256:0c8eac8ea42a167255d03c3ba6dfad2989c15427ed93d16c53ef9706ea4691df",
     image = "gcr.io/distroless/cc-debian12",
     platforms = [
         "linux/amd64",

@@ -16,7 +16,7 @@ Some tutorials under <https://bazel.build/start> point to code in this repositor
 Note that tutorials for other languages may be found under other repositories:
 
  * [iOS tutorial](https://github.com/bazelbuild/rules_apple/blob/master/doc/tutorials/ios-app.md)
- * [Go tutorial](https://bazel-contrib.github.io/SIG-rules-authors/go-tutorial.html) along with
+ * [Go tutorial](https://bazel.build/start/go) along with
    [sources](https://github.com/bazelbuild/rules_go/tree/master/examples/basic-gazelle)
 
  ## Example cookbook

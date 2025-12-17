@@ -9,5 +9,6 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "@lib_a",
+        "@com_googlesource_re2//:re2",
     ],
 )

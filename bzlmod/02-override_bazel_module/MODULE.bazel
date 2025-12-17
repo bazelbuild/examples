@@ -3,6 +3,27 @@ module(
     version = "0.0.1",
 )
 
+
+# Override abseil-cpp to the 20250814.1 LTS version with archive_override.
+# This demonstrates how to use archive_override to point to a specific tarball.
+bazel_dep(name = "abseil-cpp", version = "20240722.0")
+archive_override(
+    module_name = "abseil-cpp",
+    integrity = "sha256-FpL3fRc5us8/lDNxiLeFg88JurfkINLcbFYFpPhnhaE=",
+    strip_prefix = "abseil-cpp-20250814.1",
+    urls = ["https://github.com/abseil/abseil-cpp/releases/download/20250814.1/abseil-cpp-20250814.1.tar.gz"],
+)
+
+# Override re2 to a specific commit with git_override.
+# This demonstrates how to use git_override to depend on a specific commit.
+bazel_dep(name = "re2", version = "2024-07-02", repo_name = "com_googlesource_re2")
+git_override(
+    module_name = "re2",
+    commit = "e7aec5985072c1dbe735add802653ef4b36c231a",
+    remote = "https://github.com/google/re2.git",
+)
+
+
 bazel_dep(name = "rules_cc", version = "0.0.17")
 
 

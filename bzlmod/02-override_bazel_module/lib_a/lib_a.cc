@@ -1,5 +1,5 @@
-#include <glog/logging.h>
+#include <iostream>
 
 void lib_a() {
-    LOG(INFO) << "Hello from module A!";
+    std::cout << "Hello from module A!" << std::endl;
 }

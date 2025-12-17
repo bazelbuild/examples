@@ -7,4 +7,4 @@ bazel_dep(name = "rules_cc", version = "0.0.17")
 
 # 1. The metadata of glog is fetched from the BCR, including its dependencies (gflags).
 # 2. The `repo_name` attribute allows users to reference this dependency via the `com_github_google_glog` repo name.
-bazel_dep(name = "glog", version = "0.5.0", repo_name = "com_github_google_glog")
+bazel_dep(name = "abseil-cpp", version = "20240722.0")

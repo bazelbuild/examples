@@ -1,9 +1,8 @@
-#include <glog/logging.h>
+#include <iostream>
+#include "absl/strings/str_cat.h"
 
 int main(int argc, char* argv[]) {
-    // Initialize Google’s logging library.
-    google::InitGoogleLogging(argv[0]);
-
     int num_cookies = 42;
-    LOG(INFO) << "Found " << num_cookies << " cookies";
+    std::string s = absl::StrCat("Found ", num_cookies, " cookies");
+    std::cout << s << std::endl;
 }

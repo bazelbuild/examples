@@ -6,5 +6,5 @@ This is an example on how to introduce dependencies on Bazel modules in the MODU
 To test it out, `cd` into this directory and run the following:
 
 ```bash
-GLOG_logtostderr=1 bazel run main
+NGLOG_logtostderr=1 bazel run main
 ```

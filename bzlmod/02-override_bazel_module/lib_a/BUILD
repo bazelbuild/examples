@@ -6,5 +6,5 @@ cc_library(
     name = "lib_a",
     srcs = ["lib_a.cc"],
     hdrs = ["lib_a.h"],
-    deps = ["@com_github_google_glog//:glog"],
+    deps = ["@com_google_absl//absl/log"],
 )

@@ -49,13 +49,15 @@ also use the LLVM toolchain to keep the build hermetic.
 
 ```Starlark
 # https://github.com/bazel-contrib/toolchains_llvm
-bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+bazel_dep(name = "toolchains_llvm", version = "1.6.0", dev_dependency = True)
 
 # OCI Container rules
+# https://github.com/bazelbuild/rules_rust/releases
+bazel_dep(name = "rules_rust", version = "0.65.0")
 # https://github.com/bazel-contrib/rules_oci/releases
-bazel_dep(name = "rules_oci", version = "1.7.6")
+bazel_dep(name = "rules_oci", version = "2.2.6")
 # https://github.com/bazelbuild/rules_pkg/releases
-bazel_dep(name = "rules_pkg", version = "0.10.1")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
 ```
 
 The LLVM toolchain is configured just as in the previous example for

@@ -60,8 +60,7 @@ bazel_dep(name = "rules_rust_prost", version = "0.57.1")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 
 # Toolchains
-bazel_dep(name = "toolchains_protoc", version = "0.3.7", dev_dependency = True)
-bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
+bazel_dep(name = "toolchains_llvm", version = "1.6.0", dev_dependency = True)
 ```
 
 ### Configure clang/LLVM
@@ -231,7 +230,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_rust_prost//:defs.bzl", "rust_prost_library")
 
 # Build proto files
-# https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library
+# https://bazelbuild.github.io/rules_rust/rust_prost.html#rust_proto_library
 proto_library(
     name = "proto_bindings",
     srcs = [
@@ -240,7 +239,7 @@ proto_library(
 )
 
 # Generate Rust bindings from the generated proto files
-# https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_prost_library
+# https://bazelbuild.github.io/rules_rust/rust_prost.html#rust_prost_library
 rust_prost_library(
     name = "rust_proto",
     proto = ":proto_bindings",

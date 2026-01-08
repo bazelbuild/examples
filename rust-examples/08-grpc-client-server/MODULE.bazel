@@ -13,8 +13,7 @@ bazel_dep(name = "rules_rust_prost", version = "0.65.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 
 # Toolchains
-bazel_dep(name = "toolchains_protoc", version = "0.3.7", dev_dependency = True)
-bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
+bazel_dep(name = "toolchains_llvm", version = "1.6.0", dev_dependency = True)
 
 ###############################################################################
 # Small (clang) LLVM toolchain

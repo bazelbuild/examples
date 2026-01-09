@@ -21,7 +21,13 @@ def _impl(ctx):
         outputs = [ctx.outputs.sha256],
         inputs = [ctx.file.src],
         use_default_shell_env = True,
-        command = "sha256sum {} > {}".format(ctx.file.src.path, ctx.outputs.sha256.path),
+        command = """
+if command -v sha256sum >/dev/null 2>&1; then
+  sha256sum "{src}" > "{out}"
+else
+  shasum -a 256 "{src}" > "{out}"
+fi
+""".format(src = ctx.file.src.path, out = ctx.outputs.sha256.path),
     )
 
     # By default (if you run `bazel build` on this target, or if you use it as a

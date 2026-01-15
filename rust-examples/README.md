@@ -126,7 +126,7 @@ Links:
 
 Documentation:
 * [rules_rust](https://bazelbuild.github.io/rules_rust/)
-* [rust_proto](https://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_libraryhttps://bazelbuild.github.io/rules_rust/rust_proto.html#rust_proto_library)
+* [rust_prost](https://bazelbuild.github.io/rules_rust/rust_prost.html#rust_proto_library)
 * [Protocol Buffers](https://protobuf.dev/)
 
 

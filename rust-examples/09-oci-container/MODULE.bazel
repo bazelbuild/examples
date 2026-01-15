@@ -11,7 +11,7 @@ bazel_dep(name = "rules_rust", version = "0.65.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
 
-bazel_dep(name = "toolchains_llvm", version = "1.2.0", dev_dependency = True)
+bazel_dep(name = "toolchains_llvm", version = "1.6.0", dev_dependency = True)
 
 ###############################################################################
 # Small (clang) LLVM toolchain

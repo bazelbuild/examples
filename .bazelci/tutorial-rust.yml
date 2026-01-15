@@ -10,16 +10,12 @@ tasks:
     name: "Rust Cross Compilation"
     platform: ubuntu2204
     working_directory: ../rust-examples/02-hello-cross
-    build_flags:
-      - "--spawn_strategy=local"
     build_targets:
       - "//:all"
   rust-02-hello-cross-mac:
     name: "Rust Cross Compilation"
     platform: macos_arm64
     working_directory: ../rust-examples/02-hello-cross
-    build_flags:
-      - "--spawn_strategy=local"
     build_targets:
       - "//:all"
   rust-03-comp-opt-linux:

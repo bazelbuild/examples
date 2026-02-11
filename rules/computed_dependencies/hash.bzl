@@ -44,11 +44,28 @@ def _impl(ctx):
 
     # Compute the hash
     out = ctx.outputs.text
-    ctx.actions.run_shell(
+    hasher = ctx.actions.declare_file(ctx.label.name + "_hasher.py")
+    ctx.actions.write(
+        output = hasher,
+        content = """
+import hashlib
+import sys
+
+with open(sys.argv[1], 'rb') as f:
+    data = f.read()
+    md5 = hashlib.md5(data).hexdigest()
+
+with open(sys.argv[2], 'w') as f:
+    f.write(md5)
+""",
+    )
+
+    ctx.actions.run(
         outputs = [out],
-        inputs = [processed],
-        use_default_shell_env = True,
-        command = "md5sum < %s > %s" % (processed.path, out.path),
+        inputs = [processed, hasher],
+        executable = "python3",
+        arguments = [hasher.path, processed.path, out.path],
+        mnemonic = "ComputeHash",
     )
 
 _md5_sum = rule(

@@ -48,7 +48,7 @@ def _impl(ctx):
         outputs = [out],
         inputs = [processed],
         use_default_shell_env = True,
-        command = "if command -v md5sum >/dev/null 2>&1; then md5sum < %s | cut -d' ' -f1 > %s; else md5 -q %s > %s; fi" % (processed.path, out.path, processed.path, out.path),
+        command = "python3 -c \"import hashlib, sys; print(hashlib.md5(sys.stdin.buffer.read()).hexdigest())\" < %s > %s" % (processed.path, out.path),
     )
 
 _md5_sum = rule(

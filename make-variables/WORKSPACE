@@ -1,6 +1,6 @@
 http_archive(
     name = "rules_cc",
-    sha256 = "abc605dd850f813bb37004b77db20106a19311a96b2da1c92b789da529d28fe1",
-    strip_prefix = "rules_cc-0.0.17",
-    urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.0.17/rules_cc-0.0.17.tar.gz"],
+    sha256 = "458b658277ba51b4730ea7a2020efdf1c6dcadf7d30de72e37f4308277fa8c01",
+    strip_prefix = "rules_cc-0.2.16",
+    urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.2.16/rules_cc-0.2.16.tar.gz"],
 )

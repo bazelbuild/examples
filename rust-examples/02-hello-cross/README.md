@@ -153,9 +153,9 @@ The Rust toolchain only need to know the additional platform triplets to downloa
 or or modify your MODULE.bazel with the following entry:
 
 ```Starlark
-RUST_EDITION = "2021"  
+RUST_EDITION = "2024"  
 
-RUST_VERSION = "1.84.1"
+RUST_VERSION = "1.85.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(

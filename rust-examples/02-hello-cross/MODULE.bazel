@@ -64,9 +64,9 @@ register_toolchains("@llvm_toolchain//:all")
 ###############################################################################
 # Rust toolchain #
 ###############################################################################
-RUST_EDITION = "2021"  # NOTE: 2024 will be released with Rust 1.86.0
+RUST_EDITION = "2024"
 
-RUST_VERSION = "1.84.1"
+RUST_VERSION = "1.85.0"
 
 # https://github.com/bazelbuild/rules_rust/releases
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")

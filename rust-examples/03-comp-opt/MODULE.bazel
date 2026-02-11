@@ -6,9 +6,9 @@ module(
 # https://github.com/bazelbuild/rules_rust/releases
 bazel_dep(name = "rules_rust", version = "0.65.0")
 
-RUST_EDITION = "2021"  # NOTE: 2024 will be released with Rust 1.86.0
+RUST_EDITION = "2024"
 
-RUST_VERSION = "1.84.0"
+RUST_VERSION = "1.85.0"
 
 # https://github.com/bazelbuild/rules_rust/releases
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")

@@ -90,9 +90,9 @@ llvm.toolchain(
 
 ### Configure Rust & Prost
 ```
-RUST_EDITION = "2021"  # NOTE: 2024 edition will be released with Rust 1.85.0
+RUST_EDITION = "2024"
 
-RUST_VERSION = "1.84.0"
+RUST_VERSION = "1.85.0"
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(

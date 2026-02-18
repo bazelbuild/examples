@@ -2,6 +2,6 @@
 
 bazel_dep(name = "buildifier_prebuilt", version = "6.3.3", dev_dependency = True)
 
-bazel_dep(name = "rules_cc", version = "0.2.8")
+bazel_dep(name = "rules_cc", version = "0.2.17")
 bazel_dep(name = "catch2", version = "3.12.0")
 bazel_dep(name = "googletest", version = "1.17.0.bcr.2", repo_name = "gtest")

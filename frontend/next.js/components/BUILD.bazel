@@ -1,0 +1,20 @@
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+SRCS = [
+    "button.tsx",
+]
+
+ts_project(
+    name = "components",
+    srcs = SRCS,
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    tsconfig = "//next.js:tsconfig",
+    visibility = ["//next.js:__subpackages__"],
+    deps = [
+        "//next.js:node_modules/@types/react",
+        "//next.js:node_modules/@types/react-dom",
+        "//next.js:node_modules/next",
+    ],
+)

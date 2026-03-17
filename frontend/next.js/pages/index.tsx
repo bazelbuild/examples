@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { one } from '@bazel-example/one';
+import Button from '@components/button';
 import isEven from 'is-even';
 
 // Uncomment this line to get a linting violation:
@@ -58,6 +59,8 @@ const Home: NextPage = () => {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+
+          <Button />
         </div>
       </main>
 

@@ -28,6 +28,7 @@
             "postcss-normalize": "*"
           }
         }
-      }
+      },
+      "onlyBuiltDependencies": []
     }
 }

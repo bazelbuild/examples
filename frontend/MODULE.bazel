@@ -1,14 +1,15 @@
 "Bazel module dependencies, see https://bazel.build/external/overview#bzlmod"
 
-bazel_dep(name = "aspect_bazel_lib", version = "2.21.0")
+bazel_dep(name = "bazel_lib", version = "3.2.2")
 bazel_dep(name = "aspect_rules_lint", version = "1.10.2")
+bazel_dep(name = "aspect_bazel_lib", version = "2.22.5")
 bazel_dep(name = "aspect_rules_jest", version = "0.24.2")
-bazel_dep(name = "aspect_rules_js", version = "2.0.2")
+bazel_dep(name = "aspect_rules_js", version = "3.0.3")
 bazel_dep(name = "aspect_rules_swc", version = "2.4.4")
-bazel_dep(name = "aspect_rules_ts", version = "3.1.0")
+bazel_dep(name = "aspect_rules_ts", version = "3.8.7")
 bazel_dep(name = "aspect_rules_rollup", version = "2.0.1")
 bazel_dep(name = "aspect_rules_webpack", version = "0.16.0")
-bazel_dep(name = "bazel_skylib", version = "1.8.1")
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
 bazel_dep(name = "rules_nodejs", version = "6.5.0")
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
@@ -16,6 +17,8 @@ node.toolchain(node_version = "20.13.1")
 
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
 use_repo(pnpm, "pnpm")
+
+pnpm.pnpm(pnpm_version = "10.20.0")
 
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(

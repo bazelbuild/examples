@@ -1,9 +1,9 @@
+load("@aspect_rules_js//contrib/nextjs:defs.bzl", "nextjs")
 load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//next.js:next/package_json.bzl", next_bin = "bin")
-load("//next.js:defs.bzl", "next")
 
 npm_link_all_packages(name = "node_modules")
 
@@ -18,15 +18,15 @@ ts_config(
     visibility = ["//visibility:public"],
 )
 
-next(
+nextjs(
     name = "next",
     srcs = [
         "//next.js/pages",
         "//next.js/public",
         "//next.js/styles",
     ],
+    config = "next.config.js",
     data = [
-        "next.config.js",
         "package.json",
         ":node_modules/@bazel-example/one",
         ":node_modules/is-even",
@@ -35,7 +35,6 @@ next(
         ":node_modules/react-dom",
         ":node_modules/typescript",
     ],
-    next_bin = "./node_modules/next/dist/bin/next",
     next_js_binary = ":next_js_binary",
 )
 

@@ -115,3 +115,11 @@ crate.spec(
 )
 crate.from_specs()
 use_repo(crate, "crates")
+
+# Temporarily needed for Bazel@Head until it's not fixed in rules_rust.
+# Update with new release once fixed: https://github.com/bazelbuild/rules_rust/issues/3962.
+archive_override(
+    module_name = "rules_rust",
+    patch_cmds = ["sed -i.bak 's/for key in dir(host_tools)/for key in [\"name\", \"version\", \"allocator_library\", \"dev_components\", \"edition\", \"rustfmt_version\", \"sha256s\", \"urls\"] if hasattr(host_tools, key)/' rust/extensions.bzl"],
+    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.65.0/rules_rust-0.65.0.tar.gz"],
+)

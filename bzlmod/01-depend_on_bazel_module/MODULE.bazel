@@ -3,7 +3,7 @@ module(
     version = "0.0.1",
 )
 
-bazel_dep(name = "rules_cc", version = "0.0.17")
+bazel_dep(name = "rules_cc", version = "0.2.17")
 
 # 1. The metadata of abseil-cpp is fetched from the BCR, including its dependencies (platforms).
 # 2. The `repo_name` attribute allows users to reference this dependency via the `com_google_absl` repo name.

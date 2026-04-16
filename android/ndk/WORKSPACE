@@ -31,9 +31,9 @@ register_toolchains(
 
 http_archive(
     name = "rules_android_ndk",
-    sha256 = "b1a5ddd784e6ed915c2035c0db536a278b5f50c64412128c06877115991391ef",
-    strip_prefix = "rules_android_ndk-877c68ef34c9f3353028bf490d269230c1990483",
-    url = "https://github.com/bazelbuild/rules_android_ndk/archive/877c68ef34c9f3353028bf490d269230c1990483.zip",
+    sha256 = "e49caef1f3cdb261474f7de092cfe18e5be421825d8643830eb09f9b8be7005a",
+    strip_prefix = "rules_android_ndk-18ad65eb5d96a71973aa64421db1c0f5d2f30583",
+    url = "https://github.com/bazelbuild/rules_android_ndk/archive/18ad65eb5d96a71973aa64421db1c0f5d2f30583.zip",
 )
 
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")

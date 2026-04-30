@@ -1,0 +1,9 @@
+load("@rules_android//android:rules.bzl", "android_library")
+
+android_library(
+    name = "greeter_lib",
+    srcs = ["java/com/example/android/instrumentation/Greeter.java"],
+    custom_package = "com.example.android.instrumentation",
+    manifest = "AndroidManifest.xml",
+    visibility = ["//visibility:public"],
+)

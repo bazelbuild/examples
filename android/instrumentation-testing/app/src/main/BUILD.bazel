@@ -1,4 +1,11 @@
-load("@rules_android//android:rules.bzl", "android_library")
+load("@rules_android//android:rules.bzl", "android_binary", "android_library")
+load("//bazel:android_instrumentation_test.bzl", "android_instrumentation_test")
+
+android_binary(
+    name = "app",
+    manifest = "AndroidManifest.xml",
+    deps = [":greeter_lib"],
+)
 
 android_library(
     name = "greeter_lib",
@@ -6,4 +13,25 @@ android_library(
     custom_package = "com.example.android.instrumentation",
     manifest = "AndroidManifest.xml",
     visibility = ["//visibility:public"],
+)
+
+android_binary(
+    name = "greeter_test_app",
+    testonly = True,
+    srcs = ["java/com/example/android/instrumentation/GreeterInstrumentationTest.java"],
+    instruments = ":app",
+    manifest = "AndroidTestManifest.xml",
+    deps = [
+        ":greeter_lib",
+        "@android_test_support//:junit",
+        "@android_test_support//runner/android_junit_runner",
+    ],
+)
+
+android_instrumentation_test(
+    name = "greeter_instrumentation_test",
+    bootstrap_instrumentation_package = "com.example.android.instrumentation.test",
+    tags = ["manual"],
+    test_app = ":greeter_test_app",
+    test_packages = ["com.example.android.instrumentation.test"],
 )

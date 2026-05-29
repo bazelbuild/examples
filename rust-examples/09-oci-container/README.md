@@ -133,6 +133,9 @@ def _build_sha265_tag_impl(ctx):
     # Both the input and output files are specified by the BUILD file.
     in_file = ctx.file.input
     out_file = ctx.outputs.output
+    args = ctx.actions.args()
+    args.add(in_file)
+    args.add(out_file)
 
     # No need to return anything telling Bazel to build `out_file` when
     # building this target -- It's implied because the output is declared
@@ -140,7 +143,7 @@ def _build_sha265_tag_impl(ctx):
     ctx.actions.run_shell(
         inputs = [in_file],
         outputs = [out_file],
-        arguments = [in_file.path, out_file.path],
+        arguments = [args],
         command = "sed -n 's/.*sha256:\\([[:alnum:]]\\{7\\}\\).*/\\1/p' < \"$1\" > \"$2\"",
     )
 

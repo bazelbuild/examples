@@ -60,10 +60,13 @@ def _convert_to_uppercase_impl(ctx):
     # Both the input and output files are specified by the BUILD file.
     in_file = ctx.file.input
     out_file = ctx.outputs.output
+    args = ctx.actions.args()
+    args.add(in_file)
+    args.add(out_file)
     ctx.actions.run_shell(
         outputs = [out_file],
         inputs = [in_file],
-        arguments = [in_file.path, out_file.path],
+        arguments = [args],
         command = "tr '[:lower:]' '[:upper:]' < \"$1\" > \"$2\"",
     )
     # No need to return anything telling Bazel to build `out_file` when

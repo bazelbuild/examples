@@ -74,10 +74,12 @@ def _tool_user_impl(ctx):
     # are automatically added to the action.
     tool = ctx.executable.tool
 
+    args = ctx.actions.args()
+    args.add(my_out)
     ctx.actions.run(
         outputs = [my_out],
         executable = tool,
-        arguments = [my_out.path],
+        arguments = [args],
     )
 
     return [DefaultInfo(files = depset([my_out]))]

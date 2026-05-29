@@ -34,11 +34,14 @@ def _impl(ctx):
         processed = ctx.actions.declare_file(ctx.label.name + "_processed")
 
         # Run the selected binary
+        args = ctx.actions.args()
+        args.add(ctx.file.src)
+        args.add(processed)
         ctx.actions.run(
             outputs = [processed],
             inputs = [ctx.file.src],
             progress_message = "Apply filter '%s'" % ctx.attr.filter,
-            arguments = [ctx.file.src.path, processed.path],
+            arguments = [args],
             executable = ctx.executable._filter_bin,
         )
 
@@ -60,11 +63,15 @@ with open(sys.argv[2], 'w') as f:
 """,
     )
 
+    args = ctx.actions.args()
+    args.add(hasher)
+    args.add(processed)
+    args.add(out)
     ctx.actions.run(
         outputs = [out],
         inputs = [processed, hasher],
         executable = "python3",
-        arguments = [hasher.path, processed.path, out.path],
+        arguments = [args],
         mnemonic = "ComputeHash",
     )
 

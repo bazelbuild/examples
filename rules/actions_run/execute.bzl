@@ -9,13 +9,15 @@ the attribute "merge_tool".
 
 def _impl(ctx):
     # The list of arguments we pass to the script.
-    args = [ctx.outputs.out.path] + [f.path for f in ctx.files.chunks]
+    args = ctx.actions.args()
+    args.add(ctx.outputs.out)
+    args.add_all(ctx.files.chunks)
 
     # Action to call the script.
     ctx.actions.run(
         inputs = ctx.files.chunks,
         outputs = [ctx.outputs.out],
-        arguments = args,
+        arguments = [args],
         progress_message = "Merging into %s" % ctx.outputs.out.short_path,
         executable = ctx.executable.merge_tool,
     )

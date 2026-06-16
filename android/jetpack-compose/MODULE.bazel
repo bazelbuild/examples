@@ -6,7 +6,7 @@ bazel_dep(name = "rules_jvm_external", version = "5.3")
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     artifacts = [
-        "androidx.appcompat:appcompat:1.5.1",
+        "androidx.appcompat:appcompat:1.7.1",
         # Jetpack Compose Dependencies
         "androidx.activity:activity-compose:1.6.0",
         "androidx.compose.material:material:1.2.1",

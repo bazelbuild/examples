@@ -24,6 +24,9 @@ windows: &windows
 #
 configurations: &configurations
   working_directory: ../configurations
+  environment:
+    ANDROID_HOME: ""
+    ANDROID_NDK_HOME: ""
   build_targets:
   - "..."
   # These targets demonstrate failures: they're never meant to build.

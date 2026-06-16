@@ -11,6 +11,9 @@ tasks:
   java-maven-macos:
     name: "Maven Java App"
     platform: macos
+    environment:
+      ANDROID_HOME: ""
+      ANDROID_NDK_HOME: ""
     working_directory: ../java-maven
     build_targets:
     - "..."

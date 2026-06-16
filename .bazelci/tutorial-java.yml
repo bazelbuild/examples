@@ -9,6 +9,9 @@ tasks:
   java-tutorial-macos:
     name: "Java Tutorial"
     platform: macos
+    environment:
+      ANDROID_HOME: ""
+      ANDROID_NDK_HOME: ""
     working_directory: ../java-tutorial
     build_targets:
       - "//:ProjectRunner"
@@ -22,6 +25,9 @@ tasks:
   query-quickstart:
     name: "Query Quickstart"
     platform: macos
+    environment:
+      ANDROID_HOME: ""
+      ANDROID_NDK_HOME: ""
     working_directory: ../query-quickstart
     build_targets:
       - "//:runner"

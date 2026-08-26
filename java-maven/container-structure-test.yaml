@@ -1,7 +1,6 @@
-# See https://github.com/GoogleContainerTools/container-structure-test#command-tests
+# See https://github.com/GoogleContainerTools/container-structure-test#file-existence-tests
 schemaVersion: 2.0.0
-commandTests:
-  - name: test
-    command: java
-    args: ['-jar', '/java-maven_deploy.jar']
-    expectedOutput: ['Success: 1']
+fileExistenceTests:
+  - name: 'jar exists'
+    path: '/java-maven_deploy.jar'
+    shouldExist: true

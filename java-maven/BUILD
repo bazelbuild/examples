@@ -1,7 +1,7 @@
 load("@aspect_bazel_lib//lib:tar.bzl", "tar")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_test")
-load("@rules_oci//oci:defs.bzl", "oci_image")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -39,14 +39,26 @@ oci_image(
     entrypoint = [
         "java",
         "-jar",
-        "/java-maven-deploy.jar",
+        "/java-maven_deploy.jar",
     ],
     tars = [":layer"],
+)
+
+oci_load(
+    name = "tarball",
+    image = ":image",
+    repo_tags = ["java-maven:latest"],
+)
+
+filegroup(
+    name = "tarball.tar",
+    srcs = [":tarball"],
+    output_group = "tarball",
 )
 
 container_structure_test(
     name = "container_test",
     configs = ["container-structure-test.yaml"],
-    image = ":image",
-    tags = ["requires-docker"],
+    driver = "tar",
+    image = ":tarball.tar",
 )

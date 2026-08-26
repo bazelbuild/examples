@@ -33,7 +33,7 @@ Create a container image, suitable to push to a remote docker registry:
 $ bazel build :image
 ```
 
-Test that the image works when running inside a container runtime:
+Test that the image is built and structured correctly:
 
 ```
 $ bazel test :container_test

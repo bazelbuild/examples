@@ -19,10 +19,6 @@ tasks:
     - "..."
     test_targets:
     - "..."
-    test_flags:
-    # FIXME: either have a docker/podman runtime on our Mac images,
-    # or use a remote container service like TestContainers Cloud
-    - "--test_tag_filters=-requires-docker"
   java-maven-windows:
     name: "Maven Java App"
     platform: windows

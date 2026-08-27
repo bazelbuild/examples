@@ -8,6 +8,10 @@ tasks:
     - "..."
     test_targets:
     - "..."
+    test_flags:
+    # NOTE: BazelCI no longer supports Docker container spawning, so the
+    # Docker-related tests can no longer be run in CI.
+    - "--test_tag_filters=-requires-docker"
   java-maven-macos:
     name: "Maven Java App"
     platform: macos

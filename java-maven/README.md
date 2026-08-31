@@ -2,7 +2,7 @@ Maven Java application
 ----------------------
 
 This project demonstrates the usage of Bazel to retrieve dependencies from Maven
-repositories, build a program, and place it in an OCI container.
+repositories and build a program.
 
 To build this example, you will need to [install
 Bazel](http://bazel.io/docs/install.html).
@@ -13,7 +13,7 @@ repository using Maven.
 
 This application demonstrates the usage of
 [`rules_jvm_external`](https://github.com/bazelbuild/rules_jvm_external/) to
-configure dependencies. The dependencies are configured in the `WORKSPACE` file.
+configure dependencies. The dependencies are configured in the `MODULE.bazel` file.
 
 Build the application by running:
 
@@ -25,16 +25,4 @@ Test the application by running:
 
 ```
 $ bazel test :tests
-```
-
-Create a container image, suitable to push to a remote docker registry:
-
-```
-$ bazel build :image
-```
-
-Test that the image works when running inside a container runtime:
-
-```
-$ bazel test :container_test
 ```

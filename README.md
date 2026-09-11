@@ -2,6 +2,8 @@
 
 A collection of examples of how to use the Bazel build system.
 
+To build and run these examples, make sure you have [Bazelisk](https://github.com/bazelbuild/bazelisk) (or [Bazel](https://bazel.build/install)) installed.
+
 ## Introductory tutorials
 
 Some tutorials under <https://bazel.build/start> point to code in this repository:

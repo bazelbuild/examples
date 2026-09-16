@@ -1,0 +1,10 @@
+common --enable_bzlmod
+common --java_language_version=17
+common --java_runtime_version=remotejdk_17
+common --tool_java_language_version=17
+common --tool_java_runtime_version=remotejdk_17
+
+test:local_device --test_strategy=exclusive
+test:local_device --test_arg=--device_broker_type=LOCAL_ADB_SERVER
+
+try-import %workspace%/.bazelrc.user

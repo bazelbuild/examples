@@ -1,0 +1,3 @@
+load("//basic/x86_64_clang:defs.bzl", "instal_clang_toolchain_x86_64")
+
+instal_clang_toolchain_x86_64()

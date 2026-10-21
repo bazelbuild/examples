@@ -1,0 +1,15 @@
+module(name = "android_instrumentation_testing")
+
+bazel_dep(name = "android_test_overlay", version = "0.0.0")
+bazel_dep(name = "rules_android", version = "0.7.2")
+
+android_sdk_repository_extension = use_extension("@rules_android//rules/android_sdk_repository:rule.bzl", "android_sdk_repository_extension")
+use_repo(android_sdk_repository_extension, "androidsdk")
+
+android_test = use_extension("@android_test_overlay//:extensions.bzl", "android_test")
+use_repo(android_test, "android_test_support")
+
+local_path_override(
+    module_name = "android_test_overlay",
+    path = "third_party/android-test",
+)

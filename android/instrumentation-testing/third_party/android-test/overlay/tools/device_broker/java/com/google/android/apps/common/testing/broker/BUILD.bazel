@@ -1,0 +1,311 @@
+# -*- mode: python; -*-
+#
+# Description:
+#   An interface for tests to access physical or virtual devices.
+
+load("@rules_java//java:defs.bzl", "java_library", "java_test")
+
+licenses(["notice"])  # Apache 2.0
+
+java_library(
+    name = "struct",
+    srcs = [
+        "ExecutedTest.java",
+        "Instrumentation.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//opensource/auto_value",
+        "@maven//:com_google_code_findbugs_jsr305",
+    ],
+)
+
+java_library(
+    name = "enum",
+    srcs = ["NetworkType.java"],
+)
+
+java_library(
+    name = "anno",
+    srcs = ["DeviceBrokerAnnotations.java"],
+    deps = [
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_inject_guice",
+    ],
+)
+
+java_library(
+    name = "environment",
+    srcs = [
+        "Environment.java",
+        "EnvironmentModule.java",
+    ],
+    deps = [
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_guice",
+    ],
+)
+
+java_library(
+    name = "shared_constants",
+    srcs = [
+        "SharedEnvironment.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":environment",
+    ],
+)
+
+java_library(
+    name = "private_impl",
+    srcs = [
+        "AaptDumpPackageLineProcessor.java",
+        "AbstractRegexpLineProcessor.java",
+        "AdbDevicesLineProcessor.java",
+        "AdbInstrumentationListProcessor.java",
+        "AndroidPropertyProcessor.java",
+        "ExecReporter.java",
+        "InstrumentationTestRunnerProcessor.java",
+        "ShellVariableProcessor.java",
+        "SimpleLineListProcessor.java",
+        "StreamWritingProcessor.java",
+        "SubprocessCommunicator.java",
+    ],
+    deps = [
+        ":anno",
+        ":struct",
+        "//tools/device_broker/java/com/google/android/apps/common/testing/broker/shell",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "port_manager_module",
+    srcs = [
+        "PortManager.java",
+        "PortManagerModule.java",
+    ],
+    deps = [
+        ":anno",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_guice",
+    ],
+)
+
+java_library(
+    name = "test_info",
+    srcs = [
+        "ModernDexDumpOutputNormalizer.java",
+        "TestInfoRepository.java",
+    ],
+    deps = [
+        ":anno",
+        ":environment",
+        ":struct",
+        "//tools/device_broker/java/com/google/android/apps/common/testing/broker/shell",
+        "//tools/device_broker/java/com/google/android/apps/common/testing/suite/dex",
+        "//tools/device_broker/proto:test_info_pb_java_proto",
+        "@maven//:com_google_guava_guava",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_test(
+    name = "modern_dexdump_output_normalizer_test",
+    srcs = ["ModernDexDumpOutputNormalizerTest.java"],
+    test_class = "com.google.android.apps.common.testing.broker.ModernDexDumpOutputNormalizerTest",
+    deps = [
+        ":test_info",
+        "//tools/device_broker/java/com/google/android/apps/common/testing/suite/dex",
+        "//tools/device_broker/proto:test_info_pb_java_proto",
+        "@maven//:junit_junit",
+    ],
+)
+
+java_library(
+    name = "broker_intf",
+    srcs = [
+        "ActivityAction.java",
+        "AdbController.java",
+        "BadIdeaRuntimeException.java",
+        "BrokeredDevice.java",
+        "DeviceBroker.java",
+        "DeviceBrokerDecorator.java",
+        "DeviceBrokerType.java",
+        "HostTestSize.java",
+        "InstrumentationRepository.java",
+        "LogcatFilter.java",
+        "LogcatStreamer.java",
+        "OpenGlDriver.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":anno",
+        ":private_impl",
+        ":struct",
+        ":test_info",
+        "//tools/device_broker/java/com/google/android/apps/common/testing/broker/shell",
+        "//tools/device_broker/proto:test_info_pb_java_proto",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "broker_factory",
+    srcs = ["DeviceBrokerFactory.java"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":anno",
+        ":base_module",
+        ":broker_decorators",
+        ":broker_intf",
+        ":environment",
+        ":exec_reporter_module",
+        ":jcommander_support",
+        ":local_device",
+        ":port_manager_module",
+        ":wrapped_device",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_inject_extensions_guice_multibindings",
+        "@maven//:com_google_inject_guice",
+    ],
+)
+
+java_library(
+    name = "exec_reporter_module",
+    srcs = [
+        "ExecReporter.java",
+        "ExecReporterModule.java",
+        "NoOpExecReporter.java",
+    ],
+    deps = [
+        ":anno",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "local_device",
+    srcs = [
+        "LocalAdbServerDeviceBroker.java",
+        "LocalBrokerModule.java",
+    ],
+    deps = [
+        ":anno",
+        ":broker_intf",
+        ":private_impl",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_extensions_guice_multibindings",
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "broker_decorators",
+    srcs = [
+        "BrokeredDeviceExportedPropertyRecorder.java",
+        "DataStagingDeviceBrokerDecorator.java",
+        "FixtureScriptExecutingDeviceBrokerDecorator.java",
+        "InstrumentationExecutingDeviceBrokerDecorator.java",
+        "ProxyConfiguringDeviceBrokerDecorator.java",
+        "ProxyConfiguringModule.java",
+    ],
+    deps = [
+        ":anno",  # ready
+        ":broker_intf",  # logcat filter :(
+        ":struct",  # ready
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_extensions_guice_multibindings",
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "wrapped_device",
+    srcs = [
+        "WrappedBrokerModule.java",
+        "WrappedEmulatedDeviceBroker.java",
+    ],
+    data = [
+        "//runner/android_test_orchestrator/stubapp:stubapp.apk",
+    ],
+    deps = [
+        ":anno",
+        ":broker_intf",
+        ":enum",
+        ":environment",
+        ":private_impl",
+        "//tools/android/emulator:emulator_meta_data_pb_java_proto",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_extensions_guice_multibindings",
+        "@maven//:com_google_inject_guice",
+        "@protobuf//:protobuf_java",
+    ],
+)
+
+java_library(
+    name = "base_module",
+    srcs = [
+        "AaptUtil.java",
+        "DeviceBrokerModule.java",
+        "DirectorySearcher.java",
+        "ResourceProvider.java",
+    ],
+    data = [
+        "@androidsdk//:adb",
+    ],
+    resources = [
+        ":executor.sh",
+        "//runner/android_test_orchestrator/stubapp:stubapp.apk",
+        "//services:test_services.apk",
+    ],
+    deps = [
+        ":anno",
+        ":broker_intf",
+        ":enum",
+        ":environment",
+        ":private_impl",
+        "@maven//:aopalliance_aopalliance",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_extensions_guice_multibindings",
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
+
+java_library(
+    name = "jcommander_support",
+    srcs = [
+        "DeviceBrokerOptions.java",
+        "EnumConverters.java",
+        "LogcatFilterConverter.java",
+    ],
+    deps = [
+        ":anno",
+        ":broker_intf",
+        ":enum",
+        "@maven//:com_beust_jcommander",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_inject_guice",
+    ],
+)

@@ -12,6 +12,14 @@ bazel_dep(name = "bazel_skylib", version = "1.9.0")
 bazel_dep(name = "rules_nodejs", version = "6.7.3")
 bazel_dep(name = "rules_go", version = "0.60.0")
 
+# Explicit dependency on `ape` to work around a hosting outage of cosmo.zip.
+# The transitive `ape` 1.0.1 (via aspect_rules_lint -> rules_diff) downloads the
+# Cosmopolitan binaries only from https://cosmo.zip, which is currently
+# unreachable; `ape` >= 1.1.0 tries the gitlab.arm.com mirror first.
+# See https://github.com/bazelbuild/examples/issues/717 and
+# https://github.com/bazel-contrib/publish-to-bcr/pull/432.
+bazel_dep(name = "ape", version = "1.1.1-alpha.1")
+
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
 node.toolchain(node_version = "20.13.1")
 

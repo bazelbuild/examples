@@ -45,7 +45,7 @@ tasks:
     platform: ubuntu1804
     <<: *android-firebase
   android-firebase-macos:
-    platform: macos
+    platform: macos_arm64
     <<: *android-firebase
   # rules_android doesn't support windows yet.
   # https://github.com/bazelbuild/rules_android/issues/72
@@ -71,7 +71,7 @@ tasks:
     platform: ubuntu1804
     <<: *android-jetpack
   android-jetpack-compose-macos:
-    platform: macos
+    platform: macos_arm64
     <<: *android-jetpack
   android-jetpack-compose-windows:
     platform: windows
@@ -80,7 +80,7 @@ tasks:
     platform: ubuntu1804
     <<: *android-robolectric
   android-robolectric-testing-macos:
-    platform: macos
+    platform: macos_arm64
     environment:
       JAVA_HOME: /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
     <<: *android-robolectric

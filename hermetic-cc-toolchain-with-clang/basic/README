@@ -1,0 +1,4 @@
+Setup a clang toolchain for x86_64-unknown-linux-gnu using `cc_toolchain_config` from `@bazel_tools`
+
+external/glibc/x86_64-buildroot-linux-gnu/sysroot/lib64/libm.so.6
+external/glibc/x86_64-buildroot-linux-gnu/sysroot

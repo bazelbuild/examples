@@ -1,0 +1,108 @@
+module(
+    name = "android_test_overlay",
+    version = "0.0.0",
+)
+
+# These need to be consistent with their counterparts in build_extensions/axt_deps_versions.bzl.
+KOTLIN_VERSION = "1.9.21"
+
+KOTLINX_COROUTINES_VERSION = "1.8.1"
+
+bazel_dep(name = "protobuf", version = "29.3")
+bazel_dep(name = "rules_android", version = "0.7.2")
+bazel_dep(name = "rules_java", version = "9.6.1")
+bazel_dep(name = "rules_jvm_external", version = "7.0")
+bazel_dep(name = "rules_kotlin", version = "2.1.10", repo_name = "io_bazel_rules_kotlin")
+bazel_dep(name = "rules_license", version = "1.0.0")
+bazel_dep(name = "rules_python", version = "2.0.0")
+bazel_dep(name = "rules_robolectric", version = "4.14.1.2", repo_name = "robolectric")
+
+remote_android_extensions = use_extension("@rules_android//bzlmod_extensions:android_extensions.bzl", "remote_android_tools_extensions")
+use_repo(remote_android_extensions, "android_tools")
+
+android_sdk_repository_extension = use_extension("@rules_android//rules/android_sdk_repository:rule.bzl", "android_sdk_repository_extension")
+use_repo(android_sdk_repository_extension, "androidsdk")
+
+register_toolchains("@androidsdk//:sdk-toolchain", "@androidsdk//:all")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    ignore_root_user_error = True,
+    is_default = True,
+    python_version = "3.12",
+)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.artifact(
+    artifact = "accessibility-test-framework",
+    exclusions = [
+        "org.checkerframework:checker",
+        "org.hamcrest:hamcrest-core",
+        "org.hamcrest:hamcrest-library",
+    ],
+    group = "com.google.android.apps.common.testing.accessibility.framework",
+    version = "3.1.2",
+)
+maven.install(
+    name = "android_test_maven",
+    aar_import_bzl_label = "@rules_android//android:rules.bzl",
+    artifacts = [
+        "aopalliance:aopalliance:1.0",
+        "androidx.annotation:annotation:1.7.0",
+        "androidx.concurrent:concurrent-futures:1.2.0",
+        "androidx.concurrent:concurrent-futures-ktx:1.2.0",
+        "androidx.core:core:1.6.0",
+        "androidx.lifecycle:lifecycle-common:2.3.1",
+        "androidx.tracing:tracing:1.1.0",
+        "androidx.window:window-core:1.1.0",
+        "androidx.window:window-java:1.1.0",
+        "com.beust:jcommander:1.82",
+        "com.google.auto.value:auto-value-annotations:1.11.0",
+        "com.google.auto.value:auto-value:1.11.0",
+        "com.google.code.findbugs:jsr305:3.0.2",
+        "com.google.dagger:dagger-compiler:2.46",
+        "com.google.dagger:dagger-producers:2.46",
+        "com.google.dagger:dagger:2.46",
+        "com.google.errorprone:error_prone_annotations:2.23.0",
+        "com.google.googlejavaformat:google-java-format:1.4",
+        "com.google.inject.extensions:guice-multibindings:4.2.3",
+        "com.google.inject:guice:4.2.3",
+        "com.squareup:javapoet:1.9.0",
+        "javax.annotation:javax.annotation-api:1.3.2",
+        "javax.inject:javax.inject:1",
+        "junit:junit:4.13.2",
+        "org.ccil.cowan.tagsoup:tagsoup:1.2.1",
+        "org.hamcrest:hamcrest-library:1.3",
+        "org.jetbrains.kotlin:kotlin-stdlib:%s" % KOTLIN_VERSION,
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:%s" % KOTLINX_COROUTINES_VERSION,
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:%s" % KOTLINX_COROUTINES_VERSION,
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:%s" % KOTLINX_COROUTINES_VERSION,
+        "org.pantsbuild:jarjar:1.7.2",
+        "org.robolectric:robolectric:4.14.1",
+    ],
+    duplicate_version_warning = "none",
+    fail_if_repin_required = False,
+    fetch_sources = True,
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+        "https://dl.bintray.com/linkedin/maven",
+    ],
+    use_starlark_android_rules = True,
+)
+use_repo(maven, maven = "android_test_maven")
+maven.install(
+    name = "maven_listenablefuture",
+    artifacts = [
+        "com.google.guava:listenablefuture:1.0",
+    ],
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+        "https://dl.bintray.com/linkedin/maven",
+    ],
+)
+use_repo(maven, "maven_listenablefuture")
+
+android_test = use_extension("//:extensions.bzl", "android_test")
+use_repo(android_test, "android_test_support")

@@ -1,5 +1,0 @@
-common --enable_workspace
-common --experimental_google_legacy_api
-common --experimental_enable_android_migration_apis
-# Necesary until bazel 7.2.0rc2 or later is released (https://github.com/bazelbuild/bazel/issues/22415)
-common --nocheck_visibility
